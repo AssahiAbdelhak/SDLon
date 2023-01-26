@@ -1,0 +1,214 @@
+Story telling
+
+
+
+-------------------DEFINITION
+
+--Sections:
+
+Acte: Histoire du jeu découpée en 6 actes
+Fonctionnalités: Les systèmes optionels sympas à rajouter par actes
+
+--Signes:
+
+**: Optionel
+**+: Optionel mais fortement recommandé
+
+
+
+-------------------ACTES
+
+--Acte 1:
+
+- Paramètrage de la partie:
+	- Choix nom du perso
+	- Choix design perso
+
+- On décide de partir à l'aventure pour suivre notre rêve:
+	- On vas chez le professeur
+	- On choisis notre sdlon
+	- Premier combat (tuto)
+
+- On part dans la ville suivante:
+	- Premier vrai combat sur la route
+	- Premier chou (capture de sdlon)
+
+
+
+--Acte 2:
+
+- On arrive dans une nouvelle ville (n°1):
+	- On peu parler à des pnjs (demandent un combat)
+	- Certains nous défient quand ils nous voient
+
+- On cherche à battre l'arène:
+	- Faire level up nos sdlons (Minimum level requiered)
+	- On doit trouver le champion d'arène dans le village
+	- Une fois fait, plus qu'à rentrer dedans
+	- Battre l'arène et son champion
+	- récupération de la pierre de feu
+
+- On peu faire ce que l'on veut:
+	- Améliorer nos sdlons
+	- Découvrir la ville
+	- En capturer des nouveaux
+	- Combattre pour gagner de l'argent
+
+- On part dans la ville suivante:
+	- Combat sur la route
+	- Chou (capture de sdlon)
+
+
+
+--Acte 3:
+
+- On arrive dans une nouvelle ville (n°2):
+	- Arriver de la team raclette (cinématique)
+	- On doit parler à un pnj qui viens de se faire voler son sdlon par la team raclette
+	- Champion d'arène débarque
+	- Discours avec lui (Il est arrivé trop tard)
+
+- On cherche à battre l'arène **+ :
+	- On ne peut pas la combattre tous de suite => récupérer sdlon voler (battre team raclette)
+	- Rapporter le sdlon
+
+- On combat l'arène:
+	- Battre l'arène et son champion
+	- récupération de la pierre d'air
+
+- Quete optionel (et secrète):
+	- Capture d'un pokemon légendaire sauvage
+
+- On peu faire ce que l'on veut:
+	- Améliorer nos sdlons
+	- Découvrir la ville
+	- En capturer des nouveaux
+	- Combattre pour gagner de l'argent
+
+- On part dans la ville suivante:
+	- Combat sur la route
+	- Chou (capture de sdlon)
+
+
+--Acte 4:
+
+- On arrive dans une nouvelle ville (n°3):
+	- On peu parler à des pnjs (demandent un combat)
+	- Certains nous défient quand ils nous voient
+
+- On cherche à battre l'arène ** :
+	- Le premier pnj est imbatable avec nos sdlons il en faut d'un certain type
+	- En capturer un et le faire level up
+
+- On combat l'arène:
+	- Battre l'arène et son champion
+	- récupération de la pierre d'eau
+
+- On peu faire ce que l'on veut:
+	- Améliorer nos sdlons
+	- Découvrir la ville
+	- Explorer une grotte (sdlon particulier) **+
+	- En capturer des nouveaux
+	- Combattre pour gagner de l'argent
+
+- On part dans la ville suivante:
+	- Combat sur la route
+	- Chou (capture de sdlon)
+
+
+--Acte 5:
+
+- On arrive dans une nouvelle ville (n°4):
+	- On peu parler à des pnjs (demandent un combat)
+	- Certains nous défient quand ils nous voient
+
+- On cherche à battre l'arène:
+	- Le champion d'arène abscent en train de combattre la team raclette **+
+	- Il faut aller l'aider **+
+	- Le champion nous attends à la fin de l'arène
+
+- On combat l'arène:
+	- Battre l'arène et son champion
+	- Récupération de la pierre de terre
+
+- Chef de la team raclette nous défie ** :
+	- Allez dans une tour
+	- Les pierres fusionne avec une tour
+	- Le pokemon légendaire apparait
+	- On le capture
+	- Le chef arrive et nous défie
+	- Premier combat avec le pokémon légendaire
+	- On éclate la team raclette
+
+- On deviens le plus fort du pays:
+	- Des pnjs peuvent nous défier notre titre ** 
+
+- On peu faire ce que l'on veut:
+	- Améliorer nos sdlons
+	- Découvrir la ville
+	- Explorer des endroits particuliers (sdlon particulier)
+	- En capturer des nouveaux
+	- Combattre pour gagner de l'argent
+
+- On part dans la ville suivante ** :
+	- Combat sur la route
+	- Chou (capture de sdlon)
+
+
+--Acte 6 ** :
+
+- On arrive à la ligue:
+	- Constituer des 5 meilleurs combattants du pays
+
+- On cherche à battre la ligue:
+	- Chaque champion maîtrise un type
+	- Le dernier les maîtrise tous
+	- Il faut les battres tous avant d'acceder au champion maître
+	- Leurs sdlons sont cheater (genre sdlons de grotte)
+
+- On combat le maître de ligue:
+	- Le combat contre le mec le plus cheaté
+	- Récupération de son titre
+
+- On deviens le plus fort du pays:
+	- Des pnjs peuvent nous défier notre titre
+
+- On peu faire ce que l'on veut:
+	- Améliorer nos sdlons
+	- Découvrir la ville
+	- Explorer des endroits particuliers (sdlon particulier)
+	- En capturer des nouveaux
+	- Combattre pour gagner de l'argent
+	- Mettre en jeu son titre Pour gagner plus d'argent
+
+-------------------Fonctionnalités
+
+--Pour l'Acte 2:
+	- Vélo
+
+--Pour l'Acte 3:
+	- Canne à pêche
+	- type de "pokeball" ou "sdball" ou ...?
+
+--Pour l'Acte 4:
+	- Metro (Déplacement dans toute la map)
+	- Arène en ligne
+
+--Pour l'Acte 5:
+	- 
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
