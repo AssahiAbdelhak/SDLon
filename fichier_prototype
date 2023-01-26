@@ -1,0 +1,115 @@
+Feurovalley
+
+Quêtes Principales:
+	Capturer tous les SDLon
+	Battre tous les dresseurs
+
+Design carte du jeu
+	Carte
+	{Centre pokemon : Boutique pokemon}
+	Maison
+	Immeuble
+	Ville
+	Arbres
+	hautes herbes
+	panneau
+	eau
+	grotte
+	volcan
+	item
+
+
+Design personnage joueur
+	Personnage Joueur
+	Rival
+	Professeur
+	Champion d'arène
+	Team Raclette
+	
+	Pêcheurs
+	Gamin
+	Topdresseurs
+	Montagnard
+	Dresseur classique
+
+Menu
+	Map
+	Inventaire
+	Sauvegarder
+	Options
+	Quitter
+
+SDLon (environ 10 par type):
+	Type, HP, MP, NIVEAU, EXP, Evolution ?
+	Compétences ( attaques )
+	Photo/Image
+	Attaque
+	Defense
+	Speed attaque
+	Speed defense
+	Description
+
+ia SDLon, pnj
+
+4 Arene
+	Air	puzzle/enigme : ...
+	Feu	puzzle/enigme : ...
+	Eau	puzzle/enigme : ...
+	Terre	puzzle/enigme : ...
+	
+Combat :
+	Affichage :
+		Capacité
+		Sac :
+			potion
+			SDLasso (lasso différent système pokeball)
+		fuite
+		changement SDLon
+	Ia SDLon
+
+Histoire :
+	interactions
+	quêtes
+	story telling
+
+Starter :
+	???
+	???
+	???
+	???
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+patch blague :
+	Mohammed
