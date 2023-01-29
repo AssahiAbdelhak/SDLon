@@ -6,13 +6,64 @@ Story telling
 
 --Sections:
 
-Acte: Histoire du jeu découpée en 6 actes
-Fonctionnalités: Les systèmes optionels sympas à rajouter par actes
+- Acte: Histoire du jeu découpée en 6 actes
+- Fonctionnalités: Les systèmes optionels sympas à rajouter par actes
+- Démarage: Les différentes possibilités de configurations de jeu
+
+
 
 --Signes:
 
-**: Optionel
-**+: Optionel mais fortement recommandé
+- ** : Optionel
+- **+ : Optionel mais fortement recommandé
+
+
+
+-------------------Démarage
+
+--Chargement du jeu:
+
+- Icone sur le bureau:
+	- Double clique normal
+	- lancement du jeu
+
+
+
+--Page d'acceuil:
+
+	- Nouvelle partie (écrase la précédente)
+	- Possibilité de crée plusieurs sauvegardes **+
+	- Charger une partie
+	- Charger un patch:
+		- Fichier texte
+		- Remplace des stats & nom
+	- Paramètrage touche clavier **
+
+
+
+--Nouvelle partie:
+
+	- Sauvegarde d'un seul fichier "save.txt"
+	- OU demande un nom de sauvegarde **+
+	- Lancement partie
+
+
+
+--Charger partie:
+
+	- Charge "save.txt"
+	- OU demande un nom de fichier à charger **+
+	- Lancement partie
+
+
+
+--Chargement patch **+ :
+
+	- Demande de spécifié un fichier patch
+	- Fichier text en .sdp (sdlon patch)
+	- Permet de contrôler les patchs (évite des erreurs)
+	- Retour au menu principale
+	- Nouvelle partie ou Charger partie
 
 
 
@@ -181,34 +232,18 @@ Fonctionnalités: Les systèmes optionels sympas à rajouter par actes
 	- Combattre pour gagner de l'argent
 	- Mettre en jeu son titre Pour gagner plus d'argent
 
--------------------Fonctionnalités
+-------------------Fonctionnalités **
 
 --Pour l'Acte 2:
-	- Vélo
+	- Débloquage du vélo
 
 --Pour l'Acte 3:
-	- Canne à pêche
-	- type de "pokeball" ou "sdball" ou ...?
+	- Débloquage de la canne à pêche
+	- Débloquage de types de "pokeball" ou "sdball" ou ...?
 
 --Pour l'Acte 4:
-	- Metro (Déplacement dans toute la map)
-	- Arène en ligne
+	- Débloquage du metro (Déplacement dans toute la map)
+	- Débloquage de l'arène en ligne
 
 --Pour l'Acte 5:
-	- 
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	- Débloquage du sdlon légendaire
