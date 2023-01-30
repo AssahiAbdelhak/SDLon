@@ -4,9 +4,9 @@ FLAGS=-Wall -g
 SDL_DIR=${HOME}/Document/projet/sdlon
 SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
-LIBS=-L${SDL_LIB_DIR} -lSDL2
+LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
-PROG=sdlon
+PROG=sdl_test
 
 all: sdl_text
 
