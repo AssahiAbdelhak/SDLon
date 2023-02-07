@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include "sdlon_init.h"
 
 int main(int argc, char** argv)
 {
@@ -31,10 +32,10 @@ int main(int argc, char** argv)
 
 
 	/* Création de la fenêtre */
-	pWindow = SDL_CreateWindow("Hello World SDL2",SDL_WINDOWPOS_UNDEFINED,
+	pWindow = SDL_CreateWindow("sdlon",SDL_WINDOWPOS_UNDEFINED,
 												  SDL_WINDOWPOS_UNDEFINED,
-												  640,
-												  480,
+												  620,
+												  420,
 												  SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE);
 
 	if(!pWindow){
@@ -54,7 +55,7 @@ int main(int argc, char** argv)
 		fprintf(stderr, "erreur chargement font\n");
 		exit(EXIT_FAILURE);
 	}
-	texte = TTF_RenderUTF8_Blended(police, "Vive la programmation !", couleurNoire);
+	/*texte = TTF_RenderUTF8_Blended(police, "SDLON", couleurNoire);
 	if(!texte){
 		fprintf(stderr, "Erreur à la création du texte : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
@@ -67,9 +68,9 @@ int main(int argc, char** argv)
 		exit(EXIT_FAILURE);
 	}
 	SDL_FreeSurface(texte); /* on a la texture, plus besoin du texte */
-	/* Position ou sera mis le texte dans la fenêtre */
+	/* Position ou sera mis le texte dans la fenêtre 
     txtDestRect.x = txtDestRect.y = 10;
-	SDL_QueryTexture(texte_tex, NULL, NULL, &(txtDestRect.w), &(txtDestRect.h));
+	SDL_QueryTexture(texte_tex, NULL, NULL, &(txtDestRect.w), &(txtDestRect.h));*/
 
 	// load sample.png into image
 	SDL_RWops *rwop=SDL_RWFromFile("affiche2018.png", "rb");
@@ -77,6 +78,7 @@ int main(int argc, char** argv)
 	if(!image) {
 	     printf("IMG_LoadPNG_RW: %s\n", IMG_GetError());
 	}
+	
 	SDL_Texture *image_tex = SDL_CreateTextureFromSurface(renderer, image); 
 	if(!image_tex){
 		fprintf(stderr, "Erreur à la création du rendu de l'image : %s\n", SDL_GetError());
@@ -106,18 +108,14 @@ int main(int argc, char** argv)
                                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 								SDL_RenderClear(renderer);
                                 
-                                /* Ajout du texte en noir */
+                                /* Ajout du texte en noir 
                                 SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                                SDL_RenderCopy(renderer, texte_tex, NULL, &txtDestRect);
+                                SDL_RenderCopy(renderer, texte_tex, NULL, &txtDestRect);*/
 								
                                 /* Ajout de la seconde image à une certaine position */
-                                imgDestRect.x = 10;
-								imgDestRect.y = 50;
+                                imgDestRect.x = -150;
+								imgDestRect.y = -400;
 								SDL_QueryTexture(image_tex, NULL, NULL, &(imgDestRect.w), &(imgDestRect.h));
-								SDL_RenderCopy(renderer, image_tex, NULL, &imgDestRect);
-								
-                                /* Ajout de la seconde image à une autre position */
-								imgDestRect.x = 250;
 								SDL_RenderCopy(renderer, image_tex, NULL, &imgDestRect);
 								
                                 /* On fait le rendu ! */
@@ -142,5 +140,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
-
