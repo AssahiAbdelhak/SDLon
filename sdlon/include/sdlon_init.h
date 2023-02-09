@@ -1,8 +1,12 @@
+//macros
+#define NB_SDLON 12
+#define NB_ATTAQUE 10
+
 /**
 Initialisation structures
 */
 typedef struct struct_attaque {
-  char *nom_attaque;
+  char nom_attaque[50];
   int type_attaque;
   int mode_attaque;
   int degat;
@@ -10,20 +14,19 @@ typedef struct struct_attaque {
 
 typedef struct struct_sdlon {
   int type;
-  char *nom;
+  char nom[50];
   int vie;
-  attaque *attaque_1;
-  attaque *attaque_2;
-  attaque *attaque_3;
-  attaque *attaque_4;
+  attaque attaque_1;
+  attaque attaque_2;
+  attaque attaque_3;
+  attaque attaque_4;
+  char evolution[50];
 } sdlon;
 
 /**
 déclaration des prototypes des fonctions
 */
-extern attaque *attaque_init();
-extern sdlon *sdlon_init(attaque *attaques);
-extern int display_sdlon(sdlon *s);
-extern int sdlon_quit(sdlon *sdlons, attaque *attaques);
-extern int sdlon_is_init(sdlon *sd);
-extern int attaque_is_init(sdlon *at);
+extern int sdlon_init();
+
+//extern const int NB_SDLON;
+extern sdlon sdlon_s[NB_SDLON];

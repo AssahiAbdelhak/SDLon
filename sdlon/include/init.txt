@@ -1,0 +1,13 @@
+-1 barcasse 80 harponnage NONE NONE NONE cuiracié
+-1 cuiracié 120 harponnage NONE NONE NONE soumalin
+-1 soumalin 170 harponnage M51 NONE NONE NONE
+1 pakikea 80 NONE NONE NONE NONE flatapak
+1 flatapak 120 NONE NONE NONE NONE pakaskap
+1 pakaskap 170 NONE NONE NONE NONE NONE
+2 borasque 80 NONE NONE NONE NONE piédvent
+2 piédvent 120 NONE NONE NONE NONE borsin
+2 borsin 170 NONE NONE NONE NONE NONE
+0 poutins 80 NONE NONE NONE NONE potofeu
+0 potofeu 120 NONE NONE NONE NONE cassoulé
+0 cassoulé 170 NONE NONE NONE NONE NONE
+

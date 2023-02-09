@@ -1,123 +1,82 @@
 #include "sdlon_init.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
-Initialisation constantes
+Déclaration des tableaux de sdlons & attaques
 */
-const int NB_SDLON = 10;
-const int NB_ATTAQUE = 10;
+sdlon sdlon_s[NB_SDLON];
+attaque attaque_s[NB_SDLON];
 
-const int TYPE_FEU = 0;
-const int TYPE_EAU = -1;
-const int TYPE_TERRE = 1;
-const int TYPE_AIR = 2;
+/*
+Fonction d'initialisation du tableau d'attaques
+**/
+int attaque_init() {
+  int i = 0;
+  char *name_file = "data/init_at.txt";
+  FILE *file = NULL;
 
-const int JET_LAG = 0;
-const int LAGOS = 1;
-const int INSERT = 2;
-const int RAGE_QUIT = 3;
-const int CVSPYTHON = 4;
-const int WTF = 5;
-const int BDD = 6;
-const int CACHETTE = 7;
+  int type, mode, degat;
 
-/**
-Initialisation des sdlons
-*/
-attaque *attaque_init() {
-  // initialise le pointeurs et alloue la mémoire
-  attaque *attaques = malloc(sizeof(attaque) * NB_ATTAQUE);
+  char name_attaque[50];
 
-  // attaque 1
-  attaques->nom_attaque = "Jet lag";
-  attaques->type_attaque = TYPE_FEU;
-  attaques->mode_attaque = 1;
-  attaques->degat = 10;
 
-  // attaque suivante
-  attaques++;
+  file = fopen(name_file, "r");
 
-  // attaque 2
-  attaques->nom_attaque = "Lagos";
-  attaques->type_attaque = TYPE_FEU;
-  attaques->mode_attaque = 1;
-  attaques->degat = 25;
-
-  // on remet l'adresse à 0
-  attaques--;
-
-  return attaques;
-}
-
-int sdlon_is_init(sdlon *sd) {
-  if (sd == NULL) {
-    return 0;
-  } else {
+  if(file!=NULL){
+    for(i=0;i<NB_ATTAQUE;i++){
+      fscanf(file, "%s %d %d %d\n", name_attaque, &type, &mode, &degat);
+      strcpy(attaque_s[i].nom_attaque, name_attaque);
+      attaque_s[i].type_attaque = type;
+      attaque_s[i].mode_attaque = mode;
+      attaque_s[i].degat = degat;
+      
+    }
+  }else{
     return 1;
   }
-}
 
-int attaque_is_init(sdlon *at) {
-  if (at == NULL) {
-    return 0;
-  } else {
-    return 1;
-  }
-}
-
-sdlon *sdlon_init(attaque *attaques) {
-  /**
-  Initialise le pointeur et alloue de la mémoire*/
-  sdlon *sdlons = malloc(sizeof(sdlon) * NB_SDLON);
-
-  // sdlon 1
-  sdlons->type = TYPE_FEU;
-  sdlons->nom = "ram";
-  sdlons->vie = 60;
-  sdlons->attaque_1 = attaques + JET_LAG;
-
-  // sdlon suivant
-  sdlons++;
-
-  // sdlon 2
-  sdlons->nom = "tester";
-  sdlons->type = TYPE_EAU;
-  sdlons->attaque_1 = attaques + LAGOS;
-
-  // on reviens au début
-  sdlons--;
-
-  return sdlons;
-}
-
-int display_sdlon(sdlon *s) {
-  switch (s->type) {
-  case 0:
-    printf("name: %s, type: feu, attaque1: %s\n\n", s->nom,
-           s->attaque_1->nom_attaque);
-    break;
-  case 1:
-    printf("name: %s, type: terre, attaque1: %s\n\n", s->nom,
-           s->attaque_1->nom_attaque);
-    break;
-  case 2:
-    printf("name: %s, type: air, attaque1: %s\n\n", s->nom,
-           s->attaque_1->nom_attaque);
-    break;
-  case -1:
-    printf("name: %s, type: eau, attaque1: %s\n\n", s->nom,
-           s->attaque_1->nom_attaque);
-    break;
-  }
+  fclose(file);
 
   return 0;
 }
 
-int sdlon_quit(sdlon *sdlons, attaque *attaques) {
-  free(sdlons);
-  free(attaques);
-  sdlons = NULL;
-  attaques = NULL;
+/*
+Fonction d'initialisation du tableau de sdlons
+**/
+int sdlon_init() {
+
+  attaque_init();
+
+  int i = 0;
+  char *name_file = "data/init_sd.txt";
+  FILE *file = NULL;
+
+  int type, life, at1, at2, at3, at4;
+
+  char name_sdlon[50], name_evol[50];
+
+
+  file = fopen(name_file, "r");
+
+  if(file!=NULL){
+    for(i=0;i<NB_SDLON;i++){
+      fscanf(file, "%d %s %d %d %d %d %d %s\n", &type, name_sdlon, &life, &at1, &at2, &at3, &at4, name_evol);
+      sdlon_s[i].type = type;
+      sdlon_s[i].vie = life;
+      strcpy(sdlon_s[i].nom, name_sdlon);
+      sdlon_s[i].attaque_1 = attaque_s[at1];
+      sdlon_s[i].attaque_2 = attaque_s[at2];
+      sdlon_s[i].attaque_3 = attaque_s[at3];
+      sdlon_s[i].attaque_4 = attaque_s[at4];
+      strcpy(sdlon_s[i].evolution, name_evol);
+    }
+  }else{
+    return 1;
+  }
+
+  fclose(file);
+
   return 0;
 }
