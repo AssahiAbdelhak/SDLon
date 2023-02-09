@@ -20,7 +20,7 @@ typedef struct struct_sdlon {
   attaque attaque_2;
   attaque attaque_3;
   attaque attaque_4;
-  char evolution[50];
+  int evolution;
 } sdlon;
 
 /**
