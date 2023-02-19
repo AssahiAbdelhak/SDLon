@@ -1,0 +1,19 @@
+CC=gcc
+FLAGS=-Wall -g
+SDL_DIR=${HOME}/SDL2
+SDL_LIB_DIR=${SDL_DIR}/lib
+SDL_INC_DIR=${SDL_DIR}/include
+LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
+INCS=-I${SDL_INC_DIR}
+PROG=sdl_intro_test
+all: sdl_intro_test
+sdl_intro_test: sdl_intro_test.o lib_sdl_facile.o
+	${CC} sdl_intro_test.o lib_sdl_facile.o -o ${PROG} ${LIBS} ${INCS} ${FLAGS}
+sdl_intro_test.o: sdl_intro_test.c
+	${CC} -c sdl_intro_test.c ${LIBS} ${INCS} ${FLAGS}
+lib_sdl_facile.o: lib_sdl_facile.c
+	${CC} -c lib_sdl_facile.c ${LIBS} ${INCS} ${FLAGS}
+
+clean:
+	rm -f ${PROG}
+	rm -f *.o
