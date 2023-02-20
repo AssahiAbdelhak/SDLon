@@ -1,12 +1,12 @@
--1 barcasse 80 1 2 3 4 1 1
--1 cuiracié 120 5 5 3 4 2 17
--1 soumalin 170 3 3 2 1 0 39
-1 pakikea 80 1 1 2 8 4 1
-1 flatapak 120 8 4 3 6 5 17
-1 pakaskap 170 3 1 4 5 0 39
-2 borasque 80 7 7 6 4 7 1
-2 piédvent 120 6 4 5 4 8 17
-2 borsin 170 5 4 6 5 0 39
-0 poutins 80 7 7 8 9 10 1
-0 potofeu 120 9 8 7 4 11 17
-0 cassoulé 170 4 5 5 6 0 39
+-1 barcasse 80 1 2 3 4 1 1 31
+-1 cuiracié 120 5 5 3 4 2 17 32
+-1 soumalin 170 3 3 2 1 0 39 33
+1 pakikea 80 1 1 2 8 4 1 31
+1 flatapak 120 8 4 3 6 5 17 32
+1 pakaskap 170 3 1 4 5 0 39 33
+2 borasque 80 7 7 6 4 7 1 31
+2 piédvent 120 6 4 5 4 8 17 32
+2 borsin 170 5 4 6 5 0 39 33
+0 poutins 80 7 7 8 9 10 1 31
+0 potofeu 120 9 8 7 4 11 17 32
+0 cassoulé 170 4 5 5 6 0 39 33

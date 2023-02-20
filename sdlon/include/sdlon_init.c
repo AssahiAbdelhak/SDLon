@@ -53,7 +53,7 @@ int sdlon_init() {
   char *name_file = "data/init_sd.txt";
   FILE *file = NULL;
 
-  int type, life, at1, at2, at3, at4, evol, level;
+  int type, life, at1, at2, at3, at4, evol, level, evol_sys;
 
   char name_sdlon[50];
 
@@ -62,7 +62,7 @@ int sdlon_init() {
 
   if(file!=NULL){
     for(i=0;i<NB_SDLON;i++){
-      fscanf(file, "%d %s %d %d %d %d %d %d %d\n", &type, name_sdlon, &life, &at1, &at2, &at3, &at4, &evol, &level);
+      fscanf(file, "%d %s %d %d %d %d %d %d %d %d\n", &type, name_sdlon, &life, &at1, &at2, &at3, &at4, &evol, &level, &evol_sys);
       sdlon_s[i].type = type;
       sdlon_s[i].vie = life;
       strcpy(sdlon_s[i].nom, name_sdlon);
@@ -72,6 +72,7 @@ int sdlon_init() {
       sdlon_s[i].attaque_4 = attaque_s[at4];
       sdlon_s[i].evolution = evol;
       sdlon_s[i].level = level;
+      sdlon_s[i].evol_sys = evol_sys;
     }
   }else{
     return 1;

@@ -22,6 +22,7 @@ typedef struct struct_sdlon {
   attaque attaque_4;
   int evolution;
   int level;
+  int evol_sys;
 } sdlon;
 
 /**
