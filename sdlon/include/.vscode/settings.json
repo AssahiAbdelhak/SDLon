@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "sdlon_init.h": "c"
+        "sdlon_init.h": "c",
+        "time.h": "c"
     }
 }
