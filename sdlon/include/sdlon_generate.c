@@ -5,6 +5,11 @@
 #include <time.h>
 #include <string.h>
 
+int last_evol(int evol_sys){
+    int evol_pos=evol_sys%10, evol_tot=(evol_sys/10)%10;
+    return(evol_pos==evol_tot);
+}
+
 sdlon generate_sdlon(int environement, int min_level, int max_level){
 
     //initialisation fonction random
@@ -12,7 +17,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
 
     //initialisation des variables
     int type_sd=(rand()%PROB);
-    int seed=(rand()%NB_SDLON)+1;
+    int seed=(rand()%NB_SDLON)*(rand()%100)+1;
     int level;
     int i=0, it=0;
     int current_gen = 0;
@@ -26,9 +31,14 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
      * type feu : 20%
     */
     if(environement == 0){
+
         if(type_sd<=40){
+
             while(!current_gen){
-                if(sdlon_s[i].type==1 && sdlon_s[i].level >= min_level && sdlon_s[i].level <= max_level && it>seed){
+                if(sdlon_s[i].type==1 && 
+                (sdlon_s[i].level >= min_level || last_evol(sdlon_s[i].evol_sys) ) && 
+                sdlon_s[i].level <= max_level
+                && it>seed){
                     current_gen=1;
                 }else{
                     i++;
@@ -37,10 +47,15 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
                         i=0;
                     }
                 }
+
             }
         }else if(type_sd>40&&type_sd<=80){
+
             while(!current_gen){
-                if(sdlon_s[i].type==2 && sdlon_s[i].level >= min_level && sdlon_s[i].level <= max_level && it>seed){
+                if(sdlon_s[i].type==2 && 
+                (sdlon_s[i].level >= min_level || last_evol(sdlon_s[i].evol_sys)) && 
+                sdlon_s[i].level <= max_level && 
+                it>seed){
                     current_gen=1;
                 }else{
                     i++;
@@ -49,10 +64,15 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
                         i=0;
                     }
                 }
+
             }
         }else{
+
             while(!current_gen){
-                if(sdlon_s[i].type==0 && sdlon_s[i].level >= min_level && sdlon_s[i].level <= max_level && it>seed){
+                if(sdlon_s[i].type==0 && 
+                (sdlon_s[i].level >= min_level || last_evol(sdlon_s[i].evol_sys))
+                && sdlon_s[i].level <= max_level 
+                && it>seed){
                     current_gen=1;
                 }else{
                     i++;
@@ -62,6 +82,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
                     }
                 }
             }
+
         }
         level = gen_level(sdlon_s[i].level, max_level, sdlon_s[i].evol_sys);
 

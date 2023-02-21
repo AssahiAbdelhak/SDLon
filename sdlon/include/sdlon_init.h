@@ -1,5 +1,5 @@
 //macros
-#define NB_SDLON 12
+#define NB_SDLON 15
 #define NB_ATTAQUE 10
 
 /**

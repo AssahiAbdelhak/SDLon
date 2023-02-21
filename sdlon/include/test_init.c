@@ -5,7 +5,7 @@ int main() {
 
   sdlon_init();
 
-  sdlon j = generate_sdlon(0,1,100);
+  sdlon j = generate_sdlon(0,40,80);
   printf("nom: %s, vie: %d, level: %d\n", j.nom, j.vie, j.level);
   
   /*int i;
