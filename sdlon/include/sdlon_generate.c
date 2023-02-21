@@ -4,201 +4,32 @@
 #include <time.h>
 #include <string.h>
 
-/*int last_evol(int evol_sys){
-    int evol_pos=evol_sys%10, evol_tot=(evol_sys/10)%10;
-    return(evol_pos==evol_tot);
-}
 
-int gen_level(int min_level, int max_level, int evol_sys){
-
-    srand(time(NULL));
-    int evol_pos=evol_sys%10, evol_tot=(evol_sys/10)%10;
-
-    int dephasage = max_level-min_level;
-    printf("depf: %d, min: %d, max: %d", dephasage, min_level, max_level);
-    int level = (rand()%dephasage)+min_level+1;
-
-    if (evol_pos==1 && evol_tot>1 && level>17){
-        level = 17;
-    }else if(evol_pos==2 && evol_tot>2 && level>39){
-        level=39;
-    }
-
-    return (level);
-}
-
-int gen_life(int level){
-    return (level*2);
-}
-
-sdlon generate_sdlon(int environement, int min_level, int max_level){
-
-    //initialisation fonction random
-    srand(time(NULL));
-
-    //initialisation des variables
-    int type_sd=(rand()%PROB);
-    int seed=(rand()%NB_SDLON)*(rand()%100)+1;
-    int level;
-    int i=0, it=0;
-    int current_gen = 0;
-    sdlon gen_sd;
-    printf("coucou\n");
-
-    /**
-     * environnement terrestre
-     * type eau : impossible
-     * type terre : 40%
-     * type air : 40%
-     * type feu : 20%
-    */
-    /*if(environement == 0){
-
-        if(type_sd<=40){
-            printf("coucou\n");
-            while(!current_gen){
-                printf("%s\n", sdlon_s[i].nom);
-                if(sdlon_s[i].type==1 && 
-                sdlon_s[i].level >= min_level && 
-                (sdlon_s[i].level <= max_level || last_evol(sdlon_s[i].evol_sys) )
-                && it>seed){
-                    current_gen=1;
-                }else{
-                    i++;
-                    it++;
-                    if(i>=NB_SDLON){
-                        i=0;
-                    }
-                }
-
-            }
-        }else if(type_sd>40&&type_sd<=80){
-printf("coucou\n");
-            while(!current_gen){printf("%s\n", sdlon_s[i].nom);
-                if(sdlon_s[i].type==2 && 
-                sdlon_s[i].level >= min_level  && 
-                (sdlon_s[i].level <= max_level || last_evol(sdlon_s[i].evol_sys)) && 
-                it>seed){
-                    current_gen=1;
-                }else{
-                    i++;
-                    it++;
-                    if(i>=NB_SDLON){
-                        i=0;
-                    }
-                }
-
-            }
-        }else{
-printf("coucou\n");
-            while(!current_gen){printf("%s\n", sdlon_s[i].nom);
-                if(sdlon_s[i].type==0 && 
-                sdlon_s[i].level >= min_level 
-                && (sdlon_s[i].level <= max_level || last_evol(sdlon_s[i].evol_sys))
-                && it>seed){
-                    current_gen=1;
-                }else{
-                    i++;
-                    it++;
-                    if(i>=NB_SDLON){
-                        i=0;
-                    }
-                }
-            }
-
-        }
-    }
-
-    /**
-     * environnement aquatique
-     * type eau : 60%
-     * type terre : 10%
-     * type air : 30%
-     * type feu : 0%
-    */
-    /*if(environement == 1){
-
-        if(type_sd<=60){
-
-            while(!current_gen){
-                if(sdlon_s[i].type==-1 && 
-                (sdlon_s[i].level >= min_level || last_evol(sdlon_s[i].evol_sys) ) && 
-                sdlon_s[i].level <= max_level
-                && it>seed){
-                    current_gen=1;
-                }else{
-                    i++;
-                    it++;
-                    if(i>=NB_SDLON){
-                        i=0;
-                    }
-                }
-
-            }
-        }else if(type_sd>60&&type_sd<=90){
-
-            while(!current_gen){
-                if(sdlon_s[i].type==2 && 
-                (sdlon_s[i].level >= min_level || last_evol(sdlon_s[i].evol_sys)) && 
-                sdlon_s[i].level <= max_level && 
-                it>seed){
-                    current_gen=1;
-                }else{
-                    i++;
-                    it++;
-                    if(i>=NB_SDLON){
-                        i=0;
-                    }
-                }
-
-            }
-        }else{
-
-            while(!current_gen){
-                if(sdlon_s[i].type==1 && 
-                (sdlon_s[i].level >= min_level || last_evol(sdlon_s[i].evol_sys))
-                && sdlon_s[i].level <= max_level 
-                && it>seed){
-                    current_gen=1;
-                }else{
-                    i++;
-                    it++;
-                    if(i>=NB_SDLON){
-                        i=0;
-                    }
-                }
-            }
-
-        }
-        
-    }*/
-
-    /*level = gen_level(sdlon_s[i].level, max_level, sdlon_s[i].evol_sys);
-
-    gen_sd.attaque_1 = sdlon_s[i].attaque_1;
-    gen_sd.attaque_2 = sdlon_s[i].attaque_2;
-    gen_sd.attaque_3 = sdlon_s[i].attaque_3;
-    gen_sd.attaque_4 = sdlon_s[i].attaque_4;
-    gen_sd.evolution = sdlon_s[i].evolution;
-    gen_sd.type = sdlon_s[i].type;
-    gen_sd.vie = sdlon_s[i].vie+gen_life(level);
-    gen_sd.level = level;
-    strcpy(gen_sd.nom, sdlon_s[i].nom);
-    
-    return(gen_sd);
-}*/
-
+/**
+ * génère un niveau aléatoire
+ * en fonction d'une borne min et max
+*/
 int gen_level(int min, int max){
-    printf("%d, %d\n", min, max);
     int dephasage = max-min;
+    if(dephasage==0){
+        dephasage = 1;
+    }
     int lvl = min + (rand()%dephasage);
     return lvl;
 }
 
+/**
+ * génère la vie du sdlon
+ * en fonction de son niveau
+ * et de ses spécifications
+*/
 int gen_life(int level, int vie){
     return level*2+vie;
 }
 
+/**
+ * corrige les bornes min inutilisables
+*/
 int correctif(int min){
     switch (min)
     {
@@ -216,6 +47,9 @@ int correctif(int min){
     }
 }
 
+/**
+ * Vérifie si le sdlon courant est utilisable ou non
+*/
 int is_usable(sdlon sd, int min, int max){
     if(sd.level <= max && sd.level >= min){
         return TRUE;
@@ -229,6 +63,10 @@ int is_usable(sdlon sd, int min, int max){
 
 }
 
+/**
+ * génération du sdlon 
+ * assigne les stats en fonction des spéc
+*/
 sdlon assign_sd(int i, int min, int max){
 
     sdlon gen_sd;
@@ -247,25 +85,93 @@ sdlon assign_sd(int i, int min, int max){
     return(gen_sd);
 }
 
+/**
+ * fonction principales de génération des sdlons
+*/
 sdlon generate_sdlon(int environement, int min_level, int max_level){
 
+    //correctif des bornes inutilisables & init aléatoire
     min_level = correctif(min_level);
-
     srand(time(NULL));
 
+    //déclaration des variables
     int find_sd = FALSE;
-    int seed = rand()%PROB;
+    int seed = (rand()%PROB)+1;
     int i = (rand()%NB_SDLON);
     int level;
     sdlon gen_sd;
 
+    /**
+     * Environnement terrestre
+     * type terre: 40%
+     * type air: 40%
+     * type feu 20%
+     * type eau: 0%
+    */
     if (environement == 0){
-        while(!find_sd){
-            if(sdlon_s[i].type==0 && is_usable(sdlon_s[i], min_level, max_level)){
+
+        //type terre
+        if(seed<=40){
+            while(!find_sd){
+                if(sdlon_s[i].type==1 && is_usable(sdlon_s[i], min_level, max_level)){
                     find_sd = TRUE;
                 }else{
                     i = (rand()%NB_SDLON);
                 }
+            }
+        //type air
+        }else if(seed > 40 && seed <= 60){
+            while(!find_sd){
+                if(sdlon_s[i].type==2 && is_usable(sdlon_s[i], min_level, max_level)){
+                    find_sd = TRUE;
+                }else{
+                    i = (rand()%NB_SDLON);
+                }
+            }
+        //type feu
+        }else{
+            while(!find_sd){
+                if(sdlon_s[i].type==0 && is_usable(sdlon_s[i], min_level, max_level)){
+                    find_sd = TRUE;
+                }else{
+                    i = (rand()%NB_SDLON);
+                }
+            }
+        }
+    /**
+     * environnement aquatique
+     * type eau: 85%
+     * type air: 10%
+     * type terre: 5%
+    */
+    }else if(environement==1){
+        //type terre
+        if(seed<=5){
+            while(!find_sd){
+                if(sdlon_s[i].type==1 && is_usable(sdlon_s[i], min_level, max_level)){
+                    find_sd = TRUE;
+                }else{
+                    i = (rand()%NB_SDLON);
+                }
+            }
+        //type air
+        }else if(seed > 5 && seed <= 15){
+            while(!find_sd){
+                if(sdlon_s[i].type==2 && is_usable(sdlon_s[i], min_level, max_level)){
+                    find_sd = TRUE;
+                }else{
+                    i = (rand()%NB_SDLON);
+                }
+            }
+        //type eau
+        }else{
+            while(!find_sd){
+                if(sdlon_s[i].type==-1 && is_usable(sdlon_s[i], min_level, max_level)){
+                    find_sd = TRUE;
+                }else{
+                    i = (rand()%NB_SDLON);
+                }
+            }
         }
     }
 
