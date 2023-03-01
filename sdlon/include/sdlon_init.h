@@ -12,8 +12,8 @@ Initialisation structures
 */
 typedef struct struct_attaque {
   char nom_attaque[50];
-  int type_attaque;
-  int mode_attaque;
+  int type_attaque; //eau : 0, terre : 1, air : 2, feu : 3 
+  int mode_attaque; // Heal : 0 , Degat : 1
   int degat;
 } attaque;
 
@@ -26,9 +26,9 @@ typedef struct struct_sdlon {
   attaque attaque_2;
   attaque attaque_3;
   attaque attaque_4;
-  int evolution;
+  int evolution; //indice de l'evolution dans le tableau, 0 si pas d'evolution
   int level;
-  int evol_sys;
+  int evol_sys; //nombre avec premier chiffre, evolution courrante et 2e chiffre evolution total  
   int xp;
 } sdlon;
 
