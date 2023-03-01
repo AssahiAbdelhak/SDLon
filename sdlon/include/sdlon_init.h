@@ -2,6 +2,11 @@
 #define NB_SDLON 15
 #define NB_ATTAQUE 10
 
+#define EAU 0
+#define TERRE 1
+#define AIR 2
+#define FEU 3
+
 /**
 Initialisation structures
 */
@@ -15,6 +20,7 @@ typedef struct struct_attaque {
 typedef struct struct_sdlon {
   int type;
   char nom[50];
+  int vie_max;
   int vie;
   attaque attaque_1;
   attaque attaque_2;
@@ -23,6 +29,7 @@ typedef struct struct_sdlon {
   int evolution;
   int level;
   int evol_sys;
+  int xp;
 } sdlon;
 
 /**

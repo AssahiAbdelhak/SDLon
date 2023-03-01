@@ -78,8 +78,10 @@ sdlon assign_sd(int i, int min, int max){
     gen_sd.attaque_4 = sdlon_s[i].attaque_4;
     gen_sd.evolution = sdlon_s[i].evolution;
     gen_sd.type = sdlon_s[i].type;
-    gen_sd.vie = gen_life(level, sdlon_s[i].vie);
+    gen_sd.vie_max = gen_life(level, sdlon_s[i].vie_max);
+    gen_sd.vie = gen_sd.vie_max;
     gen_sd.level = level;
+    gen_sd.xp = 0;
     strcpy(gen_sd.nom, sdlon_s[i].nom);
 
     return(gen_sd);
@@ -113,7 +115,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
         //type terre
         if(seed<=40){
             while(!find_sd){
-                if(sdlon_s[i].type==1 && is_usable(sdlon_s[i], min_level, max_level)){
+                if(sdlon_s[i].type==TERRE && is_usable(sdlon_s[i], min_level, max_level)){
                     find_sd = TRUE;
                 }else{
                     i = (rand()%NB_SDLON);
@@ -122,7 +124,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
         //type air
         }else if(seed > 40 && seed <= 60){
             while(!find_sd){
-                if(sdlon_s[i].type==2 && is_usable(sdlon_s[i], min_level, max_level)){
+                if(sdlon_s[i].type==AIR && is_usable(sdlon_s[i], min_level, max_level)){
                     find_sd = TRUE;
                 }else{
                     i = (rand()%NB_SDLON);
@@ -131,7 +133,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
         //type feu
         }else{
             while(!find_sd){
-                if(sdlon_s[i].type==0 && is_usable(sdlon_s[i], min_level, max_level)){
+                if(sdlon_s[i].type==FEU && is_usable(sdlon_s[i], min_level, max_level)){
                     find_sd = TRUE;
                 }else{
                     i = (rand()%NB_SDLON);
@@ -145,10 +147,11 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
      * type terre: 5%
     */
     }else if(environement==1){
+
         //type terre
         if(seed<=5){
             while(!find_sd){
-                if(sdlon_s[i].type==1 && is_usable(sdlon_s[i], min_level, max_level)){
+                if(sdlon_s[i].type==TERRE && is_usable(sdlon_s[i], min_level, max_level)){
                     find_sd = TRUE;
                 }else{
                     i = (rand()%NB_SDLON);
@@ -157,7 +160,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
         //type air
         }else if(seed > 5 && seed <= 15){
             while(!find_sd){
-                if(sdlon_s[i].type==2 && is_usable(sdlon_s[i], min_level, max_level)){
+                if(sdlon_s[i].type==AIR && is_usable(sdlon_s[i], min_level, max_level)){
                     find_sd = TRUE;
                 }else{
                     i = (rand()%NB_SDLON);
@@ -166,7 +169,44 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
         //type eau
         }else{
             while(!find_sd){
-                if(sdlon_s[i].type==-1 && is_usable(sdlon_s[i], min_level, max_level)){
+                if(sdlon_s[i].type==EAU && is_usable(sdlon_s[i], min_level, max_level)){
+                    find_sd = TRUE;
+                }else{
+                    i = (rand()%NB_SDLON);
+                }
+            }
+        }
+    /**
+     * environnement volcanique
+     * type feu: 70%
+     * type air: 20%
+     * type terre: 10%
+     * type eau: 0%
+    */
+    }else if(environement==2){
+
+        //type terre
+        if(seed<=10){
+            while(!find_sd){
+                if(sdlon_s[i].type==TERRE && is_usable(sdlon_s[i], min_level, max_level)){
+                    find_sd = TRUE;
+                }else{
+                    i = (rand()%NB_SDLON);
+                }
+            }
+        //type air
+        }else if(seed > 10 && seed <= 30){
+            while(!find_sd){
+                if(sdlon_s[i].type==AIR && is_usable(sdlon_s[i], min_level, max_level)){
+                    find_sd = TRUE;
+                }else{
+                    i = (rand()%NB_SDLON);
+                }
+            }
+        //type feu
+        }else{
+            while(!find_sd){
+                if(sdlon_s[i].type==FEU && is_usable(sdlon_s[i], min_level, max_level)){
                     find_sd = TRUE;
                 }else{
                     i = (rand()%NB_SDLON);
@@ -175,6 +215,11 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
         }
     }
 
+    /**
+     * appel de la génération (assignation des stats) du sdlons
+     * avec les données crée dans le script
+     * (sdlon, vie, level)
+    */
     if(sdlon_s[sdlon_s[i].evolution].level > max_level || sdlon_s[i].evolution == 0){
         if(sdlon_s[i].level > min_level){
             gen_sd=assign_sd(i, sdlon_s[i].level, max_level);

@@ -64,7 +64,7 @@ int sdlon_init() {
     for(i=0;i<NB_SDLON;i++){
       fscanf(file, "%d %s %d %d %d %d %d %d %d %d\n", &type, name_sdlon, &life, &at1, &at2, &at3, &at4, &evol, &level, &evol_sys);
       sdlon_s[i].type = type;
-      sdlon_s[i].vie = life;
+      sdlon_s[i].vie_max = life;
       strcpy(sdlon_s[i].nom, name_sdlon);
       sdlon_s[i].attaque_1 = attaque_s[at1];
       sdlon_s[i].attaque_2 = attaque_s[at2];

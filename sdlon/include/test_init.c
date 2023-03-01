@@ -4,8 +4,8 @@
 int main() {
 
   sdlon_init();
-  sdlon j = generate_sdlon(1,8,39);
-  printf("nom: %s, vie: %d, level: %d\n", j.nom, j.vie, j.level);
+  sdlon j = generate_sdlon(0,8,15);
+  printf("nom: %s, vie: %d, level: %d\n", j.nom, j.vie_max, j.level);
   
   /*int i;
   for(i=0;i<NB_SDLON;i++){
