@@ -1,4 +1,4 @@
-#include "sdlon_init.h"
+#include "combat.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -81,7 +81,7 @@ int apply_attaque(sdlon *sd, int degat){
     srand(time(NULL));
     int success_seed = (rand()%100);
 
-    if(succes_seed <= 95){
+    if(success_seed <= 95){
         sd->vie -= degat;
         return 1;
     }else{

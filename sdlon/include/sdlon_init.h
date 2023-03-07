@@ -1,3 +1,4 @@
+#ifndef NB_SDLON
 //macros
 #define NB_SDLON 15
 #define NB_ATTAQUE 10
@@ -39,3 +40,4 @@ extern int sdlon_init();
 
 //extern const int NB_SDLON;
 extern sdlon sdlon_s[NB_SDLON];
+#endif
