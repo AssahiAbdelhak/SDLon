@@ -44,7 +44,7 @@ int main(int argc, char * argv[]) {
   int test=0, verbose = 0, cpt=4000, error=0, i;
   float nb_gen=0;
 
-  if(argc == 2){
+  if(argc >= 2){
     verbose = 1;
   }
 
@@ -106,7 +106,24 @@ int main(int argc, char * argv[]) {
   error=0;
   
   //affichage de la fiabilité des génération
-  printf("Fiabilité de génération: %0.3f\n", 1-(NB_SDLON/nb_gen));
+  printf("Fiabilité de génération: %0.3f\n\n", 1-(NB_SDLON/nb_gen));
 
+  //test des fonctions de combats (sats)
+  affiche_test("de la fonction de combat 'sats'", verbose);
+  sdlon sd_src = generate_sdlon(0,45,75);
+  sdlon sd_target = generate_sdlon(0,45,75);
+  test = sats(&sd_src, &sd_target, 1);
+
+  if(!test && sd_target.vie == sd_target.vie_max){
+    nega_test_print(test, verbose);
+  }else if(test == 1 && sd_target.vie < sd_target.vie_max){
+    posi_test_print(test, verbose);
+  }else if(test == 2 && sd_src.vie == sd_src.vie_max){
+    posi_test_print(test, verbose);
+  }else{
+    nega_test_print(1, verbose);
+  }
+
+  //printf("Dégâts apply, v=%d, vm=%d\n", sd_target->vie, sd_target->vie_max);
   return 0;
 }

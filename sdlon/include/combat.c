@@ -81,7 +81,7 @@ int apply_attaque(sdlon *sd, int degat){
     srand(time(NULL));
     int success_seed = (rand()%100);
 
-    if(success_seed <= 95){
+    if(success_seed <= 50){
         sd->vie -= degat;
         return 1;
     }else{
@@ -110,11 +110,15 @@ int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
          * 1: on attaque
         */
         if(mode_at == 0){
-            heal(sd_at, degat_at);
+            if(!heal(sd_at, degat_at)){
+                return 2;
+            }
         }else{
             degat_current = conf_dgt(degat_at, type_at, sd_target->type);
             if(apply_attaque(sd_target, degat_current)){
-
+                return 1;
+            }else{
+                return 0;
             }
         }
         //on récupère les dégat dans la configuration actuelle
