@@ -1,43 +1,7 @@
 #include "sdlon_generate.h"
 #include "combat.h"
+#include "test_header.h"
 #include <stdio.h>
-
-/**
- * affiche l'etat du test
- * dans le cas ou le resultat du test = 1
-*/
-void posi_test_print(int test, int verbose){
-
-  if(verbose){
-    test? printf("-->OK\n\n"):printf("-->KO\n\n");
-  }
-  
-  return;
-}
-
-/**
- * affiche l'etat du test
- * dans le cas ou le resultat du test = 0
-*/
-void nega_test_print(int test, int verbose){
-
-  if(verbose){
-    !test? printf("-->OK\n\n"):printf("-->KO\n\n");
-  }
-  
-  return;
-}
-
-/**
- * Affiche le test actuelle
-*/
-void affiche_test(char * str, int verbose){
-  if(verbose){
-    printf("---Test %s:\n", str);
-  }
-  
-  return;
-}
 
 int main(int argc, char * argv[]) {
 
@@ -104,9 +68,7 @@ int main(int argc, char * argv[]) {
   }
   nega_test_print(error, verbose);
   error=0;
-  
-  //affichage de la fiabilité des génération
-  printf("Fiabilité de génération: %0.3f\n\n", 1-(NB_SDLON/nb_gen));
+  affiche_fiability("génération des sdlons", NB_SDLON, nb_gen, verbose);
 
   //test des fonctions de combats (sats)
   affiche_test("de la fonction de combat 'sats'", verbose);
