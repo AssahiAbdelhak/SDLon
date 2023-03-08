@@ -1,14 +1,6 @@
 --------------------13/02/2023 -> 24/02/2023
 
-13/02/2023:
-- début déplacement du joueur
-- début des map
-
-15/02/2023:
-- amélioration déplacement du joueur
-
 20/02/2023:
-- Cinématique de début de jeu
 - Création fonction de génération des sdlons
 
 21/02/2023:
@@ -18,6 +10,3 @@
 
 22/02/2023
 - Amélioration fonction de combat
-
-24/02/2023:
-- Cinématique de début de jeu
