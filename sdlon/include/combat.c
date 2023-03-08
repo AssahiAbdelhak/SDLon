@@ -81,7 +81,7 @@ int apply_attaque(sdlon *sd, int degat){
     srand(time(NULL));
     int success_seed = (rand()%100);
 
-    if(success_seed <= 50){
+    if(success_seed <= 95){
         sd->vie -= degat;
         return 1;
     }else{
@@ -95,11 +95,27 @@ int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
     attaque at;
     int type_at, mode_at, degat_at, degat_current, status;
 
-    //on fait un traitement différent selon les attaques
-    if(num_at==1){
-
-        // on récupère la première attaque et ses spec
+    //récupération de l'attaque voulus
+    switch (num_at)
+    {
+    case 1:
         at = sd_at->attaque_1;
+        break;
+    case 2:
+        at = sd_at->attaque_2;
+        break;
+    case 3:
+        at = sd_at->attaque_3;
+        break;
+    case 4:
+        at = sd_at->attaque_4;
+        break;
+    default:
+        break;
+    }
+
+
+        // on récupère les specs de l'attaque
         mode_at = at.mode_attaque;
         degat_at = at.degat;
         type_at = at.type_attaque;
@@ -121,8 +137,4 @@ int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
                 return 0;
             }
         }
-        //on récupère les dégat dans la configuration actuelle
-
-        //on applique les dégats
-    }
 }
