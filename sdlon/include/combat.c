@@ -125,7 +125,7 @@ int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
          * 0: on heal
          * 1: on attaque
         */
-        if(mode_at == 0){
+        if(mode_at == HEAL){
             if(!heal(sd_at, degat_at)){
                 return 2;
             }
@@ -170,22 +170,22 @@ int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utili
 
   if (pv <= 10 && chance >= 45 /*chance >= pv*/) { // si un SDLon a moins de 10% de vie il se heal
 
-    if (sd_at->attaque_1.mode_attaque == 0) {
+    if (sd_at->attaque_1.mode_attaque == HEAL) {
 
       return 1;
     }
 
-    if (sd_at->attaque_2.mode_attaque == 0) {
+    if (sd_at->attaque_2.mode_attaque == HEAL) {
 
       return 2;
     }
 
-    if (sd_at->attaque_3.mode_attaque == 0) {
+    if (sd_at->attaque_3.mode_attaque == HEAL) {
 
       return 3;
     }
 
-    if (sd_at->attaque_4.mode_attaque == 0) {
+    if (sd_at->attaque_4.mode_attaque == HEAL) {
 
       return 4;
     }

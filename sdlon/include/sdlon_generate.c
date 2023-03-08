@@ -110,7 +110,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
      * type feu 20%
      * type eau: 0%
     */
-    if (environement == 0){
+    if (environement == EAU){
 
         //type terre
         if(seed<=40){
@@ -146,7 +146,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
      * type air: 10%
      * type terre: 5%
     */
-    }else if(environement==1){
+    }else if(environement==TERRE){
 
         //type terre
         if(seed<=5){
@@ -183,7 +183,7 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
      * type terre: 10%
      * type eau: 0%
     */
-    }else if(environement==2){
+    }else if(environement==AIR){
 
         //type terre
         if(seed<=10){

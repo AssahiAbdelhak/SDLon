@@ -99,9 +99,10 @@ int main(int argc, char * argv[]) {
 
   //test des fonctions de combats (ia)
   affiche_test("de la fonction de combat 'ia'", verbose);
-  sdlon sd_src2 = generate_sdlon(0,45,75);
-  sdlon sd_target2 = generate_sdlon(0,45,75);
+  sd_src = generate_sdlon(0,45,75);
+  sd_target = generate_sdlon(0,45,75);
   test = ia(&sd_src, &sd_target);
+  posi_test_print(test, verbose);
 
   return 0;
 }

@@ -7,6 +7,8 @@
 #define TERRE 1
 #define AIR 2
 #define FEU 3
+#define HEAL 0
+#define ATT 1
 
 /**
 Initialisation structures
