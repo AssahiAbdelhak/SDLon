@@ -194,69 +194,73 @@ int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utili
 
     switch (sd_target->type) { // choix de l'attaque la plus optimiser
 
-    case 0:
+    case EAU:
 
-      if (sd_at->attaque_1.type_attaque == 2 && sd_at->attaque_1.mode_attaque)
+      if (sd_at->attaque_1.type_attaque == AIR && sd_at->attaque_1.mode_attaque)
         return 1;
 
-      if (sd_at->attaque_2.type_attaque == 2 && sd_at->attaque_2.mode_attaque)
+      if (sd_at->attaque_2.type_attaque == AIR && sd_at->attaque_2.mode_attaque)
         return 2;
 
-      if (sd_at->attaque_3.type_attaque == 2 && sd_at->attaque_3.mode_attaque)
+      if (sd_at->attaque_3.type_attaque == AIR && sd_at->attaque_3.mode_attaque)
         return 3;
 
-      if (sd_at->attaque_4.type_attaque == 2 && sd_at->attaque_4.mode_attaque)
+      if (sd_at->attaque_4.type_attaque == AIR && sd_at->attaque_4.mode_attaque)
         return 4;
 
       break;
 
-    case 1:
+    case TERRE:
 
-      if (sd_at->attaque_1.type_attaque == 3 && sd_at->attaque_1.mode_attaque)
+      if (sd_at->attaque_1.type_attaque == FEU && sd_at->attaque_1.mode_attaque)
         return 1;
 
-      if (sd_at->attaque_2.type_attaque == 3 && sd_at->attaque_2.mode_attaque)
+      if (sd_at->attaque_2.type_attaque == FEU && sd_at->attaque_2.mode_attaque)
         return 2;
 
-      if (sd_at->attaque_3.type_attaque == 3 && sd_at->attaque_3.mode_attaque)
+      if (sd_at->attaque_3.type_attaque == FEU && sd_at->attaque_3.mode_attaque)
         return 3;
 
-      if (sd_at->attaque_4.type_attaque == 3 && sd_at->attaque_4.mode_attaque)
+      if (sd_at->attaque_4.type_attaque == FEU && sd_at->attaque_4.mode_attaque)
         return 4;
 
       break;
 
-    case 2:
+    case AIR:
 
-      if (sd_at->attaque_1.type_attaque == 1 && sd_at->attaque_1.mode_attaque)
+      if (sd_at->attaque_1.type_attaque == TERRE && sd_at->attaque_1.mode_attaque)
         return 1;
 
-      if (sd_at->attaque_2.type_attaque == 1 && sd_at->attaque_2.mode_attaque)
+      if (sd_at->attaque_2.type_attaque == TERRE && sd_at->attaque_2.mode_attaque)
         return 2;
 
-      if (sd_at->attaque_3.type_attaque == 1 && sd_at->attaque_3.mode_attaque)
+      if (sd_at->attaque_3.type_attaque == TERRE && sd_at->attaque_3.mode_attaque)
         return 3;
 
-      if (sd_at->attaque_4.type_attaque == 1 && sd_at->attaque_4.mode_attaque)
+      if (sd_at->attaque_4.type_attaque == TERRE && sd_at->attaque_4.mode_attaque)
         return 4;
 
       break;
 
-    case 3:
+    case FEU:
 
-      if (sd_at->attaque_1.type_attaque == 0 && sd_at->attaque_1.mode_attaque)
+      if (sd_at->attaque_1.type_attaque == EAU && sd_at->attaque_1.mode_attaque)
         return 1;
 
-      if (sd_at->attaque_2.type_attaque == 0 && sd_at->attaque_2.mode_attaque)
+      if (sd_at->attaque_2.type_attaque == EAU && sd_at->attaque_2.mode_attaque)
         return 2;
 
-      if (sd_at->attaque_3.type_attaque == 0 && sd_at->attaque_3.mode_attaque)
+      if (sd_at->attaque_3.type_attaque == EAU && sd_at->attaque_3.mode_attaque)
         return 3;
 
-      if (sd_at->attaque_4.type_attaque == 0 && sd_at->attaque_4.mode_attaque)
+      if (sd_at->attaque_4.type_attaque == EAU && sd_at->attaque_4.mode_attaque)
         return 4;
 
       break;
     }
   }
+}
+
+void fight(){
+  return;
 }

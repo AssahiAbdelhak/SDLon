@@ -1,7 +1,9 @@
 #include "sdlon_generate.h"
 #include "combat.h"
 #include "test_header.h"
+#include "player.h"
 #include <stdio.h>
+#include <string.h>
 
 int main(int argc, char * argv[]) {
 
@@ -104,5 +106,31 @@ int main(int argc, char * argv[]) {
   test = ia(&sd_src, &sd_target);
   posi_test_print(test, verbose);
 
+  //test création du joueurs
+  affiche_test("de la création du joueur", verbose);
+  player_t p_homme = player_create("coco", HOMME);
+  player_t p_femme = player_create("cocotte", FEMME);
+  error=0;
+  if(p_homme.name == "coco" && p_femme.name == "cocotte" &&
+  p_homme.genre == HOMME && p_femme.genre == FEMME){ 
+    //verification des sdlons (var p_femme)
+    for(i=0;i<MAIN_MAX;i++){
+      if(strcmp(p_femme.sd[i].nom, sdlon_s[-1].nom)){
+        error=1;
+      }
+    }
+    //verification des sdlons (var p_homme)
+    for(i=0;i<MAIN_MAX;i++){
+      if(strcmp(p_homme.sd[i].nom, sdlon_s[-1].nom)){
+        error=1;
+      }
+    }
+  }else{
+    error=1;
+  }
+  nega_test_print(error, verbose);
+
+  //test d'initialisation du joueurs
+  affiche_test("de l'initialisation du joueur", verbose);
   return 0;
 }
