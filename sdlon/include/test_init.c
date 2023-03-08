@@ -75,17 +75,33 @@ int main(int argc, char * argv[]) {
   sdlon sd_src = generate_sdlon(0,45,75);
   sdlon sd_target = generate_sdlon(0,45,75);
   test = sats(&sd_src, &sd_target, 1);
+  nb_gen=0;
 
-  if(!test && sd_target.vie == sd_target.vie_max){
-    nega_test_print(test, verbose);
-  }else if(test == 1 && sd_target.vie < sd_target.vie_max){
-    posi_test_print(test, verbose);
-  }else if(test == 2 && sd_src.vie == sd_src.vie_max){
-    posi_test_print(test, verbose);
-  }else{
-    nega_test_print(1, verbose);
+  for(i=0;i<cpt;i++){
+    if(!test && sd_target.vie == sd_target.vie_max){
+      nb_gen++;
+    }else if(test == 1 && sd_target.vie < sd_target.vie_max){
+      nb_gen++;
+    }else if(test == 2 && sd_src.vie == sd_src.vie_max){
+      nb_gen++;
+    }else{
+      error=1;
+    }
+
+    sd_src = generate_sdlon(0,45,75);
+    sd_target = generate_sdlon(0,45,75);
+    test = sats(&sd_src, &sd_target, 1);
   }
+  
+  nega_test_print(error, verbose);
+  affiche_fiability("de la fonction 'sats'", NB_SDLON, nb_gen, verbose);
+  error=0;
 
-  //printf("Dégâts apply, v=%d, vm=%d\n", sd_target->vie, sd_target->vie_max);
+  //test des fonctions de combats (ia)
+  affiche_test("de la fonction de combat 'ia'", verbose);
+  sdlon sd_src2 = generate_sdlon(0,45,75);
+  sdlon sd_target2 = generate_sdlon(0,45,75);
+  test = ia(&sd_src, &sd_target);
+
   return 0;
 }
