@@ -4,6 +4,7 @@
 #include "player.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main(int argc, char * argv[]) {
 
@@ -108,8 +109,8 @@ int main(int argc, char * argv[]) {
 
   //test création du joueurs
   affiche_test("de la création du joueur", verbose);
-  player_t p_homme = player_create("coco", HOMME);
-  player_t p_femme = player_create("cocotte", FEMME);
+  player_t p_homme = player_create("coco", HOMME, "coco");
+  player_t p_femme = player_create("cocotte", FEMME, "cocotte");
   error=0;
   if(p_homme.name == "coco" && p_femme.name == "cocotte" &&
   p_homme.genre == HOMME && p_femme.genre == FEMME){ 
@@ -131,6 +132,16 @@ int main(int argc, char * argv[]) {
   nega_test_print(error, verbose);
 
   //test d'initialisation du joueurs
+  char * save_file = malloc(sizeof(char)*80);
+  strcpy(save_file, "coco");
   affiche_test("de l'initialisation du joueur", verbose);
+  player_t player_test = player_init(save_file);
+  error=0;
+  if(strcmp(save_file, player_test.name)){
+    error = 1;
+  }
+  free(save_file);
+  error += player_quit(&player_test);
+  nega_test_print(error, verbose);
   return 0;
 }

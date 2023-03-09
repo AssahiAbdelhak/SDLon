@@ -168,7 +168,7 @@ int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utili
     return 4;
   }
 
-  if (pv <= 10 && chance >= 45 /*chance >= pv*/) { // si un SDLon a moins de 10% de vie il se heal
+  if (pv <= 10 && chance >= 50 /*chance >= pv*/) { // si un SDLon a moins de 10% de vie il se heal
 
     if (sd_at->attaque_1.mode_attaque == HEAL) {
 

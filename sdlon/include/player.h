@@ -9,6 +9,20 @@
 #define MAIN_MAX 6
 
 /**
+ * structure pour la gestion d'item
+ * nom d'un item, description, et toutes ses spec
+*/
+typedef struct item_s{
+    char * name;
+    char * description;
+    int type;
+    int usage;
+    int opt_degat;
+    int opt_tag;
+    void (*utilisation)(void *);
+}item_t;
+
+/**
  * structure du joueur
  * prenom, genre, sdlons courrant
 */
@@ -19,6 +33,12 @@ typedef struct player_s{
     sdlon sd[6];
 }player_t;
 
-player_t player_create(char * name, int genre);
-player_t player_init(char * name_file);
+player_t player_create(char * name, int genre, char * file_name);
+player_t player_init(char * file_name);
+int player_quit(player_t * p);
+int add_sdlon_in_set(sdlon sd);
+int remove_sdlon_in_set(sdlon sd);
+int switch_sdlon_from_set(sdlon sd);
+int send_sdlon_in_box(sdlon sd);
+int load_box(char * name);
 #endif
