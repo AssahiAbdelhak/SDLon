@@ -17,6 +17,6 @@ float taille_x(int x);
 float taille_y(int y);
 void blackscreen(SDL_Renderer * renderer);
 SDL_Texture * print_image(SDL_Renderer * renderer, char * img, int xi, int yi, int hi, int wi);
-SDL_Texture * print_text(SDL_Renderer * renderer, const char * fontName, const char * texte, const int xt, const int yt);
+SDL_Texture * print_text(SDL_Renderer * renderer, const char * fontName, const char * texte, const int xt, const int yt, const int r, const int g, const int b);
 void affichage(SDL_Renderer * renderer);
 void PrintKeyInfo(SDL_KeyboardEvent * key);

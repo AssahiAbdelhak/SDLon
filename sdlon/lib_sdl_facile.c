@@ -26,15 +26,55 @@ float taille_y(int y){
 
 
 void blackscreen(SDL_Renderer * renderer){
-  /**
-    \brief blackscreen : affiche un ecran noir
-  */
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
   SDL_RenderFillRect(renderer, NULL);
   SDL_RenderPresent(renderer);
 }
 
+void cadre(SDL_Renderer * renderer, int xc, int yc){
+  //Deux lignes d'épaisseurs 2 pixels
+  int i, j;
+  for(i = xc ; i < (xc+300) ; i++){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderDrawPoint(renderer, i, yc);
+  }
+  for(j = xc ; j < (xc+300) ; j++){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderDrawPoint(renderer, j, yc+1);
+  }
 
+  for(i = xc ; i < (xc+300) ; i++){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderDrawPoint(renderer, i, yc+100);
+  }
+  for(j = xc ; j < (xc+300) ; j++){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderDrawPoint(renderer, j, yc+101);
+  }
+
+  //Deux colonnes d'épaisseurs 2 pixels
+  for(i = yc ; i < (yc+100) ; i++){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderDrawPoint(renderer, xc, i);
+  }
+  for(j = yc ; j < (yc+100) ; j++){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderDrawPoint(renderer, xc+1, j);
+  }
+
+  for(i = yc ; i < (yc+100) ; i++){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderDrawPoint(renderer, xc+299, i);
+  }
+  for(j = yc ; j < (yc+100) ; j++){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderDrawPoint(renderer, xc+300, j);
+  }
+
+
+  SDL_RenderPresent(renderer);
+
+}
 
 SDL_Texture * print_image(SDL_Renderer * renderer, char * img, int xi, int yi, int hi, int wi){
   
@@ -69,7 +109,7 @@ SDL_Texture * print_image(SDL_Renderer * renderer, char * img, int xi, int yi, i
 
 
 
-SDL_Texture * print_text(SDL_Renderer * renderer, const char * fontName, const char * texte, const int xt, const int yt){
+SDL_Texture * print_text(SDL_Renderer * renderer, const char * fontName, const char * texte, const int xt, const int yt, const int r, const int g, const int b){
 
   //fonction qui affiche du texte
 
@@ -83,10 +123,10 @@ SDL_Texture * print_text(SDL_Renderer * renderer, const char * fontName, const c
   }
 
   //couleur du texte : blanche
-  SDL_Color White = {255, 255, 255};
+  SDL_Color color = {r, g, b};
 
   SDL_Surface * surfMessage;
-  surfMessage = TTF_RenderUTF8_Blended(font, texte, White);
+  surfMessage = TTF_RenderUTF8_Blended(font, texte, color);
   if(!surfMessage){
     printf("erreur de chargement du message\n");
     exit(EXIT_FAILURE);
