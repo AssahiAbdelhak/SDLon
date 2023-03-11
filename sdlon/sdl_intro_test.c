@@ -48,9 +48,8 @@ int main(int argc, char **argv){
   int clefbas = 0 ;
   int test_cond = 0 ;
   int cadenas = true;
+  int HoF = 0;
 
-  //VARIABLE souris et event
-  SDL_Point mousePosition;
   while (!quit){
     SDL_WaitEvent(&event);
 
@@ -87,17 +86,6 @@ int main(int argc, char **argv){
     SDL_Texture * txthomme2;
     SDL_Texture * txtfemme2;
 
-    SDL_Rect rectH;
-    rectH.x=400;
-    rectH.y=100;
-    rectH.w=50;
-    rectH.h=30;
-  
-    SDL_Rect rectF;
-    rectF.x=800;
-    rectF.y=100;
-    rectF.w=50;
-    rectF.h=30;
 
 
     if(cadenas == true && clefbas < 6){
@@ -171,10 +159,6 @@ int main(int argc, char **argv){
             SDL_DestroyTexture(txt4_2);
             SDL_DestroyTexture(img4);
             SDL_DestroyTexture(img4_2);
-            SDL_DestroyTexture(txthomme);
-            SDL_DestroyTexture(txtfemme);
-            SDL_DestroyTexture(txthomme);
-            SDL_DestroyTexture(txtfemme);
 
             blackscreen(renderer);
           }
@@ -228,8 +212,84 @@ int main(int argc, char **argv){
 
     affichage(renderer);
 
-    if(SDL_PollEvent(&event)){
-      if(SDL_KEYUP == event.type){
+    while(SDL_PollEvent(&event)){
+      switch(event.type){
+        
+        case SDL_KEYUP :
+          PrintKeyInfo(&event.key);
+          printf("Key release detected\n");
+          printf("\n");
+          break;
+        
+        case SDL_KEYDOWN :
+          switch( event.key.keysym.sym ){
+                
+                //Choisi d'etre un homme
+                case SDLK_LEFT:
+                  if(clefbas == 3){
+                    txthomme2 = print_text(renderer, "RosesareFF0000.ttf", "homme", 400, 100, 0, 0, 255);
+                    txtfemme = print_text(renderer, "RosesareFF0000.ttf", "femme", 800, 100, 255, 255, 255);
+                    HoF=0;
+                  }
+                  break;
+
+                //Choisi d'etre une femme
+                case SDLK_RIGHT:
+                  if(clefbas == 3){
+                    txtfemme2 = print_text(renderer, "RosesareFF0000.ttf", "femme", 800, 100, 0, 0, 255);
+                    txthomme = print_text(renderer, "RosesareFF0000.ttf", "homme", 400, 100, 255, 255, 255);
+                    HoF=1;
+                  }
+                  break;
+
+                //passe a la suite de la cinematique avec la reference du sexe choisi dans la variable HoF(Homme ou Femme)
+                case SDLK_SPACE:
+
+                  PrintKeyInfo(&event.key);
+                  printf("moi Key press detected\n");
+                  clefbas++ ;
+                  printf("moi clef_bas -> %d\n", clefbas);
+                  test_cond = 1 ;
+                  printf("moi test_cond -> %d\n", test_cond);
+                  cadenas = true ;
+                  printf("moi cadenas -> %d\n", cadenas);
+                  printf("\n");
+                  if(clefbas == 4){
+                    SDL_DestroyTexture(txthomme);
+                    SDL_DestroyTexture(txthomme2);
+                    SDL_DestroyTexture(txtfemme);
+                    SDL_DestroyTexture(txtfemme2);
+                  }
+                  break;
+
+                }
+          break;
+          
+        //fin de la cinématique
+        case SDL_QUIT : 
+          quit = true;
+          break;
+        
+      }
+    }
+  }
+
+  /* Pause tous les SDL sous systemes pour un nombre variables de millisecondes */
+  SDL_Delay(DELAY);
+
+  /* Free la memoire */
+  SDL_DestroyWindow(window);
+  
+  SDL_DestroyRenderer(renderer);
+
+  /* Eteint tous les SDL sous systemes */
+  SDL_Quit();
+  return 0;
+}
+
+
+/*
+if(SDL_KEYUP == event.type){
         PrintKeyInfo(&event.key);
         printf("Key release detected\n");
         printf("\n");
@@ -247,6 +307,8 @@ int main(int argc, char **argv){
       }
       else if(SDL_MOUSEMOTION == event.type){
         int x, y;
+        mousePosition.x = event.motion.x; 
+        mousePosition.y = event.motion.y;
         SDL_GetMouseState(&x,&y);
         printf("-----------%d %d-------------\n", x, y);
         
@@ -260,26 +322,9 @@ int main(int argc, char **argv){
             txtfemme2 = print_text(renderer, "RosesareFF0000.ttf", "femme", 800, 100, 0, 0, 255);
           }
         }
+      }
       else if(SDL_QUIT == event.type){ 
         quit = true;
         break;
       }
-      else{
-        printf("rien");
-      }
-      
-    }
-  }
-
-  /* Pause tous les SDL sous systemes pour un nombre variables de millisecondes */
-  SDL_Delay(DELAY);
-
-  /* Free la memoire */
-  SDL_DestroyWindow(window);
-  
-  SDL_DestroyRenderer(renderer);
-
-  /* Eteint tous les SDL sous systemes */
-  SDL_Quit();
-  return 0;
-}
+*/
