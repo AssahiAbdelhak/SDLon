@@ -2,6 +2,7 @@
 #include "combat.h"
 #include "test_header.h"
 #include "player.h"
+#include "item.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -143,5 +144,17 @@ int main(int argc, char * argv[]) {
   free(save_file);
   error += player_quit(&player_test);
   nega_test_print(error, verbose);
-  return 0;
+
+  //test d'initialisation des items
+  affiche_test("de l'initialisation des items", verbose);
+  error = item_init();
+  nega_test_print(error, verbose);
+
+  //affichage des items pour tester
+  display_all_items();
+  
+  //test de sortie des items
+  affiche_test("de sortie des items ('quit')", verbose);
+  test = item_quit();
+  posi_test_print(test, verbose);
 }

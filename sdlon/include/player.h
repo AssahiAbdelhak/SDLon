@@ -9,20 +9,6 @@
 #define MAIN_MAX 6
 
 /**
- * structure pour la gestion d'item
- * nom d'un item, description, et toutes ses spec
-*/
-typedef struct item_s{
-    char * name;
-    char * description;
-    int type;
-    int usage;
-    int opt_degat;
-    int opt_tag;
-    void (*utilisation)(void *);
-}item_t;
-
-/**
  * structure du joueur
  * prenom, genre, sdlons courrant
 */

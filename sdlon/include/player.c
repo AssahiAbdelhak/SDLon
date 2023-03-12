@@ -1,5 +1,6 @@
 #include "player.h"
 #include "sdlon_init.h"
+#include "item.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -59,7 +60,6 @@ player_t player_init(char * file_name){
         }
     }
     player.nb_current_sdlon = cpt;
-    printf("%s", player.sd[1].nom);
     fclose(file);
     free(path);
     free(name);
@@ -72,14 +72,6 @@ int player_quit(player_t * player){
     }
     free(player->name);
     player->name=NULL;
-    return 0;
-}
-
-/**
- * initialise les items d'un joueur
- * au chargement d'un jeu
-*/
-int item_init(){
     return 0;
 }
 
