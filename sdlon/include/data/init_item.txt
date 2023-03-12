@@ -1,5 +1,5 @@
-sdlasso Un_outil_particulier_qui_permet_de_capturer_des_sdlons 0 0 0 0
-sdlasso Un_outil_particulier_qui_permet_de_capturer_des_sdlons 0 0 0 0
-sdlasso Un_outil_particulier_qui_permet_de_capturer_des_sdlons 0 0 0 0
-sdlasso Un_outil_particulier_qui_permet_de_capturer_des_sdlons 0 0 0 0
-sdlasso Un_outil_particulier_qui_permet_de_capturer_des_sdlons 0 0 0 0
+Sdlasso Un-objet-particulier-qui-permet-de-capturer-des-sdlons 0 0 0 0
+Super-sdlasso Un-sdlasso-renforcer-et-amélioré-qui-permet-de-capturer-des-sdlons-avec-un-meilleur-rendement 0 0 0 0
+CABB-sdlasso Un-objet-basé-sur-le-fonctionnement-des-des-sdlasso-mais-perfectionné-par-des-artisants-pour-fonctionner-à-tous-les-coups 0 0 0 0
+Relique Une-relique-êxtremement-rare-n'ayant-que-peu-d'intêret 0 0 0 0
+Extracteur Un-outil-pouvant-être-utilisé-par-des-chercheur-permettant-l'extraction-d'une-relique 0 0 0 0

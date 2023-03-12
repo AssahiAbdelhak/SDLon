@@ -1,6 +1,8 @@
-#include "sdlon_init.h"
-
 #ifndef HOMME
+
+#include "sdlon_init.h"
+#include "item.h"
+
 /**
  * Definition des macros
 */
@@ -17,6 +19,7 @@ typedef struct player_s{
     int genre;
     int nb_current_sdlon;
     sdlon sd[6];
+    inventory inventaire;
 }player_t;
 
 player_t player_create(char * name, int genre, char * file_name);

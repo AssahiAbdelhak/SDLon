@@ -5,16 +5,40 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * crée l'inventaire du joueur
+ * et le met à 0
+*/
+inventory player_inventory_create(char * file_name){
+    inventory inventaire;
+    FILE * file;
+    inventaire.path_to_save = malloc(sizeof(char)*MAX_LEN_PATH);
+    int i;
+
+    for(i=0;i<NB_ITEMS;i++){
+        inventaire.list_item[i] = 0;
+    }
+    inventaire.max_item_per_slot = MAX_ITEM_PER_SLOT;
+    strcpy(inventaire.path_to_save, file_name);
+
+    file = fopen(inventaire.path_to_save, "a");
+    fprintf(file, "0 0 0 0 0\n");
+    fclose(file);
+
+    return inventaire;
+}
+
 player_t player_create(char * name, int genre, char * file_name){
 
     player_t player;
     int i, init=-1;
-    char * path = malloc(sizeof(char)*80);
+    char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "data/players_data/player_name_");
     strcat(path, file_name);
 
     //assignation nom/genre
-    player.name = name;
+    player.name = malloc(sizeof(char)*MAX_LEN_NAME);
+    strcpy(player.name, name);
     player.genre = genre;
 
     //mise à 0 des sdlons
@@ -27,9 +51,11 @@ player_t player_create(char * name, int genre, char * file_name){
     FILE * file;
     file = fopen(path, "w");
     fprintf(file, "%s %d %d %d %d %d %d %d\n", name, genre, init, init, init, init, init, init);
+    fclose(file);
+
+    player.inventaire = player_inventory_create(path);
 
     //libération mémoire
-    fclose(file);
     free(path);
     return player;
 }
@@ -37,19 +63,19 @@ player_t player_create(char * name, int genre, char * file_name){
 player_t player_init(char * file_name){
     player_t player;
 
-    char * path = malloc(sizeof(char)*80);
+    char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "data/players_data/player_name_");
     strcat(path, file_name);
 
-    char * name = malloc(sizeof(char)*80);
-    int genre, sdlon_index[6], i, cpt=0;
+    char * name = malloc(sizeof(char)*MAX_LEN_NAME);
+    int genre, sdlon_index[6], i, cpt=0, invent_qtt;
 
     FILE * file;
     file = fopen(path, "r");
 
     fscanf(file, "%s %d %d %d %d %d %d %d\n", name, &genre, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5]);
-    
-    player.name = malloc(sizeof(char)*80);
+
+    player.name = malloc(sizeof(char)*MAX_LEN_NAME);
     strcpy(player.name, name);
     player.genre = genre;
 
@@ -60,6 +86,21 @@ player_t player_init(char * file_name){
         }
     }
     player.nb_current_sdlon = cpt;
+
+    //initiate inventaire
+    player.inventaire.path_to_save = malloc(sizeof(char)*MAX_LEN_PATH);
+    strcpy(player.inventaire.path_to_save, path);
+    
+    i=0;
+    while (!feof(file))
+    {
+        fscanf(file, "%d", &invent_qtt);
+        player.inventaire.list_item[i] = invent_qtt;
+        i++;
+    }
+    
+    player.inventaire.max_item_per_slot = MAX_ITEM_PER_SLOT;
+    
     fclose(file);
     free(path);
     free(name);
@@ -71,6 +112,7 @@ int player_quit(player_t * player){
         return 1;
     }
     free(player->name);
+    free(player->inventaire.path_to_save);
     player->name=NULL;
     return 0;
 }
@@ -79,7 +121,8 @@ int player_quit(player_t * player){
  * Ajoute un item
  * à l'inventaire du joueurs
 */
-int add_items(){
+int add_items(item_t * item){
+
     return 0;
 }
 

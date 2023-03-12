@@ -8,16 +8,16 @@ item_t items[NB_ITEMS];
 int item_init(){
     int i = 0, type, usage, opt_degat, opt_tag;
     char *name_file = "data/init_item.txt";
-    char *name=malloc(sizeof(char)*50);
-    char *descritpion=malloc(sizeof(char)*250);
+    char *name=malloc(sizeof(char)*MAX_LEN_NAME);
+    char *descritpion=malloc(sizeof(char)*MAX_LEN_DESCR);
     FILE *file = NULL;
 
     file = fopen(name_file, "r");
 
     if(file!=NULL){
         for(i=0;i<NB_ITEMS;i++){
-            items[i].name = malloc(sizeof(char)*50);
-            items[i].description = malloc(sizeof(char)*250);
+            items[i].name = malloc(sizeof(char)*MAX_LEN_NAME);
+            items[i].description = malloc(sizeof(char)*MAX_LEN_DESCR);
             fscanf(file, "%s %s %d %d %d %d\n", name, descritpion, &type, &usage, &opt_degat, &opt_tag);
             strcpy(items[i].name, name);
             strcpy(items[i].description, descritpion);

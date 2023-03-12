@@ -131,12 +131,15 @@ int main(int argc, char * argv[]) {
     error=1;
   }
   nega_test_print(error, verbose);
+  player_quit(&p_femme);
+  player_quit(&p_homme);
 
   //test d'initialisation du joueurs
   char * save_file = malloc(sizeof(char)*80);
   strcpy(save_file, "coco");
   affiche_test("de l'initialisation du joueur", verbose);
   player_t player_test = player_init(save_file);
+  //printf("%s, %d, %s, %d\n", player_test.name, player_test.inventaire.list_item[0], player_test.inventaire.path_to_save, player_test.inventaire.max_item_per_slot);
   error=0;
   if(strcmp(save_file, player_test.name)){
     error = 1;
@@ -151,7 +154,7 @@ int main(int argc, char * argv[]) {
   nega_test_print(error, verbose);
 
   //affichage des items pour tester
-  display_all_items();
+  //display_all_items();
   
   //test de sortie des items
   affiche_test("de sortie des items ('quit')", verbose);
