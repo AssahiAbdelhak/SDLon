@@ -2,7 +2,7 @@
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
 # include <SDL2/SDL_image.h>
-# include "./lib/lib_sdl_facile.h"
+# include "../lib/lib_sdl_facile.h"
 
 /**
   \file lib_sdl_facile.c
