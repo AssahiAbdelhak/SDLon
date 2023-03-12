@@ -1,26 +1,14 @@
-#include "sdlon_init.h"
-
 #ifndef HOMME
+
+#include "sdlon_init.h"
+#include "item.h"
+
 /**
  * Definition des macros
 */
 #define HOMME 0
 #define FEMME 1
 #define MAIN_MAX 6
-
-/**
- * structure pour la gestion d'item
- * nom d'un item, description, et toutes ses spec
-*/
-typedef struct item_s{
-    char * name;
-    char * description;
-    int type;
-    int usage;
-    int opt_degat;
-    int opt_tag;
-    void (*utilisation)(void *);
-}item_t;
 
 /**
  * structure du joueur
@@ -31,6 +19,7 @@ typedef struct player_s{
     int genre;
     int nb_current_sdlon;
     sdlon sd[6];
+    inventory inventaire;
 }player_t;
 
 player_t player_create(char * name, int genre, char * file_name);
