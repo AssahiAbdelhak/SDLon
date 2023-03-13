@@ -155,7 +155,21 @@ int main(int argc, char * argv[]) {
 
   //affichage des items pour tester
   //display_all_items();
-  
+
+  //test d'accès aux items (sur un item vide)
+  affiche_test("de l'accès aux items (sur un item vide)", verbose);
+  player_t player = player_create("test", 0, "test");
+  int qtt_sdlasso = get_player_item(&player, SDLASSO);
+  //printf("nb sdlasso: %d\n", qtt_sdlasso);
+  nega_test_print(qtt_sdlasso, verbose);
+
+  //test d'ajout d'un item
+  affiche_test("de l'accès aux items (sur un item non-vide)", verbose);
+  error = add_items(SDLASSO, 5, &player);
+  nega_test_print(error, verbose);
+  //qtt_sdlasso = get_player_item(&player, SDLASSO);
+  printf("nb sdlasso: %d\n", qtt_sdlasso);
+
   //test de sortie des items
   affiche_test("de sortie des items ('quit')", verbose);
   test = item_quit();

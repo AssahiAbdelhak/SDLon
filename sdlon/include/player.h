@@ -30,4 +30,7 @@ int remove_sdlon_in_set(sdlon sd);
 int switch_sdlon_from_set(sdlon sd);
 int send_sdlon_in_box(sdlon sd);
 int load_box(char * name);
+int get_player_item(player_t * player, int num_item);
+int add_items(int num_item, int qtt, player_t * player);
+int remove_items(int num_item, int qtt, player_t * player);
 #endif

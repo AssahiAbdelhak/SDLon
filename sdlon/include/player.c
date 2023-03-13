@@ -118,6 +118,14 @@ int player_quit(player_t * player){
 }
 
 /**
+ * Permet de retourner la quantité
+ * d'un item posséder par le joueur
+*/
+int get_player_item(player_t * player, int num_item){
+    return(player->inventaire.list_item[num_item]);
+}
+
+/**
  * Ajoute un item
  * à l'inventaire du joueurs
  * retourne 0 si réussis
@@ -142,7 +150,17 @@ int add_items(int num_item, int qtt, player_t * player){
  * retire un item
  * à l'inventaire du joueur
 */
-int remove_items(){
+int remove_items(int num_item, int qtt, player_t * player){
+    int nb_items = player->inventaire.list_item[num_item];
+
+    if(nb_items <= 0){
+        return 1;
+    }else if((nb_items - qtt) <= 0){
+        player->inventaire.list_item[num_item] = 0;
+        return (nb_items);
+    }else{
+        player->inventaire.list_item[num_item] -= qtt;
+    }
     return 0;
 }
 

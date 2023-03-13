@@ -12,6 +12,11 @@
 /**
  * Définiton des numéros d'items
 */
+#define SDLASSO 0
+#define SUPER_SDLASSO 1
+#define CABB_SDLASSO 2
+#define RELIQUE 3
+#define EXTRACTEUR 4
 
 /**
  * structure pour la gestion d'item
