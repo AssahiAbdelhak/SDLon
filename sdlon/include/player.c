@@ -61,7 +61,9 @@ player_t player_create(char * name, int genre, char * file_name){
 }
 
 player_t player_init(char * file_name){
+
     player_t player;
+    int level, xp;
 
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "data/players_data/player_name_");
@@ -79,12 +81,15 @@ player_t player_init(char * file_name){
     strcpy(player.name, name);
     player.genre = genre;
 
-    for(i=0;i<MAIN_MAX;i++){
-        player.sd[i] = sdlon_s[sdlon_index[i]];
-        if(sdlon_index[i]!=-1){
-            cpt++;
-        }
+    for(i=0;sdlon_index[i]!=-1;i++){  
+        fscanf(file, "%d %d", &level, &xp);
+        strcpy(player.sd[i].nom, malloc(sizeof(char)*MAX_LEN_NAME));
+        strcpy(player.sd[i].nom, sdlon_s[sdlon_index[i]].nom);
+        player.sd[i].level = level;
+        player.sd[i].xp = xp;
+        cpt++;
     }
+
     player.nb_current_sdlon = cpt;
 
     //initiate inventaire
