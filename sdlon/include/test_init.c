@@ -113,7 +113,7 @@ int main(int argc, char * argv[]) {
   player_t p_homme = player_create("coco", HOMME, "coco");
   player_t p_femme = player_create("cocotte", FEMME, "cocotte");
   error=0;
-  if(p_homme.name == "coco" && p_femme.name == "cocotte" &&
+  if(!strcmp(p_homme.name, "coco") && !strcmp(p_femme.name, "cocotte") &&
   p_homme.genre == HOMME && p_femme.genre == FEMME){ 
     //verification des sdlons (var p_femme)
     for(i=0;i<MAIN_MAX;i++){

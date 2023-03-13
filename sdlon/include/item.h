@@ -1,10 +1,17 @@
 #ifndef NB_ITEMS
 
+/**
+ * Déclaration des macros
+*/
 #define NB_ITEMS 5
 #define MAX_LEN_NAME 80
 #define MAX_LEN_DESCR 250
 #define MAX_LEN_PATH 250
 #define MAX_ITEM_PER_SLOT 100
+
+/**
+ * Définiton des numéros d'items
+*/
 
 /**
  * structure pour la gestion d'item
@@ -19,14 +26,21 @@ typedef struct item_s{
     int opt_tag;
 }item_t;
 
+/**
+ * structure de l'inventaire
+ * facultatif mais facilite sa mise en place
+*/
 typedef struct inventory_s{
     int list_item[NB_ITEMS];
     int max_item_per_slot;
     char * path_to_save;
 }inventory;
 
-int item_init();
-int display_all_items();
-int item_quit();
+/**
+ * déclaration des fonctions accessible
+*/
+extern int item_init();
+extern int display_all_items();
+extern int item_quit();
 
 #endif

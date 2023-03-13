@@ -120,9 +120,21 @@ int player_quit(player_t * player){
 /**
  * Ajoute un item
  * à l'inventaire du joueurs
+ * retourne 0 si réussis
+ * 1 si aucun item recevable
+ * et le nombre d'item non recevable si une partie est recevable
 */
-int add_items(item_t * item){
+int add_items(int num_item, int qtt, player_t * player){
+    int nb_items = player->inventaire.list_item[num_item];
 
+    if(nb_items >= MAX_ITEM_PER_SLOT){
+        return 1;
+    }else if((nb_items + qtt) >= MAX_ITEM_PER_SLOT){
+        player->inventaire.list_item[num_item] = MAX_ITEM_PER_SLOT;
+        return ((nb_items + qtt)-MAX_ITEM_PER_SLOT); //retourne le nombre d'objet non recevable
+    }else{
+        player->inventaire.list_item[num_item] += qtt;
+    }
     return 0;
 }
 
@@ -191,4 +203,13 @@ int load_box(char * name){
 */
 int create_box(){
     return 0;
+}
+
+/**
+ * fonction de sauvegarde des donnée
+ * des datas du joueurs
+ * box/set/items
+*/
+int save_player_data(char * file_name){
+
 }
