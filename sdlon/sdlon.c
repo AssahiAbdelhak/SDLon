@@ -5,6 +5,7 @@
 # include <SDL2/SDL_image.h>
 # include <dirent.h>
 # include "map.h"
+#include "combat.h"
 
 #define HEIGHT 840
 #define WIDTH  1280
@@ -252,7 +253,9 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
           
                   printf("Clear!!!!!!!!!!!!!!!!!!!");
                   SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+                  
                   printMap(pWindow,screen);
+                  destroy_all(pWindow,font);
                 }
                 
               }else if (SDL_PointInRect(&mousePosition, &retourRect)) {
@@ -408,6 +411,7 @@ void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,T
 }}
 
 int main(int argc, char ** argv) {
+  SDL_Log("hello\n");
     // Le p o i n t e u r vers la fenetre
     SDL_Window * pWindow = NULL;
     // Le p o i n t e u r vers la surface incluse dans la fenetre
@@ -438,15 +442,15 @@ int main(int argc, char ** argv) {
     }
     
     if ((police = TTF_OpenFont("OpenSans-Bold.ttf", 20)) == NULL) {
-      fprintf(stderr, " erreur chargement font \n ");
-      exit(EXIT_FAILURE);
+      fprintf(stderr, " erreur  font \n ");
     }
     SDL_Surface * screen;
     screen = SDL_GetWindowSurface(pWindow);
     char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
 
-    afficherMenu(pWindow,screen,menus,4,police);
-  
+    //afficherMenu(pWindow,screen,menus,4,police);
+    afficherLeCombat(pWindow,screen);
+    destroy_all(pWindow,police);
     /* P o s i t i o n ou sera mis le texte dans la fenetre */
     // load sample . png into image
     if (pWindow) {
