@@ -31,15 +31,17 @@ inventory player_inventory_create(char * file_name){
 player_t player_create(char * name, int genre, char * file_name){
 
     player_t player;
-    int i, init=-1;
+    int i, init=-1, x=0, y=0;
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "data/players_data/player_name_");
     strcat(path, file_name);
 
-    //assignation nom/genre
+    //assignation nom/genre/position
     player.name = malloc(sizeof(char)*MAX_LEN_NAME);
     strcpy(player.name, name);
     player.genre = genre;
+    player.x = x;
+    player.y = y;
 
     //mise à 0 des sdlons
     player.nb_current_sdlon = 0;
@@ -50,7 +52,7 @@ player_t player_create(char * name, int genre, char * file_name){
     //creation du fichier de sauvegarde des données du joueur
     FILE * file;
     file = fopen(path, "w");
-    fprintf(file, "%s %d %d %d %d %d %d %d\n", name, genre, init, init, init, init, init, init);
+    fprintf(file, "%s %d %d %d %d %d %d %d %d %d\n", name, genre, x, y, init, init, init, init, init, init);
     fclose(file);
 
     player.inventaire = player_inventory_create(path);
@@ -63,7 +65,7 @@ player_t player_create(char * name, int genre, char * file_name){
 player_t player_init(char * file_name){
 
     player_t player;
-    int level, xp, vie;
+    int level, xp, vie, x, y;
 
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "data/players_data/player_name_");
@@ -75,11 +77,13 @@ player_t player_init(char * file_name){
     FILE * file;
     file = fopen(path, "r");
 
-    fscanf(file, "%s %d %d %d %d %d %d %d\n", name, &genre, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5]);
+    fscanf(file, "%s %d %d %d %d %d %d %d %d %d\n", name, &genre, &x, &y, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5]);
 
     player.name = malloc(sizeof(char)*MAX_LEN_NAME);
     strcpy(player.name, name);
     player.genre = genre;
+    player.x = x;
+    player.y = y;
 
     for(i=0;sdlon_index[i]!=-1;i++){  
         fscanf(file, "%d %d %d", &level, &xp, &vie);
@@ -272,7 +276,6 @@ int remove_sdlon_in_set(sdlon sd, player_t * player){
         return 1;
     }else{
         while(cmp && i<nb){
-            printf("debug :%d\n", cmp);//debugage
             i++;
             sdlon sd_tmp = player->sd[i];
             cmp = sdloncmp(sd_tmp, sd);

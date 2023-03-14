@@ -17,6 +17,8 @@
 typedef struct player_s{
     char * name;
     int genre;
+    int x;
+    int y;
     int nb_current_sdlon;
     sdlon sd[6];
     inventory inventaire;
