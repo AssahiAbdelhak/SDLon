@@ -5,6 +5,9 @@
 #include <SDL2/SDL_ttf.h>
 #include "constants.h"
 #include "map.h"
+#include "include/sdlon_generate.h"
+#include "include/sdlon_init.h"
+#include "combat.h"
 #define TILE_SIZE 32
 #define WIDTH 1280
 #define HEIGHT 832
@@ -57,6 +60,8 @@ void destroy(SDL_Window *pWindow,SDL_Surface *surface){
 
 void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * nom_fichier,int firstgid, int tile_width,int tile_height){
     SDL_Surface * tile = IMG_Load(nom_fichier);
+    if(tile==NULL)
+        SDL_Log("NULL!!!!\n");
     SDL_Rect rect = {0,0,tile_width,tile_height};
     int tile_x;
     int tile_y;
@@ -77,6 +82,7 @@ void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * n
             SDL_BlitSurface(tile,&src_rect,screen,&rect);
         }
     }
+    SDL_Log("layer Done!!\n");
     SDL_FreeSurface(tile);
     SDL_UpdateWindowSurface(window);
     
@@ -162,7 +168,10 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_e:
                         if(dansLesBuissons){
-                            printf("E cliqué\n");
+                            SDL_Log("E cliqué\n");
+                            return afficherLeCombat(window,screen);
+                            //sdlon sdl1 = generate_sdlon(0,5,20);
+                            //SDL_Log("nom == %s\n",sdl1.nom);
                             //decouvrirLeSdlon();
                         }
                         break;
@@ -208,6 +217,7 @@ void printMap(SDL_Window *window,SDL_Surface * screen){
     ///***
     printf("print this\n");
     printSpirit(window,screen,"images/pers7.png",50*16,23*16,hintSliceFromMap, hint);
+    return 0;
     int running = 1;
       while (running) {
         SDL_Event e;
