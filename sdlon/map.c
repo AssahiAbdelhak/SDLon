@@ -2,14 +2,25 @@
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "constants.h"
+#include "map.h"
+#include "include/sdlon_generate.h"
+#include "include/sdlon_init.h"
+#include "combat.h"
 #define TILE_SIZE 32
-#define HEIGHT 1280
-#define WIDTH 832
+#define WIDTH 1280
+#define HEIGHT 832
 #define frameTime 100
 
 enum directions{DOWN,LEFT,RIGHT,UP};
 enum actions{DEF1,WALK1,DEF2,WALK2};
+
+/*------------------------------Variable globales-------------------------------------*/
+
+SDL_Rect hintBox,hintContainer;
+int dansLesBuissons=0;
+
 
 void waiting(Uint32 *start_time){
     *start_time = SDL_GetTicks();
@@ -36,6 +47,7 @@ void movePlayer(SDL_Window *window,SDL_Surface *spirit,SDL_Surface *screen,SDL_S
     src_rect.x = act*32;
     SDL_BlitSurface(spirit,&src_rect,screen,&rect);
     SDL_UpdateWindowSurface(window);
+    
 }
 
 
@@ -48,6 +60,8 @@ void destroy(SDL_Window *pWindow,SDL_Surface *surface){
 
 void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * nom_fichier,int firstgid, int tile_width,int tile_height){
     SDL_Surface * tile = IMG_Load(nom_fichier);
+    if(tile==NULL)
+        SDL_Log("NULL!!!!\n");
     SDL_Rect rect = {0,0,tile_width,tile_height};
     int tile_x;
     int tile_y;
@@ -68,20 +82,21 @@ void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * n
             SDL_BlitSurface(tile,&src_rect,screen,&rect);
         }
     }
+    SDL_Log("layer Done!!\n");
     SDL_FreeSurface(tile);
     SDL_UpdateWindowSurface(window);
     
 }
 
 int localisationValide(int x,int y){
-    if(x<0||x>HEIGHT-32||y<0||y>WIDTH-32)
+    if(x<0||x>WIDTH-32||y<0||y>HEIGHT-32)
         return 0;
     if(collision[(y/16)*80+(x/16)])
         return 0;
     return 1;
 }
 
-void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y){
+void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
     printf("image good");
     SDL_Rect rect = {x,y,32,32};
@@ -113,6 +128,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                     case SDLK_UP:
                     printf("Up\n");
                         if(localisationValide(x,y-16)){
+                            printf("arbre position : x=%d,y=%d\n",x,y);
                             dir = UP;
                             SDL_Rect nouv_rect = {rect.x,rect.y-16,rect.h,rect.w};
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,UP,WALK1,&start_time);
@@ -122,6 +138,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_DOWN:
                         if(localisationValide(x,y+16)){
+                            printf("arbre position : x=%d,y=%d\n",x,y);
                             dir = DOWN;
                             SDL_Rect nouv_rect = {rect.x,rect.y+16,rect.h,rect.w};
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,DOWN,WALK1,&start_time);
@@ -131,6 +148,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_LEFT:
                         if(localisationValide(x-16,y)){
+                            printf("arbre position : x=%d,y=%d\n",x,y);
                             dir = LEFT;
                             SDL_Rect nouv_rect = {rect.x-16,rect.y,rect.h,rect.w};
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,LEFT,WALK1,&start_time);
@@ -140,6 +158,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_RIGHT:
                         if(localisationValide(x+16,y)){
+                            printf("arbre position : x=%d,y=%d\n",x,y);
                             dir = RIGHT;
                             SDL_Rect nouv_rect = {rect.x+16,rect.y,rect.h,rect.w};
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,RIGHT,WALK1,&start_time);
@@ -147,7 +166,17 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             x=x+16;
                         }
                         break;
+                    case SDLK_e:
+                        if(dansLesBuissons){
+                            SDL_Log("E cliqué\n");
+                            return afficherLeCombat(window,screen);
+                            //sdlon sdl1 = generate_sdlon(0,5,20);
+                            //SDL_Log("nom == %s\n",sdl1.nom);
+                            //decouvrirLeSdlon();
+                        }
+                        break;
                 }
+                dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint);
                 break;
             case SDL_MOUSEMOTION:
                 break;
@@ -167,9 +196,28 @@ void printMap(SDL_Window *window,SDL_Surface * screen){
     printLayer(window,screen,sol,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,chemin,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,arbre,"images/pokemon_style.png",1,16,16);
+    printLayer(window,screen,buissons,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,objets,"images/pokemon_style.png",1,16,16);
+    //***
+    
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color white = {255,255,255};
+    SDL_Surface *hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour decouvrir le sdlon",white);
+    
+    hintBox.y=HEIGHT - 100 - hint->h;
+    hintBox.x=(WIDTH - hint->w)/2;
+    hintBox.h=hint->h;
+    hintBox.w=hint->w; 
+    hintContainer.x=0;
+    hintContainer.y=0;
+    hintContainer.h=hint->h;
+    hintContainer.w=hint->w;
+    SDL_Surface *hintSliceFromMap = SDL_CreateRGBSurface(0, hint->w, hint->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    SDL_BlitSurface(screen,&hintBox,hintSliceFromMap,&hintContainer);
+    ///***
     printf("print this\n");
-    printSpirit(window,screen,"images/pers7.png",50*16,23*16);
+    printSpirit(window,screen,"images/pers7.png",50*16,23*16,hintSliceFromMap, hint);
+    return 0;
     int running = 1;
       while (running) {
         SDL_Event e;
@@ -178,5 +226,20 @@ void printMap(SDL_Window *window,SDL_Surface * screen){
             case SDL_QUIT:
             running = 0;
             break;
-          }}}
+
+            
+        }
+      }
+}}
+int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint){
+    
+    if(buissons[(y/16)*80+(x/16)]){
+        SDL_BlitSurface(hint,&hintContainer,screen,&hintBox);
+        SDL_UpdateWindowSurface(window);
+        return 1;
+    }else{        
+        SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
+        SDL_UpdateWindowSurface(window);
+        return 0;
+    }
 }
