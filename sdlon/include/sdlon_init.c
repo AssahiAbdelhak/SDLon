@@ -90,3 +90,30 @@ int get_sdlon_index(char * name){
   }
   return i;
 }
+
+int sdloncmp(sdlon sd_src, sdlon sd_origin){
+  int diff = 0;
+  diff += strcmp(sd_src.nom, sd_origin.nom);
+  if(sd_src.evol_sys != sd_origin.evol_sys){
+    diff++;
+  }
+  if(sd_src.evolution != sd_origin.evolution){
+    diff++;
+  }
+  if(sd_src.level != sd_origin.level){
+    diff++;
+  }
+  if(sd_src.type != sd_origin.type){
+    diff++;
+  }
+  if(sd_src.vie != sd_origin.vie){
+    diff++;
+  }
+  if(sd_src.vie_max != sd_origin.vie_max){
+    diff++;
+  }
+  if(sd_src.xp != sd_origin.xp){
+    diff++;
+  }
+  return (diff);
+}

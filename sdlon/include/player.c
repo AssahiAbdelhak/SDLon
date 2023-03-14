@@ -136,6 +136,15 @@ int player_quit(player_t * player){
     return 0;
 }
 
+int display_pss(player_t player){
+    int i;
+    printf("Total de sdlon dans le set: %d\n\n", player.nb_current_sdlon);
+    for(i=0;i<player.nb_current_sdlon;i++){
+        printf("Sdlon n° %d:\nNom: %s\n\n", i+1, player.sd[i].nom);
+    }
+    return 0;
+}
+
 /**
  * save set, player, item
  * pour sauvegarder ses données
@@ -230,7 +239,7 @@ int add_sdlon_in_set(sdlon sd, player_t * player){
 
     int i = player->nb_current_sdlon;
 
-    if(player->nb_current_sdlon>=MAIN_MAX){
+    if(i>=MAIN_MAX){
         return 1;
     }else{
         strcpy(player->sd[i].nom, sd.nom);
@@ -254,7 +263,33 @@ int add_sdlon_in_set(sdlon sd, player_t * player){
  * Fonction qui retire un sdlon
  * de la main courante d'un joueurs
 */
-int remove_sdlon_in_set(sdlon sd){
+int remove_sdlon_in_set(sdlon sd, player_t * player){
+    int nb = player->nb_current_sdlon, i=0, cmp;
+    sdlon sd_tmp = player->sd[0];
+    cmp = sdloncmp(sd_tmp, sd);
+    
+    if(nb<=0){
+        return 1;
+    }else{
+        while(cmp && i<nb){
+            printf("debug :%d\n", cmp);//debugage
+            i++;
+            sdlon sd_tmp = player->sd[i];
+            cmp = sdloncmp(sd_tmp, sd);
+        }
+        if(i>=nb){
+            player->nb_current_sdlon--;
+            return 0;
+        }else{
+            for(;i<nb;i++){
+                player->sd[i] = player->sd[i+1];
+            }
+            if(i>=nb){
+                player->nb_current_sdlon--;
+                return 0;
+            }
+        }
+    }
     return 0;
 }
 
@@ -262,7 +297,7 @@ int remove_sdlon_in_set(sdlon sd){
  * Fonction qui switch
  * les sdlons du set du joueur
 */
-int switch_sdlon_from_set(sdlon sd){
+int switch_sdlon_from_set(sdlon sd_in, sdlon sd_out, player_t * player){
     //remove_sdlon_in_set(sd);
     //add_sdlon_in_set(sd);
     return 0;

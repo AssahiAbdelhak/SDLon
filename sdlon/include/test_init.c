@@ -186,7 +186,13 @@ int main(int argc, char * argv[]) {
   posi_test_print(error, verbose);
   sspi(player);
 
+  //visualisation des sdlons dans le set d'un joueur
+  display_pss(player);
 
+  remove_sdlon_in_set(player.sd[5], &player);
+
+  //visualisation des sdlons dans le set d'un joueur
+  display_pss(player);
 
   //test de sortie des items
   affiche_test("de sortie des items ('quit')", verbose);
