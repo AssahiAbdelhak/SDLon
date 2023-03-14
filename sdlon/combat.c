@@ -77,6 +77,76 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb){
     return;
 }
 
+void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height){
+    SDL_Surface *container = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
+    Uint32 blue_bg = 0x69bdef;
+    SDL_FillRect(container,NULL,blue_bg);
+    //Please resize it before use it
+    SDL_Surface *img = IMG_Load("img/asset/SDLon_creature/(pinsir)-Pinchee.png");
+    if(img==NULL){
+        SDL_Log("ERRor");
+        return ;
+    }
+    /*image*/
+    SDL_Rect title_rect = {10,10,img->h,img->w};
+    SDL_BlitSurface(img,NULL,container,&title_rect);
+    SDL_Rect container_rect = {30,30,height,width};
+    /*fin image*/
+    /*nom de pokemon*/
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color white = {255,255,255};
+    SDL_Surface *titre = TTF_RenderUTF8_Blended(font,"LATIOS",white);
+    SDL_Rect nom_rect = {80,10,titre->h,titre->w};
+    SDL_BlitSurface(titre,NULL,container,&nom_rect);
+    /*fin de pokemon*/
+    /*genre*/
+    SDL_Surface *genre = TTF_RenderUTF8_Blended(font,"M",white);
+    SDL_Rect genre_rect = {width - genre->w - 20,10,genre->h,genre->w};
+    SDL_BlitSurface(genre,NULL,container,&genre_rect);
+    /*fin genre*/
+    /*hp*/
+    SDL_Surface *niv_vie = TTF_RenderUTF8_Blended(font,"HP",white);
+    SDL_Rect hp = { 80, 80, niv_vie->h, niv_vie->w };
+    SDL_BlitSurface(niv_vie, NULL, container, &hp);
+    int vie=90;
+    SDL_Rect bar_vie = {120,85,200,20};
+    SDL_Rect bar_vie_sdlon = {120,85,(vie*200)/100,20};
+    SDL_FillRect(container,&bar_vie,SDL_MapRGB(container->format,214,248,228));  // 106,238,158
+    SDL_FillRect(container,&bar_vie_sdlon,SDL_MapRGB(container->format,106,238,158));
+    /*fin hp*/
+    SDL_BlitSurface(container,NULL,screen,&container_rect);
+    SDL_UpdateWindowSurface(window);
+}
+
+// max de n  est 4 je crois
+void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n){
+    Uint32 bg = 0x285171;
+    SDL_FillRect(screen,NULL,bg);
+    /*tittre*/
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color white = {255,255,255};
+    SDL_Surface *titre = TTF_RenderUTF8_Blended(font,"Scene de Combat",white);
+    SDL_Rect rect = {(WIDTH - titre->w)/2,10,titre->h,titre->w};
+    SDL_BlitSurface(titre,NULL,screen,&rect);
+    /*fin titre*/
+    /*print sdlons*/
+    printSdlonBar(window,screen,500,200);
+    /*fin sdlons*/
+    SDL_UpdateWindowSurface(window);
+    int running =1;
+    while (running) {
+        SDL_Event e;
+        while (SDL_PollEvent( & e)) {
+          switch (e.type) {
+            case SDL_QUIT:
+                running = 0;
+                return 0;
+                break;
+          }
+        }
+    }
+}
+
 void botton(SDL_Surface *surface,int width,int height,int selected){
     SDL_Surface *annuler_rect = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -122,6 +192,9 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
     switch(n){
         case 0:
             onAttack(window,screen,surface,width,height);
+            break;
+        case 2:
+            showAllSDlons(window,screen,4);
             break;
         case 3:
             printMap(window,screen);
