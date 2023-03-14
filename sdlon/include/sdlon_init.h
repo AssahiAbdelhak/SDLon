@@ -39,6 +39,7 @@ typedef struct struct_sdlon {
 déclaration des prototypes des fonctions
 */
 extern int sdlon_init();
+extern int get_sdlon_index(char * name);
 
 //extern const int NB_SDLON;
 extern sdlon sdlon_s[NB_SDLON];

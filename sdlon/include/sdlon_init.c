@@ -82,3 +82,11 @@ int sdlon_init() {
 
   return 0;
 }
+
+int get_sdlon_index(char * name){
+  int i = 0;
+  while(strcmp(sdlon_s[i].nom, name)){
+    i++;
+  }
+  return i;
+}

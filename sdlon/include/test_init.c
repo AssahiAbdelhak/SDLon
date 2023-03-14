@@ -170,8 +170,27 @@ int main(int argc, char * argv[]) {
   //qtt_sdlasso = get_player_item(&player, SDLASSO);
   //printf("nb sdlasso: %d\n", qtt_sdlasso);
 
+  //test d'ajout d'un sdlon dans le set du joueur
+  affiche_test("d'ajout d'un sdlon dans le set d'un joueur", verbose);
+  error += add_sdlon_in_set(sdlon_s[0], &player);
+  error += add_sdlon_in_set(sdlon_s[5], &player);
+  error += add_sdlon_in_set(sdlon_s[3], &player);
+  error += add_sdlon_in_set(sdlon_s[3], &player);
+  error += add_sdlon_in_set(sdlon_s[8], &player);
+  error += add_sdlon_in_set(sdlon_s[9], &player);
+  nega_test_print(error, verbose);
+
+  affiche_test("d'ajout d'un sdlon dans le set complet d'un joueur", verbose);
+  error=0;
+  error += add_sdlon_in_set(sdlon_s[9], &player);
+  posi_test_print(error, verbose);
+  sspi(player);
+
+
+
   //test de sortie des items
   affiche_test("de sortie des items ('quit')", verbose);
   test = item_quit();
   posi_test_print(test, verbose);
+  player_quit(&player);
 }

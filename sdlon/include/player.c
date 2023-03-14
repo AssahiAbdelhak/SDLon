@@ -63,7 +63,7 @@ player_t player_create(char * name, int genre, char * file_name){
 player_t player_init(char * file_name){
 
     player_t player;
-    int level, xp;
+    int level, xp, vie;
 
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "data/players_data/player_name_");
@@ -82,11 +82,20 @@ player_t player_init(char * file_name){
     player.genre = genre;
 
     for(i=0;sdlon_index[i]!=-1;i++){  
-        fscanf(file, "%d %d", &level, &xp);
+        fscanf(file, "%d %d %d", &level, &xp, &vie);
         strcpy(player.sd[i].nom, malloc(sizeof(char)*MAX_LEN_NAME));
         strcpy(player.sd[i].nom, sdlon_s[sdlon_index[i]].nom);
         player.sd[i].level = level;
         player.sd[i].xp = xp;
+        player.sd[i].vie = vie;
+        player.sd[i].type = sdlon_s[sdlon_index[i]].type;
+        player.sd[i].vie_max = sdlon_s[sdlon_index[i]].vie_max;
+        player.sd[i].evolution = sdlon_s[sdlon_index[i]].evolution;
+        player.sd[i].evol_sys = sdlon_s[sdlon_index[i]].evol_sys;
+        player.sd[i].attaque_1 = sdlon_s[sdlon_index[i]].attaque_1;
+        player.sd[i].attaque_2 = sdlon_s[sdlon_index[i]].attaque_2;
+        player.sd[i].attaque_3 = sdlon_s[sdlon_index[i]].attaque_3;
+        player.sd[i].attaque_4 = sdlon_s[sdlon_index[i]].attaque_4;
         cpt++;
     }
 
@@ -112,14 +121,51 @@ player_t player_init(char * file_name){
     return player;
 }
 
+/**
+ * Libere la mémoire utiliser par le joueurs
+*/
 int player_quit(player_t * player){
+    int i;
     if(player==NULL){
         return 1;
     }
     free(player->name);
     free(player->inventaire.path_to_save);
+    
     player->name=NULL;
     return 0;
+}
+
+/**
+ * save set, player, item
+ * pour sauvegarder ses données
+ * dans le bon format
+*/
+int sspi(player_t player){
+    FILE * file;
+    int i;
+    file = fopen(player.inventaire.path_to_save, "w");
+
+    fprintf(file, "%s %d", player.name, player.genre);
+
+    for(i=0;i<player.nb_current_sdlon;i++){
+        fprintf(file, " %d", get_sdlon_index(player.sd[i].nom));
+    }
+    for(;i<MAIN_MAX;i++){
+        fprintf(file, " -1");
+    }
+    fprintf(file, "\n");
+
+    for(i=0;i<player.nb_current_sdlon;i++){
+        fprintf(file, "%d %d %d\n", player.sd[i].level, player.sd[i].xp, player.sd[i].vie);
+    }
+
+    for(i=0;i<NB_ITEMS;i++){
+        fprintf(file, "%d ", player.inventaire.list_item[i]);
+    }
+
+    fclose(file);
+    
 }
 
 /**
@@ -180,7 +226,27 @@ int use_item(){
  * Fonction qui ajoute un sdlon
  * dans la main courante d'un joueurs
 */
-int add_sdlon_in_set(sdlon sd){
+int add_sdlon_in_set(sdlon sd, player_t * player){
+
+    int i = player->nb_current_sdlon;
+
+    if(player->nb_current_sdlon>=MAIN_MAX){
+        return 1;
+    }else{
+        strcpy(player->sd[i].nom, sd.nom);
+        player->sd[i].level = sd.level;
+        player->sd[i].xp = sd.xp;
+        player->sd[i].vie = sd.vie;
+        player->sd[i].type = sd.type;
+        player->sd[i].vie_max = sd.vie_max;
+        player->sd[i].evolution = sd.evolution;
+        player->sd[i].evol_sys = sd.evol_sys;
+        player->sd[i].attaque_1 = sd.attaque_1;
+        player->sd[i].attaque_2 = sd.attaque_2;
+        player->sd[i].attaque_3 = sd.attaque_3;
+        player->sd[i].attaque_4 = sd.attaque_4;
+    }
+    player->nb_current_sdlon++;
     return 0;
 }
 
@@ -197,8 +263,8 @@ int remove_sdlon_in_set(sdlon sd){
  * les sdlons du set du joueur
 */
 int switch_sdlon_from_set(sdlon sd){
-    remove_sdlon_in_set(sd);
-    add_sdlon_in_set(sd);
+    //remove_sdlon_in_set(sd);
+    //add_sdlon_in_set(sd);
     return 0;
 }
 
