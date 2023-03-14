@@ -61,7 +61,9 @@ player_t player_create(char * name, int genre, char * file_name){
 }
 
 player_t player_init(char * file_name){
+
     player_t player;
+    int level, xp;
 
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "data/players_data/player_name_");
@@ -79,12 +81,15 @@ player_t player_init(char * file_name){
     strcpy(player.name, name);
     player.genre = genre;
 
-    for(i=0;i<MAIN_MAX;i++){
-        player.sd[i] = sdlon_s[sdlon_index[i]];
-        if(sdlon_index[i]!=-1){
-            cpt++;
-        }
+    for(i=0;sdlon_index[i]!=-1;i++){  
+        fscanf(file, "%d %d", &level, &xp);
+        strcpy(player.sd[i].nom, malloc(sizeof(char)*MAX_LEN_NAME));
+        strcpy(player.sd[i].nom, sdlon_s[sdlon_index[i]].nom);
+        player.sd[i].level = level;
+        player.sd[i].xp = xp;
+        cpt++;
     }
+
     player.nb_current_sdlon = cpt;
 
     //initiate inventaire
@@ -118,11 +123,31 @@ int player_quit(player_t * player){
 }
 
 /**
+ * Permet de retourner la quantité
+ * d'un item posséder par le joueur
+*/
+int get_player_item(player_t * player, int num_item){
+    return(player->inventaire.list_item[num_item]);
+}
+
+/**
  * Ajoute un item
  * à l'inventaire du joueurs
+ * retourne 0 si réussis
+ * 1 si aucun item recevable
+ * et le nombre d'item non recevable si une partie est recevable
 */
-int add_items(item_t * item){
+int add_items(int num_item, int qtt, player_t * player){
+    int nb_items = player->inventaire.list_item[num_item];
 
+    if(nb_items >= MAX_ITEM_PER_SLOT){
+        return 1;
+    }else if((nb_items + qtt) >= MAX_ITEM_PER_SLOT){
+        player->inventaire.list_item[num_item] = MAX_ITEM_PER_SLOT;
+        return ((nb_items + qtt)-MAX_ITEM_PER_SLOT); //retourne le nombre d'objet non recevable
+    }else{
+        player->inventaire.list_item[num_item] += qtt;
+    }
     return 0;
 }
 
@@ -130,7 +155,17 @@ int add_items(item_t * item){
  * retire un item
  * à l'inventaire du joueur
 */
-int remove_items(){
+int remove_items(int num_item, int qtt, player_t * player){
+    int nb_items = player->inventaire.list_item[num_item];
+
+    if(nb_items <= 0){
+        return 1;
+    }else if((nb_items - qtt) <= 0){
+        player->inventaire.list_item[num_item] = 0;
+        return (nb_items);
+    }else{
+        player->inventaire.list_item[num_item] -= qtt;
+    }
     return 0;
 }
 
@@ -191,4 +226,13 @@ int load_box(char * name){
 */
 int create_box(){
     return 0;
+}
+
+/**
+ * fonction de sauvegarde des donnée
+ * des datas du joueurs
+ * box/set/items
+*/
+int save_player_data(char * file_name){
+
 }
