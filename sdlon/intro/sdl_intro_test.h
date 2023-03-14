@@ -1,0 +1,1 @@
+int afficherCinematique(SDL_Window *window);

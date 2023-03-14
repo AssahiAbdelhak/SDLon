@@ -13,9 +13,9 @@
 */
 
 
-int main(int argc, char **argv){
+int afficherCinematique(SDL_Window *window){
   /* Initialise les data de notre jeu*/
-  SDL_Window *window = NULL;
+  //SDL_Window *window = NULL;
   int quit = false;
   SDL_Event event;
   
@@ -23,25 +23,26 @@ int main(int argc, char **argv){
   * Initialise le systeme video sdl (ainsi que le sous systeme lie au evenements).
   * Retourne 0 on utilise SDL_GetError() pour retourner une erreur ou un succes.
   */
+ /*Je vais commenter ce code puisque je l'ai deja initialise dans mon program*/
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     fprintf(stderr, "SDL failed to initialise: %s\n", SDL_GetError());
     return 1;
   }
 
   /* Cree la fenetre SDL */
-  window = SDL_CreateWindow("SDLON", /* Titre de la fenetre */
-			    SDL_WINDOWPOS_UNDEFINED, /* Position x de la fenetre */
-			    SDL_WINDOWPOS_UNDEFINED, /* Position y de la fenetre */
-			    WIDTH, /* largeur de la fenetre en pixels */
-			    HEIGHT, /* hauteur de la fenetre en pixels */
-			    SDL_WINDOW_SHOWN); /* Additional flag(s) */
+  //window = SDL_CreateWindow("SDLON", /* Titre de la fenetre */
+			    //SDL_WINDOWPOS_UNDEFINED, /* Position x de la fenetre */
+			    //SDL_WINDOWPOS_UNDEFINED, /* Position y de la fenetre */
+			    //WIDTH, /* largeur de la fenetre en pixels */
+			    //HEIGHT, /* hauteur de la fenetre en pixels */
+			    //SDL_WINDOW_SHOWN); /* Additional flag(s) */
 
   /* Check de la fenetre si elle a bien ete cree; si non, exit le programme */
   if (window == NULL) {
     fprintf(stderr, "SDL window failed to initialise: %s\n", SDL_GetError());
     return 1;
   }
-
+  
   SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
 
 
@@ -89,10 +90,16 @@ int main(int argc, char **argv){
         case 0 :
           //img et txt crée et reste tant que aucune touche n'est press
           blackscreen(renderer);
-
+          SDL_Log("error here ?1\n");
           img = print_image(renderer, "../img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
-          txt = print_text(renderer, "RosesareFF0000.ttf", "Bonjour dresseur, je suis le professeur SDLon, mon nom est Ange.", MARGE, LIGNE1, 255, 255, 255);
-
+          if(img==NULL){
+            SDL_Log("%d\n",SDL_GetError());
+          }
+          //txt = print_text(renderer, "RosesareFF0000.ttf", "Bonjour dresseur, je suis le professeur SDLon, mon nom est Ange.", MARGE, LIGNE1, 255, 255, 255);
+          if(txt==NULL){
+            SDL_Log("%d\n",SDL_GetError());
+          }
+          SDL_Log("error here ?\n");
           break;    
         case 1 :
           
@@ -263,7 +270,8 @@ int main(int argc, char **argv){
   SDL_Delay(DELAY);
 
   /* Free la memoire */
-  SDL_DestroyWindow(window);
+  //pareil la
+  //SDL_DestroyWindow(window);
   
   SDL_DestroyRenderer(renderer);
 

@@ -12,7 +12,7 @@ sdl_text: sdlon.c
 
 windows: wind
 wind: sdlon.c
-	${CC} -o ${PROG} sdlon.c combat.c map.c include/sdlon_generate.c include/sdlon_init.c constants.c -IC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\include -LC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\lib  -w -mconsole -Wl,-subsystem,windows -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image
+	${CC} -o ${PROG} sdlon.c combat.c map.c intro/lib_sdl_facile.c intro/sdl_intro_test.c include/sdlon_generate.c include/sdlon_init.c constants.c -IC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\include -LC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\lib  -w -mconsole -Wl,-subsystem,windows -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image
 clean:
 	rm -f ${PROG}
 	rm -f *.o
