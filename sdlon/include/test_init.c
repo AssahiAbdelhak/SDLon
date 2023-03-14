@@ -187,12 +187,18 @@ int main(int argc, char * argv[]) {
   sspi(player);
 
   //visualisation des sdlons dans le set d'un joueur
-  display_pss(player);
+  //display_pss(player);
 
   remove_sdlon_in_set(player.sd[5], &player);
 
   //visualisation des sdlons dans le set d'un joueur
-  display_pss(player);
+  //display_pss(player);
+
+  //switch de 2 sdlons
+  switch_sdlon_from_set(sdlon_s[2], player.sd[4], &player);
+
+  //visualisation des sdlons dans le set d'un joueur
+  //display_pss(player);
 
   //test de sortie des items
   affiche_test("de sortie des items ('quit')", verbose);

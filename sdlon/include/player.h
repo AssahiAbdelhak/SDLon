@@ -20,6 +20,7 @@ typedef struct player_s{
     int x;
     int y;
     int nb_current_sdlon;
+    int badges;
     sdlon sd[6];
     inventory inventaire;
 }player_t;

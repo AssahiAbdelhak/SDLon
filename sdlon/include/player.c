@@ -301,8 +301,8 @@ int remove_sdlon_in_set(sdlon sd, player_t * player){
  * les sdlons du set du joueur
 */
 int switch_sdlon_from_set(sdlon sd_in, sdlon sd_out, player_t * player){
-    //remove_sdlon_in_set(sd);
-    //add_sdlon_in_set(sd);
+    remove_sdlon_in_set(sd_out, player);
+    add_sdlon_in_set(sd_in, player);
     return 0;
 }
 
@@ -336,7 +336,11 @@ int create_box(){
  * fonction de sauvegarde des donnée
  * des datas du joueurs
  * box/set/items
+ * optionel en fonction des autres système de sauvegarde de l'initialisation
 */
 int save_player_data(char * file_name){
-
+    //optionelle
+    //faire à la fin
+    //la sauvegarde seras surement gérer autre part
+    return 0;
 }
