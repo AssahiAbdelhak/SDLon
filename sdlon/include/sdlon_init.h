@@ -41,6 +41,7 @@ déclaration des prototypes des fonctions
 extern int sdlon_init();
 extern int get_sdlon_index(char * name);
 extern int sdloncmp(sdlon sd_src, sdlon sd_origin);
+extern void afficheSDLon(sdlon s);
 
 extern sdlon sdlon_s[NB_SDLON];
 #endif

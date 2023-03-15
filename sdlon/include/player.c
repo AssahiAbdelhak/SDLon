@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "Primitives_Box.h"
 /**
  * crée l'inventaire du joueur
  * et le met à 0
@@ -320,8 +320,28 @@ int send_sdlon_in_box(sdlon sd){
  * dans la boite de stockage
 */
 int load_box(char * name){
+    FILE *f = fopen(name, "r");
+    enTeteBox();
+    sdlon aux;
+    if(f == NULL){
+        printf("Erreur d'ouverture du fichier Box SDLon\n");
+        return 1;
+    }
+    while(!feof(f)){
+        fscanf(f,"%d %d %d %d %d %d %d %s\n",&aux.type,&aux.vie_max,&aux.vie,&aux.evolution,&aux.level,&aux.evol_sys,&aux.xp,aux.nom); // sauvegarde des infos des SDLons
+        fscanf(f,"%d %d %d %s\n",&aux.attaque_1.degat,&aux.attaque_1.mode_attaque,&aux.attaque_1.type_attaque,aux.attaque_1.nom_attaque);//save attaque numero 1
+        fscanf(f,"%d %d %d %s\n",&aux.attaque_2.degat,&aux.attaque_2.mode_attaque,&aux.attaque_2.type_attaque,aux.attaque_2.nom_attaque);//save attaque numero 2
+        fscanf(f,"%d %d %d %s\n",&aux.attaque_3.degat,&aux.attaque_3.mode_attaque,&aux.attaque_3.type_attaque,aux.attaque_3.nom_attaque);//save attaque numero 3
+        fscanf(f,"%d %d %d %s\n",&aux.attaque_4.degat,&aux.attaque_4.mode_attaque,&aux.attaque_4.type_attaque,aux.attaque_4.nom_attaque);//save attaque numero 4
+        
+        append(&boiteASdlon, aux);
+    }
+
+    fclose(f);
+
     return 0;
 }
+
 
 /**
  * créé une boite
@@ -329,7 +349,36 @@ int load_box(char * name){
  * pourras stocker ses sdlons
 */
 int create_box(){
+    boiteASdlon = malloc(sizeof(box));
+    boiteASdlon->next = NULL;
+    boiteASdlon->precedent = NULL;
     return 0;
+}
+
+/*
+    fonction sauvegarde de la box
+*/
+
+int save_box(char *name){
+    FILE *f = fopen(name, "w+");
+    enTeteBox();
+    sdlon aux = boiteASdlon->current;
+    if(f == NULL){
+        printf("Erreur d'ouverture du fichier Box SDLon\n");
+        return 1;
+    }
+    while(boiteASdlon->next != NULL){
+        fprintf(f,"%d %d %d %d %d %d %d %s\n",aux.type,aux.vie_max,aux.vie,aux.evolution,aux.level,aux.evol_sys,aux.xp,aux.nom); // sauvegarde des infos des SDLons
+        fprintf(f,"%d %d %d %s\n",aux.attaque_1.degat,aux.attaque_1.mode_attaque,aux.attaque_1.type_attaque,aux.attaque_1.nom_attaque);//save attaque numero 1
+        fprintf(f,"%d %d %d %s\n",aux.attaque_2.degat,aux.attaque_2.mode_attaque,aux.attaque_2.type_attaque,aux.attaque_2.nom_attaque);//save attaque numero 2
+        fprintf(f,"%d %d %d %s\n",aux.attaque_3.degat,aux.attaque_3.mode_attaque,aux.attaque_3.type_attaque,aux.attaque_3.nom_attaque);//save attaque numero 3
+        fprintf(f,"%d %d %d %s\n",aux.attaque_4.degat,aux.attaque_4.mode_attaque,aux.attaque_4.type_attaque,aux.attaque_4.nom_attaque);//save attaque numero 4
+        suivantBox();
+        aux = boiteASdlon->current;
+    }
+
+    fclose(f);
+
 }
 
 /**
