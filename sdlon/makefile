@@ -8,11 +8,11 @@ INCS=-I${SDL_INC_DIR}
 PROG=prog
 all: sdl_text
 sdl_text: sdlon.c
-	${CC} -o ${PROG} sdlon.c combat.c map.c intro/lib_sdl_facile.c intro/sdl_intro_test.c include/sdlon_generate.c include/sdlon_init.c constants.c ${LIBS} ${INCS} ${FLAGS}
+	${CC} -o ${PROG} sdlon.c combat.c map.c include/story.h intro/lib_sdl_facile.c intro/sdl_intro_test.c include/sdlon_generate.c include/sdlon_init.c constants.c ${LIBS} ${INCS} ${FLAGS}
 
 windows: wind
 wind: sdlon.c
-	${CC} -o ${PROG} sdlon.c combat.c map.c intro/lib_sdl_facile.c intro/sdl_intro_test.c include/sdlon_generate.c include/sdlon_init.c constants.c -IC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\include -LC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\lib  -w -mconsole -Wl,-subsystem,windows -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image
+	${CC} -o ${PROG} sdlon.c combat.c map.c include/story.c intro/lib_sdl_facile.c intro/sdl_intro_test.c include/sdlon_generate.c include/sdlon_init.c constants.c -IC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\include -LC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\lib  -w -mconsole -Wl,-subsystem,windows -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image
 clean:
 	rm -f ${PROG}
 	rm -f *.o

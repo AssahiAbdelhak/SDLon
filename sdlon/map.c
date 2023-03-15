@@ -8,6 +8,7 @@
 #include "include/sdlon_generate.h"
 #include "include/sdlon_init.h"
 #include "combat.h"
+#include "include/story.h"
 #define TILE_SIZE 32
 #define WIDTH 1280
 #define HEIGHT 832
@@ -21,6 +22,7 @@ enum actions{DEF1,WALK1,DEF2,WALK2};
 SDL_Rect hintBox,hintContainer;
 int dansLesBuissons=0;
 
+town_init();
 
 void waiting(Uint32 *start_time){
     *start_time = SDL_GetTicks();
@@ -113,11 +115,13 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
         printf("erreur 2\n");
     SDL_UpdateWindowSurface(window);
     int running = 1;
+    int move = 0;
     Uint32 start_time = SDL_GetTicks(); // 100 milliseconds per frame
     printf("goo!!!");
       while (running) {
         SDL_Event e;
         while (SDL_PollEvent( & e)) {
+            move = 0;
           switch (e.type) {
             case SDL_QUIT:
                 destroy(window,screen);
@@ -125,48 +129,37 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                 break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){
+                    
                     case SDLK_UP:
-                    printf("Up\n");
                         if(localisationValide(x,y-16)){
-                            printf("arbre position : x=%d,y=%d\n",x,y);
+                            move = 1;
                             dir = UP;
-                            SDL_Rect nouv_rect = {rect.x,rect.y-16,rect.h,rect.w};
-                            movePlayer(window,spirit,screen,copy,rect,nouv_rect,UP,WALK1,&start_time);
-                            rect.y = nouv_rect.y;
-                            y=y-16;
+                            
                         }
                         break;
                     case SDLK_DOWN:
                         if(localisationValide(x,y+16)){
-                            printf("arbre position : x=%d,y=%d\n",x,y);
+                            move = 1;
                             dir = DOWN;
-                            SDL_Rect nouv_rect = {rect.x,rect.y+16,rect.h,rect.w};
-                            movePlayer(window,spirit,screen,copy,rect,nouv_rect,DOWN,WALK1,&start_time);
-                            rect.y = nouv_rect.y;
-                            y=y+16;
+                            
                         }
                         break;
                     case SDLK_LEFT:
                         if(localisationValide(x-16,y)){
-                            printf("arbre position : x=%d,y=%d\n",x,y);
+                            move = 1;
                             dir = LEFT;
-                            SDL_Rect nouv_rect = {rect.x-16,rect.y,rect.h,rect.w};
-                            movePlayer(window,spirit,screen,copy,rect,nouv_rect,LEFT,WALK1,&start_time);
-                            rect.x = nouv_rect.x;
-                            x=x-16;
+                            
                         }
                         break;
                     case SDLK_RIGHT:
                         if(localisationValide(x+16,y)){
-                            printf("arbre position : x=%d,y=%d\n",x,y);
+                            move = 1;
                             dir = RIGHT;
-                            SDL_Rect nouv_rect = {rect.x+16,rect.y,rect.h,rect.w};
-                            movePlayer(window,spirit,screen,copy,rect,nouv_rect,RIGHT,WALK1,&start_time);
-                            rect.x = nouv_rect.x;
-                            x=x+16;
+                            
                         }
                         break;
                     case SDLK_e:
+                        move=0;
                         if(dansLesBuissons){
                             SDL_Log("E cliqué\n");
                             return afficherLeCombat(window,screen);
@@ -175,15 +168,45 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             //decouvrirLeSdlon();
                         }
                         break;
+                    default:
+                        move=0;
+                        break;
                 }
+                
                 dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint);
                 break;
             case SDL_MOUSEMOTION:
                 break;
-            }    
+            }
+               
         }
+        if(move){
+            if(dir==UP){
+                SDL_Rect nouv_rect = {rect.x,rect.y-16,rect.h,rect.w};
+                            movePlayer(window,spirit,screen,copy,rect,nouv_rect,UP,WALK1,&start_time);
+                            rect.y = nouv_rect.y;
+                            y=y-16;
+                    }
+                    if(dir==DOWN){
+                        SDL_Rect nouv_rect = {rect.x,rect.y+16,rect.h,rect.w};
+                            movePlayer(window,spirit,screen,copy,rect,nouv_rect,DOWN,WALK1,&start_time);
+                            rect.y = nouv_rect.y;
+                            y=y+16;
+                    }
+                    if(dir==LEFT){
+                        SDL_Rect nouv_rect = {rect.x-16,rect.y,rect.h,rect.w};
+                            movePlayer(window,spirit,screen,copy,rect,nouv_rect,LEFT,WALK1,&start_time);
+                            rect.x = nouv_rect.x;
+                            x=x-16;
+                    }
+                    if(dir==RIGHT){
+                        SDL_Rect nouv_rect = {rect.x+16,rect.y,rect.h,rect.w};
+                            movePlayer(window,spirit,screen,copy,rect,nouv_rect,RIGHT,WALK1,&start_time);
+                            rect.x = nouv_rect.x;
+                            x=x+16;
+                    }
+        } 
         if (SDL_GetTicks() - start_time > 2000){
-                    printf("waiting for 2 seconds\n");
                     Uint32 start_temps = SDL_GetTicks();
                     movePlayer(window,spirit,screen,copy,rect,rect,dir,DEF1,&start_temps);
                     movePlayer(window,spirit,screen,copy,rect,rect,dir,DEF2,&start_temps);
@@ -193,7 +216,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
 
 void printMap(SDL_Window *window,SDL_Surface * screen){
     
-    printLayer(window,screen,sol,"images/pokemon_style.png",1,16,16);
+    printLayer(window,screen,all_town[0].layer[0],"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,chemin,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,arbre,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,buissons,"images/pokemon_style.png",1,16,16);
@@ -217,7 +240,7 @@ void printMap(SDL_Window *window,SDL_Surface * screen){
     ///***
     printf("print this\n");
     printSpirit(window,screen,"images/pers7.png",50*16,23*16,hintSliceFromMap, hint);
-    return 0;
+    return ;
     int running = 1;
       while (running) {
         SDL_Event e;

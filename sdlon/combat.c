@@ -7,6 +7,10 @@
 #define HEIGHT 840
 #define WIDTH 1280
 
+void printControlles(SDL_Window *window,SDL_Surface * screen);
+void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height);
+void botton(SDL_Surface *surface,int width,int height,int x,int y,int selected);
+
 void attaque(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Surface *surface,int x,int y,char *name_attaque,int envir,int selected){
     SDL_Surface *attaque_surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -68,8 +72,27 @@ void attaque(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Sur
 void handle_events(SDL_Window *window,SDL_Surface *screen,int nb){
     switch (nb){
     case 0:
-        printControlles(window,screen);
+        afficherLeCombat(window,screen);
         break;
+    // à implémenter après
+    default:
+        afficherLeCombat(window,screen);
+        break;
+    }
+    return;
+}
+
+void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb){
+    switch (nb){
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+        printf("Là il faut faire qlq chose, mais por l'instant je vais revenir au combat\n");
+        afficherLeCombat(window,screen);
+        break;
+    case 4:
+        afficherLeCombat(window,screen);
     // à implémenter après
     default:
         break;
@@ -77,10 +100,14 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb){
     return;
 }
 
-void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height){
+void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected){
     SDL_Surface *container = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     Uint32 blue_bg = 0x69bdef;
-    SDL_FillRect(container,NULL,blue_bg);
+    Uint32 bg_selected = 0xdaed9c;
+    if(selected)
+        SDL_FillRect(container,NULL,bg_selected);
+    else
+        SDL_FillRect(container,NULL,blue_bg);
     //Please resize it before use it
     SDL_Surface *img = IMG_Load("img/asset/SDLon_creature/(pinsir)-Pinchee.png");
     if(img==NULL){
@@ -90,17 +117,17 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height)
     /*image*/
     SDL_Rect title_rect = {10,10,img->h,img->w};
     SDL_BlitSurface(img,NULL,container,&title_rect);
-    SDL_Rect container_rect = {30,30,height,width};
+    SDL_Rect container_rect = {x,y,height,width};
     /*fin image*/
     /*nom de pokemon*/
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {255,255,255};
-    SDL_Surface *titre = TTF_RenderUTF8_Blended(font,"LATIOS",white);
+    SDL_Surface *titre = TTF_RenderUTF8_Blended(font,nom,white);
     SDL_Rect nom_rect = {80,10,titre->h,titre->w};
     SDL_BlitSurface(titre,NULL,container,&nom_rect);
     /*fin de pokemon*/
     /*genre*/
-    SDL_Surface *genre = TTF_RenderUTF8_Blended(font,"M",white);
+    SDL_Surface *genre = TTF_RenderUTF8_Blended(font,gendre,white);
     SDL_Rect genre_rect = {width - genre->w - 20,10,genre->h,genre->w};
     SDL_BlitSurface(genre,NULL,container,&genre_rect);
     /*fin genre*/
@@ -108,18 +135,26 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height)
     SDL_Surface *niv_vie = TTF_RenderUTF8_Blended(font,"HP",white);
     SDL_Rect hp = { 80, 80, niv_vie->h, niv_vie->w };
     SDL_BlitSurface(niv_vie, NULL, container, &hp);
-    int vie=90;
     SDL_Rect bar_vie = {120,85,200,20};
     SDL_Rect bar_vie_sdlon = {120,85,(vie*200)/100,20};
     SDL_FillRect(container,&bar_vie,SDL_MapRGB(container->format,214,248,228));  // 106,238,158
     SDL_FillRect(container,&bar_vie_sdlon,SDL_MapRGB(container->format,106,238,158));
     /*fin hp*/
+    /*niveau*/
+    SDL_Surface *niveau = TTF_RenderUTF8_Blended(font,"Niv. 100",white);
+    SDL_Rect niveau_rect = {10,150,niveau->h,niveau->w};
+    SDL_BlitSurface(niveau,NULL,container,&niveau_rect);
+    /*fin niveau*/
+    /*stats*/
+    SDL_Surface *stats = TTF_RenderUTF8_Blended(font,"302/302",white);
+    SDL_Rect stats_rect = {150,250,stats->h,stats->w};
+    SDL_BlitSurface(stats,NULL,container,&stats_rect);
+    /*fin stats*/
     SDL_BlitSurface(container,NULL,screen,&container_rect);
     SDL_UpdateWindowSurface(window);
 }
 
-// max de n  est 4 je crois
-void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n){
+void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n){
     Uint32 bg = 0x285171;
     SDL_FillRect(screen,NULL,bg);
     /*tittre*/
@@ -129,8 +164,20 @@ void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n){
     SDL_Rect rect = {(WIDTH - titre->w)/2,10,titre->h,titre->w};
     SDL_BlitSurface(titre,NULL,screen,&rect);
     /*fin titre*/
+    printSdlonBar(window,screen,500,200,30,60,"Abdelhak","M",90,10,(n==0));
+    printSdlonBar(window,screen,500,200,730,60,"Lilian","M",80,10,(n==1));
+    printSdlonBar(window,screen,500,200,30,360,"Mohamed","M",70,10,(n==2));
+    printSdlonBar(window,screen,500,200,730,360,"Wandrille","M",30,10,(n==3));
+    botton(screen,WIDTH - 60,100,30,700,(n==4));
+    SDL_UpdateWindowSurface(window);
+}
+
+// max de n  est 4 je crois
+void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n){
+    
     /*print sdlons*/
-    printSdlonBar(window,screen,500,200);
+    int nb = 0;
+    updateSdlons(window,screen,nb);
     /*fin sdlons*/
     SDL_UpdateWindowSurface(window);
     int running =1;
@@ -140,14 +187,36 @@ void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n){
           switch (e.type) {
             case SDL_QUIT:
                 running = 0;
-                return 0;
+                return;
+                break;
+            case SDL_KEYDOWN:
+                switch (e.key.keysym.sym){
+                    case SDLK_UP:
+                        nb=(nb-2)%5;
+                        break;
+                    case SDLK_DOWN:
+                        nb=(nb+2)%5;
+                        break;
+                    case SDLK_LEFT:
+                        nb=(nb-1)%5;
+                        if(nb<0)
+                            nb += 5;
+                        break;
+                    case SDLK_RIGHT:
+                        nb=(nb+1)%5;
+                        break;
+                    case SDLK_RETURN:
+                        return handle_sdlons_events(window,screen,nb);
+                        break;
+                }
+                updateSdlons(window,screen,nb);
                 break;
           }
         }
     }
 }
 
-void botton(SDL_Surface *surface,int width,int height,int selected){
+void botton(SDL_Surface *surface,int width,int height,int x,int y,int selected){
     SDL_Surface *annuler_rect = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     Uint32 bg = 0x285171;
@@ -166,9 +235,10 @@ void botton(SDL_Surface *surface,int width,int height,int selected){
     SDL_BlitSurface(annuler,NULL,annuler_rect,&rect);
     rect.h=height;
     rect.w=width;
-    rect.y=200;
-    rect.x=20;
+    rect.y=y;
+    rect.x=x;
     SDL_BlitSurface(annuler_rect,NULL,surface,&rect);
+    
 }
 
 void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int selected){
@@ -179,7 +249,7 @@ void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,
     attaque(window,screen,180,80,surface,210,10,"rien",0,(1==selected));
     attaque(window,screen,180,80,surface,10,110,"rien",0,(2==selected));
     attaque(window,screen,180,80,surface,210,110,"rien",0,(3==selected));
-    botton(surface,width-40,40,(4==selected));
+    botton(surface,width-40,40,20,200,(4==selected));
     /*botton d'annuler*/
     
     /*FIN*/
@@ -188,10 +258,24 @@ void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,
     SDL_UpdateWindowSurface(window);
 }
 
+void showItem(SDL_Window *window,SDL_Surface * surface){
+
+}
+
+/*sac*/
+void showSac(SDL_Window *window,SDL_Surface * surface){
+    /*Uint32 bg = 0x285171;
+    SDL_FillRect(screen,NULL,bg);
+    SDL_Surface *attaque_surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);*/
+}
+/*fin sac*/
 void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n){
     switch(n){
         case 0:
             onAttack(window,screen,surface,width,height);
+            break;
+        case 1:
+            showSac(window,screen);
             break;
         case 2:
             showAllSDlons(window,screen,4);
@@ -214,7 +298,7 @@ void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int wi
           switch (e.type) {
             case SDL_QUIT:
                 running = 0;
-                return 0;
+                return ;
                 break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){
@@ -321,7 +405,7 @@ void printControlles(SDL_Window *window,SDL_Surface * screen){
                 SDL_DestroyWindow(window);
                 SDL_Quit();
                 running = 0;
-                return 0;
+                return;
                 break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){
@@ -341,6 +425,7 @@ void printControlles(SDL_Window *window,SDL_Surface * screen){
                         break;
                     case SDLK_RETURN:
                         handle_option_events(window,screen,surface,width,height,nb);
+                        return ;
                         break;
                 }
                 updateOptions(window,screen,surface,nb,width,height);
@@ -405,7 +490,7 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen){
     printPlayerStats(window,screen,"nom sdlon 2",WIDTH-320,450,15,90);
 
     printControlles(window,screen);
-    return;
+    return 0;
     // int running = 1;
     // while (running) {
     //     SDL_Event e;
