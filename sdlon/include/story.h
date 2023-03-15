@@ -3,7 +3,7 @@
 #include "sdlon_init.h"
 #include "player.h"
 
-#define NB_TOWN;
+#define NB_TOWN 4
 
 typedef struct town_s{
     char * name;
@@ -11,4 +11,4 @@ typedef struct town_s{
     int environnement;
 }town_t;
 
-#ifndef
+#endif

@@ -117,3 +117,31 @@ int sdloncmp(sdlon sd_src, sdlon sd_origin){
   }
   return (diff);
 }
+
+/*
+  afficher un sdlon s
+*/
+
+extern void afficheSDLon(sdlon s){
+  switch (s.type)
+  {
+  case 0:
+    /* code */
+    printf("\nType : eau\n");
+    break;
+  case 1:
+    /* code */
+    printf("\nType : terre\n");
+    break;
+  case 2:
+    /* code */
+    printf("\nType : air\n");
+    break;
+  case 3:
+    /* code */
+    printf("\nType : feu\n");
+    break;
+  }
+  printf("nom : %s\nvie : %d\nvie max : %d\nattaque 1 : %s\nattaque 2 : %s\nattaque 3 : %s\nattaque 4 : %s\nevolution : %d\nLevel : %d\nEvol_sys : %d\nXp : %d\n",s.nom,s.vie,s.vie_max,s.attaque_1.nom_attaque,s.attaque_2.nom_attaque,s.attaque_3.nom_attaque,s.attaque_4.nom_attaque,s.evolution,s.level,s.evol_sys,s.xp);
+
+}

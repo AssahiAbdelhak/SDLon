@@ -6,9 +6,11 @@ SDL_INC_DIR=${SDL_DIR}/include
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
 PROG=prog
-all: sdl_text
+all: sdl_text 
 sdl_text: sdlon.c
 	${CC} -o ${PROG} sdlon.c ${LIBS} ${INCS} ${FLAGS}
+
+
 
 windows: wind
 wind: sdlon.c

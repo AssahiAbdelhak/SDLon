@@ -1,3 +1,4 @@
+#include "Primitives_Box.h"
 #include "sdlon_generate.h"
 #include "combat.h"
 #include "test_header.h"
@@ -9,7 +10,7 @@
 
 int main(int argc, char * argv[]) {
 
-  int test=0, verbose = 0, cpt=4000, error=0, i;
+  int test=0, verbose = 0, cpt=40, error=0, i;
   float nb_gen=0;
 
   if(argc >= 2){
@@ -20,6 +21,9 @@ int main(int argc, char * argv[]) {
   affiche_test("d'initialisation des sdlons", verbose);
   test = sdlon_init();
   nega_test_print(test, verbose);
+
+
+
 
   //test de génération de sdlons aux bornes 1 -> 15
   affiche_test("de génération aux bornes 1 -> 15", verbose);
@@ -187,18 +191,18 @@ int main(int argc, char * argv[]) {
   sspi(player);
 
   //visualisation des sdlons dans le set d'un joueur
-  //display_pss(player);
+  display_pss(player);
 
   remove_sdlon_in_set(player.sd[5], &player);
 
   //visualisation des sdlons dans le set d'un joueur
-  //display_pss(player);
+  display_pss(player);
 
   //switch de 2 sdlons
   switch_sdlon_from_set(sdlon_s[2], player.sd[4], &player);
 
   //visualisation des sdlons dans le set d'un joueur
-  //display_pss(player);
+  display_pss(player);
 
   //test de sortie des items
   affiche_test("de sortie des items ('quit')", verbose);
