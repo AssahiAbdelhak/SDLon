@@ -4,6 +4,7 @@
 #include "test_header.h"
 #include "player.h"
 #include "item.h"
+#include "story.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -209,4 +210,10 @@ int main(int argc, char * argv[]) {
   test = item_quit();
   posi_test_print(test, verbose);
   player_quit(&player);
+
+
+
+  town_init();
+
+  display_town(all_town[0]);
 }

@@ -8,7 +8,7 @@ INCS=-I${SDL_INC_DIR}
 PROG=prog
 all: sdl_text 
 sdl_text: sdlon.c
-	${CC} -o ${PROG} sdlon.c ${LIBS} ${INCS} ${FLAGS}
+	${CC} -o ${PROG} sdlon.c combat.c map.c intro/lib_sdl_facile.c intro/sdl_intro_test.c include/sdlon_generate.c include/sdlon_init.c constants.c ${LIBS} ${INCS} ${FLAGS}
 
 
 
