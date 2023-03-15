@@ -42,6 +42,5 @@ extern int sdlon_init();
 extern int get_sdlon_index(char * name);
 extern int sdloncmp(sdlon sd_src, sdlon sd_origin);
 
-//extern const int NB_SDLON;
 extern sdlon sdlon_s[NB_SDLON];
 #endif
