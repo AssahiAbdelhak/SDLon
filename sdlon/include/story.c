@@ -16,7 +16,8 @@ town_t all_town[NB_TOWN];
 void town_init(){
     char * path = "data/init_town.txt";
     char * name = malloc(sizeof(char)*MAX_LEN_NAME);
-    int i=0, j=0, k=0, nb_town, badge_required, type_map, environnement, nb_layer, nb_tiles, tile_width, tile_height, first_grid, source_grid, value;
+    char * source_grid = malloc(sizeof(char)*MAX_LEN_NAME);
+    int i=0, j=0, k=0, nb_town, badge_required, type_map, environnement, nb_layer, nb_tiles, tile_width, tile_height, first_grid, value;
     char sep;
     FILE * file;
 
@@ -24,8 +25,11 @@ void town_init(){
     fscanf(file, "%d\n", &nb_town);
 
     for(i=0;i<nb_town;i++){
-        fscanf(file, "%s %d %d %d %d %d %d %d %d %d\n", name, &badge_required, &type_map, &environnement, &nb_layer, &nb_tiles, &tile_width, &tile_height, &first_grid, &source_grid);
-        strcmp(all_town[i].name, name);
+        fscanf(file, "%s %d %d %d %d %d %d %d %d %s\n", name, &badge_required, &type_map, &environnement, &nb_layer, &nb_tiles, &tile_width, &tile_height, &first_grid, source_grid);
+        all_town[i].name = malloc((sizeof(char)*MAX_LEN_NAME));
+        all_town[i].source_grid = malloc((sizeof(char)*MAX_LEN_PATH));
+        strcpy(all_town[i].name, name);
+        strcpy(all_town[i].source_grid, source_grid);
         all_town[i].badge_required = badge_required;
         all_town[i].type_map = type_map;
         all_town[i].environnement = environnement;
@@ -48,9 +52,21 @@ void town_init(){
     }
 
     fclose(file);
-    free(name);
-    
+    free(name);    
 }
+
+void display_town(town_t town){
+    printf("Nom de la ville: %s\n", town.name);
+    printf("Environnement de la ville: %d\n", town.environnement);
+    printf("Nombre de badge requis: %d\n", town.badge_required);
+    printf("Type de ville: %d\n", town.type_map);
+    printf("First grid: %d\n", town.first_grid);
+    printf("Source grid: %s\n", town.source_grid);
+    printf("Hauteur des tuiles: %d\n", town.tile_height);
+    printf("Largeur des tuiles: %d\n", town.tile_width);
+    return ;
+}
+
 
 /**
  * Vérifie que l'on peu aller dans la ville suivante

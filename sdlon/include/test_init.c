@@ -210,8 +210,6 @@ int main(int argc, char * argv[]) {
 
 
   town_init();
-  printf("%d\n", all_town[0].layer[0][4158]);
-  printf("%d\n", all_town[0].layer[1][0]);
-  printf("%d\n", all_town[0].layer[2][6]);
-  printf("%d\n", all_town[0].layer[2][7]);
+
+  display_town(all_town[0]);
 }

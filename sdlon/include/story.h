@@ -10,6 +10,7 @@
 #define VILLE 0
 #define ROUTE 1
 #define MAISON 3
+#define TILES_SIZE 16
 
 
 typedef struct town_s{
@@ -22,11 +23,12 @@ typedef struct town_s{
     int tile_width;
     int tile_height;
     int first_grid;
-    int source_grid;
+    char * source_grid;
     int layer[MAX_LAYER][MAX_TILES];
 }town_t;
 
 extern town_t all_town[NB_TOWN];
 void town_init();
+void display_town(town_t town);
 
 #endif
