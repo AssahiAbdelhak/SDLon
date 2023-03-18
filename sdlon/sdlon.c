@@ -254,7 +254,7 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
                   printf("Clear!!!!!!!!!!!!!!!!!!!");
                   SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
                   
-                  printMap(pWindow,screen);
+                  //printMap(pWindow,screen);
                   destroy_all(pWindow,font);
                 }
                 
@@ -448,8 +448,8 @@ int main(int argc, char ** argv) {
     screen = SDL_GetWindowSurface(pWindow);
     char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
 
-    //afficherMenu(pWindow,screen,menus,4,police);
-    afficherLeCombat(pWindow,screen);
+    afficherMenu(pWindow,screen,menus,4,police);
+    //afficherLeCombat(pWindow,screen);
     destroy_all(pWindow,police);
     /* P o s i t i o n ou sera mis le texte dans la fenetre */
     // load sample . png into image

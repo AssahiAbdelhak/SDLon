@@ -8,7 +8,6 @@
 #include "include/sdlon_generate.h"
 #include "include/sdlon_init.h"
 #include "combat.h"
-#include "include/story.h"
 #define TILE_SIZE 32
 #define WIDTH 1280
 #define HEIGHT 832
@@ -216,7 +215,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
 
 void printMap(SDL_Window *window,SDL_Surface * screen){
     
-    printLayer(window,screen,all_town[0].layer[0],"images/pokemon_style.png",1,16,16);
+    printLayer(window,screen,sol,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,chemin,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,arbre,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,buissons,"images/pokemon_style.png",1,16,16);

@@ -9,7 +9,7 @@
 
 void printControlles(SDL_Window *window,SDL_Surface * screen);
 void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height);
-void botton(SDL_Surface *surface,int width,int height,int x,int y,int selected);
+void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected);
 
 void attaque(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Surface *surface,int x,int y,char *name_attaque,int envir,int selected){
     SDL_Surface *attaque_surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
@@ -168,7 +168,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n){
     printSdlonBar(window,screen,500,200,730,60,"Lilian","M",80,10,(n==1));
     printSdlonBar(window,screen,500,200,30,360,"Mohamed","M",70,10,(n==2));
     printSdlonBar(window,screen,500,200,730,360,"Wandrille","M",30,10,(n==3));
-    botton(screen,WIDTH - 60,100,30,700,(n==4));
+    botton(screen,"ANNULER",WIDTH - 60,100,30,700,(n==4));
     SDL_UpdateWindowSurface(window);
 }
 
@@ -216,7 +216,7 @@ void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n){
     }
 }
 
-void botton(SDL_Surface *surface,int width,int height,int x,int y,int selected){
+void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected){
     SDL_Surface *annuler_rect = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     Uint32 bg = 0x285171;
@@ -226,7 +226,7 @@ void botton(SDL_Surface *surface,int width,int height,int x,int y,int selected){
     else
         SDL_FillRect(annuler_rect,NULL,bg);
     SDL_Color white = {255,255,255};
-    SDL_Surface *annuler = TTF_RenderUTF8_Blended(font,"ANNULER",white);
+    SDL_Surface *annuler = TTF_RenderUTF8_Blended(font,titre,white);
     SDL_Rect rect;
     rect.h=annuler->h;
     rect.w=annuler->w;
@@ -249,7 +249,7 @@ void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,
     attaque(window,screen,180,80,surface,210,10,"rien",0,(1==selected));
     attaque(window,screen,180,80,surface,10,110,"rien",0,(2==selected));
     attaque(window,screen,180,80,surface,210,110,"rien",0,(3==selected));
-    botton(surface,width-40,40,20,200,(4==selected));
+    botton(surface,"ANNULER",width-40,40,20,200,(4==selected));
     /*botton d'annuler*/
     
     /*FIN*/
@@ -258,15 +258,117 @@ void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,
     SDL_UpdateWindowSurface(window);
 }
 
-void showItem(SDL_Window *window,SDL_Surface * surface){
-
+void updateArrowSelector(SDL_Window *window,SDL_Surface * surface,int n){
+    
 }
 
+void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
+    SDL_Surface *desc_container = SDL_CreateRGBSurface(0, WIDTH/2, 300, 32, 0, 255, 255, 255);
+    SDL_FillRect(desc_container,NULL,0xFFFFFF);
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 60);
+    SDL_Color white = {0,0,0};
+    SDL_Surface *desc_texte = TTF_RenderText_Blended_Wrapped(font,desc,white,desc_container->w);
+    SDL_Rect rect_texte = {(desc_container->h - desc_texte->h)/2,10,desc_texte->h,desc_texte->w};
+    SDL_BlitSurface(desc_texte,NULL,desc_container,&rect_texte);
+    SDL_Rect rect_container = {0,HEIGHT - desc_container->h,desc_texte->h,desc_texte->w};
+    SDL_BlitSurface(desc_container,NULL,screen,&rect_container);
+}
+
+void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y){
+    /*Varibles*/
+    Uint32 bg = 0xFFFFFF;
+    SDL_Color color = {96,96,96};
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    
+    /*Conatiner*/
+    SDL_Surface *item_container = SDL_CreateRGBSurface(0, (WIDTH/2 - 60), 50, 32, 0, 255, 255, 255);
+    SDL_FillRect(item_container,NULL,bg);
+    /*texte d'item*/
+    SDL_Surface *item_name = TTF_RenderUTF8_Blended(font,nom,color);
+    SDL_Rect rect_texte = {30,10,item_name->h,item_name->w};
+    SDL_BlitSurface(item_name,NULL,item_container,&rect_texte);
+    /*quantite d'item*/
+    SDL_Surface *item_quant = TTF_RenderUTF8_Blended(font,"x 6",color);
+    SDL_Rect rect_qnt = {(item_container->w - item_quant->w - 20),10,item_quant->h,item_quant->w};
+    SDL_BlitSurface(item_quant,NULL,item_container,&rect_qnt);
+    /**/
+    SDL_Rect rect_container = {30,y,item_container->h,item_container->w};
+    SDL_BlitSurface(item_container,NULL,surface,&rect_container);
+}
+
+
 /*sac*/
-void showSac(SDL_Window *window,SDL_Surface * surface){
-    /*Uint32 bg = 0x285171;
+void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n){
+    Uint32 bg = 0x285171;
+    Uint32 items_bg = 0xf8e088;
     SDL_FillRect(screen,NULL,bg);
-    SDL_Surface *attaque_surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);*/
+    SDL_Surface *items_surface = SDL_CreateRGBSurface(0, WIDTH/2, HEIGHT, 32, 0, 219, 233, 172);
+    SDL_FillRect(items_surface,NULL,items_bg);
+    SDL_Surface *sac = IMG_Load("images/sac.png");
+    SDL_Rect rect = {100,100,sac->h,sac->w};
+    SDL_BlitSurface(sac,NULL,screen,&rect);
+    int nb=0;
+    for(int i=0;i<n;i++)
+        showItem(window,items_surface,noms[i],2, (60*i)+40);
+    /*description*/
+    showDescription(window,screen,descs[nb]);
+    /*arraow*/
+    SDL_Surface * arrow =  IMG_Load("images/select.png");
+    SDL_Rect rect_arrow = {5,40+(60)*(nb)+15,arrow->h,arrow->w};
+    SDL_BlitSurface(arrow,NULL,items_surface,&rect_arrow);
+    SDL_Rect btn = {30,HEIGHT - 50 - 30,(WIDTH/2 - 60),50};
+    SDL_Rect btn_in_screen = {30+WIDTH/2,HEIGHT - 50 - 30,(WIDTH/2 - 60),50};
+    SDL_Log("x == %d\n",btn.x);
+    botton(items_surface,"Fremer le sac",btn.w, btn.h, btn.x, btn.y, 0);
+    SDL_Rect items_rect = {WIDTH/2,0,items_surface->h,items_surface->w};
+    SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
+    SDL_UpdateWindowSurface(window);
+    int running = 1;
+    SDL_Point mousePosition;
+    while (running) {
+        SDL_Event e;
+        while (SDL_PollEvent( & e)) {
+          switch (e.type) {
+            case SDL_QUIT:
+                running = 0;
+                return ;
+                break;
+            case SDL_MOUSEBUTTONUP:
+                if(SDL_PointInRect(&mousePosition, &btn_in_screen))
+                    return afficherLeCombat(window,screen);
+                break;
+            case SDL_KEYDOWN:
+                switch (e.key.keysym.sym){
+                    case SDLK_UP:
+                        nb=(nb-1);
+                        nb = (nb<0)?nb += n:nb;
+                        break;
+                    case SDLK_DOWN:
+                        nb=(nb+1)%n;
+                        break;
+                    case SDLK_RETURN:
+                        break;
+                }
+                SDL_FillRect(items_surface,&rect_arrow,items_bg);
+                showDescription(window,screen,descs[nb]);
+                rect_arrow.y = 40+(60)*(nb)+15;
+                SDL_BlitSurface(arrow,NULL,items_surface,&rect_arrow);
+                SDL_Rect items_rect = {WIDTH/2,0,items_surface->h,items_surface->w};
+                SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
+                SDL_UpdateWindowSurface(window);
+                break;
+            case SDL_MOUSEMOTION:
+                mousePosition.x = e.motion.x; 
+                mousePosition.y = e.motion.y;
+                if (SDL_PointInRect(&mousePosition, &btn_in_screen)){
+                    botton(items_surface,"Fremer le sac",btn.w, btn.h, btn.x, btn.y, 1);
+                }else
+                    botton(items_surface,"Fremer le sac",btn.w, btn.h, btn.x, btn.y, 0);
+                SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
+                SDL_UpdateWindowSurface(window);
+          }
+        }
+    }
 }
 /*fin sac*/
 void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n){
@@ -275,7 +377,9 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
             onAttack(window,screen,surface,width,height);
             break;
         case 1:
-            showSac(window,screen);
+        char * noms[5] = {"HYPER POTION","HUILE","POUDRECLAIRE","QUEUE SKITTV","RAPPEL"};
+        char * descs[5] = {"Restaurer les PV d'un POKeMON de 200 points.","DESCRIPTION 2","DESCRIPTION 3","DESCRIPTION 4","DESCRIPTION 5"};
+            showSac(window,screen,noms,descs,5);
             break;
         case 2:
             showAllSDlons(window,screen,4);

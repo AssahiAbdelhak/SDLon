@@ -25,10 +25,9 @@ float taille_y(int y){
 
 
 
-void blackscreen(SDL_Renderer * renderer){
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-  SDL_RenderFillRect(renderer, NULL);
-  SDL_RenderPresent(renderer);
+void blackscreen(SDL_Surface * screen){
+  Uint32 black = 0x000;
+  SDL_FillRect(screen,NULL,black);
 }
 
 void cadre(SDL_Renderer * renderer, int xc, int yc){
@@ -76,7 +75,7 @@ void cadre(SDL_Renderer * renderer, int xc, int yc){
 
 }
 
-SDL_Texture * print_image(SDL_Renderer * renderer, char * img, int xi, int yi, int hi, int wi){
+void print_image(SDL_Surface * screen, char * img, int xi, int yi, int hi, int wi){
   
   
   //-------Message--------
@@ -94,22 +93,13 @@ SDL_Texture * print_image(SDL_Renderer * renderer, char * img, int xi, int yi, i
   rectangle.h=hi;
   rectangle.w=wi;
 
+  SDL_BlitSurface(image,NULL,screen,&rectangle);
   
-  SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image);
-  if(!texture){
-    printf("Erreur de chargement de la texture : %s",SDL_GetError());
-    exit(EXIT_FAILURE);
-  }
-
-  SDL_FreeSurface(image);
-  SDL_RenderCopy(renderer, texture, NULL, &rectangle);
-
-  return texture ;
 }
 
 
 
-SDL_Texture * print_text(SDL_Renderer * renderer, const char * fontName, const char * texte, const int xt, const int yt, const int r, const int g, const int b){
+void print_text(SDL_Surface * screen, const char * fontName, const char * texte, const int xt, const int yt, const int r, const int g, const int b){
 
   //fonction qui affiche du texte
 
@@ -131,33 +121,35 @@ SDL_Texture * print_text(SDL_Renderer * renderer, const char * fontName, const c
     printf("erreur de chargement du message\n");
     exit(EXIT_FAILURE);
   }
-
+/*
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   SDL_Texture * Message = SDL_CreateTextureFromSurface(renderer, surfMessage);
   if(!Message){
     printf("erreur de chargement de la texture\n");
     exit(EXIT_FAILURE);
   }
-
+*/
 
   SDL_Rect Message_rect;
   Message_rect.x = xt ;//100 -> 100
   Message_rect.y = yt ;//700 -> 750
-
+/*
   SDL_QueryTexture(Message, NULL, NULL, &(Message_rect.w), &(Message_rect.h));
 
   SDL_FreeSurface(surfMessage);
   SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+  */
+  SDL_BlitSurface(surfMessage,NULL,screen,&Message_rect);
   TTF_Quit();
 
-  return Message ;
+  //return Message ;
 }
 
 
 
-void affichage(SDL_Renderer * renderer){
+void affichage(SDL_Window * window){
   //Pour la finalisation et l'affichage
-  SDL_RenderPresent(renderer);
+  SDL_UpdateWindowSurface(window);
 }
 
 void PrintKeyInfo(SDL_KeyboardEvent * key){
