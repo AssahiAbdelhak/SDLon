@@ -4,6 +4,7 @@
 # include <SDL2/SDL_ttf.h>
 # include <SDL2/SDL_image.h>
 # include "../lib/lib_sdl_facile.h"
+#include "../map.h"
 /**
   \file sdl_prog_test.c
   \brief Programme de test sur la cinematique de debut de jeu
@@ -13,12 +14,12 @@
 */
 
 
-int main(int argc,char *argv[]){
+void afficherCinematique(SDL_Window * window,SDL_Surface *screen){
   /* Initialise les data de notre jeu*/
-  SDL_Window *window = NULL;
+  //SDL_Window *window = NULL;
   int quit = false;
   SDL_Event event;
-  
+  SDL_Log("je suis passer par la\n");
   /*
   * Initialise le systeme video sdl (ainsi que le sous systeme lie au evenements).
   * Retourne 0 on utilise SDL_GetError() pour retourner une erreur ou un succes.
@@ -30,19 +31,20 @@ int main(int argc,char *argv[]){
   }*/
 
   /* Cree la fenetre SDL */
-  window = SDL_CreateWindow("SDLON", /* Titre de la fenetre */
-			    SDL_WINDOWPOS_UNDEFINED, /* Position x de la fenetre */
-			    SDL_WINDOWPOS_UNDEFINED, /* Position y de la fenetre */
-			    WIDTH, /* largeur de la fenetre en pixels */
-			    HEIGHT, /* hauteur de la fenetre en pixels */
-			    SDL_WINDOW_SHOWN); /* Additional flag(s) */
+  
+  //window = SDL_CreateWindow("SDLON", /* Titre de la fenetre */
+		//	    SDL_WINDOWPOS_UNDEFINED, /* Position x de la fenetre */
+			//    SDL_WINDOWPOS_UNDEFINED, /* Position y de la fenetre */
+			//    WIDTH, /* largeur de la fenetre en pixels */
+			  //  HEIGHT, /* hauteur de la fenetre en pixels */
+			    //SDL_WINDOW_SHOWN); /* Additional flag(s) */
 
   /* Check de la fenetre si elle a bien ete cree; si non, exit le programme */
   if (window == NULL) {
     fprintf(stderr, "SDL window failed to initialise: %s\n", SDL_GetError());
     return 1;
   }
-  SDL_Surface * screen = SDL_GetWindowSurface(window);
+  //SDL_Surface * screen = SDL_GetWindowSurface(window);
 
 
   //VARIABLE CINEMATIQUE
@@ -57,7 +59,7 @@ int main(int argc,char *argv[]){
 
     //CINEMATIQUE DE DEBUT DE JEU
     //Initialisation des variables de ma cinématique
-
+/*
     SDL_Texture * img ;
     SDL_Texture * txt ; //72 caractères maximum par lignes (espace inclu)
 
@@ -83,16 +85,20 @@ int main(int argc,char *argv[]){
     
     SDL_Texture * txthomme2;
     SDL_Texture * txtfemme2;
-
+*/
     if(cadenas == true && clefbas < 6){
       switch(clefbas){
         case 0 :
           //img et txt crée et reste tant que aucune touche n'est press
           blackscreen(screen);
+          SDL_Log("et par la\n");
           //Uint32 black = 0x000;
           //SDL_FillRect(items_surface,&rect_arrow,black);
-          print_image(screen, "../img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
+          
+          print_image(screen, "img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
+          SDL_Log("et par la 1\n");
           print_text(screen, "RosesareFF0000.ttf", "Bonjour dresseur, je suis le professeur SDLon, mon nom est Ange.", MARGE, LIGNE1, 255, 255, 255);
+          SDL_Log("et par la 2\n");
           affichage(window);
           SDL_Log("error here ?\n");
           break;    
@@ -108,7 +114,7 @@ affichage(window);
           }
           test_cond = 0;
 
-          print_image(screen, "../img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
+          print_image(screen, "img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
           print_text(screen, "RosesareFF0000.ttf", "Si tu est ici c'est que tu comptes attraper des SDLon je suppose.", MARGE, LIGNE1, 255, 255, 255);
 affichage(window);
           break;
@@ -124,8 +130,8 @@ affichage(window);
           }
           test_cond = 0;
           
-          print_image(screen, "../img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
-          print_image(screen, "../img/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
+          print_image(screen, "img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
+          print_image(screen, "img/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
           print_text(screen, "RosesareFF0000.ttf", "Tres bien, vois tu, ceci est un sdlon !", MARGE, LIGNE1, 255, 255, 255);
 affichage(window);
           break;
@@ -141,8 +147,8 @@ affichage(window);
           }
           test_cond = 0;
 
-          print_image(screen, "../img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
-          print_image(screen, "../img/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
+          print_image(screen, "img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
+          print_image(screen, "img/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
           print_text(screen, "RosesareFF0000.ttf", "Tout d'abord j'ai une question.", MARGE, LIGNE1, 255, 255, 255);
           print_text(screen, "RosesareFF0000.ttf", "Est-tu un homme ou une femme ?", MARGE, LIGNE2, 255, 255, 255);
 
@@ -165,8 +171,8 @@ affichage(window);
           }
           test_cond = 0;
 
-          print_image(screen, "../img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
-          print_image(screen, "../img/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
+          print_image(screen, "img/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
+          print_image(screen, "img/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
           print_text(screen, "RosesareFF0000.ttf", "Tres bien, n'oublie pas de passer me voir au labo, j'ai quelques choses", MARGE, LIGNE1, 255, 255, 255);
           print_text(screen, "RosesareFF0000.ttf", "a te donner, je te souhaite une bonne aventure", MARGE, LIGNE2, 255, 255, 255);
           affichage(window);
@@ -181,7 +187,9 @@ affichage(window);
             SDL_DestroyTexture(img5_2);
 */
             blackscreen(screen);
+            printMap(window,screen);
             affichage(window);
+            return ;
           }
           test_cond = 0;
           break;

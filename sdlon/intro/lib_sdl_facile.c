@@ -83,6 +83,7 @@ void print_image(SDL_Surface * screen, char * img, int xi, int yi, int hi, int w
 
   SDL_Surface * image = IMG_Load(img);
   if(!image){
+    SDL_Log("image failed\n%s\n",SDL_GetError());
     printf("Erreur de chargement de l'image : %s",SDL_GetError());
     exit(EXIT_FAILURE);
   }
@@ -94,7 +95,7 @@ void print_image(SDL_Surface * screen, char * img, int xi, int yi, int hi, int w
   rectangle.w=wi;
 
   SDL_BlitSurface(image,NULL,screen,&rectangle);
-  
+  SDL_Log("good\n");
 }
 
 

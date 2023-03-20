@@ -6,7 +6,7 @@
 # include <dirent.h>
 # include "map.h"
 #include "combat.h"
-
+#include "lib/lib_sdl_facile.h"
 #define HEIGHT 840
 #define WIDTH  1280
 
@@ -133,6 +133,12 @@ void afficherLesSauvegardes(SDL_Window *pWindow,TTF_Font *font,SDL_Surface
               char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
               return afficherMenu(pWindow,secreen,menus,4,font);
             } 
+            for (int i = 0; i < N; i++){
+              if (SDL_PointInRect(&mousePosition, &rects[i])) {
+                SDL_Log("sauvegarde : %s selectionné\n",strings[i]);
+              } 
+            }
+            
             break;
       }
       }
@@ -253,7 +259,7 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
           
                   printf("Clear!!!!!!!!!!!!!!!!!!!");
                   SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
-                  
+                  afficherCinematique(pWindow,screen);
                   //printMap(pWindow,screen);
                   destroy_all(pWindow,font);
                 }
