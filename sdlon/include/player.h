@@ -34,7 +34,7 @@ typedef struct box{
     struct box * next;
     struct box * precedent;
 }box;
-box * boiteASdlon;
+//box * boiteASdlon;
 
 player_t player_create(char * name, int genre, char * file_name);
 player_t player_init(char * file_name);
@@ -42,9 +42,9 @@ int player_quit(player_t * p);
 int add_sdlon_in_set(sdlon sd, player_t * player);
 int remove_sdlon_in_set(sdlon sd, player_t * player);
 int switch_sdlon_from_set(sdlon sd_in, sdlon sd_out, player_t * player);
-int send_sdlon_in_box(sdlon sd);
-int load_box(char * name);
-int create_box();
+//int send_sdlon_in_box(sdlon sd);
+//int load_box(char * name);
+//int create_box();
 int get_player_item(player_t * player, int num_item);
 int add_items(int num_item, int qtt, player_t * player);
 int remove_items(int num_item, int qtt, player_t * player);

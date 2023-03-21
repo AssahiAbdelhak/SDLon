@@ -6,7 +6,6 @@
 # include <dirent.h>
 # include "map.h"
 #include "combat.h"
-#include "lib/lib_sdl_facile.h"
 #include "intro/sdl_intro_test.h"
 #include "include/player.h"
 #define HEIGHT 840

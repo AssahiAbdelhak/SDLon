@@ -1,9 +1,10 @@
-#include "player.h"
+/*#include "player.h"
 #include "sdlon_init.h"
 #include "item.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Primitives_Box.h"
 
 void precedentBox(){
     boiteASdlon = boiteASdlon->precedent;
@@ -44,4 +45,4 @@ void displayBox(box* head) {
         aux = aux->next;
     }
     printf("\n");
-}
+}*/

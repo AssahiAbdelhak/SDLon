@@ -104,7 +104,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
     printf("image good");
     SDL_Rect rect = {x,y,32,32};
     SDL_Rect copy_rect = {0,0,32,32};
-    
+    sdlon_init();
     enum directions dir = DOWN;
     enum actions act = DEF1;
 // prq 32 et pas 16 pcq on veut recuperer les 4 part du personnage
@@ -130,7 +130,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                 break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){
-                    
+                    case SDLK_s:
+                        SDL_Log("sauverge est faite\n");
+                        sspi(player);
+                     break;
+
                     case SDLK_UP:
                         if(localisationValide(x,y-16)){
                             move = 1;
@@ -162,32 +166,40 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                     case SDLK_e:
                         move=0;
                         if(dansLesBuissons){
-                            SDL_Log("E cliqué\n");
-                            //return afficherLeCombat(window,screen);
-                            //sdlon sdl1 = generate_sdlon(0,5,20);
-                            //SDL_Log("nom == %s\n",sdl1.nom);
-                            //decouvrirLeSdlon();
-                            int seed = rand()%100;
-                            printf("%d\n",seed);
-                            
-                            if(seed<=10){
-                                afficherLeCombat(window,screen,player);
-
+                            if(player.nb_current_sdlon<1){
+                                // afficher un message indiquant comme quoi il a pas assez de sdlon
+                                SDL_Log("nombre de sdlon insuffisants");
+                                sdlon sd = generate_sdlon(0,5,15);
+                                add_sdlon_in_set(sd,&player);
                             }else{
-                                SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
-        SDL_UpdateWindowSurface(window);
-                                SDL_BlitSurface(pasSdlon,&hintContainer,screen,&hintBox);
-                                SDL_UpdateWindowSurface(window);
+                                int i;
+                                SDL_Log("hfhveihfvbiebvier");
+                                SDL_Log("Total de sdlon dans le set: %d\n\n", player.nb_current_sdlon);
+                                for(i=0;i<player.nb_current_sdlon;i++){
+                                    SDL_Log("Sdlon n° %d:\nNom: %s\n\n", i+1, player.sd[i].nom);
+                                }
+                                SDL_Log("E cliqué\n");
+                                //return afficherLeCombat(window,screen);
+                                //sdlon sdl1 = generate_sdlon(0,5,20);
+                                //SDL_Log("nom == %s\n",sdl1.nom);
+                                //decouvrirLeSdlon();
+                                int seed = rand()%100;
+                                printf("%d\n",seed);
+                                
+                                if(seed<=10){
+                                    afficherLeCombat(window,screen,player);
+
+                                }else{
+                                    SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
+            SDL_UpdateWindowSurface(window);
+                                    SDL_BlitSurface(pasSdlon,&hintContainer,screen,&hintBox);
+                                    SDL_UpdateWindowSurface(window);
+                                }
                             }
+                            
                         }
                         break;
-                    case SDLK_ESCAPE: ;
-                        printf("escape clicked\n");
-                        TTF_Font *police = TTF_OpenFont("OpenSans-Bold.ttf", 20);
-                        char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
-                        afficherMenu(window,screen,menus,4,police);
-                        return;
-                        break;
+                    
                     default:
                         move=0;
                         break;

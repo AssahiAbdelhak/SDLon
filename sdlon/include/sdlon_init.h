@@ -1,6 +1,6 @@
 #ifndef NB_SDLON
 //macros
-#define NB_SDLON 15
+#define NB_SDLON 30
 #define NB_ATTAQUE 10
 
 #define EAU 0

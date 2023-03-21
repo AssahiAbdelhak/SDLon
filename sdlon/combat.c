@@ -12,6 +12,31 @@ void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int wi
 void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected);
 int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player);
 
+void afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int height){
+    SDL_Surface *tableauMenus = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
+    Uint32 bg = 0xdbeaa9;
+    SDL_FillRect(tableauMenus,NULL,bg);
+    SDL_Rect container = {0,0,height,width};
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Rect rect = {10,10,width,height};
+    SDL_Surface * copy = SDL_BlitSurface(screen,&rect,tableauMenus,&container);
+    SDL_BlitSurface(tableauMenus,NULL,screen,&rect);
+    SDL_UpdateWindowSurface(window);
+    int running = 1;
+    SDL_Point mousePosition;
+    while (running) {
+        SDL_Event e;
+        while (SDL_PollEvent( & e)) {
+          switch (e.type) {
+            case SDL_QUIT:
+                running = 0;
+                return ;
+                break;
+          }
+        }
+    }
+}
+
 void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Surface *surface,int x,int y,char *name_attaque,int envir,int selected){
     SDL_Surface *attaque_surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -595,8 +620,9 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player){
 
     printPokemon(window,screen,"img/asset/SDLon_creature/face-animal.png",WIDTH-200,200);
     printPokemon(window,screen,"img/asset/SDLon_creature/dos-animal.png",0,HEIGHT-200);
-
-    printPlayerStats(window,screen,"nom sdlon 1",20,30,15,50);
+    
+    SDL_Log("%s\n",player.sd[0].nom);
+    //printPlayerStats(window,screen,player.sd[0].nom,20,30,20,80);
     printPlayerStats(window,screen,"nom sdlon 2",WIDTH-320,450,15,90);
 
     printControlles(window,screen,player);

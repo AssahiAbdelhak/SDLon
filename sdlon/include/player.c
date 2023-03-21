@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Primitives_Box.h"
+//#include "Primitives_Box.h"
 /**
  * crée l'inventaire du joueur
  * et le met à 0
@@ -146,9 +146,10 @@ int player_quit(player_t * player){
 
 int display_pss(player_t player){
     int i;
-    printf("Total de sdlon dans le set: %d\n\n", player.nb_current_sdlon);
+    SDL_log("hfhveihfvbiebvier");
+    SDL_log("Total de sdlon dans le set: %d\n\n", player.nb_current_sdlon);
     for(i=0;i<player.nb_current_sdlon;i++){
-        printf("Sdlon n° %d:\nNom: %s\n\n", i+1, player.sd[i].nom);
+        SDL_log("Sdlon n° %d:\nNom: %s\n\n", i+1, player.sd[i].nom);
     }
     return 0;
 }
@@ -163,7 +164,7 @@ int sspi(player_t player){
     int i;
     file = fopen(player.inventaire.path_to_save, "w");
 
-    fprintf(file, "%s %d", player.name, player.genre);
+    fprintf(file, "%s %d %d %d", player.name, player.genre,player.x, player.y);
 
     for(i=0;i<player.nb_current_sdlon;i++){
         fprintf(file, " %d", get_sdlon_index(player.sd[i].nom));
@@ -323,6 +324,7 @@ int send_sdlon_in_box(sdlon sd){
  * Fonction qui charge les sdlons 
  * dans la boite de stockage
 */
+/*
 int load_box(char * name){
     FILE *f = fopen(name, "r");
     enTeteBox();
@@ -345,24 +347,25 @@ int load_box(char * name){
 
     return 0;
 }
-
+*/
 
 /**
  * créé une boite
  * dans laquel le joueur
  * pourras stocker ses sdlons
 */
+/*
 int create_box(){
     boiteASdlon = malloc(sizeof(box));
     boiteASdlon->next = NULL;
     boiteASdlon->precedent = NULL;
     return 0;
 }
-
+*/
 /*
     fonction sauvegarde de la box
 */
-
+/*
 int save_box(char *name){
     FILE *f = fopen(name, "w+");
     enTeteBox();
@@ -385,16 +388,10 @@ int save_box(char *name){
     return 1;
 
 }
-
+*/
 /**
  * fonction de sauvegarde des donnée
  * des datas du joueurs
  * box/set/items
  * optionel en fonction des autres système de sauvegarde de l'initialisation
 */
-int save_player_data(char * file_name){
-    //optionelle
-    //faire à la fin
-    //la sauvegarde seras surement gérer autre part
-    return 0;
-}
