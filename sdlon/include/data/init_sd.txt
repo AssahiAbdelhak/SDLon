@@ -1,15 +1,34 @@
-0 barcasse 80 1 2 3 4 1 1 31
-0 cuiracié 120 5 5 3 4 2 17 32
-0 soumalin 170 3 3 2 1 0 39 33
-1 pakikea 80 1 1 2 8 4 1 31
-1 flatapak 120 8 4 3 6 5 17 32
-1 pakaskap 170 3 1 4 5 0 39 33
-2 borasque 80 7 7 6 4 7 1 31
-2 piédvent 120 6 4 5 4 8 17 32
-2 borsin 170 5 4 6 5 0 39 33
-3 poutins 80 7 7 8 9 10 1 31
-3 potofeu 120 9 8 7 4 11 17 32
-3 cassoulé 170 4 5 5 6 0 39 33
-3 ramonne 45 1 3 4 2 13 1 31
-3 tchoorisso 150 1 3 4 2 14 17 32
-3 bravas 170 1 3 4 2 0 39 33
+0 barcasse 44 1 2 3 4 1 1 31        X
+0 cuiracié 60 5 5 3 4 2 17 32        X
+0 soumalin 79 3 3 2 1 0 39 33      X
+0 Aquaconda 85 1 1 1 1 0 30 00   X
+0 Geyseron 65 1 1 1 1 0 21 00
+0 Aqualpha 50 1 1 1 1 0 5 00        X
+0 Gelphin 85 1 1 1 1 0 7 00          X
+
+1 pakikea 44 1 1 2 8 4 1 31          X
+1 flatapak 60 8 4 3 6 5 17 32        X
+1 pakaskap 79 3 1 4 5 0 39 33      X
+1 Géodrome 55 1 1 1 1 0 20 00
+1 Sableon 55 1 1 1 1 0 4 00
+1 Rochermite 65 1 1 1 1 0 12 00
+1 Taupinambour 65 1 1 1 1 0 22 00
+1 Terroc 79 1 1 1 1 0 31 00
+
+2 borasque 44 7 7 6 4 7 1 31
+2 piédvent 60 6 4 5 4 8 17 32
+2 borsin 79 5 4 6 5 0 39 33
+2 Cielouette 65 1 1 1 1 0 5 00
+2 Aérodactyl 65 1 1 1 1 0 12 00
+2 Altisphère 85 1 1 1 1 0 36 00
+2 Tourbillair 85 1 1 1 1 0 31 00
+
+3 poutins 44 7 7 8 9 10 1 31
+3 potofeu 60 9 8 7 4 11 17 32
+3 cassoulé 79 4 5 5 6 0 39 33
+3 ramonne 44 1 3 4 2 13 1 31
+3 tchoorisso 60 1 3 4 2 14 17 32
+3 bravas 79 1 3 4 2 0 35 33
+3 Lavalanche 65 1 1 1 1 0 29 00
+3 Blazeodon 85 1 1 1 1 0 33 00         X
+
