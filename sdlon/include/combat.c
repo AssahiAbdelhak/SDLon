@@ -137,6 +137,7 @@ int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
                 return 0;
             }
         }
+        return -1;
 }
 
 
@@ -259,6 +260,7 @@ int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utili
       break;
     }
   }
+  return -1;
 }
 
 void fight(){

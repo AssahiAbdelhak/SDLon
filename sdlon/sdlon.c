@@ -7,6 +7,8 @@
 # include "map.h"
 #include "combat.h"
 #include "lib/lib_sdl_facile.h"
+#include "intro/sdl_intro_test.h"
+#include "include/player.h"
 #define HEIGHT 840
 #define WIDTH  1280
 
@@ -94,8 +96,9 @@ void showPlayerInMap(SDL_Window *pWindow,SDL_Surface *screen){
 
 void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,TTF_Font *font);
 
-void afficherLesSauvegardes(SDL_Window *pWindow,TTF_Font *font,SDL_Surface 
+void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *font,SDL_Surface 
 *secreen,char strings[][100],int N,SDL_Rect *rect){
+  sdlon_init();
   SDL_Rect rects[N];
   SDL_Color white = {255,255,255};
   int y = (HEIGHT - (50*2) - (50*N))/N;
@@ -136,6 +139,8 @@ void afficherLesSauvegardes(SDL_Window *pWindow,TTF_Font *font,SDL_Surface
             for (int i = 0; i < N; i++){
               if (SDL_PointInRect(&mousePosition, &rects[i])) {
                 SDL_Log("sauvegarde : %s selectionné\n",strings[i]);
+                player_t player = player_init(strings[i]);
+                printMap(pWindow,screen,player);
               } 
             }
             
@@ -155,7 +160,7 @@ void destroy_all(SDL_Window *pWindow,TTF_Font *font){
 }
 
 void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
-
+  sdlon_init();
   SDL_Color white = {255,255,255};
   SDL_Color red = {255,0,0};
   SDL_Surface *name;
@@ -248,19 +253,17 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
                   SDL_UpdateWindowSurface(pWindow);
                 }else{
                   
-                  char path[300];
-                  sprintf(path,"sauvegardes/%s.txt",savaGameName);
-                  printf("%s\n",path);
-                  FILE *f = fopen(path,"w");
-                  if(f==NULL){
-                    printf("Error cannot create this file\n");
-                  }
-                  fclose(f);
-          
-                  printf("Clear!!!!!!!!!!!!!!!!!!!");
                   SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
-                  afficherCinematique(pWindow,screen);
-                  //printMap(pWindow,screen);
+                  int genre = afficherCinematique(pWindow,screen);
+                  printf("fin de cinématique");
+                  char * name = malloc(sizeof(char)*MAX_LEN_NAME);
+                  strcpy(name, savaGameName);
+                  player_t player = player_create(name, genre, name);
+                  player.x = 50*16;
+    player.y = 23*16;
+                  printf("\njoueur créée: %d, %d\n", genre, player.nb_current_sdlon);
+                  printMap(pWindow,screen,player);
+
                   destroy_all(pWindow,font);
                 }
                 
@@ -298,7 +301,7 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
   char fileNames[20][100];
   int index=0;
   struct dirent *dir;
-  d = opendir("sauvegardes");
+  d = opendir("include/data/players_data");
   if (d) {
     while ((dir = readdir(d)) != NULL) {
       if(strcmp(dir->d_name,".")!=0&&strcmp(dir->d_name,"..")!=0){
@@ -309,7 +312,7 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
     }
     closedir(d);
   }
-  afficherLesSauvegardes(pWindow,font,screen,fileNames,index,&rect);
+  afficherLesSauvegardes(pWindow,screen,font,screen,fileNames,index,&rect);
   SDL_Event e;
   SDL_Point mousePosition;
   while(1){
@@ -325,7 +328,6 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
               SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
               SDL_UpdateWindowSurface(pWindow);
               char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
-              return afficherMenu(pWindow,screen,menus,4,font);
             } 
           break;
       }
@@ -336,6 +338,7 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
 
 void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,TTF_Font *font){
     
+    SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
     SDL_Surface *btns[N];
     SDL_Color colors[2] = {{255,0,0},{255,255,255}};
     SDL_Rect rects[N];
@@ -417,6 +420,7 @@ void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,T
 }}
 
 int main(int argc, char ** argv) {
+  srand(time(NULL));
   SDL_Log("hello\n");
     // Le p o i n t e u r vers la fenetre
     SDL_Window * pWindow = NULL;

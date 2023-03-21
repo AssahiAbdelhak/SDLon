@@ -14,7 +14,7 @@
 */
 
 
-void afficherCinematique(SDL_Window * window,SDL_Surface *screen){
+int afficherCinematique(SDL_Window * window,SDL_Surface *screen){
   /* Initialise les data de notre jeu*/
   //SDL_Window *window = NULL;
   int quit = false;
@@ -42,7 +42,7 @@ void afficherCinematique(SDL_Window * window,SDL_Surface *screen){
   /* Check de la fenetre si elle a bien ete cree; si non, exit le programme */
   if (window == NULL) {
     fprintf(stderr, "SDL window failed to initialise: %s\n", SDL_GetError());
-    return 1;
+    return -1;
   }
   //SDL_Surface * screen = SDL_GetWindowSurface(window);
 
@@ -187,9 +187,9 @@ affichage(window);
             SDL_DestroyTexture(img5_2);
 */
             blackscreen(screen);
-            printMap(window,screen);
-            affichage(window);
-            return ;
+            //printMap(window,screen);
+            //affichage(window);
+            return HoF;
           }
           test_cond = 0;
           break;
@@ -240,7 +240,7 @@ affichage(window);
           //passe a la suite de la cinematique avec la reference du sexe choisi dans la variable HoF(Homme ou Femme)
 
           case SDLK_SPACE:
-
+            
             PrintKeyInfo(&event.key);
             printf("moi Key press detected\n");
             clefbas++ ;
@@ -288,6 +288,6 @@ affichage(window);
 
   /* Eteint tous les SDL sous systemes */
   SDL_Quit();
-  return 0;
+  return HoF;
 }
 

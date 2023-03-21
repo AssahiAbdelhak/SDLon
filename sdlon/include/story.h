@@ -12,11 +12,6 @@
 #define MAISON 3
 #define TILES_SIZE 16
 
-<<<<<<< HEAD
-#define NB_TOWN 4
-=======
->>>>>>> c7de127e4d457d420c754ed8c38cf4be8f8fab8c
-
 typedef struct town_s{
     char * name;
     int badge_required;
@@ -31,11 +26,8 @@ typedef struct town_s{
     int layer[MAX_LAYER][MAX_TILES];
 }town_t;
 
-<<<<<<< HEAD
-=======
 extern town_t all_town[NB_TOWN];
 void town_init();
 void display_town(town_t town);
 
->>>>>>> c7de127e4d457d420c754ed8c38cf4be8f8fab8c
 #endif
