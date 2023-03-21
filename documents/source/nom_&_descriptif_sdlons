@@ -1,0 +1,36 @@
+Nom sdlons:
+
+-------- Starters:
+- barcasse > cuiracié > soumalin
+	type: eau
+	proba: 0
+
+- pakikea > flatapak > pakaskap
+	type: terre
+	proba: 0
+
+- borasque > piédvent > borsin
+	type: air
+	proba: 0
+
+- pout'ins > potofeu > cassaoulé
+	type: feu
+	proba: 0
+
+-------- Légendaires:
+- mauriteau
+
+- feur
+
+-------- Classique:
+- ramonne > tchorisso > bravas
+	type: feu
+	proba:	moyenne (Environnement classqiue), 
+		supérieur (Environnement volcanique),
+		nulle (Environnement aquatique).
+		
+- epityrum > eauliv > venichet
+	type: eau
+	proba:	nulle (Environnement classqiue), 
+		nulle (Environnement volcanique),
+		supérieur (Environnement aquatique).
