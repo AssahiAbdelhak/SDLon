@@ -33,7 +33,7 @@ player_t player_create(char * name, int genre, char * file_name){
     player_t player;
     int i, init=-1, x=0, y=0;
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
-    strcpy(path, "data/players_data/player_name_");
+    strcpy(path, "include/data/players_data/player_name_");
     strcat(path, file_name);
 
     //assignation nom/genre/position
@@ -52,9 +52,13 @@ player_t player_create(char * name, int genre, char * file_name){
     //creation du fichier de sauvegarde des données du joueur
     FILE * file;
     file = fopen(path, "w");
-    fprintf(file, "%s %d %d %d %d %d %d %d %d %d\n", name, genre, x, y, init, init, init, init, init, init);
-    fclose(file);
-
+    if(file!=NULL){
+        fprintf(file, "%s %d %d %d %d %d %d %d %d %d\n", player.name, genre, x, y, init, init, init, init, init, init);
+        fclose(file);
+    }else{
+        printf("fichier non crée\n");
+        return player;
+    }
     player.inventaire = player_inventory_create(path);
 
     //libération mémoire
@@ -68,7 +72,7 @@ player_t player_init(char * file_name){
     int level, xp, vie, x, y;
 
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
-    strcpy(path, "data/players_data/player_name_");
+    strcpy(path, "include/data/players_data/");
     strcat(path, file_name);
 
     char * name = malloc(sizeof(char)*MAX_LEN_NAME);
@@ -178,7 +182,7 @@ int sspi(player_t player){
     }
 
     fclose(file);
-    
+    return 1;
 }
 
 /**
@@ -378,6 +382,7 @@ int save_box(char *name){
     }
 
     fclose(f);
+    return 1;
 
 }
 

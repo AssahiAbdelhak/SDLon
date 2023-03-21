@@ -8,6 +8,7 @@
 #include "include/sdlon_generate.h"
 #include "include/sdlon_init.h"
 #include "combat.h"
+#include <time.h>
 #define TILE_SIZE 32
 #define WIDTH 1280
 #define HEIGHT 832
@@ -19,9 +20,10 @@ enum actions{DEF1,WALK1,DEF2,WALK2};
 /*------------------------------Variable globales-------------------------------------*/
 
 SDL_Rect hintBox,hintContainer;
+SDL_Surface *pasSdlon;
 int dansLesBuissons=0;
 
-town_init();
+//town_init();
 
 void waiting(Uint32 *start_time){
     *start_time = SDL_GetTicks();
@@ -97,7 +99,7 @@ int localisationValide(int x,int y){
     return 1;
 }
 
-void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint){
+void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
     printf("image good");
     SDL_Rect rect = {x,y,32,32};
@@ -161,11 +163,30 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         move=0;
                         if(dansLesBuissons){
                             SDL_Log("E cliqué\n");
-                            return afficherLeCombat(window,screen);
+                            //return afficherLeCombat(window,screen);
                             //sdlon sdl1 = generate_sdlon(0,5,20);
                             //SDL_Log("nom == %s\n",sdl1.nom);
                             //decouvrirLeSdlon();
+                            int seed = rand()%100;
+                            printf("%d\n",seed);
+                            
+                            if(seed<=10){
+                                afficherLeCombat(window,screen,player);
+
+                            }else{
+                                SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
+        SDL_UpdateWindowSurface(window);
+                                SDL_BlitSurface(pasSdlon,&hintContainer,screen,&hintBox);
+                                SDL_UpdateWindowSurface(window);
+                            }
                         }
+                        break;
+                    case SDLK_ESCAPE: ;
+                        printf("escape clicked\n");
+                        TTF_Font *police = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+                        char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
+                        afficherMenu(window,screen,menus,4,police);
+                        return;
                         break;
                     default:
                         move=0;
@@ -185,24 +206,28 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,UP,WALK1,&start_time);
                             rect.y = nouv_rect.y;
                             y=y-16;
+                            player.y=y;
                     }
                     if(dir==DOWN){
                         SDL_Rect nouv_rect = {rect.x,rect.y+16,rect.h,rect.w};
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,DOWN,WALK1,&start_time);
                             rect.y = nouv_rect.y;
                             y=y+16;
+                            player.y=y;
                     }
                     if(dir==LEFT){
                         SDL_Rect nouv_rect = {rect.x-16,rect.y,rect.h,rect.w};
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,LEFT,WALK1,&start_time);
                             rect.x = nouv_rect.x;
                             x=x-16;
+                            player.x=x;
                     }
                     if(dir==RIGHT){
                         SDL_Rect nouv_rect = {rect.x+16,rect.y,rect.h,rect.w};
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,RIGHT,WALK1,&start_time);
                             rect.x = nouv_rect.x;
                             x=x+16;
+                            player.x=x;
                     }
         } 
         if (SDL_GetTicks() - start_time > 2000){
@@ -213,7 +238,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
     }
 }
 
-void printMap(SDL_Window *window,SDL_Surface * screen){
+void printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
     
     printLayer(window,screen,sol,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,chemin,"images/pokemon_style.png",1,16,16);
@@ -225,6 +250,7 @@ void printMap(SDL_Window *window,SDL_Surface * screen){
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {255,255,255};
     SDL_Surface *hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour decouvrir le sdlon",white);
+    pasSdlon = TTF_RenderUTF8_Blended(font,"Vous n'avez pas trouvez de sdlon",white);
     
     hintBox.y=HEIGHT - 100 - hint->h;
     hintBox.x=(WIDTH - hint->w)/2;
@@ -238,7 +264,11 @@ void printMap(SDL_Window *window,SDL_Surface * screen){
     SDL_BlitSurface(screen,&hintBox,hintSliceFromMap,&hintContainer);
     ///***
     printf("print this\n");
-    printSpirit(window,screen,"images/pers7.png",50*16,23*16,hintSliceFromMap, hint);
+    
+    if(player.genre==HOMME)
+        printSpirit(window,screen,"images/mec.png",player.x,player.y,hintSliceFromMap, hint,player);
+    else
+        printSpirit(window,screen,"images/meuf.png",player.x,player.y,hintSliceFromMap, hint,player);
     return ;
     int running = 1;
       while (running) {
@@ -246,10 +276,8 @@ void printMap(SDL_Window *window,SDL_Surface * screen){
         while (SDL_PollEvent( & e)) {
           switch (e.type) {
             case SDL_QUIT:
-            running = 0;
-            break;
-
-            
+                running = 0;
+                break;  
         }
       }
 }}

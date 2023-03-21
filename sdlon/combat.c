@@ -7,11 +7,12 @@
 #define HEIGHT 840
 #define WIDTH 1280
 
-void printControlles(SDL_Window *window,SDL_Surface * screen);
-void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height);
+void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player);
+void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,player_t player);
 void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected);
+int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player);
 
-void attaque(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Surface *surface,int x,int y,char *name_attaque,int envir,int selected){
+void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Surface *surface,int x,int y,char *name_attaque,int envir,int selected){
     SDL_Surface *attaque_surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     Uint32 bg = 0xdbeaa9;
@@ -69,30 +70,30 @@ void attaque(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Sur
     return;
 }
 
-void handle_events(SDL_Window *window,SDL_Surface *screen,int nb){
+void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player){
     switch (nb){
     case 0:
-        afficherLeCombat(window,screen);
+        afficherLeCombat(window,screen,player);
         break;
     // à implémenter après
     default:
-        afficherLeCombat(window,screen);
+        afficherLeCombat(window,screen,player);
         break;
     }
     return;
 }
 
-void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb){
+void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player){
     switch (nb){
     case 0:
     case 1:
     case 2:
     case 3:
         printf("Là il faut faire qlq chose, mais por l'instant je vais revenir au combat\n");
-        afficherLeCombat(window,screen);
+        afficherLeCombat(window,screen,player);
         break;
     case 4:
-        afficherLeCombat(window,screen);
+        afficherLeCombat(window,screen,player);
     // à implémenter après
     default:
         break;
@@ -173,7 +174,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n){
 }
 
 // max de n  est 4 je crois
-void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n){
+void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     
     /*print sdlons*/
     int nb = 0;
@@ -206,7 +207,7 @@ void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n){
                         nb=(nb+1)%5;
                         break;
                     case SDLK_RETURN:
-                        return handle_sdlons_events(window,screen,nb);
+                        return handle_sdlons_events(window,screen,nb,player);
                         break;
                 }
                 updateSdlons(window,screen,nb);
@@ -245,10 +246,10 @@ void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,
     Uint32 border_color = 0xfbfbf9;
     SDL_FillRect(surface, NULL, border_color);
 
-    attaque(window,screen,180,80,surface,10,10,"rien",0,(0==selected));
-    attaque(window,screen,180,80,surface,210,10,"rien",0,(1==selected));
-    attaque(window,screen,180,80,surface,10,110,"rien",0,(2==selected));
-    attaque(window,screen,180,80,surface,210,110,"rien",0,(3==selected));
+    attaque_graphique(window,screen,180,80,surface,10,10,"rien",0,(0==selected));
+    attaque_graphique(window,screen,180,80,surface,210,10,"rien",0,(1==selected));
+    attaque_graphique(window,screen,180,80,surface,10,110,"rien",0,(2==selected));
+    attaque_graphique(window,screen,180,80,surface,210,110,"rien",0,(3==selected));
     botton(surface,"ANNULER",width-40,40,20,200,(4==selected));
     /*botton d'annuler*/
     
@@ -265,7 +266,7 @@ void updateArrowSelector(SDL_Window *window,SDL_Surface * surface,int n){
 void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
     SDL_Surface *desc_container = SDL_CreateRGBSurface(0, WIDTH/2, 300, 32, 0, 255, 255, 255);
     SDL_FillRect(desc_container,NULL,0xFFFFFF);
-    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 60);
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {0,0,0};
     SDL_Surface *desc_texte = TTF_RenderText_Blended_Wrapped(font,desc,white,desc_container->w);
     SDL_Rect rect_texte = {(desc_container->h - desc_texte->h)/2,10,desc_texte->h,desc_texte->w};
@@ -274,7 +275,7 @@ void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
     SDL_BlitSurface(desc_container,NULL,screen,&rect_container);
 }
 
-void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y){
+void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y, player_t player, int index){
     /*Varibles*/
     Uint32 bg = 0xFFFFFF;
     SDL_Color color = {96,96,96};
@@ -288,7 +289,9 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
     SDL_Rect rect_texte = {30,10,item_name->h,item_name->w};
     SDL_BlitSurface(item_name,NULL,item_container,&rect_texte);
     /*quantite d'item*/
-    SDL_Surface *item_quant = TTF_RenderUTF8_Blended(font,"x 6",color);
+    char * nombre = malloc(sizeof(char )* MAX_LEN_NAME);
+    fprintf(nombre,"x %d", player.inventaire.list_item[index]);
+    SDL_Surface *item_quant = TTF_RenderUTF8_Blended(font,nombre,color);
     SDL_Rect rect_qnt = {(item_container->w - item_quant->w - 20),10,item_quant->h,item_quant->w};
     SDL_BlitSurface(item_quant,NULL,item_container,&rect_qnt);
     /**/
@@ -298,7 +301,7 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 
 
 /*sac*/
-void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n){
+void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player){
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
     SDL_FillRect(screen,NULL,bg);
@@ -309,7 +312,7 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
     SDL_BlitSurface(sac,NULL,screen,&rect);
     int nb=0;
     for(int i=0;i<n;i++)
-        showItem(window,items_surface,noms[i],2, (60*i)+40);
+        showItem(window,items_surface,noms[i],2, (60*i)+40, player, i);
     /*description*/
     showDescription(window,screen,descs[nb]);
     /*arraow*/
@@ -334,14 +337,16 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
                 return ;
                 break;
             case SDL_MOUSEBUTTONUP:
-                if(SDL_PointInRect(&mousePosition, &btn_in_screen))
-                    return afficherLeCombat(window,screen);
+                if(SDL_PointInRect(&mousePosition, &btn_in_screen)){
+                    afficherLeCombat(window,screen,player);
+                    return;
+                }
                 break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){
                     case SDLK_UP:
                         nb=(nb-1);
-                        nb = (nb<0)?nb += n:nb;
+                        nb = (nb<0)?(nb + n):(nb);
                         break;
                     case SDLK_DOWN:
                         nb=(nb+1)%n;
@@ -371,28 +376,29 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
     }
 }
 /*fin sac*/
-void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n){
+void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n,player_t player){
     switch(n){
         case 0:
-            onAttack(window,screen,surface,width,height);
+            onAttack(window,screen,surface,width,height,player);
             break;
-        case 1:
-        char * noms[5] = {"HYPER POTION","HUILE","POUDRECLAIRE","QUEUE SKITTV","RAPPEL"};
-        char * descs[5] = {"Restaurer les PV d'un POKeMON de 200 points.","DESCRIPTION 2","DESCRIPTION 3","DESCRIPTION 4","DESCRIPTION 5"};
-            showSac(window,screen,noms,descs,5);
+        case 1: ;
+            char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
+            char * descs[5] = {"Un-objet-particulier-qui-permet-de-capturer-des-sdlons.","Un-sdlasso-renforcer-et-amélioré-qui-permet-de-capturer-des-sdlons-avec-un-meilleur-rendement.","Un-objet-basé-sur-le-fonctionnement-des-des-sdlasso-mais-perfectionné-par-des-artisants-pour-fonctionner-à-tous-les-coups.","Une-relique-êxtremement-rare-n'ayant-que-peu-d'intêret.","Un-outil-pouvant-être-utilisé-par-des-chercheur-permettant-l'extraction-d'une-relique."};
+            showSac(window,screen,noms,descs,5,player);
             break;
         case 2:
-            showAllSDlons(window,screen,4);
+            showAllSDlons(window,screen,4,player);
             break;
-        case 3:
-            printMap(window,screen);
+        case 3: ;
+            player_t temp;
+            printMap(window,screen,player);
             break;
         default:
             break;
     }
 }
 
-void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height){
+void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,player_t player){
     int nb=0;
     drawAllOptions(window,screen,surface,width,height,nb);
     int running = 1;
@@ -421,7 +427,7 @@ void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int wi
                         nb=(nb+1)%5;
                         break;
                     case SDLK_RETURN:
-                        return handle_events(window,screen,nb);
+                        return handle_events(window,screen,nb,player);
                         break;
                 }
                 drawAllOptions(window,screen,surface,width,height,nb);
@@ -487,7 +493,7 @@ void updateOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,i
     SDL_UpdateWindowSurface(window);
 }
 
-void printControlles(SDL_Window *window,SDL_Surface * screen){
+void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player){
      
     // Create a surface for the rectangle border
     int width = 400;
@@ -528,7 +534,7 @@ void printControlles(SDL_Window *window,SDL_Surface * screen){
                         nb=(nb+1)%4;
                         break;
                     case SDLK_RETURN:
-                        handle_option_events(window,screen,surface,width,height,nb);
+                        handle_option_events(window,screen,surface,width,height,nb,player);
                         return ;
                         break;
                 }
@@ -580,7 +586,7 @@ void printPokemon(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int 
     SDL_BlitSurface(pokemon,NULL,screen,&dest);
     SDL_UpdateWindowSurface(window);
 }
-int afficherLeCombat(SDL_Window *window,SDL_Surface * screen){
+int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player){
     SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
     /*Afficher la map*/
     printLayer(window,screen,combat_sol,"images/pokemon_style.png",1,16,16);
@@ -593,7 +599,7 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen){
     printPlayerStats(window,screen,"nom sdlon 1",20,30,15,50);
     printPlayerStats(window,screen,"nom sdlon 2",WIDTH-320,450,15,90);
 
-    printControlles(window,screen);
+    printControlles(window,screen,player);
     return 0;
     // int running = 1;
     // while (running) {
