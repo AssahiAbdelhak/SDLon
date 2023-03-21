@@ -33,7 +33,7 @@ int afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int he
     SDL_Rect rect = {(WIDTH - width)/2,(HEIGHT-height)/2,width,height};
     SDL_Surface * copy = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
     SDL_BlitSurface(screen,&rect,copy,&container);
-    int nb=0;
+    int nb=;
     updateMenus(window,screen,tableauMenus,width,height,nb);
     SDL_BlitSurface(tableauMenus,NULL,screen,&rect);
     SDL_UpdateWindowSurface(window);
