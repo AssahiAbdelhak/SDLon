@@ -23,7 +23,23 @@ SDL_Rect hintBox,hintContainer;
 SDL_Surface *pasSdlon;
 int dansLesBuissons=0;
 
+int printMap(SDL_Window *window,SDL_Surface * screen,player_t player);
 //town_init();
+
+void handle_sdlons_inventaire_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player){
+    switch (nb){
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        printMap(window,screen,player);
+    // à implémenter après
+    default:
+        break;
+    }
+    return;
+}
 
 void waiting(Uint32 *start_time){
     *start_time = SDL_GetTicks();
@@ -141,13 +157,24 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
 
                     case SDLK_i:
                         SDL_Log("inventaire ouvert\n");
-                        int retour = afficherTableauMenu(window,screen,500,500);
+                        int retour = afficherTableauMenu(window,screen,500,700);
                         switch (retour){
+                            // sdlon sac informations
                         case 1:
                             SDL_Log("sauverge est faite\n");
                             sspi(player);
                             break;
-                        case 2: ;
+                        case 2:;
+                            int nbRetour = showAllSDlons(window,screen,4,player);
+                            handle_sdlons_inventaire_events(window,screen,nbRetour,player);
+                            break;
+                        case 3:;
+                            char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
+                            char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
+                            SDL_Log("show sac\n");
+                            showSac(window,screen,noms,descs,5,player,printMap);
+                            break;
+                        case 5: ;
                             TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
                             char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
                             return afficherMenu(window,screen,menus,4,font);
@@ -269,7 +296,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
     }
 }
 
-void printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
+int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
     
     printLayer(window,screen,sol,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,chemin,"images/pokemon_style.png",1,16,16);
