@@ -19,7 +19,10 @@ void updateMenus(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int
     SDL_FillRect(surface,NULL,bg);
     botton(surface,"Reprendre",(width-40),80,20,30,(0==n));
     botton(surface,"Sauvegarder",(width-40),80,20,140,(1==n));
-    botton(surface,"Quitter",(width-40),80,20,250,(2==n));
+    botton(surface,"SDLons",(width-40),80,20,250,(2==n));
+    botton(surface,"Sac",(width-40),80,20,360,(3==n));
+    botton(surface,"Information",(width-40),80,20,470,(4==n));
+    botton(surface,"Quitter",(width-40),80,20,580,(5==n));
     SDL_BlitSurface(surface,NULL,screen,&rect);
     SDL_UpdateWindowSurface(window);
 }
@@ -47,10 +50,10 @@ int afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int he
                 switch (e.key.keysym.sym){
                     case SDLK_UP:
                         nb=(nb-1);
-                        nb = (nb<0)?(nb + 3):(nb);
+                        nb = (nb<0)?(nb + 6):(nb);
                         break;
                     case SDLK_DOWN:
-                        nb=(nb+1)%3;
+                        nb=(nb+1)%6;
                         break;
                     case SDLK_RETURN:
                         SDL_Log("copy that\n");
@@ -249,7 +252,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
 }
 
 // max de n  est 4 je crois
-void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
+int showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     
     /*print sdlons*/
     int nb = 0;
@@ -268,21 +271,21 @@ void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player)
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){
                     case SDLK_UP:
-                        nb=(nb-2)%5;
+                        nb=(nb-2)%n;
                         break;
                     case SDLK_DOWN:
-                        nb=(nb+2)%5;
+                        nb=(nb+2)%n;
                         break;
                     case SDLK_LEFT:
-                        nb=(nb-1)%5;
+                        nb=(nb-1)%n;
                         if(nb<0)
-                            nb += 5;
+                            nb += n;
                         break;
                     case SDLK_RIGHT:
-                        nb=(nb+1)%5;
+                        nb=(nb+1)%n;
                         break;
                     case SDLK_RETURN:
-                        return handle_sdlons_events(window,screen,nb,player);
+                        return nb;
                         break;
                 }
                 updateSdlons(window,screen,nb,player);
@@ -378,7 +381,7 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 
 
 /*sac*/
-void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player){
+void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player, int (*f)(SDL_Window *window,SDL_Surface * screen,player_t player)){
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
     SDL_FillRect(screen,NULL,bg);
@@ -420,7 +423,7 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
                 break;
             case SDL_MOUSEBUTTONUP:
                 if(SDL_PointInRect(&mousePosition, &btn_in_screen)){
-                    afficherLeCombat(window,screen,player);
+                    f(window,screen,player);
                     return;
                 }
                 break;
@@ -467,11 +470,12 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
             char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
             char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
             SDL_Log("show sac\n");
-            showSac(window,screen,noms,descs,5,player);
+            showSac(window,screen,noms,descs,5,player,afficherLeCombat);
             return;
             break;
-        case 2:
-            showAllSDlons(window,screen,4,player);
+        case 2:;
+            int nbRetour = showAllSDlons(window,screen,4,player);
+            handle_sdlons_events(window,screen,nbRetour,player);
             break;
         case 3: ;
             player_t temp;

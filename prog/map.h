@@ -11,5 +11,5 @@ void destroy(SDL_Window *pWindow,SDL_Surface *surface);
 extern void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * nom_fichier,int firstgid, int tile_width,int tile_height);
 int localisationValide(int x,int y);
 void printSpirit(SDL_Window *widow,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player);
-void printMap(SDL_Window *window,SDL_Surface * screen,player_t player);
+int printMap(SDL_Window *window,SDL_Surface * screen,player_t player);
 int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font , SDL_Color white,int move);
