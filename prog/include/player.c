@@ -139,6 +139,15 @@ player_t player_init(char * file_name){
     return player;
 }
 
+
+void replace_current_sd(player_t * player){
+    int i = 0;
+
+    for(i=0;i<player->nb_current_sdlon;i++){
+        if(player.sd[i].vie )
+    }
+}
+
 /**
  * Libere la mémoire utiliser par le joueurs
 */
