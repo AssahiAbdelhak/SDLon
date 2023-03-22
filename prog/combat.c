@@ -252,11 +252,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
 }
 
 // max de n  est 4 je crois
-<<<<<<< HEAD
 int showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
-=======
-void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player, sdlon sd){
->>>>>>> 9f26368ead47b239f0b4ce19c810c2153797612d
     
     /*print sdlons*/
     int nb = 0;
@@ -289,11 +285,7 @@ void showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player,
                         nb=(nb+1)%n;
                         break;
                     case SDLK_RETURN:
-<<<<<<< HEAD
                         return nb;
-=======
-                        return handle_sdlons_events(window,screen,nb,player, sd);
->>>>>>> 9f26368ead47b239f0b4ce19c810c2153797612d
                         break;
                 }
                 updateSdlons(window,screen,nb,player);
@@ -389,11 +381,7 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 
 
 /*sac*/
-<<<<<<< HEAD
 void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player, int (*f)(SDL_Window *window,SDL_Surface * screen,player_t player)){
-=======
-void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player, sdlon sd){
->>>>>>> 9f26368ead47b239f0b4ce19c810c2153797612d
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
     SDL_FillRect(screen,NULL,bg);
@@ -419,10 +407,12 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
     SDL_Rect btn = {30,HEIGHT - 50 - 30,(WIDTH/2 - 60),50};
     SDL_Rect btn_in_screen = {30+WIDTH/2,HEIGHT - 50 - 30,(WIDTH/2 - 60),50};
     SDL_Log("x == %d\n",btn.x);
-    botton(items_surface,"Fremer le sac",btn.w, btn.h, btn.x, btn.y, 0);
+    botton(items_surface,"Fermer le sac",btn.w, btn.h, btn.x, btn.y, 0);
     SDL_Rect items_rect = {WIDTH/2,0,items_surface->h,items_surface->w};
     SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
+    SDL_FillRect(items_surface,&rect_arrow,items_bg);
     SDL_UpdateWindowSurface(window);
+    
     int running = 1;
     SDL_Point mousePosition;
     while (running) {
@@ -435,11 +425,7 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
                 break;
             case SDL_MOUSEBUTTONUP:
                 if(SDL_PointInRect(&mousePosition, &btn_in_screen)){
-<<<<<<< HEAD
                     f(window,screen,player);
-=======
-                    afficherLeCombat(window,screen,player,sd);
->>>>>>> 9f26368ead47b239f0b4ce19c810c2153797612d
                     return;
                 }
                 break;
@@ -457,11 +443,7 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
                 }
                 SDL_FillRect(items_surface,&rect_arrow,items_bg);
                 showDescription(window,screen,descs[nb]);
-                rect_arrow.y = 40+(60)*(nb)+15;
-                SDL_BlitSurface(arrow,NULL,items_surface,&rect_arrow);
-                SDL_Rect items_rect = {WIDTH/2,0,items_surface->h,items_surface->w};
-                SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
-                SDL_UpdateWindowSurface(window);
+                
                 break;
             case SDL_MOUSEMOTION:
                 mousePosition.x = e.motion.x; 
@@ -473,6 +455,11 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
                 SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
                 SDL_UpdateWindowSurface(window);
           }
+                rect_arrow.y = 40+(60)*(nb)+15;
+                SDL_BlitSurface(arrow,NULL,items_surface,&rect_arrow);
+                
+                SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
+                SDL_UpdateWindowSurface(window);
         }
     }
 }
@@ -486,20 +473,12 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
             char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
             char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
             SDL_Log("show sac\n");
-<<<<<<< HEAD
             showSac(window,screen,noms,descs,5,player,afficherLeCombat);
             return;
             break;
         case 2:;
             int nbRetour = showAllSDlons(window,screen,4,player);
-            handle_sdlons_events(window,screen,nbRetour,player);
-=======
-            showSac(window,screen,noms,descs,5,player, sd);
-            return;
-            break;
-        case 2:
-            showAllSDlons(window,screen,4,player, sd);
->>>>>>> 9f26368ead47b239f0b4ce19c810c2153797612d
+            handle_sdlons_events(window,screen,nbRetour,player,sd);
             break;
         case 3: ;
             player_t temp;

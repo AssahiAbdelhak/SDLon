@@ -115,6 +115,121 @@ int localisationValide(int x,int y){
     return 1;
 }
 
+void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurrentSdlons, int argent){
+    int width = 800,height = 400;
+    Uint32 bg = 0x2858d8;
+    Uint32 bg_photo = 0x1848c8;
+    Uint32 bg_main = 0x5e96f8;
+    
+    /*copy surface*/
+    SDL_Surface * copy_carte = SDL_CreateRGBSurface(0, width, height, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    SDL_Rect rect_container = {(WIDTH - width)/2,(HEIGHT-height)/2,width,height};
+    SDL_Rect rect = {0,0,width,height};
+    SDL_BlitSurface(screen,&rect_container,copy_carte,&rect);
+
+    SDL_Surface* carte = SDL_CreateRGBSurface(0, width, height, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    SDL_FillRect(carte,NULL,bg);
+    // load Photo de dimension 128*128
+    SDL_Surface * photo = IMG_Load("images/asset/SDLon_character/trainer6.png");
+    SDL_Surface* photo_bg = SDL_CreateRGBSurface(0, 128, 128, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    SDL_FillRect(photo_bg,NULL,bg_photo);
+    SDL_Rect rect_photo = {0,0,128,128};
+    SDL_BlitSurface(photo,NULL,photo_bg,&rect_photo);
+    
+    // blit photo in carte
+    SDL_Rect photo_rect = {width - 128 - 10,30,128,128};
+    SDL_BlitSurface(photo_bg,NULL,carte,&photo_rect);
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color white = {255,255,255};
+    // la surface de NOM constante
+    
+    SDL_Surface *nom_title = TTF_RenderUTF8_Blended(font,"NOM ",white);
+    SDL_Surface* nom_container = SDL_CreateRGBSurface(0, width - 128- 40, nom_title->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    SDL_FillRect(nom_container,NULL,bg_main);
+    SDL_Rect nom1 = {10,0,nom_title->h,nom_title->w};
+    SDL_BlitSurface(nom_title,NULL,nom_container,&nom1);
+    SDL_Surface *nom_player = TTF_RenderUTF8_Blended(font,nom,white);
+    SDL_Rect nom2 = {width-128-40 - nom_player->w,0,nom_player->h,nom_player->w};
+    SDL_BlitSurface(nom_player,NULL,nom_container,&nom2);
+    SDL_Rect rect_nom = {10,60,nom_container->h,nom_container->w};
+    SDL_BlitSurface(nom_container,NULL,carte,&rect_nom);
+
+    // la surface de NOMBRE constante
+    SDL_Surface *nombre_title = TTF_RenderUTF8_Blended(font,"NOMBRE DE SDLONS ",white);
+    SDL_Surface* nombre_container = SDL_CreateRGBSurface(0, width -128 - 40, nombre_title->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    SDL_FillRect(nombre_container,NULL,bg_main);
+    SDL_Rect nombre1 = {10,0,nombre_title->h,nombre_title->w};
+    SDL_BlitSurface(nombre_title,NULL,nombre_container,&nombre1);
+    char * nombre = malloc(sizeof(MAX_LEN_NAME));
+    sprintf(nombre,"%d",nbCurrentSdlons);
+    SDL_Surface *nombre_player = TTF_RenderUTF8_Blended(font,nombre,white);
+    SDL_Rect nombre2 = {width-128-40-nombre_player->w,0,nombre_player->h,nombre_player->w};
+    SDL_BlitSurface(nombre_player,NULL,nombre_container,&nombre2);
+    SDL_Rect rect_nombre = {10,120,nombre_container->h,nombre_container->w};
+    SDL_BlitSurface(nombre_container,NULL,carte,&rect_nombre);
+    // la surface de ARGENT constante
+    SDL_Surface *argent_title = TTF_RenderUTF8_Blended(font,"ARGENT ",white);
+    SDL_Surface* argent_container = SDL_CreateRGBSurface(0, width -128-40, argent_title->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    SDL_FillRect(argent_container,NULL,bg_main);
+    SDL_Rect argent1 = {10,0,argent_title->h,argent_title->w};
+    SDL_BlitSurface(argent_title,NULL,argent_container,&argent1);
+    char * arg = malloc(sizeof(MAX_LEN_NAME));
+    sprintf(arg,"%d $",argent);
+    SDL_Surface *argent_player = TTF_RenderUTF8_Blended(font,arg,white);
+    SDL_Rect argent2 = {argent_container->w -argent_player->w,0,argent_player->h,argent_player->w};
+    SDL_BlitSurface(argent_player,NULL,argent_container,&argent2);
+    SDL_Rect rect_argent = {10,180,argent_container->h,argent_container->w};
+    SDL_BlitSurface(argent_container,NULL,carte,&rect_argent);
+
+    //message
+    
+    SDL_Surface * message = TTF_RenderUTF8_Blended(font,"Je suis DRESSEUR!\nRavi de te connaitre. ",white);
+    SDL_Surface* message_bg = SDL_CreateRGBSurface(0, width - 40, message->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    SDL_FillRect(message_bg,NULL,bg_main);
+    SDL_Rect rect_message = {10,0,message->h,message->w};
+    SDL_BlitSurface(message,NULL,message_bg,&rect_message);
+    SDL_Rect message_rect = {10,240,message_bg->h,message_bg->w};
+    SDL_BlitSurface(message_bg,NULL,carte,&message_rect);
+    //void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected);
+    
+    botton(carte,"RETOUR",message_bg->w,50,10,300,0);
+    
+    SDL_Rect btn_in_screen = {10+rect_container.x,300+rect_container.y,message_bg->w,50};
+    SDL_BlitSurface(carte,NULL,screen,&rect_container);
+    SDL_Log("x = %d\ty = %d\n",btn_in_screen.x,btn_in_screen.y);
+    SDL_UpdateWindowSurface(window);
+    int running = 1;
+    SDL_Point mousePosition;
+    while (running) {
+        SDL_Event e;
+        while (SDL_PollEvent( & e)) {
+          switch (e.type) {
+            case SDL_QUIT:
+                running = 0;
+                return ;
+                break;
+            case SDL_MOUSEBUTTONUP:
+                if(SDL_PointInRect(&mousePosition, &btn_in_screen)){
+                    SDL_BlitSurface(copy_carte,NULL,screen,&rect_container);
+                    SDL_UpdateWindowSurface(window);
+                    return;
+                }
+                break;
+            case SDL_MOUSEMOTION:
+                mousePosition.x = e.motion.x; 
+                mousePosition.y = e.motion.y;
+                if (SDL_PointInRect(&mousePosition, &btn_in_screen)){
+
+                    botton(carte,"RETOUR",message_bg->w,50,10,300,1);
+                }else
+                    botton(carte,"RETOUR",message_bg->w,50,10,300,0);
+                SDL_BlitSurface(carte,NULL,screen,&rect_container);
+                SDL_UpdateWindowSurface(window);
+          }
+        }
+    }
+}
+
 void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
     int movePers=1;
@@ -173,6 +288,10 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
                             SDL_Log("show sac\n");
                             showSac(window,screen,noms,descs,5,player,printMap);
+                            break;
+                        case 4:
+                            
+                            showCarte(window,screen,"Abdelhak",5,5981);
                             break;
                         case 5: ;
                             TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);

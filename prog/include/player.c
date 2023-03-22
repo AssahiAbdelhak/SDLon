@@ -139,7 +139,7 @@ player_t player_init(char * file_name){
     return player;
 }
 
-
+/*
 void replace_current_sd(player_t * player){
     int i = 0;
 
@@ -147,7 +147,7 @@ void replace_current_sd(player_t * player){
         if(player.sd[i].vie )
     }
 }
-
+*/
 /**
  * Libere la mémoire utiliser par le joueurs
 */
