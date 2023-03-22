@@ -42,6 +42,7 @@ player_t player_create(char * name, int genre, char * file_name){
     player.genre = genre;
     player.x = x;
     player.y = y;
+    player.sd_in_use = -1;
 
     //mise à 0 des sdlons
     player.nb_current_sdlon = 0;
@@ -88,6 +89,7 @@ player_t player_init(char * file_name){
     player.genre = genre;
     player.x = x;
     player.y = y;
+    player.sd_in_use = -1;
 
     for(i=0;sdlon_index[i]!=-1;i++){  
         fscanf(file, "%d %d %d", &level, &xp, &vie);
@@ -106,6 +108,12 @@ player_t player_init(char * file_name){
         player.sd[i].attaque_2 = sdlon_s[sdlon_index[i]].attaque_2;
         player.sd[i].attaque_3 = sdlon_s[sdlon_index[i]].attaque_3;
         player.sd[i].attaque_4 = sdlon_s[sdlon_index[i]].attaque_4;
+        if(player.sd_in_use == -1 && player.sd[i].vie > 0){
+            printf("compatbile; %d\n", i);
+            player.sd_in_use = i;
+        }else{
+            printf("non compatible\n");
+        }
         cpt++;
     }
 
