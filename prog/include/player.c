@@ -93,6 +93,8 @@ player_t player_init(char * file_name){
         fscanf(file, "%d %d %d", &level, &xp, &vie);
         strcpy(player.sd[i].nom, malloc(sizeof(char)*MAX_LEN_NAME));
         strcpy(player.sd[i].nom, sdlon_s[sdlon_index[i]].nom);
+        strcpy(player.sd[i].front_face, sdlon_s[sdlon_index[i]].front_face);
+        strcpy(player.sd[i].back_face, sdlon_s[sdlon_index[i]].back_face);
         player.sd[i].level = level;
         player.sd[i].xp = xp;
         player.sd[i].vie = vie;

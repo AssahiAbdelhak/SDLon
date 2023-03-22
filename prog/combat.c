@@ -448,9 +448,9 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
                 mousePosition.x = e.motion.x; 
                 mousePosition.y = e.motion.y;
                 if (SDL_PointInRect(&mousePosition, &btn_in_screen)){
-                    botton(items_surface,"Fremer le sac",btn.w, btn.h, btn.x, btn.y, 1);
+                    botton(items_surface,"Fermer le sac",btn.w, btn.h, btn.x, btn.y, 1);
                 }else
-                    botton(items_surface,"Fremer le sac",btn.w, btn.h, btn.x, btn.y, 0);
+                    botton(items_surface,"Fermer le sac",btn.w, btn.h, btn.x, btn.y, 0);
                 SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
                 SDL_UpdateWindowSurface(window);
           }
@@ -673,19 +673,18 @@ void printPokemon(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int 
     SDL_UpdateWindowSurface(window);
 }
 int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player){
+    sdlon sd = generate_sdlon(0,1,15);
     SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
     /*Afficher la map*/
     printLayer(window,screen,combat_sol,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,combat_ciel,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,combat_arbre,"images/pokemon_style.png",1,16,16);
 
-    printPokemon(window,screen,"images/asset/SDLon_creature/face-animal.png",WIDTH-200,200);
-    printPokemon(window,screen,"images/asset/SDLon_creature/dos-animal.png",0,HEIGHT-200);
+    printPokemon(window,screen,sd.front_face,WIDTH-200,200);
+    printPokemon(window,screen,player.sd[0].back_face,0,HEIGHT-200);
     SDL_Log("vie courante %d\tvie max %d\n",player.sd[0].vie,player.sd[0].vie_max);
     SDL_Log("niveau %d\n",player.sd[0].level);
     printPlayerStats(window,screen,player.sd[0].nom,20,30,player.sd[0].level,(player.sd[0].vie*100)/player.sd[0].vie_max);
-    //sdlon_init();
-    sdlon sd = generate_sdlon(0,1,15);
     printPlayerStats(window,screen,sd.nom,WIDTH-320,450,sd.level,100);
 
     printControlles(window,screen,player);
