@@ -101,6 +101,9 @@ int localisationValide(int x,int y){
 
 void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
+    int movePers=1;
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color white = {255,255,255};
     printf("image good");
     SDL_Rect rect = {x,y,32,32};
     SDL_Rect copy_rect = {0,0,32,32};
@@ -155,6 +158,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                      break;
 
                     case SDLK_UP:
+                        movePers=1;
                         if(localisationValide(x,y-16)){
                             move = 1;
                             dir = UP;
@@ -162,6 +166,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         }
                         break;
                     case SDLK_DOWN:
+                        movePers=1;
                         if(localisationValide(x,y+16)){
                             move = 1;
                             dir = DOWN;
@@ -169,6 +174,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         }
                         break;
                     case SDLK_LEFT:
+                        movePers=1;
                         if(localisationValide(x-16,y)){
                             move = 1;
                             dir = LEFT;
@@ -176,14 +182,16 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         }
                         break;
                     case SDLK_RIGHT:
+                        move=1;
                         if(localisationValide(x+16,y)){
-                            move = 1;
+                            movePers = 1;
                             dir = RIGHT;
                             
                         }
                         break;
                     case SDLK_e:
                         move=0;
+                        movePers=0;
                         if(dansLesBuissons){
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
@@ -201,13 +209,9 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                                 printf("%d\n",seed);
                                 
                                 if(seed<=10){
+                                    movePers=0;
                                     afficherLeCombat(window,screen,player);
-
-                                }else{
-                                    SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
-            SDL_UpdateWindowSurface(window);
-                                    SDL_BlitSurface(pasSdlon,&hintContainer,screen,&hintBox);
-                                    SDL_UpdateWindowSurface(window);
+                                    
                                 }
                             }
                             
@@ -219,7 +223,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                 }
                 
-                dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint);
+                dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint,font,white,movePers);
                 break;
             case SDL_MOUSEMOTION:
                 break;
@@ -275,7 +279,7 @@ void printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
     
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {255,255,255};
-    SDL_Surface *hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour decouvrir le sdlon",white);
+    SDL_Surface *hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour chercher le sdlon",white);
     pasSdlon = TTF_RenderUTF8_Blended(font,"Vous n'avez pas trouvez de sdlon",white);
     
     hintBox.y=HEIGHT - 100 - hint->h;
@@ -307,13 +311,20 @@ void printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
         }
       }
 }}
-int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint){
-    
+int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font,SDL_Color white,int move){
+    printf("la valeur de movepers %d\n",move);
+    if(move)
+        hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour chercher le sdlon",white);
+    else{
+        hint = TTF_RenderUTF8_Blended(font,"Vous n'avez pas trouve de sdlon",white);
+    }
+    SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
     if(buissons[(y/16)*80+(x/16)]){
         SDL_BlitSurface(hint,&hintContainer,screen,&hintBox);
         SDL_UpdateWindowSurface(window);
         return 1;
     }else{        
+        
         SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
         SDL_UpdateWindowSurface(window);
         return 0;
