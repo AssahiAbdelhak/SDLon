@@ -237,7 +237,8 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                                 
                                 if(seed<=10){
                                     movePers=0;
-                                    afficherLeCombat(window,screen,player);
+                                    sdlon sd = generate_sdlon(0, 1, 15);
+                                    afficherLeCombat(window,screen,player,sd);
                                     
                                 }
                             }

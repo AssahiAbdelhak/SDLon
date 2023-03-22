@@ -56,17 +56,21 @@ int sdlon_init() {
   int type, life, at1, at2, at3, at4, evol, level, evol_sys;
 
   char name_sdlon[50];
+  char front_face[200];
+  char back_face[200];
 
 
   file = fopen(name_file, "r");
 
   if(file!=NULL){
     for(i=0;i<NB_SDLON;i++){
-      fscanf(file, "%d %s %d %d %d %d %d %d %d %d\n", &type, name_sdlon, &life, &at1, &at2, &at3, &at4, &evol, &level, &evol_sys);
+      fscanf(file, "%d %s %d %d %d %d %d %d %d %d %s %s\n", &type, name_sdlon, &life, &at1, &at2, &at3, &at4, &evol, &level, &evol_sys, front_face, back_face);
       sdlon_s[i].type = type;
       sdlon_s[i].vie_max = life;
       sdlon_s[i].vie = life;
       strcpy(sdlon_s[i].nom, name_sdlon);
+      strcpy(sdlon_s[i].front_face, front_face);
+      strcpy(sdlon_s[i].back_face, back_face);
       sdlon_s[i].attaque_1 = attaque_s[at1];
       sdlon_s[i].attaque_2 = attaque_s[at2];
       sdlon_s[i].attaque_3 = attaque_s[at3];
@@ -74,6 +78,7 @@ int sdlon_init() {
       sdlon_s[i].evolution = evol;
       sdlon_s[i].level = level;
       sdlon_s[i].evol_sys = evol_sys;
+
     }
   }else{
     SDL_Log("le fichier n'est pas ouvert\n");

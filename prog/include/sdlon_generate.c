@@ -77,6 +77,8 @@ sdlon assign_sd(int i, int min, int max){
     gen_sd.attaque_3 = sdlon_s[i].attaque_3;
     gen_sd.attaque_4 = sdlon_s[i].attaque_4;
     gen_sd.evolution = sdlon_s[i].evolution;
+    strcpy(gen_sd.back_face, sdlon_s[i].back_face);
+    strcpy(gen_sd.front_face, sdlon_s[i].front_face);
     gen_sd.type = sdlon_s[i].type;
     gen_sd.vie_max = gen_life(level, sdlon_s[i].vie_max);
     gen_sd.vie = gen_sd.vie_max;

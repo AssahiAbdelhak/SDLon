@@ -23,6 +23,7 @@ typedef struct player_s{
     int badges;
     sdlon sd[6];
     inventory inventaire;
+    int sd_in_use;
 }player_t;
 
 /*

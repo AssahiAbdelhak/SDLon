@@ -33,6 +33,8 @@ typedef struct struct_sdlon {
   int level;
   int evol_sys; //nombre avec premier chiffre, evolution courrante et 2e chiffre evolution total  
   int xp;
+  char front_face[200];
+  char back_face[200];
 } sdlon;
 
 /**
