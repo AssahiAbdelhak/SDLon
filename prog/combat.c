@@ -175,7 +175,7 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     else
         SDL_FillRect(container,NULL,blue_bg);
     //Please resize it before use it
-    SDL_Surface *img = IMG_Load("img/asset/SDLon_creature/(pinsir)-Pinchee.png");
+    SDL_Surface *img = IMG_Load("images/asset/SDLon_creature/(pinsir)-Pinchee.png");
     if(img==NULL){
         SDL_Log("ERRor");
         return ;
