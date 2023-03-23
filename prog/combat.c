@@ -169,7 +169,7 @@ void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t
     return;
 }
 
-void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected){
+void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected,char * path){
     SDL_Surface *container = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     Uint32 blue_bg = 0x69bdef;
     Uint32 bg_selected = 0xdaed9c;
@@ -178,7 +178,7 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     else
         SDL_FillRect(container,NULL,blue_bg);
     //Please resize it before use it
-    SDL_Surface *img = IMG_Load("images/asset/SDLon_creature/(pinsir)-Pinchee.png");
+    SDL_Surface *img = IMG_Load(path);
     if(img==NULL){
         SDL_Log("ERRor");
         return ;
@@ -240,7 +240,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     for(i=0;i<player.nb_current_sdlon;i++){
         x=(i%2==0)?30:730;
         y=60+(300)*(i/2);
-        printSdlonBar(window,screen,500,200,x,y,player.sd[i].nom,"M",(player.sd[i].vie*100)/player.sd[i].vie_max,player.sd[i].level,(n==i));
+        printSdlonBar(window,screen,500,200,x,y,player.sd[i].nom,"M",(player.sd[i].vie*100)/player.sd[i].vie_max,player.sd[i].level,(n==i),player.sd[i].front_face);
         
     }
     /*printSdlonBar(window,screen,500,200,30,60,"Abdelhak","M",90,10,(n==0));

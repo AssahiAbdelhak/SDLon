@@ -48,6 +48,6 @@ extern int item_init();
 extern int display_all_items();
 extern int item_quit();
 
-extern item_t * items[NB_ITEMS];
+extern item_t items[NB_ITEMS];
 
 #endif

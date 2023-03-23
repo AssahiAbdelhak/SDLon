@@ -286,26 +286,27 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             handle_sdlons_inventaire_events(window,screen,nbRetour,player);
                             break;
                         case 3:;
-                            char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
-                            char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
+                            //char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
+                            //char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
                             
-                            /*char * noms[NB_ITEMS];
+                            char * noms[NB_ITEMS];
                             char * descs[NB_ITEMS];
-                            printf("Début de la lecture des items\n");
+                            SDL_Log("Début de la lecture des items\n");
                             display_all_items();
                             for(i=0;i<NB_ITEMS;i++){
                                 noms[i] = malloc(sizeof(char)*MAX_LEN_NAME);
                                 descs[i] = malloc(sizeof(char)*MAX_LEN_DESCR);
-                                strcpy(noms[i], items[i]->name);
-                                strcpy(descs[i], items[i]->description);
+                                SDL_Log("hello");
+                                strcpy(noms[i], items[i].name);
+                                strcpy(descs[i], items[i].description);
                                 printf("Ok, l'items est lus\n");
-                            }*/
+                            }
                             SDL_Log("show sac\n");
                             showSac(window,screen,noms,descs,5,player,printMap);
                             break;
                         case 4:
                             
-                            showCarte(window,screen,"Abdelhak",5,5981);
+                            showCarte(window,screen,player.name,player.nb_current_sdlon,player.argent);
                             break;
                         case 5: ;
                             TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -356,7 +357,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
                                 SDL_Log("nombre de sdlon insuffisants");
-                                sdlon sd = sdlon_s[10];
+                                sdlon sd = sdlon_s[15];
                                 add_sdlon_in_set(sd,&player);
                             }else{
                                 

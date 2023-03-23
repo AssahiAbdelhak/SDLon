@@ -13,7 +13,7 @@
 1 Rochermite 65 1 1 1 1 0 12 11 images/asset/663.png images/asset/663b.png
 1 Taupinambour 65 1 1 1 1 0 22 11 images/asset/664.png images/asset/664b.png
 1 Terroc 79 1 1 1 1 0 31 11 images/asset/665.png images/asset/665b.png
-2 borasque 44 7 7 6 4 7 1 31 images/asset/666.png images/asset/666b.png
+2 borasque 44 7 7 6 4 7 1 31 images/asset/668s.png images/asset/668sb.png
 2 piédvent 60 6 4 5 4 8 17 32 images/asset/667.png images/asset/667b.png
 2 borsin 79 5 4 6 5 0 39 33 images/asset/668.png images/asset/668b.png
 2 Cielouette 65 1 1 1 1 0 5 11 images/asset/669.png images/asset/669b.png
