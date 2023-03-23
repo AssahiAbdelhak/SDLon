@@ -31,7 +31,7 @@ inventory player_inventory_create(char * file_name){
 player_t player_create(char * name, int genre, char * file_name){
 
     player_t player;
-    int i, init=-1, x=0, y=0;
+    int i, init=-1, x=0, y=0, argent=1500;
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "include/data/players_data/player_name_");
     strcat(path, file_name);
@@ -54,7 +54,7 @@ player_t player_create(char * name, int genre, char * file_name){
     FILE * file;
     file = fopen(path, "w");
     if(file!=NULL){
-        fprintf(file, "%s %d %d %d %d %d %d %d %d %d\n", player.name, genre, x, y, init, init, init, init, init, init);
+        fprintf(file, "%s %d %d %d %d %d %d %d %d %d %d\n", player.name, genre, x, y, argent, init, init, init, init, init, init);
         fclose(file);
     }else{
         printf("fichier non crée\n");
@@ -70,7 +70,7 @@ player_t player_create(char * name, int genre, char * file_name){
 player_t player_init(char * file_name){
 
     player_t player;
-    int level, xp, vie, x, y;
+    int level, xp, vie, x, y, argent;
 
     char * path = malloc(sizeof(char)*MAX_LEN_PATH);
     strcpy(path, "include/data/players_data/");
@@ -82,7 +82,7 @@ player_t player_init(char * file_name){
     FILE * file;
     file = fopen(path, "r");
 
-    fscanf(file, "%s %d %d %d %d %d %d %d %d %d\n", name, &genre, &x, &y, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5]);
+    fscanf(file, "%s %d %d %d %d %d %d %d %d %d %d\n", name, &genre, &x, &y, &argent, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5]);
 
     player.name = malloc(sizeof(char)*MAX_LEN_NAME);
     strcpy(player.name, name);
@@ -90,6 +90,7 @@ player_t player_init(char * file_name){
     player.x = x;
     player.y = y;
     player.sd_in_use = -1;
+    player.argent = argent;
 
     for(i=0;sdlon_index[i]!=-1;i++){  
         fscanf(file, "%d %d %d", &level, &xp, &vie);
@@ -139,15 +140,23 @@ player_t player_init(char * file_name){
     return player;
 }
 
-/*
+/*replace l'indice du sdlon courrant utiliser*/
 void replace_current_sd(player_t * player){
     int i = 0;
 
     for(i=0;i<player->nb_current_sdlon;i++){
-        if(player.sd[i].vie )
+        if(player->sd[i].vie > 0){
+            player->sd_in_use=i;
+            printf("Indice placé");
+            return;
+        }else{
+            printf("Indice non placé");
+        }
     }
+    return;
 }
-*/
+
+
 /**
  * Libere la mémoire utiliser par le joueurs
 */
