@@ -81,60 +81,65 @@ player_t player_init(char * file_name){
 
     FILE * file;
     file = fopen(path, "r");
+    if(file!=NULL){
+        fscanf(file, "%s %d %d %d %d %d %d %d %d %d %d\n", name, &genre, &x, &y, &argent, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5]);
 
-    fscanf(file, "%s %d %d %d %d %d %d %d %d %d %d\n", name, &genre, &x, &y, &argent, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5]);
+        player.name = malloc(sizeof(char)*MAX_LEN_NAME);
+        strcpy(player.name, name);
+        player.genre = genre;
+        player.x = x;
+        player.y = y;
+        player.sd_in_use = -1;
+        player.argent = argent;
 
-    player.name = malloc(sizeof(char)*MAX_LEN_NAME);
-    strcpy(player.name, name);
-    player.genre = genre;
-    player.x = x;
-    player.y = y;
-    player.sd_in_use = -1;
-    player.argent = argent;
-
-    for(i=0;sdlon_index[i]!=-1;i++){  
-        fscanf(file, "%d %d %d", &level, &xp, &vie);
-        strcpy(player.sd[i].nom, malloc(sizeof(char)*MAX_LEN_NAME));
-        strcpy(player.sd[i].nom, sdlon_s[sdlon_index[i]].nom);
-        strcpy(player.sd[i].front_face, sdlon_s[sdlon_index[i]].front_face);
-        strcpy(player.sd[i].back_face, sdlon_s[sdlon_index[i]].back_face);
-        player.sd[i].level = level;
-        player.sd[i].xp = xp;
-        player.sd[i].vie = vie;
-        player.sd[i].type = sdlon_s[sdlon_index[i]].type;
-        player.sd[i].vie_max = sdlon_s[sdlon_index[i]].vie_max;
-        player.sd[i].evolution = sdlon_s[sdlon_index[i]].evolution;
-        player.sd[i].evol_sys = sdlon_s[sdlon_index[i]].evol_sys;
-        player.sd[i].attaque_1 = sdlon_s[sdlon_index[i]].attaque_1;
-        player.sd[i].attaque_2 = sdlon_s[sdlon_index[i]].attaque_2;
-        player.sd[i].attaque_3 = sdlon_s[sdlon_index[i]].attaque_3;
-        player.sd[i].attaque_4 = sdlon_s[sdlon_index[i]].attaque_4;
-        if(player.sd_in_use == -1 && player.sd[i].vie > 0){
-            printf("compatbile; %d\n", i);
-            player.sd_in_use = i;
-        }else{
-            printf("non compatible\n");
+        for(i=0;sdlon_index[i]!=-1;i++){  
+            fscanf(file, "%d %d %d", &level, &xp, &vie);
+            strcpy(player.sd[i].nom, malloc(sizeof(char)*MAX_LEN_NAME));
+            strcpy(player.sd[i].nom, sdlon_s[sdlon_index[i]].nom);
+            strcpy(player.sd[i].front_face, sdlon_s[sdlon_index[i]].front_face);
+            strcpy(player.sd[i].back_face, sdlon_s[sdlon_index[i]].back_face);
+            player.sd[i].level = level;
+            player.sd[i].xp = xp;
+            player.sd[i].vie = vie;
+            player.sd[i].type = sdlon_s[sdlon_index[i]].type;
+            player.sd[i].vie_max = sdlon_s[sdlon_index[i]].vie_max;
+            player.sd[i].evolution = sdlon_s[sdlon_index[i]].evolution;
+            player.sd[i].evol_sys = sdlon_s[sdlon_index[i]].evol_sys;
+            player.sd[i].attaque_1 = sdlon_s[sdlon_index[i]].attaque_1;
+            player.sd[i].attaque_2 = sdlon_s[sdlon_index[i]].attaque_2;
+            player.sd[i].attaque_3 = sdlon_s[sdlon_index[i]].attaque_3;
+            player.sd[i].attaque_4 = sdlon_s[sdlon_index[i]].attaque_4;
+            if(player.sd_in_use == -1 && player.sd[i].vie > 0){
+                printf("compatbile; %d\n", i);
+                player.sd_in_use = i;
+            }else{
+                printf("non compatible\n");
+            }
+            cpt++;
         }
-        cpt++;
-    }
 
-    player.nb_current_sdlon = cpt;
+        player.nb_current_sdlon = cpt;
 
-    //initiate inventaire
-    player.inventaire.path_to_save = malloc(sizeof(char)*MAX_LEN_PATH);
-    strcpy(player.inventaire.path_to_save, path);
-    
-    i=0;
-    while (!feof(file))
-    {
-        fscanf(file, "%d", &invent_qtt);
-        player.inventaire.list_item[i] = invent_qtt;
-        i++;
+        //initiate inventaire
+        player.inventaire.path_to_save = malloc(sizeof(char)*MAX_LEN_PATH);
+        strcpy(player.inventaire.path_to_save, path);
+        
+        i=0;
+        while (!feof(file))
+        {
+            fscanf(file, "%d", &invent_qtt);
+            player.inventaire.list_item[i] = invent_qtt;
+            i++;
+        }
+        
+        player.inventaire.max_item_per_slot = MAX_ITEM_PER_SLOT;
+        
+        fclose(file);
+        printf("Fichier d'initialisation du perso ouvert.\n");
+    }else{
+        printf("Fichier d'initialisation du perso non ouvert.\n");
     }
     
-    player.inventaire.max_item_per_slot = MAX_ITEM_PER_SLOT;
-    
-    fclose(file);
     free(path);
     free(name);
     return player;
@@ -191,26 +196,29 @@ int sspi(player_t player){
     FILE * file;
     int i;
     file = fopen(player.inventaire.path_to_save, "w");
+    if(file!=NULL){
+        fprintf(file, "%s %d %d %d %d", player.name, player.genre,player.x, player.y, player.argent);
 
-    fprintf(file, "%s %d %d %d", player.name, player.genre,player.x, player.y);
+        for(i=0;i<player.nb_current_sdlon;i++){
+            fprintf(file, " %d", get_sdlon_index(player.sd[i].nom));
+        }
+        for(;i<MAIN_MAX;i++){
+            fprintf(file, " -1");
+        }
+        fprintf(file, "\n");
 
-    for(i=0;i<player.nb_current_sdlon;i++){
-        fprintf(file, " %d", get_sdlon_index(player.sd[i].nom));
+        for(i=0;i<player.nb_current_sdlon;i++){
+            fprintf(file, "%d %d %d\n", player.sd[i].level, player.sd[i].xp, player.sd[i].vie);
+        }
+
+        for(i=0;i<NB_ITEMS;i++){
+            fprintf(file, "%d ", player.inventaire.list_item[i]);
+        }
+
+        fclose(file);
+    }else{
+        printf("Fichier non éditer.\n Nom de fichier courant: %s.\n", player.inventaire.path_to_save);
     }
-    for(;i<MAIN_MAX;i++){
-        fprintf(file, " -1");
-    }
-    fprintf(file, "\n");
-
-    for(i=0;i<player.nb_current_sdlon;i++){
-        fprintf(file, "%d %d %d\n", player.sd[i].level, player.sd[i].xp, player.sd[i].vie);
-    }
-
-    for(i=0;i<NB_ITEMS;i++){
-        fprintf(file, "%d ", player.inventaire.list_item[i]);
-    }
-
-    fclose(file);
     return 1;
 }
 
