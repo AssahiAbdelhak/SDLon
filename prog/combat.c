@@ -369,7 +369,7 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
     /*quantite d'item*/
     char * nombre = malloc(sizeof(char )* MAX_LEN_NAME);
     
-    sprintf(nombre,"x %d", player.inventaire.list_item);
+    sprintf(nombre,"x %d", player.inventaire.list_item[index]);
     SDL_Surface *item_quant = TTF_RenderUTF8_Blended(font,nombre,color);
     SDL_Rect rect_qnt = {(item_container->w - item_quant->w - 20),10,item_quant->h,item_quant->w};
     SDL_BlitSurface(item_quant,NULL,item_container,&rect_qnt);

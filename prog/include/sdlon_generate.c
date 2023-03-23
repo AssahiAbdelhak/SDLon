@@ -102,7 +102,6 @@ sdlon generate_sdlon(int environement, int min_level, int max_level){
     int find_sd = FALSE;
     int seed = (rand()%PROB)+1;
     int i = (rand()%NB_SDLON);
-    int level;
     sdlon gen_sd;
 
     /**

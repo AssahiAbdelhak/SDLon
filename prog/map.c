@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "constants.h"
 #include "map.h"
+#include "include/item.h"
 #include "include/sdlon_generate.h"
 #include "include/sdlon_init.h"
 #include "combat.h"
@@ -232,7 +233,8 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
 
 void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
-    int movePers=1;
+    int movePers=1,i=0;
+    item_init();
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {255,255,255};
     printf("image good");
@@ -286,6 +288,18 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         case 3:;
                             char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
                             char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
+                            
+                            /*char * noms[NB_ITEMS];
+                            char * descs[NB_ITEMS];
+                            printf("Début de la lecture des items\n");
+                            display_all_items();
+                            for(i=0;i<NB_ITEMS;i++){
+                                noms[i] = malloc(sizeof(char)*MAX_LEN_NAME);
+                                descs[i] = malloc(sizeof(char)*MAX_LEN_DESCR);
+                                strcpy(noms[i], items[i]->name);
+                                strcpy(descs[i], items[i]->description);
+                                printf("Ok, l'items est lus\n");
+                            }*/
                             SDL_Log("show sac\n");
                             showSac(window,screen,noms,descs,5,player,printMap);
                             break;

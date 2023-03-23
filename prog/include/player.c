@@ -45,6 +45,11 @@ player_t player_create(char * name, int genre, char * file_name){
     player.sd_in_use = -1;
     player.argent = argent;
 
+    //mise à 0 des items
+    for(i=0;i<NB_ITEMS;i++){
+        player.inventaire.list_item[i] = 0;
+    }
+
     //mise à 0 des sdlons
     player.nb_current_sdlon = 0;
     for(i=0;i<MAIN_MAX;i++){
@@ -132,7 +137,7 @@ player_t player_init(char * file_name){
             player.inventaire.list_item[i] = invent_qtt;
             i++;
         }
-        
+        printf("Nb sdlasso : %d\n", player.inventaire.list_item[0]);
         player.inventaire.max_item_per_slot = MAX_ITEM_PER_SLOT;
         
         fclose(file);
@@ -167,7 +172,6 @@ void replace_current_sd(player_t * player){
  * Libere la mémoire utiliser par le joueurs
 */
 int player_quit(player_t * player){
-    int i;
     if(player==NULL){
         return 1;
     }

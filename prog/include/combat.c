@@ -93,7 +93,7 @@ int apply_attaque(sdlon *sd, int degat){
 int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
 
     attaque at;
-    int type_at, mode_at, degat_at, degat_current, status;
+    int type_at, mode_at, degat_at, degat_current;
 
     //récupération de l'attaque voulus
     switch (num_at)
