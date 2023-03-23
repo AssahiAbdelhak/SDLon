@@ -670,6 +670,8 @@ void printPlayerStats(SDL_Window *window,SDL_Surface * screen,char * nom,int x,i
 }
 
 void printPokemon(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y){
+    printf("Nom du fichier: %s\n", nom_fichier);
+    printf("OK\n");
     SDL_Surface *pokemon = IMG_Load(nom_fichier);
     SDL_Rect dest;
     dest.h = pokemon->h;
@@ -688,7 +690,10 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     printLayer(window,screen,combat_arbre,"images/pokemon_style.png",1,16,16);
 
     printPokemon(window,screen,sd.front_face,WIDTH-200,200);
-    printPokemon(window,screen,player.sd[0].back_face,0,HEIGHT-200);
+    printf("In use: %d\n", player.sd_in_use);
+    printf("Path sdlon in use: %s\n", player.sd[player.sd_in_use].back_face);
+    printf("Path sdlon 0: %s\n", player.sd[0].back_face);
+    printPokemon(window,screen,player.sd[player.sd_in_use].back_face,0,HEIGHT-200);//player indice in use bug. jpense ca viens du pointeur du sdlon courrant
     SDL_Log("vie courante %d\tvie max %d\n",player.sd[player.sd_in_use].vie,player.sd[0].vie_max);
     SDL_Log("niveau %d\n",player.sd[0].level);
     printPlayerStats(window,screen,player.sd[0].nom,20,30,player.sd[0].level,(player.sd[0].vie*100)/player.sd[0].vie_max);

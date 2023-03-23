@@ -259,7 +259,8 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
                   strcpy(name, savaGameName);
                   player_t player = player_create(name, genre, name);
                   player.x = 50*16;
-    player.y = 23*16;
+                  player.y = 23*16;
+                  sspi(player);
                   printf("\njoueur créée: %d, %d\n", genre, player.nb_current_sdlon);
                   printMap(pWindow,screen,player);
 

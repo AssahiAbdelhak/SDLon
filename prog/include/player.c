@@ -43,6 +43,7 @@ player_t player_create(char * name, int genre, char * file_name){
     player.x = x;
     player.y = y;
     player.sd_in_use = -1;
+    player.argent = argent;
 
     //mise à 0 des sdlons
     player.nb_current_sdlon = 0;
@@ -299,8 +300,11 @@ int add_sdlon_in_set(sdlon sd, player_t * player){
         player->sd[i].attaque_2 = sd.attaque_2;
         player->sd[i].attaque_3 = sd.attaque_3;
         player->sd[i].attaque_4 = sd.attaque_4;
+        strcpy(player->sd[i].front_face, sd.front_face);
+        strcpy(player->sd[i].back_face, sd.back_face);
     }
     player->nb_current_sdlon++;
+    replace_current_sd(player);
     return 0;
 }
 
