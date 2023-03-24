@@ -1,4 +1,5 @@
 #include "combat.h"
+#include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -140,6 +141,40 @@ int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
             }
         }
         return -1;
+}
+
+/**
+ * Retourne le nombre de sdlons utilisables
+*/
+int get_usable_sdlon(player_t player){
+  int i = 0, cpt=0;
+  for(i=0;i<player.nb_current_sdlon;i++){
+    if(player.sd[i].vie > 0){
+      cpt++;
+    }
+  }
+  return cpt;
+}
+
+/**
+ * renvoie le status d'un combat
+ * 0: gagné
+ * 1: sdlon tué mais d'autre en rab
+ * 2: continue
+ * 3: défaite
+*/
+int status_combat(player_t player, sdlon sd){
+  if(player.sd[player.sd_in_use].vie<=0){
+    if(get_usable_sdlon(player) > 0){
+      return 1;//on en as encore dans notre set!
+    }else{
+      return 3;//on as perdu!
+    }
+  }else if(sd.vie > 0){
+    return 2;//on continue
+  }else{
+    return 0;//on as gagné
+  }
 }
 
 

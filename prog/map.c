@@ -362,7 +362,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
                                 SDL_Log("nombre de sdlon insuffisants");
-                                sdlon sd = generate_sdlon(0,40,50);
+                                sdlon sd = generate_sdlon(0,70,80);
                                 add_sdlon_in_set(sd,&player);
                             }else{
                                 

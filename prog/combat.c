@@ -139,22 +139,32 @@ void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int heig
     return;
 }
 
+/**
+ * fonction qui gère l'attaque choisis
+ * applique les dégat et récupère le status du combat
+*/
 void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player, sdlon sd){
+    int status;
     switch (nb){
     case 0:
+        //on attaque
         sats(&(player.sd[player.sd_in_use]),&sd,1);
-        printf("%d",sd.vie);
-        //afficherLeCombat(window,screen,player,sd);
-        //on affiche l'attaque utilisé
-        //adversaire attaque
-        printf("la vie avant %d",player.sd[player.sd_in_use].vie);
-        int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
-        printf("nb attaque %d\n",nb_attaque);
-        sats(&sd,&(player.sd[player.sd_in_use]),1);
-        printf("la vie apres %d",player.sd[player.sd_in_use].vie);
-        //on affiche l'attaque utilisé par l'adversaire
-        //on rerends le combat
-        afficherLeCombat(window,screen,player,sd);
+
+        //on regarde le status du combat
+        status = status_combat(player, sd);
+
+        //si le combat n'est pas terminé
+        if(status==1 || status ==2){
+            //l'ennemi attaque
+            int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
+            sats(&sd,&(player.sd[player.sd_in_use]),1);//remplacer par le numéro d'attaque quand ia opérationelle
+
+            //puis on reviens au combat
+            afficherLeCombat(window,screen,player,sd);
+        }else{
+            //on affiche un message puis on quitte
+            afficherLeCombat(window,screen,player,sd);//temporairement on reviens au combat
+        }
         break;
     
     default:
@@ -726,15 +736,16 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     SDL_BlitSurface(map_bg,NULL,screen,NULL);
     SDL_UpdateWindowSurface(window);
 
+    //obsolète, on affiche une belle image c'est mieux
     //printLayer(window,screen,combat_sol,"images/pokemon_style.png",1,16,16);
     //printLayer(window,screen,combat_ciel,"images/pokemon_style.png",1,16,16);
     //printLayer(window,screen,combat_arbre,"images/pokemon_style.png",1,16,16);
 
-    printPokemon(window,screen,sd.front_face,WIDTH-200,200);
+    printPokemon(window,screen,sd.front_face,WIDTH-280,250);
     printf("In use: %d\n", player.sd_in_use);
     printf("Path sdlon in use: %s\n", player.sd[player.sd_in_use].back_face);
     printf("Path sdlon 0: %s\n", player.sd[0].back_face);
-    printPokemon(window,screen,player.sd[player.sd_in_use].back_face,0,HEIGHT-200);//player indice in use bug. jpense ca viens du pointeur du sdlon courrant
+    printPokemon(window,screen,player.sd[player.sd_in_use].back_face,50,HEIGHT-150);//player indice in use bug. jpense ca viens du pointeur du sdlon courrant
     SDL_Log("vie courante %d\tvie max %d\n",player.sd[player.sd_in_use].vie,player.sd[0].vie_max);
     SDL_Log("niveau %d\n",player.sd[0].level);
     printPlayerStats(window,screen,player.sd[0].nom,20,30,player.sd[0].level,(player.sd[0].vie*100)/player.sd[0].vie_max);
