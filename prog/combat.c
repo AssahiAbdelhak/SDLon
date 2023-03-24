@@ -12,7 +12,7 @@
 void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd);
 void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,player_t player, sdlon sd);
 void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected);
-int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd);
+int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd,int isFirst,int nb_attaque);
 
 void updateMenus(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n){
     Uint32 bg = 0xae48f1;
@@ -149,28 +149,33 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
     case 0:
         //on attaque
         sats(&(player.sd[player.sd_in_use]),&sd,1);
-        printf("attaque 1\n");
+        SDL_Log("attaque 1\n");
+        SDL_Log("attaque name = %s",player.sd[player.sd_in_use].attaque_1.nom_attaque);
         break;
     case 1:
         //on attaque
         sats(&(player.sd[player.sd_in_use]),&sd,2);
-        printf("attaque 2\n");
+        SDL_Log("attaque 2\n");
+        SDL_Log("attaque name = %s",player.sd[player.sd_in_use].attaque_2.nom_attaque);
         break;
     
     case 2:
         //on attaque
         sats(&(player.sd[player.sd_in_use]),&sd,3);
-        printf("attaque 3\n");
+        SDL_Log("attaque 3\n");
+        SDL_Log("attaque name = %s",player.sd[player.sd_in_use].attaque_3.nom_attaque);
         break;
 
     case 3:
         //on attaque
         sats(&(player.sd[player.sd_in_use]),&sd,4);
-        printf("attaque 4\n");
+        SDL_Log("attaque 4\n");
+        SDL_Log("attaque name = %s",player.sd[player.sd_in_use].attaque_4.nom_attaque);
         break;
     
     default:
-        afficherLeCombat(window,screen,player,sd);
+        SDL_Log("Error");
+        afficherLeCombat(window,screen,player,sd,0,-10);
         break;
     }
     //on regarde le status du combat
@@ -188,38 +193,44 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
         //combat non terminer
         if(status==1 || status==2){
             //on reviens au combat
-            afficherLeCombat(window,screen,player,sd);
+            afficherLeCombat(window,screen,player,sd,0,nb);
         }else{
             //défaite du joueur
             printf("Vous avez perdu");
-            afficherLeCombat(window,screen,player,sd);//temporairement
+            printMap(window,screen,player);//temporairement
         }
 
         
     }else{
         //on affiche un message puis on quitte
         printf("Fin du combat, vous avez gagné");
-        afficherLeCombat(window,screen,player,sd);//temporairement on reviens au combat
+        afficherLeCombat(window,screen,player,sd,0,4);//temporairement on reviens au combat
     }
     return;
 }
 
 void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player, sdlon sd){
-    switch (nb){
+    if(nb==player.nb_current_sdlon){
+        afficherLeCombat(window,screen,player, sd,0,-10);
+    }else{
+        // changer le sdlon
+    }
+    /*switch (nb){
     case 0:
     case 1:
     case 2:
     case 3:
         printf("Là il faut faire qlq chose, mais por l'instant je vais revenir au combat\n");
-        afficherLeCombat(window,screen,player,sd);
+        afficherLeCombat(window,screen,player,sd,0,nb);
         break;
     case 4:
-        afficherLeCombat(window,screen,player, sd);
+        SDL_Log("naffiche rien stp");
+         // genre ne fait rien
     // à implémenter après
     default:
         break;
     }
-    return;
+    return;*/
 }
 
 void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected,char * path){
@@ -377,10 +388,10 @@ void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,
     Uint32 border_color = 0xfbfbf9;
     SDL_FillRect(surface, NULL, border_color);
     SDL_Log("attaque : %s\n",player.sd[0].attaque_1.nom_attaque);
-    attaque_graphique(window,screen,180,80,surface,10,10,player.sd[0].attaque_1.nom_attaque,player.sd[0].attaque_1.type_attaque,(0==selected));
-    attaque_graphique(window,screen,180,80,surface,210,10,player.sd[0].attaque_2.nom_attaque,player.sd[0].attaque_2.type_attaque,(1==selected));
-    attaque_graphique(window,screen,180,80,surface,10,110,player.sd[0].attaque_3.nom_attaque,player.sd[0].attaque_3.type_attaque,(2==selected));
-    attaque_graphique(window,screen,180,80,surface,210,110,player.sd[0].attaque_4.nom_attaque,player.sd[0].attaque_4.type_attaque,(3==selected));
+    attaque_graphique(window,screen,180,80,surface,10,10,player.sd[player.sd_in_use].attaque_1.nom_attaque,player.sd[player.sd_in_use].attaque_1.type_attaque,(0==selected));
+    attaque_graphique(window,screen,180,80,surface,210,10,player.sd[player.sd_in_use].attaque_2.nom_attaque,player.sd[player.sd_in_use].attaque_2.type_attaque,(1==selected));
+    attaque_graphique(window,screen,180,80,surface,10,110,player.sd[player.sd_in_use].attaque_3.nom_attaque,player.sd[player.sd_in_use].attaque_3.type_attaque,(2==selected));
+    attaque_graphique(window,screen,180,80,surface,210,110,player.sd[player.sd_in_use].attaque_4.nom_attaque,player.sd[player.sd_in_use].attaque_4.type_attaque,(3==selected));
     botton(surface,"ANNULER",width-40,40,20,200,(4==selected));
     /*botton d'annuler*/
     
@@ -484,7 +495,7 @@ int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[]
                 break;
             case SDL_MOUSEBUTTONUP:
                 if(SDL_PointInRect(&mousePosition, &btn_in_screen)){
-                    return 2;
+                    return -1;
                 }
                 break;
             case SDL_KEYDOWN:
@@ -548,8 +559,8 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
                             }
                             SDL_Log("show sac\n");
             int returnValue = showSac(window,screen,noms,descs,5,player,sd);
-            if(returnValue==2){
-                afficherLeCombat(window,screen,player,sd);
+            if(returnValue==-1){
+                afficherLeCombat(window,screen,player,sd,0,-10);
             }
             return;
             break;
@@ -595,6 +606,7 @@ void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int wi
                         nb=(nb+1)%5;
                         break;
                     case SDLK_RETURN:
+                        SDL_Log("nb == %d",nb);
                         return handle_events(window,screen,nb,player,sd);
                         break;
                 }
@@ -758,7 +770,8 @@ void printPokemon(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int 
     SDL_BlitSurface(pokemon,NULL,screen,&dest);
     SDL_UpdateWindowSurface(window);
 }
-int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd){
+int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd,int isFirst,int nb_attaque){
+    SDL_Log("isFirst %d\t nb_attaque %d\n",isFirst,nb_attaque);
     //sdlon sd = generate_sdlon(0,1,15);
     SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
     /*Afficher la map*/
@@ -790,19 +803,44 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color black = {0,0,0};
     char *sdlon_name = malloc(MAX_LEN_NAME);
-    sprintf(sdlon_name,"Un SDLon \"%s\" sauvage est apparu",sd.nom);
-    printf("here3\n");
-    SDL_Surface *sdlon_name_bar = TTF_RenderUTF8_Blended(font,sdlon_name,black);
-    SDL_Rect nom_rect = { 10, 10, sdlon_name_bar->h, sdlon_name_bar->w };
-    SDL_Rect rect = { 210, HEIGHT - 100 - 20, bandeau->h, bandeau->w };
-    printf("here4\n");
-    SDL_BlitSurface(sdlon_name_bar, NULL, bandeau, &nom_rect);
-    SDL_BlitSurface(screen,&rect,copy,&rect_copy);
-    SDL_BlitSurface(bandeau, NULL, screen, &rect);
+    if(isFirst)
+        sprintf(sdlon_name,"Un SDLon \"%s\" sauvage est apparu",sd.nom);
+    else{
+        if(nb_attaque==0)
+            sprintf(sdlon_name,"Vous avez utilise l'attaque \"%s\"",player.sd[player.sd_in_use].attaque_1.nom_attaque);
+        if(nb_attaque==1)
+            sprintf(sdlon_name,"Vous avez utilise l'attaque \"%s\"",player.sd[player.sd_in_use].attaque_2.nom_attaque);
+        if(nb_attaque==2)
+            sprintf(sdlon_name,"Vous avez utilise l'attaque \"%s\"",player.sd[player.sd_in_use].attaque_3.nom_attaque);
+        if(nb_attaque==3)
+            sprintf(sdlon_name,"Vous avez utilise l'attaque \"%s\"",player.sd[player.sd_in_use].attaque_4.nom_attaque);
+        if(nb_attaque==4)
+            sprintf(sdlon_name,"Parfait vous avez gagne");
+    }
+    SDL_Rect rect = { 250, HEIGHT - 100 - 20, bandeau->w, bandeau->h };
+    if(nb_attaque!=-10){
+        SDL_Log("message is %s\n",sdlon_name); // -1 ca veut dire n'affiche pas de message;
+        SDL_Surface *sdlon_name_bar = TTF_RenderUTF8_Blended(font,sdlon_name,black);
+        SDL_Rect nom_rect = { 10, 10, sdlon_name_bar->h, sdlon_name_bar->w };
+        SDL_BlitSurface(sdlon_name_bar, NULL, bandeau, &nom_rect);
+        SDL_BlitSurface(screen,&rect,copy,NULL);
+        SDL_BlitSurface(bandeau, NULL, screen, &rect);
     SDL_UpdateWindowSurface(window);
-    SDL_Delay(3000);
-    SDL_BlitSurface(copy, NULL, screen, &rect);
-    SDL_UpdateWindowSurface(window);
+        SDL_Delay(3000);
+        SDL_BlitSurface(copy, NULL, screen, &rect);
+        SDL_UpdateWindowSurface(window);
+    }else{
+        SDL_Log("naffiche rien stp");
+        SDL_Log("name att 1 %s",player.sd[player.sd_in_use].attaque_1.nom_attaque);
+        SDL_Log("name att 2 %s",player.sd[player.sd_in_use].attaque_2.nom_attaque);
+        SDL_Log("name att 3 %s",player.sd[player.sd_in_use].attaque_3.nom_attaque);
+        SDL_Log("name att 4 %s",player.sd[player.sd_in_use].attaque_4.nom_attaque);
+    }
+    
+    
+    
+    
+    
     printControlles(window,screen,player,sd);
     return 0;
     // int running = 1;

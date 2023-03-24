@@ -315,7 +315,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             SDL_Log("show sac\n");
                             sdlon sd;
                             int returnValue = showSac(window,screen,noms,descs,5,player,sd);
-                            if(returnValue==2){
+                            if(returnValue==-1){
                                 printMap(window,screen,player);
                             }
                             break;
