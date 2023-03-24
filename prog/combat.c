@@ -354,7 +354,7 @@ void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
 }
 
 /**
- * Fonction permettant 
+ * Fonction permettant d'afficher les items dans le sac
 */
 void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y, player_t player, int index){
     /*Varibles*/
@@ -390,10 +390,12 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player, int (*f)(SDL_Window *window,SDL_Surface * screen,player_t player)){
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
+    item_init();
     SDL_FillRect(screen,NULL,bg);
     SDL_Surface *items_surface = SDL_CreateRGBSurface(0, WIDTH/2, HEIGHT, 32, 0, 219, 233, 172);
     SDL_FillRect(items_surface,NULL,items_bg);
-    SDL_Surface *sac = IMG_Load("images/sac.png");
+    printf("Path image élément: %s\n", items[0].path);
+    SDL_Surface *sac = IMG_Load(items[0].path);
     if(sac)
         SDL_Log("image nice\n");
     SDL_Rect rect = {100,100,sac->h,sac->w};

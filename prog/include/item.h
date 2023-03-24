@@ -25,6 +25,8 @@
 typedef struct item_s{
     char * name;
     char * description;
+    char * path;
+    int prix;
     int type;
     int usage;
     int opt_degat;

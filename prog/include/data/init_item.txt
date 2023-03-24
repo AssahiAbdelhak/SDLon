@@ -1,10 +1,10 @@
 Sdlasso Un objet particulier qui permet de capturer des sdlons
-0 0 0 0
+0 0 0 0 15 images/sdlasso.png
 Super-sdlasso Un sdlasso renforce et ameliore qui permet de capturer des sdlons avec un meilleur rendement
-0 0 0 0
+0 0 0 0 150 images/super_sdlasso.png
 CABB-sdlasso Un objet base sur le fonctionnement des sdlassos mais perfectionne par des artisants pour fonctionner a tous les coups
-0 0 0 0
+0 0 0 0 15000 images/cabb_sdlasso.png
 Relique Une relique extremement rare n'ayant que peu d'interet
-0 0 0 0
+0 0 0 0 25000 images/relique.png
 Extracteur Un outil pouvant etre utilise par des chercheur permettant l'extraction d'une relique
-0 0 0 0
+0 0 0 0 25000 images/extract.png
