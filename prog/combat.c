@@ -149,7 +149,8 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
         //adversaire attaque
         printf("la vie avant %d",player.sd[player.sd_in_use].vie);
         int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
-        sats(&sd,&(player.sd[player.sd_in_use]),nb_attaque);
+        printf("nb attaque %d\n",nb_attaque);
+        sats(&sd,&(player.sd[player.sd_in_use]),1);
         printf("la vie apres %d",player.sd[player.sd_in_use].vie);
         //on affiche l'attaque utilisé par l'adversaire
         //on rerends le combat
@@ -395,16 +396,8 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 }
 
 
-<<<<<<< HEAD
 /*sac*/
 int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player,sdlon sd){
-=======
-/**
- * Affichage du sac pendant le combat
- * Lit les items dans le tableau générique "items" disponible dans item.h
-*/
-void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player, int (*f)(SDL_Window *window,SDL_Surface * screen,player_t player)){
->>>>>>> e88b7e474d0fe8afbac37e7aea0c868b9042ebf1
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
     item_init();
@@ -468,7 +461,13 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
                 }
                 SDL_FillRect(items_surface,&rect_arrow,items_bg);
                 showDescription(window,screen,descs[nb]);
+                sac = IMG_Load(items[nb].path);
+                SDL_Rect rect = {100,100,sac->h,sac->w};
+                //SDL_Rect rect2 = {0,0,sac->h,sac->w};
+                SDL_FillRect(screen,&rect,bg);
                 
+    SDL_BlitSurface(sac,NULL,screen,&rect);
+    SDL_UpdateWindowSurface(window);
                 break;
             case SDL_MOUSEMOTION:
                 mousePosition.x = e.motion.x; 
