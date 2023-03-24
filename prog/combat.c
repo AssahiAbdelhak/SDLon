@@ -149,27 +149,44 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
     case 0:
         //on attaque
         sats(&(player.sd[player.sd_in_use]),&sd,1);
+        printf("attaque 1\n");
+        break;
+    case 1:
+        //on attaque
+        sats(&(player.sd[player.sd_in_use]),&sd,2);
+        printf("attaque 2\n");
+        break;
+    
+    case 2:
+        //on attaque
+        sats(&(player.sd[player.sd_in_use]),&sd,3);
+        printf("attaque 3\n");
+        break;
 
-        //on regarde le status du combat
-        status = status_combat(player, sd);
-
-        //si le combat n'est pas terminé
-        if(status==1 || status ==2){
-            //l'ennemi attaque
-            int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
-            sats(&sd,&(player.sd[player.sd_in_use]),1);//remplacer par le numéro d'attaque quand ia opérationelle
-
-            //puis on reviens au combat
-            afficherLeCombat(window,screen,player,sd);
-        }else{
-            //on affiche un message puis on quitte
-            afficherLeCombat(window,screen,player,sd);//temporairement on reviens au combat
-        }
+    case 3:
+        //on attaque
+        sats(&(player.sd[player.sd_in_use]),&sd,4);
+        printf("attaque 4\n");
         break;
     
     default:
         afficherLeCombat(window,screen,player,sd);
         break;
+    }
+    //on regarde le status du combat
+    status = status_combat(player, sd);
+
+    //si le combat n'est pas terminé
+    if(status==1 || status ==2){
+        //l'ennemi attaque
+        int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
+        sats(&sd,&(player.sd[player.sd_in_use]),1);//remplacer par le numéro d'attaque quand ia opérationelle
+
+        //puis on reviens au combat
+        afficherLeCombat(window,screen,player,sd);
+    }else{
+        //on affiche un message puis on quitte
+        afficherLeCombat(window,screen,player,sd);//temporairement on reviens au combat
     }
     return;
 }
