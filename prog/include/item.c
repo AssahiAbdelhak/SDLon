@@ -6,10 +6,11 @@
 item_t items[NB_ITEMS];
 
 int item_init(){
-    int i = 0, type, usage, opt_degat, opt_tag;
+    int i = 0, type, usage, opt_degat, opt_tag, prix;
     char *name_file = "include/data/init_item.txt";
     char *name=malloc(sizeof(char)*MAX_LEN_NAME);
     char *descritpion=malloc(sizeof(char)*MAX_LEN_DESCR);
+    char *image_path=malloc(sizeof(char)*MAX_LEN_PATH);
     FILE *file = NULL;
 
     file = fopen(name_file, "r");
@@ -18,9 +19,12 @@ int item_init(){
         for(i=0;i<NB_ITEMS;i++){
             items[i].name = malloc(sizeof(char)*MAX_LEN_NAME);
             items[i].description = malloc(sizeof(char)*MAX_LEN_DESCR);
-            fscanf(file, "%s %[^\n]%d %d %d %d\n", name, descritpion, &type, &usage, &opt_degat, &opt_tag);
+            items[i].path = malloc(sizeof(char)*MAX_LEN_PATH);
+            fscanf(file, "%s %[^\n]%d %d %d %d %d %s\n", name, descritpion, &type, &usage, &opt_degat, &opt_tag, &prix, image_path);
+            strcpy(items[i].path, image_path);
             strcpy(items[i].name, name);
             strcpy(items[i].description, descritpion);
+            items[i].prix = prix;
             items[i].type = type;
             items[i].usage = usage;
             items[i].opt_degat = opt_degat;

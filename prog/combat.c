@@ -365,6 +365,9 @@ void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
     SDL_BlitSurface(desc_container,NULL,screen,&rect_container);
 }
 
+/**
+ * Fonction permettant d'afficher les items dans le sac
+*/
 void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y, player_t player, int index){
     /*Varibles*/
     Uint32 bg = 0xFFFFFF;
@@ -392,14 +395,24 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 }
 
 
+<<<<<<< HEAD
 /*sac*/
 int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player,sdlon sd){
+=======
+/**
+ * Affichage du sac pendant le combat
+ * Lit les items dans le tableau générique "items" disponible dans item.h
+*/
+void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player, int (*f)(SDL_Window *window,SDL_Surface * screen,player_t player)){
+>>>>>>> e88b7e474d0fe8afbac37e7aea0c868b9042ebf1
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
+    item_init();
     SDL_FillRect(screen,NULL,bg);
     SDL_Surface *items_surface = SDL_CreateRGBSurface(0, WIDTH/2, HEIGHT, 32, 0, 219, 233, 172);
     SDL_FillRect(items_surface,NULL,items_bg);
-    SDL_Surface *sac = IMG_Load("images/sac.png");
+    printf("Path image élément: %s\n", items[0].path);
+    SDL_Surface *sac = IMG_Load(items[0].path);
     if(sac)
         SDL_Log("image nice\n");
     SDL_Rect rect = {100,100,sac->h,sac->w};
@@ -419,6 +432,7 @@ int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[]
     SDL_Rect btn = {30,HEIGHT - 50 - 30,(WIDTH/2 - 60),50};
     SDL_Rect btn_in_screen = {30+WIDTH/2,HEIGHT - 50 - 30,(WIDTH/2 - 60),50};
     SDL_Log("x == %d\n",btn.x);
+    //bouton de fermeture du sac
     botton(items_surface,"Fermer le sac",btn.w, btn.h, btn.x, btn.y, 0);
     SDL_Rect items_rect = {WIDTH/2,0,items_surface->h,items_surface->w};
     SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
