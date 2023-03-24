@@ -302,7 +302,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                                 printf("Ok, l'items est lus\n");
                             }
                             SDL_Log("show sac\n");
-                            showSac(window,screen,noms,descs,5,player,printMap);
+                            sdlon sd;
+                            int returnValue = showSac(window,screen,noms,descs,5,player,sd);
+                            if(returnValue==2){
+                                printMap(window,screen,player);
+                            }
                             break;
                         case 4:
                             
@@ -311,7 +315,8 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         case 5: ;
                             TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
                             char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
-                            return afficherMenu(window,screen,menus,4,font);
+                            afficherMenu(window,screen,menus,4,font);
+                            return ;
                             break;
                         default:
                             break;
@@ -357,7 +362,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
                                 SDL_Log("nombre de sdlon insuffisants");
-                                sdlon sd = sdlon_s[15];
+                                sdlon sd = generate_sdlon(0,40,50);
                                 add_sdlon_in_set(sd,&player);
                             }else{
                                 

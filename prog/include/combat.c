@@ -130,7 +130,9 @@ int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
                 return 2;
             }
         }else{
+          degat_current =0;
             degat_current = conf_dgt(degat_at, type_at, sd_target->type);
+            printf("degats apportes %d",degat_current);
             if(apply_attaque(sd_target, degat_current)){
                 return 1;
             }else{

@@ -4,6 +4,7 @@
 #include "constants.h"
 #include "map.h"
 #include "include/sdlon_generate.h"
+#include "include/combat.h"
 
 #define HEIGHT 840
 #define WIDTH 1280
@@ -141,9 +142,20 @@ void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int heig
 void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player, sdlon sd){
     switch (nb){
     case 0:
+        sats(&(player.sd[player.sd_in_use]),&sd,1);
+        printf("%d",sd.vie);
+        //afficherLeCombat(window,screen,player,sd);
+        //on affiche l'attaque utilisé
+        //adversaire attaque
+        printf("la vie avant %d",player.sd[player.sd_in_use].vie);
+        int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
+        sats(&sd,&(player.sd[player.sd_in_use]),nb_attaque);
+        printf("la vie apres %d",player.sd[player.sd_in_use].vie);
+        //on affiche l'attaque utilisé par l'adversaire
+        //on rerends le combat
         afficherLeCombat(window,screen,player,sd);
         break;
-    // à implémenter après
+    
     default:
         afficherLeCombat(window,screen,player,sd);
         break;
@@ -192,7 +204,7 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {255,255,255};
     SDL_Surface *titre = TTF_RenderUTF8_Blended(font,nom,white);
-    SDL_Rect nom_rect = {80,10,titre->h,titre->w};
+    SDL_Rect nom_rect = {170,10,titre->h,titre->w};
     SDL_BlitSurface(titre,NULL,container,&nom_rect);
     /*fin de pokemon*/
     /*genre*/
@@ -202,10 +214,10 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     /*fin genre*/
     /*hp*/
     SDL_Surface *niv_vie = TTF_RenderUTF8_Blended(font,"HP",white);
-    SDL_Rect hp = { 80, 80, niv_vie->h, niv_vie->w };
+    SDL_Rect hp = { 170, 80, niv_vie->h, niv_vie->w };
     SDL_BlitSurface(niv_vie, NULL, container, &hp);
-    SDL_Rect bar_vie = {120,85,200,20};
-    SDL_Rect bar_vie_sdlon = {120,85,(vie*200)/100,20};
+    SDL_Rect bar_vie = {200,85,200,20};
+    SDL_Rect bar_vie_sdlon = {200,85,(vie*200)/100,20};
     SDL_FillRect(container,&bar_vie,SDL_MapRGB(container->format,214,248,228));  // 106,238,158
     SDL_FillRect(container,&bar_vie_sdlon,SDL_MapRGB(container->format,106,238,158));
     /*fin hp*/
@@ -381,7 +393,7 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 
 
 /*sac*/
-void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player, int (*f)(SDL_Window *window,SDL_Surface * screen,player_t player)){
+int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player,sdlon sd){
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
     SDL_FillRect(screen,NULL,bg);
@@ -425,8 +437,7 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
                 break;
             case SDL_MOUSEBUTTONUP:
                 if(SDL_PointInRect(&mousePosition, &btn_in_screen)){
-                    f(window,screen,player);
-                    return;
+                    return 2;
                 }
                 break;
             case SDL_KEYDOWN:
@@ -470,10 +481,23 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
             onAttack(window,screen,surface,width,height,player, sd);
             break;
         case 1: ;
-            char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
-            char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
-            SDL_Log("show sac\n");
-            showSac(window,screen,noms,descs,5,player,afficherLeCombat);
+            char * noms[NB_ITEMS];
+                            char * descs[NB_ITEMS];
+                            SDL_Log("Début de la lecture des items\n");
+                            display_all_items();
+                            for(int i=0;i<NB_ITEMS;i++){
+                                noms[i] = malloc(sizeof(char)*MAX_LEN_NAME);
+                                descs[i] = malloc(sizeof(char)*MAX_LEN_DESCR);
+                                SDL_Log("hello");
+                                strcpy(noms[i], items[i].name);
+                                strcpy(descs[i], items[i].description);
+                                printf("Ok, l'items est lus\n");
+                            }
+                            SDL_Log("show sac\n");
+            int returnValue = showSac(window,screen,noms,descs,5,player,sd);
+            if(returnValue==2){
+                afficherLeCombat(window,screen,player,sd);
+            }
             return;
             break;
         case 2:;
@@ -697,8 +721,30 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     SDL_Log("vie courante %d\tvie max %d\n",player.sd[player.sd_in_use].vie,player.sd[0].vie_max);
     SDL_Log("niveau %d\n",player.sd[0].level);
     printPlayerStats(window,screen,player.sd[0].nom,20,30,player.sd[0].level,(player.sd[0].vie*100)/player.sd[0].vie_max);
-    printPlayerStats(window,screen,sd.nom,WIDTH-320,450,sd.level,100);
-
+    printPlayerStats(window,screen,sd.nom,WIDTH-320,450,sd.level,(sd.vie*100)/sd.vie_max);
+    printf("here1\n");
+    SDL_Surface * copy = SDL_CreateRGBSurface(0, 500, 100, 32, 0, 0, 0, 0);
+    SDL_Rect rect_copy = {0,0,100,500};
+    SDL_Surface * bandeau = SDL_CreateRGBSurface(0, 500, 100, 32, 0, 0, 0, 0);
+    Uint32 color = 0xf8f8d8;
+    SDL_FillRect(bandeau,NULL,color);
+    printf("here2\n");
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color black = {0,0,0};
+    char *sdlon_name = malloc(MAX_LEN_NAME);
+    sprintf(sdlon_name,"Un SDLon \"%s\" sauvage est apparu",sd.nom);
+    printf("here3\n");
+    SDL_Surface *sdlon_name_bar = TTF_RenderUTF8_Blended(font,sdlon_name,black);
+    SDL_Rect nom_rect = { 10, 10, sdlon_name_bar->h, sdlon_name_bar->w };
+    SDL_Rect rect = { 210, HEIGHT - 100 - 20, bandeau->h, bandeau->w };
+    printf("here4\n");
+    SDL_BlitSurface(sdlon_name_bar, NULL, bandeau, &nom_rect);
+    SDL_BlitSurface(screen,&rect,copy,&rect_copy);
+    SDL_BlitSurface(bandeau, NULL, screen, &rect);
+    SDL_UpdateWindowSurface(window);
+    SDL_Delay(3000);
+    SDL_BlitSurface(copy, NULL, screen, &rect);
+    SDL_UpdateWindowSurface(window);
     printControlles(window,screen,player,sd);
     return 0;
     // int running = 1;
