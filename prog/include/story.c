@@ -14,7 +14,7 @@ town_t all_town[NB_TOWN];
  * Fonction qui initialise les villes
 */
 void town_init(){
-    char * path = "data/init_town.txt";
+    char * path = "include/data/init_town.txt";
     char * name = malloc(sizeof(char)*MAX_LEN_NAME);
     char * source_grid = malloc(sizeof(char)*MAX_LEN_NAME);
     int i=0, j=0, k=0, nb_town, badge_required, type_map, environnement, nb_layer, nb_tiles, tile_width, tile_height, first_grid, value;

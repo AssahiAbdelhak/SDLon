@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "constants.h"
 #include "map.h"
+#include "include/story.h"
 #include "include/item.h"
 #include "include/sdlon_generate.h"
 #include "include/sdlon_init.h"
@@ -372,7 +373,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
                                 SDL_Log("nombre de sdlon insuffisants");
-                                sdlon sd = generate_sdlon(0,7000,8000);
+                                sdlon sd = generate_sdlon(0,70,100);
                                 add_sdlon_in_set(sd,&player);
                             }else{
                                 if(can_fight(player)){
@@ -450,7 +451,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
 }
 
 int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
-    
+    /*town_init();
+    int i=0;
+    for(i=0;i<all_town[0].nb_layer;i++){
+        printLayer(window,screen,all_town[0].layer[i],all_town[0].source_grid,all_town[0].first_grid,all_town[0].tile_width,all_town[0].tile_height);
+    }*/
     printLayer(window,screen,sol,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,chemin,"images/pokemon_style.png",1,16,16);
     printLayer(window,screen,arbre,"images/pokemon_style.png",1,16,16);
