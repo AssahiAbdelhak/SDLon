@@ -182,10 +182,23 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
         int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
         sats(&sd,&(player.sd[player.sd_in_use]),1);//remplacer par le numéro d'attaque quand ia opérationelle
 
-        //puis on reviens au combat
-        afficherLeCombat(window,screen,player,sd);
+        //on regarde le status du combat
+        status = status_combat(player, sd);
+
+        //combat non terminer
+        if(status==1 || status==2){
+            //on reviens au combat
+            afficherLeCombat(window,screen,player,sd);
+        }else{
+            //défaite du joueur
+            printf("Vous avez perdu");
+            afficherLeCombat(window,screen,player,sd);//temporairement
+        }
+
+        
     }else{
         //on affiche un message puis on quitte
+        printf("Fin du combat, vous avez gagné");
         afficherLeCombat(window,screen,player,sd);//temporairement on reviens au combat
     }
     return;

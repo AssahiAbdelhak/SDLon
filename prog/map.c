@@ -117,7 +117,10 @@ int localisationValide(int x,int y){
     return 1;
 }
 
-void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurrentSdlons, int argent){
+/**
+ * Fonctiion qui permet d'afficher la carte d'identité du dresseur
+*/
+void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurrentSdlons, int argent,int genre){
     int width = 800,height = 400;
     Uint32 bg = 0x2858d8;
     Uint32 bg_photo = 0x1848c8;
@@ -132,7 +135,13 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
     SDL_Surface* carte = SDL_CreateRGBSurface(0, width, height, screen->format->BitsPerPixel, 0, 0, 0, 0);
     SDL_FillRect(carte,NULL,bg);
     // load Photo de dimension 128*128
-    SDL_Surface * photo = IMG_Load("images/asset/SDLon_character/trainer6.png");
+    SDL_Surface * photo;
+    if(genre==HOMME){
+        photo = IMG_Load("images/asset/SDLon_character/trainer6.png");
+    }else{
+        photo = IMG_Load("images/asset/SDLon_character/trainer2.png");
+    }
+    
     SDL_Surface* photo_bg = SDL_CreateRGBSurface(0, 128, 128, screen->format->BitsPerPixel, 0, 0, 0, 0);
     SDL_FillRect(photo_bg,NULL,bg_photo);
     SDL_Rect rect_photo = {0,0,128,128};
@@ -311,7 +320,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             break;
                         case 4:
                             
-                            showCarte(window,screen,player.name,player.nb_current_sdlon,player.argent);
+                            showCarte(window,screen,player.name,player.nb_current_sdlon,player.argent,player.genre);
                             break;
                         case 5: ;
                             TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -363,7 +372,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
                                 SDL_Log("nombre de sdlon insuffisants");
-                                sdlon sd = generate_sdlon(0,70,80);
+                                sdlon sd = generate_sdlon(0,7000,8000);
                                 add_sdlon_in_set(sd,&player);
                             }else{
                                 if(can_fight(player)){
