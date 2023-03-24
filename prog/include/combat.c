@@ -177,6 +177,18 @@ int status_combat(player_t player, sdlon sd){
   }
 }
 
+/**
+ * Fonction qui renvoie:
+ * 1 si l'on peu se battre
+ * 0 sinon
+*/
+int can_fight(player_t player){
+  if(get_usable_sdlon(player)){
+    return 1;
+  }
+    return 0;
+}
+
 
 int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utiliser
 

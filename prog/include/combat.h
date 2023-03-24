@@ -5,3 +5,4 @@
 int sats(sdlon * sd_at, sdlon * sd_target, int num_at);
 int ia(sdlon *sd_at, sdlon *sd_target);
 int status_combat(player_t player, sdlon sd);
+int can_fight(player_t player);

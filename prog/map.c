@@ -8,6 +8,7 @@
 #include "include/item.h"
 #include "include/sdlon_generate.h"
 #include "include/sdlon_init.h"
+#include "include/combat.h"
 #include "combat.h"
 #include <time.h>
 #define TILE_SIZE 32
@@ -365,21 +366,25 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                                 sdlon sd = generate_sdlon(0,70,80);
                                 add_sdlon_in_set(sd,&player);
                             }else{
-                                
-                                SDL_Log("E cliqué\n");
-                                //return afficherLeCombat(window,screen);
-                                //sdlon sdl1 = generate_sdlon(0,5,20);
-                                //SDL_Log("nom == %s\n",sdl1.nom);
-                                //decouvrirLeSdlon();
-                                int seed = rand()%100;
-                                printf("%d\n",seed);
-                                
-                                if(seed<=10){
-                                    movePers=0;
-                                    sdlon sd = generate_sdlon(0, 1, 15);
-                                    afficherLeCombat(window,screen,player,sd);
+                                if(can_fight(player)){
+                                    SDL_Log("E cliqué\n");
+                                    //return afficherLeCombat(window,screen);
+                                    //sdlon sdl1 = generate_sdlon(0,5,20);
+                                    //SDL_Log("nom == %s\n",sdl1.nom);
+                                    //decouvrirLeSdlon();
+                                    int seed = rand()%100;
+                                    printf("%d\n",seed);
                                     
+                                    if(seed<=10){
+                                        movePers=0;
+                                        sdlon sd = generate_sdlon(0, 1, 15);
+                                        afficherLeCombat(window,screen,player,sd);
+                                        
+                                    }
+                                }else{
+                                    printf("Impossible de se battre");
                                 }
+                                
                             }
                             
                         }
