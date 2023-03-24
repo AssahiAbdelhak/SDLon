@@ -353,6 +353,9 @@ void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
     SDL_BlitSurface(desc_container,NULL,screen,&rect_container);
 }
 
+/**
+ * Fonction permettant 
+*/
 void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y, player_t player, int index){
     /*Varibles*/
     Uint32 bg = 0xFFFFFF;
@@ -380,7 +383,10 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 }
 
 
-/*sac*/
+/**
+ * Affichage du sac pendant le combat
+ * Lit les items dans le tableau générique "items" disponible dans item.h
+*/
 void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player, int (*f)(SDL_Window *window,SDL_Surface * screen,player_t player)){
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
@@ -407,6 +413,7 @@ void showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[
     SDL_Rect btn = {30,HEIGHT - 50 - 30,(WIDTH/2 - 60),50};
     SDL_Rect btn_in_screen = {30+WIDTH/2,HEIGHT - 50 - 30,(WIDTH/2 - 60),50};
     SDL_Log("x == %d\n",btn.x);
+    //bouton de fermeture du sac
     botton(items_surface,"Fermer le sac",btn.w, btn.h, btn.x, btn.y, 0);
     SDL_Rect items_rect = {WIDTH/2,0,items_surface->h,items_surface->w};
     SDL_BlitSurface(items_surface,NULL,screen,&items_rect);
