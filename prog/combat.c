@@ -722,9 +722,13 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     //sdlon sd = generate_sdlon(0,1,15);
     SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
     /*Afficher la map*/
-    printLayer(window,screen,combat_sol,"images/pokemon_style.png",1,16,16);
-    printLayer(window,screen,combat_ciel,"images/pokemon_style.png",1,16,16);
-    printLayer(window,screen,combat_arbre,"images/pokemon_style.png",1,16,16);
+    SDL_Surface *map_bg = IMG_Load("images/asset/scene_de_combat/3.png");
+    SDL_BlitSurface(map_bg,NULL,screen,NULL);
+    SDL_UpdateWindowSurface(window);
+
+    //printLayer(window,screen,combat_sol,"images/pokemon_style.png",1,16,16);
+    //printLayer(window,screen,combat_ciel,"images/pokemon_style.png",1,16,16);
+    //printLayer(window,screen,combat_arbre,"images/pokemon_style.png",1,16,16);
 
     printPokemon(window,screen,sd.front_face,WIDTH-200,200);
     printf("In use: %d\n", player.sd_in_use);
