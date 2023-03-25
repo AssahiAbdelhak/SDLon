@@ -197,7 +197,7 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
         }else{
             //défaite du joueur
             printf("Vous avez perdu");
-            printMap(window,screen,player);//temporairement
+            afficherLeCombat(window,screen,player,sd,0,5);//temporairement
         }
 
         
@@ -304,6 +304,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     for(i=0;i<player.nb_current_sdlon;i++){
         x=(i%2==0)?30:730;
         y=60+(300)*(i/2);
+        SDL_Log("vie %d",(player.sd[i].vie*100)/player.sd[i].vie_max);
         printSdlonBar(window,screen,500,200,x,y,player.sd[i].nom,"M",(player.sd[i].vie*100)/player.sd[i].vie_max,player.sd[i].level,(n==i),player.sd[i].front_face);
         
     }
@@ -815,7 +816,9 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
         if(nb_attaque==3)
             sprintf(sdlon_name,"Vous avez utilise l'attaque \"%s\"",player.sd[player.sd_in_use].attaque_4.nom_attaque);
         if(nb_attaque==4)
-            sprintf(sdlon_name,"Parfait vous avez gagne");
+            sprintf(sdlon_name,"Parfait vous avez vaincu \"%s\"",sd.nom);
+        if(nb_attaque==5)
+            sprintf(sdlon_name,"Dommage \"%s\" vous a vaincu",sd.nom);
     }
     SDL_Rect rect = { 250, HEIGHT - 100 - 20, bandeau->w, bandeau->h };
     if(nb_attaque!=-10){
@@ -836,10 +839,9 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
         SDL_Log("name att 3 %s",player.sd[player.sd_in_use].attaque_3.nom_attaque);
         SDL_Log("name att 4 %s",player.sd[player.sd_in_use].attaque_4.nom_attaque);
     }
-    
-    
-    
-    
+    if(nb_attaque==4||nb_attaque==5){
+        printMap(window,screen,player);
+    }
     
     printControlles(window,screen,player,sd);
     return 0;
