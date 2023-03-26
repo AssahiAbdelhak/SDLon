@@ -5,7 +5,7 @@ SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
-INC= include/player.c include/sdlon_init.c include/item.c include/sdlon_generate.c include/story.c include/combat.c
+INC= include/player.c include/sdlon_init.c include/item.c include/sdlon_generate.c include/story.c include/combat.c market.c
 PROG=prog
 all: sdl_text 
 sdl_text: sdlon.c

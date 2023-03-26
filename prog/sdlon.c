@@ -23,98 +23,25 @@ gcc sdl_test.c -IC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\include
 
 void destroy_all(SDL_Window *pWindow,TTF_Font *font);
 
-void showPlayerInMap(SDL_Window *pWindow,SDL_Surface *screen){
-  SDL_Surface * map = IMG_Load("images/map_villeA.png");
-  SDL_Surface * personnage = IMG_Load("images/personnage.png");
-  SDL_Rect rect,persRect = {500,500,98,76};
-  rect.x = -200;
-  rect.y = -200;
-  rect.h = 10000;
-  rect.w = 2395;
-  int x=-200;
-  int y=-200;
-  SDL_BlitSurface(map,NULL,screen,&rect);
-  SDL_BlitSurface(personnage,NULL,screen,&persRect);
-  SDL_UpdateWindowSurface(pWindow);
-
-  SDL_Event e;
-  while(1){
-    while(SDL_PollEvent(&e)) { 
-      switch(e.type){
-        case SDL_QUIT:
-          destroy_all(pWindow,NULL);
-        break;
-        case SDL_KEYDOWN:
-          switch(e.key.keysym.sym){
-            case SDLK_DOWN:
-              SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
-              printf("%d\n",y);
-                y -= 10;
-              rect.x=x;
-              rect.y=y;
-              SDL_BlitSurface(map,NULL,screen,&rect);
-              SDL_BlitSurface(personnage,NULL,screen,&persRect);
-              SDL_UpdateWindowSurface(pWindow);
-              
-            break;
-            case SDLK_UP:
-              SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
-                y += 10;
-              rect.x=x;
-              rect.y=y;
-              SDL_BlitSurface(map,NULL,screen,&rect);
-              SDL_BlitSurface(personnage,NULL,screen,&persRect);
-              SDL_UpdateWindowSurface(pWindow);
-            break;
-            
-            case SDLK_LEFT:
-              SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
-                x -= 10;
-              rect.x=x;
-              rect.y=y;
-              SDL_BlitSurface(map,NULL,screen,&rect);
-              SDL_BlitSurface(personnage,NULL,screen,&persRect);
-              SDL_UpdateWindowSurface(pWindow);
-            break;
-            case SDLK_RIGHT:
-              SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
-                x += 10;
-              rect.x=x;
-              rect.y=y;
-              SDL_BlitSurface(map,NULL,screen,&rect);
-              SDL_BlitSurface(personnage,NULL,screen,&persRect);
-              SDL_UpdateWindowSurface(pWindow);
-            break;
-          }
-          break;
-      }
-      }
-    }
-
-}
-
 void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,TTF_Font *font);
 
-void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *font,SDL_Surface 
-*secreen,char strings[][100],int N,SDL_Rect *rect){
+void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *font,char strings[][100],int N,SDL_Rect *rect){
   sdlon_init();
   SDL_Rect rects[N];
   SDL_Color white = {255,255,255};
   int y = (HEIGHT - (50*2) - (50*N))/N;
   for(int i=0;i<N;i++){
-    
     rects[i].y = y;
     SDL_Surface *texte = TTF_RenderUTF8_Blended(font,strings[i],white);
     rects[i].x = (WIDTH - 200 )/2;
     rects[i].h = 50;
     rects[i].w = 200;
-    SDL_FillRect(secreen,&rects[i],SDL_MapRGB(secreen->format,180,180,180));
+    SDL_FillRect(screen,&rects[i],SDL_MapRGB(screen->format,180,180,180));
     rects[i].x = (WIDTH - texte->w )/2;
     rects[i].y += (texte->h)/2;
-    SDL_BlitSurface(texte,NULL,secreen,&rects[i]);
+    SDL_BlitSurface(texte,NULL,screen,&rects[i]);
     SDL_FreeSurface(texte);
     y+=55;
-    printf("%s\n",strings[i]);
   }
   SDL_UpdateWindowSurface(pWindow);
     SDL_Event e;
@@ -126,19 +53,18 @@ void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *f
         destroy_all(pWindow,font);
         break;
         case SDL_MOUSEBUTTONUP:
-          printf("click_n");
           mousePosition.x = e.motion.x; 
           mousePosition.y = e.motion.y;
             if (SDL_PointInRect(&mousePosition, rect)) {
-              SDL_FillRect(secreen,NULL,SDL_MapRGB(secreen->format,0,0,0));
+              SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
               SDL_UpdateWindowSurface(pWindow);
               char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
-              return afficherMenu(pWindow,secreen,menus,4,font);
+              return afficherMenu(pWindow,screen,menus,4,font);
             } 
             for (int i = 0; i < N; i++){
               if (SDL_PointInRect(&mousePosition, &rects[i])) {
-                SDL_Log("sauvegarde : %s selectionné\n",strings[i]);
                 player_t player = player_init(strings[i]);
+                TTF_CloseFont(font);
                 printMap(pWindow,screen,player);
               } 
             }
@@ -187,7 +113,6 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
       SDL_FreeSurface(welcomeMsg);
       SDL_FreeSurface(btn);
       SDL_FreeSurface(retour);
-      SDL_UpdateWindowSurface(pWindow);
       rect.y = 100;
       rect.x = (WIDTH - instrctionMsg->w)/2;
      SDL_BlitSurface(instrctionMsg,NULL,screen,&rect);
@@ -206,22 +131,14 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
         if(e.type ==SDL_KEYDOWN&&e.key.keysym.sym==SDLK_BACKSPACE&&index>0){
           index--;
           name = TTF_RenderUTF8_Blended(font,savaGameName, white);
-          if(SDL_FillRect(name,NULL,SDL_MapRGB(name->format,0,0,0))==0)
-            printf("ok\n");
-          else
-            printf("ko,%s\n",SDL_GetError());
           SDL_BlitSurface(name,NULL,screen,&rect);
           SDL_FreeSurface(name);
-          SDL_UpdateWindowSurface(pWindow);
-          printf("1Acces to index %d\n",index);
           if(index==0)
             savaGameName[index]=' ';
           else
             savaGameName[index]='\0';
           name = TTF_RenderUTF8_Blended(font,savaGameName, white);
           rect.x = (WIDTH - name->w)/2;
-          printf("back space\n");
-          printf("%s\n",savaGameName);
           SDL_BlitSurface(name,NULL,screen,&rect);
           SDL_FreeSurface(name);
           SDL_UpdateWindowSurface(pWindow);
@@ -229,7 +146,6 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
         }
         else if(e.type== SDL_TEXTINPUT&&index<10){
           strcat(savaGameName,e.text.text);
-          printf("2Acces to index %d\n",index);
           index++;
           savaGameName[index]='\0';
           
@@ -251,8 +167,9 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
                   SDL_FreeSurface(error);
                   SDL_UpdateWindowSurface(pWindow);
                 }else{
-                  
                   SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+                  // frees
+                SDL_FreeSurface(error);
                   int genre = afficherCinematique(pWindow,screen);
                   printf("fin de cinématique");
                   char * name = malloc(sizeof(char)*MAX_LEN_NAME);
@@ -261,16 +178,19 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
                   player.x = 50*16;
                   player.y = 23*16;
                   sspi(player);
-                  printf("\njoueur créée: %d, %d\n", genre, player.nb_current_sdlon);
+                  // frees
+                  SDL_FreeSurface(error);
+                  TTF_CloseFont(font);
                   printMap(pWindow,screen,player);
 
                   destroy_all(pWindow,font);
                 }
                 
               }else if (SDL_PointInRect(&mousePosition, &retourRect)) {
-                printf("yeah!!!\n");
                 SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
                 char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
+                // frees
+                SDL_FreeSurface(error);
                 return afficherMenu(pWindow,screen,menus,4,font);
               }
         }
@@ -292,9 +212,9 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
   rect.h = title->h;
   rect.w = title->w;
   SDL_BlitSurface(title,NULL,screen,&rect);
-   title = TTF_RenderUTF8_Blended(font,"Retour",white);
-   rect.y = HEIGHT - 100;
-   SDL_BlitSurface(title,NULL,screen,&rect);
+  title = TTF_RenderUTF8_Blended(font,"Retour",white);
+  rect.y = HEIGHT - 100;
+  SDL_BlitSurface(title,NULL,screen,&rect);
   SDL_FreeSurface(title);
   SDL_UpdateWindowSurface(pWindow);
   DIR *d;
@@ -312,7 +232,7 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
     }
     closedir(d);
   }
-  afficherLesSauvegardes(pWindow,screen,font,screen,fileNames,index,&rect);
+  afficherLesSauvegardes(pWindow,screen,font,fileNames,index,&rect);
   SDL_Event e;
   SDL_Point mousePosition;
   while(1){
@@ -328,6 +248,7 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
               SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
               SDL_UpdateWindowSurface(pWindow);
               char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
+              afficherMenu(pWindow,screen,menus,4,font);
             } 
           break;
       }
@@ -463,41 +384,6 @@ int main(int argc, char ** argv) {
     destroy_all(pWindow,police);
     /* P o s i t i o n ou sera mis le texte dans la fenetre */
     // load sample . png into image
-    if (pWindow) {
-      int running = 1;
-      while (running) {
-        SDL_Event e;
-        while (SDL_PollEvent( & e)) {
-          switch (e.type) {
-            case SDL_MOUSEBUTTONUP:
-
-                
-                break;
-
-          case SDL_QUIT:
-            running = 0;
-            break;
-          case SDL_WINDOWEVENT:
-            switch (e.window.event) {
-            case SDL_WINDOWEVENT_EXPOSED:
-            case SDL_WINDOWEVENT_SIZE_CHANGED:
-            case SDL_WINDOWEVENT_RESIZED:
-            case SDL_WINDOWEVENT_SHOWN:
-              /* Le fond de la fenetre sera blanc */
-              /* Ajout du texte en noir */
-              
-              /* Ajout de la seconde image a une c e r t a i n e p o s i t i o n */
-              /* On fait le rendu ! */
-              break;
-            }
-            break;
-          }
-        }
-      }
-    } else {
-      fprintf(stderr, " Erreur de creation de la fenetre : %s \n ", SDL_GetError());
-    }
-    // D e s t r u c t i o n de la fenetre
-    destroy_all(pWindow,police);
+    
     return 0;
   }
