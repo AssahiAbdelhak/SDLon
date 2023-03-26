@@ -1,1 +1,1 @@
-void printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int colission[1600]);
+int printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int colission[1600]);

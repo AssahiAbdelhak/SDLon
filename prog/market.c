@@ -24,26 +24,170 @@
 
 enum directions{DOWN,LEFT,RIGHT,UP};
 enum actions{DEF1,WALK1,DEF2,WALK2};
-
-
-void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,player_t player,int x_map,int y_map){
-    SDL_Surface * argent = SDL_CreateRGBSurface(0, 100, 50, surface->format->BitsPerPixel, 0, 255, 255, 255);
-    char * argent_texte = malloc(MAX_LEN_NAME);
-    sprintf(argent_texte,"Argent %d $",player.argent);
+void afficherItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y, player_t player, int index){
+    /*Varibles*/
+    Uint32 bg = 0xFFFFFF;
+    SDL_Color color = {96,96,96};
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
-    SDL_Color black = {0,0,0};
-    SDL_Surface * message = TTF_RenderUTF8_Blended(font,argent_texte,black);
-    free(argent_texte);
-    SDL_Rect argent_rect = {0,0,message->w,message->h};
-    SDL_BlitSurface(message,NULL,argent,&argent_rect);
-    SDL_Rect arg_rect = {0,0,argent->w,argent->h};
-    SDL_BlitSurface(argent,NULL,surface,&argent_rect);
-    SDL_Rect container_rect = {x_map,y_map,surface->h,surface->w};
+    
+    /*Conatiner*/
+    SDL_Surface *item_container = SDL_CreateRGBSurface(0, 320, 50, 32, 0, 255, 255, 255);
+    SDL_FillRect(item_container,NULL,bg);
+    /*texte d'item*/
+    SDL_Surface *item_name = TTF_RenderUTF8_Blended(font,"Poke Ball",color);
+    SDL_Rect rect_texte = {30,10,item_name->h,item_name->w};
+    SDL_BlitSurface(item_name,NULL,item_container,&rect_texte);
+    SDL_FreeSurface(item_name);
+    /*quantite d'item*/
+    char * nombre = malloc(sizeof(char )* MAX_LEN_NAME);
+    
+    sprintf(nombre,"$ %d", 200);
+    SDL_Surface *item_quant = TTF_RenderUTF8_Blended(font,nombre,color);
+    free(nombre);
+    SDL_Rect rect_qnt = {(item_container->w - item_quant->w - 20),10,item_quant->h,item_quant->w};
+    SDL_BlitSurface(item_quant,NULL,item_container,&rect_qnt);
+    SDL_FreeSurface(item_quant);
+    SDL_Log("here 3\n");
+    /**/
+    SDL_Rect rect_container = {320,y,item_container->h,item_container->w};
+    SDL_BlitSurface(item_container,NULL,surface,&rect_container);
+    SDL_FreeSurface(item_container);
+    TTF_CloseFont(font);
+}
+
+void afficherDescription(SDL_Window *window,SDL_Surface * screen,SDL_Surface * surface,SDL_Surface *sac,SDL_Surface *argent,char * desc,SDL_Rect container_rect){
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Surface *desc_container = SDL_CreateRGBSurface(0, 640/2, 640-(sac->h+argent->h), 32, 0, 255, 255, 255);
+    SDL_FillRect(desc_container,NULL,0xFFFFFF);
+    SDL_Color white = {0,0,0};
+    SDL_Surface *desc_texte = TTF_RenderText_Blended_Wrapped(font,desc,white,desc_container->w);
+    SDL_Rect rect_texte = {10,10,desc_texte->h,desc_texte->w};
+    SDL_BlitSurface(desc_texte,NULL,desc_container,&rect_texte);
+    SDL_FreeSurface(desc_texte);
+    SDL_Rect rect_container = {0,sac->h+argent->h+100,desc_texte->h,desc_texte->w};
+    SDL_BlitSurface(desc_container,NULL,surface,&rect_container);
+    SDL_FreeSurface(desc_container);
     SDL_BlitSurface(surface,NULL,screen,&container_rect);
     SDL_UpdateWindowSurface(window);
 }
+
+void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,player_t player,int x_map,int y_map){
+    SDL_FillRect(surface,NULL,0xffffff);
+    char * argent_texte = malloc(MAX_LEN_NAME);
+    sprintf(argent_texte,"Argent                                     %d $",player.argent);
+    TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color black = {0,0,0};
+    SDL_Surface * message = TTF_RenderUTF8_Blended(font,argent_texte,black);
+    SDL_Surface * argent = SDL_CreateRGBSurface(0, message->w + 10,20+message->h, surface->format->BitsPerPixel, 0, 255, 255, 255);
+    SDL_FillRect(argent,NULL,0xffffff);
+    free(argent_texte);
+    SDL_Rect argent_rect = {5,10,message->w,message->h};
+    SDL_BlitSurface(message,NULL,argent,&argent_rect);
+    SDL_Rect arg_rect = {0,0,argent->w,argent->h};
+    SDL_BlitSurface(argent,NULL,surface,&arg_rect);
+    SDL_Rect container_rect = {x_map,y_map,surface->h,surface->w};
+    /*image*/
+    SDL_Surface * sac = IMG_Load("images/sac.png");
+    SDL_Surface * image_container = SDL_CreateRGBSurface(0, sac->w,sac->h, surface->format->BitsPerPixel, 0, 255, 255, 255);
+    SDL_FillRect(image_container,NULL,0xa51209);
+    SDL_Rect image_rect = {0,0,sac->w,sac->h};
+    SDL_BlitSurface(sac,NULL,image_container,&image_rect);
+    SDL_Rect image_cont_rect = {0,argent->h,image_container->w,image_container->h};
+    SDL_BlitSurface(image_container,NULL,surface,&image_cont_rect);
+    /*description*/
+    SDL_Surface *desc_container = SDL_CreateRGBSurface(0, 640/2, 640-(sac->h+argent->h), 32, 0, 255, 255, 255);
+    SDL_FillRect(desc_container,NULL,0xFFFFFF);
+    SDL_Color white = {0,0,0};
+    SDL_Surface *desc_texte = TTF_RenderText_Blended_Wrapped(font,"this is a long description,that i created to test my program",white,desc_container->w);
+    SDL_Rect rect_texte = {10,10,desc_texte->h,desc_texte->w};
+    SDL_BlitSurface(desc_texte,NULL,desc_container,&rect_texte);
+    SDL_FreeSurface(desc_texte);
+    SDL_Rect rect_container = {0,sac->h+argent->h+100,desc_texte->h,desc_texte->w};
+    SDL_BlitSurface(desc_container,NULL,surface,&rect_container);
+    SDL_FreeSurface(desc_container);
+    /*items*/
+    afficherItem(window,surface,"hello",15,0,player,0);
+    afficherItem(window,surface,"hello",15,50,player,0);
+    afficherItem(window,surface,"hello",15,100,player,0);
+    afficherItem(window,surface,"hello",15,150,player,0);
+    afficherItem(window,surface,"hello",15,200,player,0);
+    afficherItem(window,surface,"hello",15,250,player,0);
+    afficherItem(window,surface,"hello",15,300,player,0);
+    afficherItem(window,surface,"hello",15,350,player,0);
+    afficherItem(window,surface,"hello",15,400,player,0);
+    afficherItem(window,surface,"hello",15,450,player,0);
+    int n = 10;
+    SDL_Rect btn = {320,600,320,40};
+    SDL_Rect btn_in_screen = {320+x_map,600+y_map,320,40};
+    botton(surface,"Quitter",btn.w, btn.h, btn.x, btn.y, 0);
+    
+    /*arrow*/
+    int nb=0;
+    SDL_Surface * arrow =  IMG_Load("images/select.png");
+    SDL_Rect rect_arrow = {5+320,(50)*(nb)+15,arrow->h,arrow->w};
+    SDL_BlitSurface(arrow,NULL,surface,&rect_arrow);
+
+    SDL_BlitSurface(surface,NULL,screen,&container_rect);
+    SDL_UpdateWindowSurface(window);
+    int running = 1;
+    SDL_Point mousePosition;
+    while (running) {
+        SDL_Event e;
+        while (SDL_PollEvent( & e)) {
+          switch (e.type) {
+            case SDL_MOUSEBUTTONUP:
+                if(SDL_PointInRect(&mousePosition, &btn_in_screen)){
+                    if(sac)
+                        SDL_FreeSurface(sac);
+                    SDL_FreeSurface(surface);
+                    SDL_FreeSurface(arrow);
+                    SDL_Log("should quit");
+                    return;
+                }
+                break;
+            case SDL_KEYDOWN:
+                switch (e.key.keysym.sym){
+                    case SDLK_UP:
+                        nb=(nb-1);
+                        nb = (nb<0)?(nb + n):(nb);
+                        break;
+                    case SDLK_DOWN:
+                        nb=(nb+1)%n;
+                        break;
+                    case SDLK_RETURN:
+                        break;
+                }
+                SDL_FillRect(surface,&rect_arrow,0xffffff);
+                afficherDescription(window,screen,surface,sac,argent,"Description 2",container_rect);
+                /*SDL_Log("%s",items[nb].path);
+                sac = IMG_Load(items[nb].path);
+                SDL_Rect rect = {100,100,sac->h,sac->w};
+                //SDL_Rect rect2 = {0,0,sac->h,sac->w};
+                SDL_FillRect(screen,&rect,bg);
+                SDL_BlitSurface(sac,NULL,screen,&rect);
+                SDL_UpdateWindowSurface(window);*/
+                break;
+            case SDL_MOUSEMOTION:
+                mousePosition.x = e.motion.x; 
+                mousePosition.y = e.motion.y;
+                if (SDL_PointInRect(&mousePosition, &btn_in_screen)){
+                    botton(surface,"Quitter",btn.w, btn.h, btn.x, btn.y, 1);
+                }else
+                    botton(surface,"Quitter",btn.w, btn.h, btn.x, btn.y, 0);
+                SDL_BlitSurface(surface,NULL,screen,&container_rect);
+                
+                SDL_UpdateWindowSurface(window);
+          }
+                rect_arrow.y = (50)*(nb)+15;
+                SDL_BlitSurface(arrow,NULL,surface,&rect_arrow);
+                
+                SDL_BlitSurface(surface,NULL,screen,&container_rect);
+                SDL_UpdateWindowSurface(window);
+        }
+    }
+}
 /*Afficher le centre pokemon*/
-void printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int colission[1600]){
+int printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int colission[1600]){
     SDL_Surface * map = IMG_Load("../tiledmap/market_map.png");
     Uint32 bg = 0x000000;
     SDL_FillRect(screen,NULL,bg);
@@ -54,8 +198,9 @@ void printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int col
     SDL_BlitSurface(map,NULL,screen,&rect);
     SDL_FreeSurface(map);
     SDL_Log("x == %d\ty == %d",x_map,y_map);
-    printSpiritInMarket(window,screen,"images/mec.png",100,100,player,x_map,y_map,colission);
+    int var = printSpiritInMarket(window,screen,"images/mec.png",100,100,player,x_map,y_map,colission);
     SDL_UpdateWindowSurface(window);
+    return var;
 }
 /*verification des coordonnées*/
 int coordonnesValide(int colission[1600],int x,int y){
@@ -94,7 +239,7 @@ int detecteur(SDL_Window *window,SDL_Surface *screen,int col[1600],int x,int y){
     return retour;
 }
 /*afficher le personnage sur la map*/
-void printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,player_t player,int x_map,int y_map,int colission[1600]){
+int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,player_t player,int x_map,int y_map,int colission[1600]){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
     int movePers=1,i=0,detecter=VIDE;
     item_init();
@@ -234,10 +379,13 @@ void printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichi
                         move=0;
                         movePers=0;
                         if(detecter==STORE){
-                            SDL_FillRect(screen,NULL,0x000000);
+                            
                             SDL_Log("go to store2");
                             SDL_Surface * surface = SDL_CreateRGBSurface(0, 640, 640, screen->format->BitsPerPixel, 0, 255, 255, 255);
                             afficherLaBoutique(window,screen,surface,player,x_map,y_map);
+                            SDL_FillRect(screen,NULL,0x000000);
+                            printMarket(window,screen,player,market_collision);
+                            return -1;
                         }
                         break;
                     
