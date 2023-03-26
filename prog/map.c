@@ -11,6 +11,7 @@
 #include "include/sdlon_init.h"
 #include "include/combat.h"
 #include "combat.h"
+#include "market.h"
 #include <time.h>
 #define TILE_SIZE 32
 #define WIDTH 1280
@@ -28,19 +29,6 @@ SDL_Rect hintBox,hintContainer;
 SDL_Surface *pasSdlon;
 int dansLesBuissons=0;
 
-void printMarket(SDL_Window *window,SDL_Surface * screen,player_t player, SDL_Surface *hintSliceFromMap, SDL_Surface *hint ){
-    SDL_Surface * map = IMG_Load("../tiledmap/market_map.png");
-                            if(!map){
-                                SDL_Log("image not good");
-                            }
-                            Uint32 bg = 0x000000;
-                            SDL_FillRect(screen,NULL,bg);
-                            SDL_Rect rect = {(WIDTH - map->w)/2,(HEIGHT - map->h)/2,map->w,map->h};
-                            SDL_BlitSurface(map,NULL,screen,&rect);
-                            SDL_FreeSurface(map);
-                            printSpirit(window,screen,"images/mec.png",500,500,hintSliceFromMap, hint,player);
-                            SDL_UpdateWindowSurface(window);
-}
 
 int printMap(SDL_Window *window,SDL_Surface * screen,player_t player);
 //town_init();
@@ -380,8 +368,8 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_f:
                         if(dansLesBuissons==PORTE){
-                            printMarket(window,screen,player,hintSliceFromMap,hint);
-                            
+                            printMarket(window,screen,player,market_collision);
+                            return ;
                         }
                         break;
                     case SDLK_e:
