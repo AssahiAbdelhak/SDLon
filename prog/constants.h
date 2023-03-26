@@ -13,3 +13,8 @@ extern int buissons[4160];
 extern int combat_sol[4160];
 extern int combat_ciel[4160];
 extern int combat_arbre[4160];
+extern int market_1[1600];
+extern int market_2[1600];
+extern int market_3[1600];
+extern int market_4[1600];
+extern int market_5[1600];
