@@ -55,7 +55,6 @@ void waiting(Uint32 *start_time){
 }
 
 void movePlayer(SDL_Window *window,SDL_Surface *spirit,SDL_Surface *screen,SDL_Surface *copy,SDL_Rect pre_rect,SDL_Rect rect,enum directions dir,enum actions act,Uint32 *start_time){
-    
     SDL_BlitSurface(copy,NULL,screen,&pre_rect);
     SDL_Rect copy_rect = {0,0,32,32};
     SDL_BlitSurface(screen,&rect,copy,&copy_rect);
@@ -142,15 +141,18 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
     }else{
         photo = IMG_Load("images/asset/SDLon_character/trainer2.png");
     }
-    
+    SDL_Log("here done");
     SDL_Surface* photo_bg = SDL_CreateRGBSurface(0, 128, 128, screen->format->BitsPerPixel, 0, 0, 0, 0);
     SDL_FillRect(photo_bg,NULL,bg_photo);
     SDL_Rect rect_photo = {0,0,128,128};
     SDL_BlitSurface(photo,NULL,photo_bg,&rect_photo);
-    
+    SDL_FreeSurface(photo);
+    SDL_Log("image done");
     // blit photo in carte
     SDL_Rect photo_rect = {width - 128 - 10,30,128,128};
     SDL_BlitSurface(photo_bg,NULL,carte,&photo_rect);
+    SDL_FreeSurface(photo_bg);
+    SDL_Log("image 2 done");
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {255,255,255};
     // la surface de NOM constante
@@ -160,39 +162,46 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
     SDL_FillRect(nom_container,NULL,bg_main);
     SDL_Rect nom1 = {10,0,nom_title->h,nom_title->w};
     SDL_BlitSurface(nom_title,NULL,nom_container,&nom1);
+    SDL_FreeSurface(nom_title);
     SDL_Surface *nom_player = TTF_RenderUTF8_Blended(font,nom,white);
     SDL_Rect nom2 = {width-128-40 - nom_player->w,0,nom_player->h,nom_player->w};
     SDL_BlitSurface(nom_player,NULL,nom_container,&nom2);
+    SDL_FreeSurface(nom_player);
     SDL_Rect rect_nom = {10,60,nom_container->h,nom_container->w};
     SDL_BlitSurface(nom_container,NULL,carte,&rect_nom);
-
+    SDL_FreeSurface(nom_container);
     // la surface de NOMBRE constante
     SDL_Surface *nombre_title = TTF_RenderUTF8_Blended(font,"NOMBRE DE SDLONS ",white);
     SDL_Surface* nombre_container = SDL_CreateRGBSurface(0, width -128 - 40, nombre_title->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
     SDL_FillRect(nombre_container,NULL,bg_main);
     SDL_Rect nombre1 = {10,0,nombre_title->h,nombre_title->w};
     SDL_BlitSurface(nombre_title,NULL,nombre_container,&nombre1);
+    SDL_FreeSurface(nombre_title);
     char * nombre = malloc(sizeof(MAX_LEN_NAME));
     sprintf(nombre,"%d",nbCurrentSdlons);
     SDL_Surface *nombre_player = TTF_RenderUTF8_Blended(font,nombre,white);
     SDL_Rect nombre2 = {width-128-40-nombre_player->w,0,nombre_player->h,nombre_player->w};
     SDL_BlitSurface(nombre_player,NULL,nombre_container,&nombre2);
+    SDL_FreeSurface(nombre_player);
     SDL_Rect rect_nombre = {10,120,nombre_container->h,nombre_container->w};
     SDL_BlitSurface(nombre_container,NULL,carte,&rect_nombre);
+    SDL_FreeSurface(nombre_container);
     // la surface de ARGENT constante
     SDL_Surface *argent_title = TTF_RenderUTF8_Blended(font,"ARGENT ",white);
     SDL_Surface* argent_container = SDL_CreateRGBSurface(0, width -128-40, argent_title->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
     SDL_FillRect(argent_container,NULL,bg_main);
     SDL_Rect argent1 = {10,0,argent_title->h,argent_title->w};
     SDL_BlitSurface(argent_title,NULL,argent_container,&argent1);
+    SDL_FreeSurface(argent_title);
     char * arg = malloc(sizeof(MAX_LEN_NAME));
     sprintf(arg,"%d $",argent);
     SDL_Surface *argent_player = TTF_RenderUTF8_Blended(font,arg,white);
     SDL_Rect argent2 = {argent_container->w -argent_player->w,0,argent_player->h,argent_player->w};
     SDL_BlitSurface(argent_player,NULL,argent_container,&argent2);
+    SDL_FreeSurface(argent_player);
     SDL_Rect rect_argent = {10,180,argent_container->h,argent_container->w};
     SDL_BlitSurface(argent_container,NULL,carte,&rect_argent);
-
+    SDL_FreeSurface(argent_container);
     //message
     
     SDL_Surface * message = TTF_RenderUTF8_Blended(font,"Je suis DRESSEUR!\nRavi de te connaitre. ",white);
@@ -200,14 +209,17 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
     SDL_FillRect(message_bg,NULL,bg_main);
     SDL_Rect rect_message = {10,0,message->h,message->w};
     SDL_BlitSurface(message,NULL,message_bg,&rect_message);
+    SDL_FreeSurface(message);
     SDL_Rect message_rect = {10,240,message_bg->h,message_bg->w};
     SDL_BlitSurface(message_bg,NULL,carte,&message_rect);
+    SDL_FreeSurface(message_bg);
     //void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected);
     
     botton(carte,"RETOUR",message_bg->w,50,10,300,0);
     
     SDL_Rect btn_in_screen = {10+rect_container.x,300+rect_container.y,message_bg->w,50};
     SDL_BlitSurface(carte,NULL,screen,&rect_container);
+    
     SDL_Log("x = %d\ty = %d\n",btn_in_screen.x,btn_in_screen.y);
     SDL_UpdateWindowSurface(window);
     int running = 1;
@@ -216,14 +228,17 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
         SDL_Event e;
         while (SDL_PollEvent( & e)) {
           switch (e.type) {
-            case SDL_QUIT:
-                running = 0;
-                return ;
-                break;
             case SDL_MOUSEBUTTONUP:
                 if(SDL_PointInRect(&mousePosition, &btn_in_screen)){
+                    SDL_Log("close ");
                     SDL_BlitSurface(copy_carte,NULL,screen,&rect_container);
+                    SDL_FreeSurface(copy_carte);
+                    SDL_Log("close 1");
+                    SDL_FreeSurface(carte);
+                    TTF_CloseFont(font);
+                    SDL_Log("close 2");
                     SDL_UpdateWindowSurface(window);
+                    //printMap(window,screen,player);
                     return;
                 }
                 break;
@@ -231,10 +246,10 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
                 mousePosition.x = e.motion.x; 
                 mousePosition.y = e.motion.y;
                 if (SDL_PointInRect(&mousePosition, &btn_in_screen)){
-
                     botton(carte,"RETOUR",message_bg->w,50,10,300,1);
-                }else
+                }else{
                     botton(carte,"RETOUR",message_bg->w,50,10,300,0);
+                }
                 SDL_BlitSurface(carte,NULL,screen,&rect_container);
                 SDL_UpdateWindowSurface(window);
           }
@@ -258,15 +273,14 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
 // prq 32 et pas 16 pcq on veut recuperer les 4 part du personnage
     SDL_Rect src_rect = {dir*16,act*16,32,32};
     SDL_Surface* copy = SDL_CreateRGBSurface(0, 32, 32, screen->format->BitsPerPixel, 0, 0, 0, 0);
-    if(SDL_BlitSurface(screen,&rect,copy,&copy_rect)<0)
-        printf("erreur 1\n");
-    if(SDL_BlitSurface(spirit,&src_rect,screen,&rect)<0)
-        printf("erreur 2\n");
+    SDL_BlitSurface(screen,&rect,copy,&copy_rect);
+    SDL_BlitSurface(spirit,&src_rect,screen,&rect);
+    //SDL_FreeSurface(spirit);
     SDL_UpdateWindowSurface(window);
     int running = 1;
     int move = 0;
     Uint32 start_time = SDL_GetTicks(); // 100 milliseconds per frame
-    printf("goo!!!");
+    SDL_Log("goo!!!");
       while (running) {
         SDL_Event e;
         while (SDL_PollEvent( & e)) {
@@ -279,17 +293,14 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){
                     case SDLK_s:
-                        SDL_Log("sauverge est faite\n");
                         sspi(player);
                      break;
 
                     case SDLK_i:
-                        SDL_Log("inventaire ouvert\n");
                         int retour = afficherTableauMenu(window,screen,500,700);
                         switch (retour){
                             // sdlon sac informations
                         case 1:
-                            SDL_Log("sauverge est faite\n");
                             sspi(player);
                             break;
                         case 2:;
@@ -302,28 +313,26 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             
                             char * noms[NB_ITEMS];
                             char * descs[NB_ITEMS];
-                            SDL_Log("Début de la lecture des items\n");
                             display_all_items();
                             for(i=0;i<NB_ITEMS;i++){
                                 noms[i] = malloc(sizeof(char)*MAX_LEN_NAME);
                                 descs[i] = malloc(sizeof(char)*MAX_LEN_DESCR);
-                                SDL_Log("hello");
                                 strcpy(noms[i], items[i].name);
                                 strcpy(descs[i], items[i].description);
-                                printf("Ok, l'items est lus\n");
                             }
-                            SDL_Log("show sac\n");
                             sdlon sd;
                             int returnValue = showSac(window,screen,noms,descs,5,player,sd);
                             if(returnValue==-1){
+                                TTF_CloseFont(font);
                                 printMap(window,screen,player);
                             }
                             break;
                         case 4:
-                            
                             showCarte(window,screen,player.name,player.nb_current_sdlon,player.argent,player.genre);
+                            SDL_Log("got here ?");
                             break;
                         case 5: ;
+                            TTF_CloseFont(font);
                             TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
                             char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
                             afficherMenu(window,screen,menus,4,font);
@@ -336,10 +345,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
 
                     case SDLK_UP:
                         movePers=1;
+                        SDL_Log("up clicked");
                         if(localisationValide(x,y-16)){
                             move = 1;
                             dir = UP;
-                            
+                            SDL_Log("up clicked");
                         }
                         break;
                     case SDLK_DOWN:
@@ -372,22 +382,23 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         if(dansLesBuissons){
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
-                                SDL_Log("nombre de sdlon insuffisants");
+                                //SDL_Log("nombre de sdlon insuffisants");
                                 sdlon sd = generate_sdlon(0,70,100);
                                 add_sdlon_in_set(sd,&player);
                             }else{
                                 if(can_fight(player)){
-                                    SDL_Log("E cliqué\n");
+                                    //SDL_Log("E cliqué\n");
                                     //return afficherLeCombat(window,screen);
                                     //sdlon sdl1 = generate_sdlon(0,5,20);
                                     //SDL_Log("nom == %s\n",sdl1.nom);
                                     //decouvrirLeSdlon();
                                     int seed = rand()%100;
-                                    printf("%d\n",seed);
+                                    //printf("%d\n",seed);
                                     
                                     if(seed<=10){
                                         movePers=0;
                                         sdlon sd = generate_sdlon(0, 1, 15);
+                                        TTF_CloseFont(font);
                                         afficherLeCombat(window,screen,player,sd);
                                         
                                     }
@@ -404,8 +415,9 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         move=0;
                         break;
                 }
-                
+                SDL_Log("start buissons");
                 dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint,font,white,movePers);
+                SDL_Log("finish buissons");
                 break;
             case SDL_MOUSEMOTION:
                 break;
@@ -413,8 +425,10 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                
         }
         if(move){
+            SDL_Log("get in move condition");
             if(dir==UP){
                 SDL_Rect nouv_rect = {rect.x,rect.y-16,rect.h,rect.w};
+                SDL_Log("got here");
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,UP,WALK1,&start_time);
                             rect.y = nouv_rect.y;
                             y=y-16;
@@ -480,7 +494,7 @@ int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
     SDL_BlitSurface(screen,&hintBox,hintSliceFromMap,&hintContainer);
     ///***
     printf("print this\n");
-    
+    TTF_CloseFont(font);
     if(player.genre==HOMME)
         printSpirit(window,screen,"images/mec.png",player.x,player.y,hintSliceFromMap, hint,player);
     else
@@ -498,16 +512,24 @@ int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
       }
 }}
 int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font,SDL_Color white,int move){
-    printf("la valeur de movepers %d\n",move);
-    if(move)
-        hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour chercher le sdlon",white);
+    
+    SDL_Log("valeurs de collision %d",buissons[(y/16)*80+(x/16)]);
+    if(move){
+        if(buissons[(y/16)*80+(x/16)]==porte)
+            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour Entrer dans la maison",white);
+        else
+            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour chercher le sdlon",white);
+    }
     else{
         hint = TTF_RenderUTF8_Blended(font,"Vous n'avez pas trouve de sdlon",white);
     }
+    SDL_Log("here2");
     SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
     if(buissons[(y/16)*80+(x/16)]){
         SDL_BlitSurface(hint,&hintContainer,screen,&hintBox);
         SDL_UpdateWindowSurface(window);
+        if(buissons[(y/16)*80+(x/16)]==porte)
+            return 0;
         return 1;
     }else{        
         
