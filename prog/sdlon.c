@@ -5,9 +5,9 @@
 # include <SDL2/SDL_image.h>
 # include <dirent.h>
 # include "map.h"
+#include "include/player.h"
 #include "combat.h"
 #include "intro/sdl_intro_test.h"
-#include "include/player.h"
 #define HEIGHT 840
 #define WIDTH  1280
 
@@ -362,7 +362,7 @@ int main(int argc, char ** argv) {
       exit(EXIT_FAILURE);
     }
     /* C r e a t i o n de la fenetre */
-    pWindow = SDL_CreateWindow(" Hello World SDL2 ", SDL_WINDOWPOS_UNDEFINED,
+    pWindow = SDL_CreateWindow(" Sdlon ", SDL_WINDOWPOS_UNDEFINED,
       SDL_WINDOWPOS_UNDEFINED,
       WIDTH,
       HEIGHT,
@@ -382,7 +382,7 @@ int main(int argc, char ** argv) {
     afficherMenu(pWindow,screen,menus,4,police);
     //afficherLeCombat(pWindow,screen);
     destroy_all(pWindow,police);
-    /* P o s i t i o n ou sera mis le texte dans la fenetre */
+    /* Position ou sera mis le texte dans la fenetre */
     // load sample . png into image
     
     return 0;

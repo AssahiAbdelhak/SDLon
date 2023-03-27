@@ -253,7 +253,7 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
 
 void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
-    int movePers=1,i=0;
+    int movePers=1,i=0,retour;
     item_init();
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {255,255,255};
@@ -289,7 +289,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                      break;
 
                     case SDLK_i:
-                        int retour = afficherTableauMenu(window,screen,500,700);
+                        retour = afficherTableauMenu(window,screen,500,700);
                         switch (retour){
                             // sdlon sac informations
                         case 1:
