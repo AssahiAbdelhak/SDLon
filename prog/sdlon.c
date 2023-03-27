@@ -1,6 +1,8 @@
 # include <stdio.h>
 # include <string.h>
 # include <SDL2/SDL.h>
+#include <stdlib.h>
+#include <time.h>
 # include <SDL2/SDL_ttf.h>
 # include <SDL2/SDL_image.h>
 # include <dirent.h>

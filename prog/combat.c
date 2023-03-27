@@ -42,7 +42,6 @@ int afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int he
     
     SDL_UpdateWindowSurface(window);
     int running = 1;
-    SDL_Point mousePosition;
     while (running) {
         SDL_Event e;
         while (SDL_PollEvent( & e)) {
@@ -65,9 +64,12 @@ int afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int he
                         return nb;
                 }
                 updateMenus(window,screen,tableauMenus,width,height,nb);
+            }
         }
     }
-}}
+    return 0;
+}
+
 
 void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Surface *surface,int x,int y,char *name_attaque,int type_sdl,int selected){
     /*TODO : creer des variables pour les couleurs de haque type*/
@@ -86,7 +88,7 @@ void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int heig
         SDL_FillRect(attaque_surface,NULL,bg_selected);
     SDL_Color black = {0,0,0};
     SDL_Color white = {255,255,255};
-    SDL_Color red = {255,0,0};
+    //SDL_Color red = {255,0,0};
 
     SDL_Surface *nom_attaque = TTF_RenderUTF8_Blended(font,name_attaque,black);
     int fixed_height_for_type=30;
@@ -185,7 +187,7 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
     //si le combat n'est pas terminé
     if(status==1 || status ==2){
         //l'ennemi attaque
-        int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
+        //int nb_attaque = ia(&sd, &(player.sd[player.sd_in_use]));
         sats(&sd,&(player.sd[player.sd_in_use]),1);//remplacer par le numéro d'attaque quand ia opérationelle
 
         //on regarde le status du combat
@@ -314,8 +316,8 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     for(i=0;i<player.nb_current_sdlon;i++){
         x=(i%2==0)?30:730;
         y=60+(300)*(i/2);
-        SDL_Log("vie %d",(player.sd[i].vie*100)/player.sd[i].vie_max);
-        printSdlonBar(window,screen,500,200,x,y,player.sd[i].nom,"M",(player.sd[i].vie*100)/player.sd[i].vie_max,player.sd[i].level,(n==i),player.sd[i].front_face);
+        SDL_Log("vie %d et vie courante %d et vie max %d",((player.sd[i].vie*100)/(player.sd[i].vie_max)), player.sd[i].vie, player.sd[i].vie_max);
+        printSdlonBar(window,screen,500,200,x,y,player.sd[i].nom,"M",((player.sd[i].vie*100)/player.sd[i].vie_max),player.sd[i].level,(n==i),player.sd[i].front_face);
         
     }
     /*printSdlonBar(window,screen,500,200,30,60,"Abdelhak","M",90,10,(n==0));
@@ -342,7 +344,7 @@ int showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
           switch (e.type) {
             case SDL_QUIT:
                 running = 0;
-                return;
+                return 0;
                 break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){
@@ -612,7 +614,6 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
             handle_sdlons_events(window,screen,nbRetour,player,sd);
             break;
         case 3: ;
-            player_t temp;
             printMap(window,screen,player);
             break;
         default:
@@ -845,7 +846,7 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     printPlayerStats(window,screen,sd.nom,WIDTH-320,450,sd.level,(sd.vie*100)/sd.vie_max);
     printf("here1\n");
     SDL_Surface * copy = SDL_CreateRGBSurface(0, 500, 100, 32, 0, 0, 0, 0);
-    SDL_Rect rect_copy = {0,0,100,500};
+    
     SDL_Surface * bandeau = SDL_CreateRGBSurface(0, 500, 100, 32, 0, 0, 0, 0);
     Uint32 color = 0xf8f8d8;
     SDL_FillRect(bandeau,NULL,color);

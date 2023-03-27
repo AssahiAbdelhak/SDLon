@@ -101,7 +101,7 @@ player_t player_init(char * file_name){
         player.current_town = current_town;
 
         for(i=0;sdlon_index[i]!=-1;i++){  
-            fscanf(file, "%d %d %d", &level, &xp, &vie);
+            fscanf(file, "%d %d %d\n", &level, &xp, &vie);
             strcpy(player.sd[i].nom, malloc(sizeof(char)*MAX_LEN_NAME));
             strcpy(player.sd[i].nom, sdlon_s[sdlon_index[i]].nom);
             strcpy(player.sd[i].front_face, sdlon_s[sdlon_index[i]].front_face);
@@ -110,7 +110,7 @@ player_t player_init(char * file_name){
             player.sd[i].xp = xp;
             player.sd[i].vie = vie;
             player.sd[i].type = sdlon_s[sdlon_index[i]].type;
-            player.sd[i].vie_max = sdlon_s[sdlon_index[i]].vie_max;
+            player.sd[i].vie_max = (sdlon_s[sdlon_index[i]].vie_max+(level*2));
             player.sd[i].evolution = sdlon_s[sdlon_index[i]].evolution;
             player.sd[i].evol_sys = sdlon_s[sdlon_index[i]].evol_sys;
             player.sd[i].attaque_1 = sdlon_s[sdlon_index[i]].attaque_1;
