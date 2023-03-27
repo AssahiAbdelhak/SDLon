@@ -754,8 +754,6 @@ void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sd
                         break;
                     case SDLK_LEFT:
                         nb=(nb-1)%4;
-                        if(nb<0)
-                            nb += 4;
                         break;
                     case SDLK_RIGHT:
                         nb=(nb+1)%4;
@@ -765,6 +763,8 @@ void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sd
                         return ;
                         break;
                 }
+                if(nb<0)
+                    nb += 4;
                 updateOptions(window,screen,surface,nb,width,height);
                 break;
           }

@@ -24,7 +24,7 @@
 
 enum directions{DOWN,LEFT,RIGHT,UP};
 enum actions{DEF1,WALK1,DEF2,WALK2};
-void afficherItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y, player_t player, int index){
+void afficherItem(SDL_Window *window,SDL_Surface * surface,char * nom, int prix,int y, player_t player, int index){
     /*Varibles*/
     Uint32 bg = 0xFFFFFF;
     SDL_Color color = {96,96,96};
@@ -34,14 +34,14 @@ void afficherItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,i
     SDL_Surface *item_container = SDL_CreateRGBSurface(0, 640-337, 50, 32, 0, 255, 255, 255);
     SDL_FillRect(item_container,NULL,bg);
     /*texte d'item*/
-    SDL_Surface *item_name = TTF_RenderUTF8_Blended(font,"Poke Ball",color);
+    SDL_Surface *item_name = TTF_RenderUTF8_Blended(font,nom,color);
     SDL_Rect rect_texte = {30,10,item_name->h,item_name->w};
     SDL_BlitSurface(item_name,NULL,item_container,&rect_texte);
     SDL_FreeSurface(item_name);
     /*quantite d'item*/
     char * nombre = malloc(sizeof(char )* MAX_LEN_NAME);
     
-    sprintf(nombre,"$ %d", 200);
+    sprintf(nombre,"$ %d", prix);
     SDL_Surface *item_quant = TTF_RenderUTF8_Blended(font,nombre,color);
     free(nombre);
     SDL_Rect rect_qnt = {(item_container->w - item_quant->w - 20),10,item_quant->h,item_quant->w};
@@ -55,7 +55,7 @@ void afficherItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,i
     TTF_CloseFont(font);
 }
 
-int confirmation(SDL_Window * window,SDL_Surface * screen,SDL_Surface * surface,int x,int y,SDL_Rect container_rect){
+int confirmation(SDL_Window * window,SDL_Surface * screen,SDL_Surface * surface,int x,int y,SDL_Rect container_rect,int i){
     SDL_Log("x == %d,y == %d",x,y);
     SDL_Surface *container = SDL_CreateRGBSurface(0, 300, 80, 32, 0, 255, 255, 255);
     SDL_FillRect(container,NULL,0xffffff);
@@ -94,12 +94,12 @@ int confirmation(SDL_Window * window,SDL_Surface * screen,SDL_Surface * surface,
                 switch (e.key.keysym.sym){
                     case SDLK_UP:
                         totlaObjets++;
-                        total += 300;// a changer
+                        total += items[i].prix;// a changer
                         break;
                     case SDLK_DOWN:
                         if(totlaObjets>0){
                             totlaObjets--;
-                            total -= 300;// a changer
+                            total -= items[i].prix;// a changer
                         }
                         break;
                     case SDLK_RETURN:
@@ -154,10 +154,10 @@ void afficherDescription(SDL_Window *window,SDL_Surface * screen,SDL_Surface * s
 /**
  * fonction d'affichage de la boutique 
 */
-void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,player_t player,int x_map,int y_map){
+void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,player_t *player,int x_map,int y_map){
     SDL_FillRect(surface,NULL,0xffffff);
     char * argent_texte = malloc(MAX_LEN_NAME);
-    sprintf(argent_texte,"Argent                                     %d $",player.argent);
+    sprintf(argent_texte,"Argent                                     %d $",player->argent);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color black = {0,0,0};
     SDL_Surface * message = TTF_RenderUTF8_Blended(font,argent_texte,black);
@@ -181,7 +181,7 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
     SDL_Surface *desc_container = SDL_CreateRGBSurface(0, 640/2, 640-(sac->h+argent->h), 32, 0, 255, 255, 255);
     SDL_FillRect(desc_container,NULL,0xFFFFFF);
     SDL_Color white = {0,0,0};
-    SDL_Surface *desc_texte = TTF_RenderText_Blended_Wrapped(font,"this is a long description,that i created to test my program",white,desc_container->w);
+    SDL_Surface *desc_texte = TTF_RenderText_Blended_Wrapped(font,items[0].description,white,desc_container->w);
     SDL_Rect rect_texte = {10,10,desc_texte->h,desc_texte->w};
     SDL_BlitSurface(desc_texte,NULL,desc_container,&rect_texte);
     SDL_FreeSurface(desc_texte);
@@ -189,11 +189,9 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
     SDL_BlitSurface(desc_container,NULL,surface,&rect_container);
     SDL_FreeSurface(desc_container);
     //item
-    afficherItem(window,surface,"hello",15,0,player,0);
-    afficherItem(window,surface,"hello",15,50,player,0);
-    afficherItem(window,surface,"hello",15,100,player,0);
-    afficherItem(window,surface,"hello",15,150,player,0);
-    afficherItem(window,surface,"hello",15,200,player,0);
+    for(int i=0;i<NB_ITEMS;i++)
+        afficherItem(window,surface,items[i].name,items[i].prix,50*i,*player,0);
+    
 
     int n = 5;
     SDL_Rect btn = {337,600,320,40};
@@ -234,16 +232,16 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
                         nb=(nb+1)%n;
                         break;
                     case SDLK_RETURN:
-                        SDL_Log("player argent avant %d",player.argent);
-                        player.argent += confirmation(window,screen,surface,x_map+340,500,container_rect);
-                        SDL_Log("player argent apres %d",player.argent);
+                        SDL_Log("player argent avant %d",player->argent);
+                        player->argent += confirmation(window,screen,surface,x_map+340,500,container_rect,nb);
+                        SDL_Log("player argent apres %d",player->argent);
                         SDL_FillRect(screen,NULL,0x000000);
                         afficherLaBoutique(window,screen,surface,player,x_map,y_map);
                         return;
                         break;
                 }
                 SDL_FillRect(surface,&rect_arrow,0xffffff);
-                afficherDescription(window,screen,surface,sac,argent,"Description 2",container_rect);
+                afficherDescription(window,screen,surface,sac,argent,items[nb].description,container_rect);
                 /*SDL_Log("%s",items[nb].path);
                 sac = IMG_Load(items[nb].path);
                 SDL_Rect rect = {100,100,sac->h,sac->w};
@@ -279,6 +277,7 @@ int printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int coli
     SDL_Surface * map = IMG_Load("../tiledmap/market_map.png");
     Uint32 bg = 0x000000;
     SDL_FillRect(screen,NULL,bg);
+    printf("error here\n");
     SDL_Rect rect = {(WIDTH - map->w)/2,(HEIGHT - map->h)/2,map->w,map->h};
     int x_map = (WIDTH - map->w)/2;
     int y_map = (HEIGHT - map->h)/2;
@@ -286,7 +285,11 @@ int printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int coli
     SDL_BlitSurface(map,NULL,screen,&rect);
     SDL_FreeSurface(map);
     SDL_Log("x == %d\ty == %d",x_map,y_map);
-    int var = printSpiritInMarket(window,screen,"images/mec.png",100,100,player,x_map,y_map,colission);
+    int var;
+    if(player.genre==HOMME)
+        var = printSpiritInMarket(window,screen,"images/mec.png",100,100,player,x_map,y_map,colission);
+    else
+        var = printSpiritInMarket(window,screen,"images/meuf.png",100,100,player,x_map,y_map,colission);
     SDL_UpdateWindowSurface(window);
     return var;
 }
@@ -483,7 +486,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             
                             SDL_Log("go to store2");
                             SDL_Surface * surface = SDL_CreateRGBSurface(0, 640, 640, screen->format->BitsPerPixel, 0, 255, 255, 255);
-                            afficherLaBoutique(window,screen,surface,player,x_map,y_map);
+                            afficherLaBoutique(window,screen,surface,&player,x_map,y_map);
                             SDL_FillRect(screen,NULL,0x000000);
                             printMarket(window,screen,player,market_collision);
                             return -1;
