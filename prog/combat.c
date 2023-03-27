@@ -13,7 +13,7 @@ void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sd
 void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,player_t player, sdlon sd);
 void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected);
 int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd,int isFirst,int nb_attaque);
-
+/*MAJ des menus sur le jeu*/
 void updateMenus(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n){
     Uint32 bg = 0xae48f1;
     SDL_Rect rect = {(WIDTH - width)/2,(HEIGHT-height)/2,width,height};
@@ -27,7 +27,7 @@ void updateMenus(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int
     SDL_BlitSurface(surface,NULL,screen,&rect);
     SDL_UpdateWindowSurface(window);
 }
-
+/*affichage du tableau de meuns*/
 int afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int height){
     SDL_Surface *tableauMenus = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
     Uint32 bg = 0xdbeaa9;
@@ -69,8 +69,7 @@ int afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int he
     }
     return 0;
 }
-
-
+/*fonction qui affiche chaque attaque*/
 void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Surface *surface,int x,int y,char *name_attaque,int type_sdl,int selected){
     /*TODO : creer des variables pour les couleurs de haque type*/
     SDL_Surface *attaque_surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
@@ -211,11 +210,13 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
     }
     return;
 }
-
-void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player, sdlon sd){
-    if(nb==player.nb_current_sdlon){
-        afficherLeCombat(window,screen,player, sd,0,-10);
+/*fonction qui change le sdlon utilise*/
+void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t *player, sdlon sd){
+    if(nb==player->nb_current_sdlon){
+        afficherLeCombat(window,screen,*player, sd,0,-10);
     }else{
+        player->sd_in_use = nb;
+        afficherLeCombat(window,screen,*player, sd,0,-10);
         // changer le sdlon
     }
     /*switch (nb){
@@ -235,7 +236,7 @@ void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t
     }
     return;*/
 }
-
+/*affichage carte de chaque sdlon*/
 void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected,char * path){
     SDL_Surface *container = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     Uint32 blue_bg = 0x69bdef;
@@ -299,7 +300,7 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     TTF_CloseFont(font);
     SDL_UpdateWindowSurface(window);
 }
-
+/*MAJ des cartes des sdlons*/
 void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     Uint32 bg = 0x285171;
     SDL_FillRect(screen,NULL,bg);
@@ -328,7 +329,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     TTF_CloseFont(font);
     SDL_UpdateWindowSurface(window);
 }
-
+/*affichage de tous les sdlons*/
 // max de n  est 4 je crois
 int showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     
@@ -372,7 +373,7 @@ int showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
         }
     }
 }
-
+/*fonction generique pour affichage des buttons sur l'écran*/
 void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected){
     SDL_Surface *annuler_rect = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -399,7 +400,7 @@ void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,i
     TTF_CloseFont(font);
     SDL_FreeSurface(annuler_rect);
 }
-
+/*afficher tous les options*/
 void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int selected,player_t player){
     Uint32 border_color = 0xfbfbf9;
     SDL_FillRect(surface, NULL, border_color);
@@ -416,11 +417,11 @@ void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,
     SDL_BlitSurface(surface, NULL, screen, &pos);
     SDL_UpdateWindowSurface(window);
 }
-
+/*MAj la position de la fleche*/
 void updateArrowSelector(SDL_Window *window,SDL_Surface * surface,int n){
     
 }
-
+/*affichage de la description de chaque item*/
 void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
     SDL_Surface *desc_container = SDL_CreateRGBSurface(0, WIDTH/2, 300, 32, 0, 255, 255, 255);
     SDL_FillRect(desc_container,NULL,0xFFFFFF);
@@ -472,7 +473,7 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 
 
 /*sac*/
-int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t player,sdlon sd){
+int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t *player,sdlon sd){
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
     item_init();
@@ -490,7 +491,7 @@ int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[]
     int nb=0;
     for(int i=0;i<n;i++){
         SDL_Log("show item %d\n",i);
-        showItem(window,items_surface,noms[i],2, (60*i)+40, player, i);
+        showItem(window,items_surface,noms[i],2, (60*i)+40, *player, i);
     }
     SDL_Log("show description");
     /*description*/
@@ -547,6 +548,9 @@ int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[]
                         nb=(nb+1)%n;
                         break;
                     case SDLK_RETURN:
+                        SDL_Log("nb sdlons avant %d",player->nb_current_sdlon);
+                        add_sdlon_in_set(sd,player);
+                        SDL_Log("nb sdlons apres %d",player->nb_current_sdlon);
                         break;
                 }
                 SDL_Log("here 1");
@@ -584,10 +588,11 @@ int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[]
     }
 }
 /*fin sac*/
-void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n,player_t player, sdlon sd){
+/*fonction qui gere les eventement lors de l'affichage du combat */
+void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n,player_t *player, sdlon sd){
     switch(n){
         case 0:
-            onAttack(window,screen,surface,width,height,player, sd);
+            onAttack(window,screen,surface,width,height,*player, sd);
             break;
         case 1: ;
             char * noms[NB_ITEMS];
@@ -603,24 +608,28 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
                                 printf("Ok, l'items est lus\n");
                             }
                             SDL_Log("show sac\n");
+            SDL_Log("nb sdlons avant 1 %d",player->nb_current_sdlon);
             int returnValue = showSac(window,screen,noms,descs,5,player,sd);
+            SDL_Log("nb sdlons apres 1 %d",player->nb_current_sdlon);
             if(returnValue==-1){
-                afficherLeCombat(window,screen,player,sd,0,-10);
+                afficherLeCombat(window,screen,*player,sd,0,-10);
             }
             return;
             break;
         case 2:;
-            int nbRetour = showAllSDlons(window,screen,4,player);
+            int nbRetour = showAllSDlons(window,screen,4,*player);
+            SDL_Log("nb_current sdlon est %d",player->sd_in_use);
             handle_sdlons_events(window,screen,nbRetour,player,sd);
+            SDL_Log("nb_current sdlon est %d",player->sd_in_use);
             break;
         case 3: ;
-            printMap(window,screen,player);
+            printMap(window,screen,*player);
             break;
         default:
             break;
     }
 }
-
+/*fonction appelle des qu'on click sur l'option attaque*/
 void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,player_t player, sdlon sd){
     int nb=0;
     drawAllOptions(window,screen,surface,width,height,nb,player);
@@ -659,7 +668,7 @@ void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int wi
     }
     return ;
 }
-
+/*MAj les option sdans l'ecran*/
 void updateOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int n,int width,int height){
     Uint32 border_color = 0xf8f8d8;
     SDL_FillRect(surface, NULL, border_color);
@@ -719,7 +728,7 @@ void updateOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,i
     TTF_CloseFont(font);
     SDL_UpdateWindowSurface(window);
 }
-
+/*affichage des options*/
 void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd){
      
     // Create a surface for the rectangle border
@@ -759,7 +768,7 @@ void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sd
                         nb=(nb+1)%4;
                         break;
                     case SDLK_RETURN:
-                        handle_option_events(window,screen,surface,width,height,nb,player,sd);
+                        handle_option_events(window,screen,surface,width,height,nb,&player,sd);
                         return ;
                         break;
                 }
@@ -771,7 +780,7 @@ void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sd
         }
     }
 }
-
+/*affichage de sinformation des joueur*/
 void printPlayerStats(SDL_Window *window,SDL_Surface * screen,char * nom,int x,int y, int niveau,int vie){
     Uint32 border_color = 0xf8f8d8;
 
@@ -806,7 +815,7 @@ void printPlayerStats(SDL_Window *window,SDL_Surface * screen,char * nom,int x,i
     TTF_CloseFont(font);
     SDL_UpdateWindowSurface(window);
 }
-
+/*affichage de sdlon*/
 void printPokemon(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y){
     printf("Nom du fichier: %s\n", nom_fichier);
     printf("OK\n");
@@ -820,6 +829,7 @@ void printPokemon(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int 
     SDL_FreeSurface(pokemon);
     SDL_UpdateWindowSurface(window);
 }
+/*affichage de la scène de combat*/
 int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd,int isFirst,int nb_attaque){
     SDL_Log("isFirst %d\t nb_attaque %d\n",isFirst,nb_attaque);
     //sdlon sd = generate_sdlon(0,1,15);
@@ -842,8 +852,8 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     printPokemon(window,screen,player.sd[player.sd_in_use].back_face,50,HEIGHT-150);//player indice in use bug. jpense ca viens du pointeur du sdlon courrant
     SDL_Log("vie courante %d\tvie max %d\n",player.sd[player.sd_in_use].vie,player.sd[0].vie_max);
     SDL_Log("niveau %d\n",player.sd[0].level);
-    printPlayerStats(window,screen,player.sd[0].nom,20,30,player.sd[0].level,(player.sd[0].vie*100)/player.sd[0].vie_max);
-    printPlayerStats(window,screen,sd.nom,WIDTH-320,450,sd.level,(sd.vie*100)/sd.vie_max);
+    printPlayerStats(window,screen,player.sd[player.sd_in_use].nom,WIDTH-320,450,player.sd[player.sd_in_use].level,(player.sd[player.sd_in_use].vie*100)/player.sd[player.sd_in_use].vie_max);
+    printPlayerStats(window,screen,sd.nom,20,30,sd.level,(sd.vie*100)/sd.vie_max);
     printf("here1\n");
     SDL_Surface * copy = SDL_CreateRGBSurface(0, 500, 100, 32, 0, 0, 0, 0);
     

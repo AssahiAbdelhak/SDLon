@@ -32,22 +32,14 @@ int dansLesBuissons=0;
 
 int printMap(SDL_Window *window,SDL_Surface * screen,player_t player);
 //town_init();
-
-void handle_sdlons_inventaire_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player){
-    switch (nb){
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-        printMap(window,screen,player);
-    // à implémenter après
-    default:
-        break;
+/*cette fonction est appelle apres un evenement dans le sac et permet de prendre une decision*/
+void handle_sdlons_inventaire_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t *player){
+    if(player->nb_current_sdlon!=nb){
+        player->sd_in_use = nb;
     }
-    return;
+    printMap(window,screen,*player);
 }
-
+/*cette fonction empeche le personnage de se deplacer qu'apres un certain moment*/
 void waiting(Uint32 *start_time){
     *start_time = SDL_GetTicks();
     Uint32 elapsed_time = SDL_GetTicks() - *start_time;
@@ -57,7 +49,7 @@ void waiting(Uint32 *start_time){
     // Update the start time for the next frame
     *start_time = SDL_GetTicks();
 }
-
+/*fonction qui deplace le personnage sur la map*/
 void movePlayer(SDL_Window *window,SDL_Surface *spirit,SDL_Surface *screen,SDL_Surface *copy,SDL_Rect pre_rect,SDL_Rect rect,enum directions dir,enum actions act,Uint32 *start_time){
     SDL_BlitSurface(copy,NULL,screen,&pre_rect);
     SDL_Rect copy_rect = {0,0,32,32};
@@ -75,14 +67,14 @@ void movePlayer(SDL_Window *window,SDL_Surface *spirit,SDL_Surface *screen,SDL_S
     
 }
 
-
+/*fonction de destruction de l'ecran*/
 void destroy(SDL_Window *pWindow,SDL_Surface *surface){
     SDL_FreeSurface(surface);
   SDL_DestroyWindow(pWindow);
     SDL_Quit();
     exit(1);
 }
-
+/*fonction qui afficher chaque layer de la map*/
 void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * nom_fichier,int firstgid, int tile_width,int tile_height){
     SDL_Surface * tile = IMG_Load(nom_fichier);
     SDL_Rect rect = {0,0,tile_width,tile_height};
@@ -109,7 +101,7 @@ void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * n
     SDL_UpdateWindowSurface(window);
     
 }
-
+/*fonction qui verifie si les coordonnees du personnage sont valides ou pas*/
 int localisationValide(int x,int y){
     if(x<0||x>WIDTH-32||y<0||y>HEIGHT-32)
         return 0;
@@ -250,7 +242,7 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
         }
     }
 }
-
+/*affichage du personnage sur la map*/
 void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
     int movePers=1,i=0,retour;
@@ -297,7 +289,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             break;
                         case 2:;
                             int nbRetour = showAllSDlons(window,screen,4,player);
-                            handle_sdlons_inventaire_events(window,screen,nbRetour,player);
+                            handle_sdlons_inventaire_events(window,screen,nbRetour,&player);
                             break;
                         case 3:;
                             //char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
@@ -456,7 +448,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
         }
     }
 }
-
+/*afficher de la map (des couches multiples)*/
 int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
     town_init();
     int i=0;
@@ -499,6 +491,7 @@ int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
         }
       }
 }}
+/*fonction qui renvoie vrai si on est dans les buissons faux sinon*/
 int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font,SDL_Color white,int move){
     
     SDL_Log("valeurs de collision %d",collision[(y/16)*80+(x/16)]);

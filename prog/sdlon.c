@@ -22,11 +22,11 @@ sommet y = 480 -> -1590
 cd C:\Users\bdalh\Desktop\test
 gcc sdl_test.c -IC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\include -LC:\Users\bdalh\Desktop\developpement\x86_64-w64-mingw32\lib -w -Wl,-subsystem,windows -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image -o prog
 */
-
+/*detruire l'ecran*/
 void destroy_all(SDL_Window *pWindow,TTF_Font *font);
-
+/*fonction pour afficher le menu d'accueil*/
 void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,TTF_Font *font);
-
+/*fonction pour afficher les sauvegardes disponibles*/
 void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *font,char strings[][100],int N,SDL_Rect *rect){
   sdlon_init();
   SDL_Rect rects[N];
@@ -77,7 +77,7 @@ void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *f
     }
   
 }
-
+/*detruire l'ecran*/
 void destroy_all(SDL_Window *pWindow,TTF_Font *font){
   SDL_DestroyWindow(pWindow);
     TTF_CloseFont(font); /* Doit etre avant T T F _ Q u i t () */
@@ -85,7 +85,7 @@ void destroy_all(SDL_Window *pWindow,TTF_Font *font){
     SDL_Quit();
     exit(1);
 }
-
+/*fonction qui affiche l'interface de nouvelle partie*/
 void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
   sdlon_init();
   SDL_Color white = {255,255,255};
@@ -204,7 +204,7 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
     SDL_StopTextInput();
   destroy_all(pWindow,font);
   }
-  
+/*fonction qui affiche chaque sauvegarde separement*/ 
 void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
   SDL_Rect rect;
   SDL_Color white = {255,255,255};
@@ -258,7 +258,7 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
     }
   return destroy_all(pWindow,font);
 }
-
+/*fonction pour afficher le menu d'accueil*/
 void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,TTF_Font *font){
     
     SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));

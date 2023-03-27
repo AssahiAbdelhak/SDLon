@@ -233,7 +233,10 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
                         break;
                     case SDLK_RETURN:
                         SDL_Log("player argent avant %d",player->argent);
-                        player->argent += confirmation(window,screen,surface,x_map+340,500,container_rect,nb);
+                        int total = confirmation(window,screen,surface,x_map+340,500,container_rect,nb);
+                        int qtt = (total/items[nb].prix)*(-1);
+                        player->argent += total;
+                        add_items(nb,qtt,player);
                         SDL_Log("player argent apres %d",player->argent);
                         SDL_FillRect(screen,NULL,0x000000);
                         afficherLaBoutique(window,screen,surface,player,x_map,y_map);
@@ -389,7 +392,8 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             break;
                         case 2:;
                             int nbRetour = showAllSDlons(window,screen,4,player);
-                            handle_sdlons_inventaire_events(window,screen,nbRetour,player);
+                            printMarket(window,screen,player,market_collision);
+                            //if(nbRetour==player.nb_current_sdlon)
                             break;
                         case 3:;
                             //char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
@@ -408,7 +412,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             int returnValue = showSac(window,screen,noms,descs,5,player,sd);
                             if(returnValue==-1){
                                 TTF_CloseFont(font);
-                                printMap(window,screen,player);
+                                printMarket(window,screen,player,market_collision);
                             }
                             break;
                         case 4:
