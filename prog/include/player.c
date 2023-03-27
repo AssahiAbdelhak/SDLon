@@ -44,6 +44,7 @@ player_t player_create(char * name, int genre, char * file_name){
     player.y = y;
     player.sd_in_use = -1;
     player.argent = argent;
+    player.current_town = 0;
 
     //mise à 0 des items
     for(i=0;i<NB_ITEMS;i++){
@@ -60,7 +61,7 @@ player_t player_create(char * name, int genre, char * file_name){
     FILE * file;
     file = fopen(path, "w");
     if(file!=NULL){
-        fprintf(file, "%s %d %d %d %d %d %d %d %d %d %d\n", player.name, genre, x, y, argent, init, init, init, init, init, init);
+        fprintf(file, "%s %d %d %d %d %d %d %d %d %d %d %d\n", player.name, genre, x, y, argent, init, init, init, init, init, init, 0);
         fclose(file);
     }else{
         printf("fichier non crée\n");
@@ -83,12 +84,12 @@ player_t player_init(char * file_name){
     strcat(path, file_name);
 
     char * name = malloc(sizeof(char)*MAX_LEN_NAME);
-    int genre, sdlon_index[6], i, cpt=0, invent_qtt;
+    int genre, sdlon_index[6], i, cpt=0, invent_qtt, current_town;
 
     FILE * file;
     file = fopen(path, "r");
     if(file!=NULL){
-        fscanf(file, "%s %d %d %d %d %d %d %d %d %d %d\n", name, &genre, &x, &y, &argent, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5]);
+        fscanf(file, "%s %d %d %d %d %d %d %d %d %d %d %d\n", name, &genre, &x, &y, &argent, &sdlon_index[0], &sdlon_index[1], &sdlon_index[2], &sdlon_index[3], &sdlon_index[4], &sdlon_index[5], &current_town);
 
         player.name = malloc(sizeof(char)*MAX_LEN_NAME);
         strcpy(player.name, name);
@@ -97,6 +98,7 @@ player_t player_init(char * file_name){
         player.y = y;
         player.sd_in_use = -1;
         player.argent = argent;
+        player.current_town = current_town;
 
         for(i=0;sdlon_index[i]!=-1;i++){  
             fscanf(file, "%d %d %d", &level, &xp, &vie);
@@ -210,7 +212,7 @@ int sspi(player_t player){
         for(;i<MAIN_MAX;i++){
             fprintf(file, " -1");
         }
-        fprintf(file, "\n");
+        fprintf(file, " %d\n", player.current_town);
 
         for(i=0;i<player.nb_current_sdlon;i++){
             fprintf(file, "%d %d %d\n", player.sd[i].level, player.sd[i].xp, player.sd[i].vie);

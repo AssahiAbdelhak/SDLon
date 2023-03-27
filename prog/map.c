@@ -458,16 +458,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
 }
 
 int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
-    /*town_init();
+    town_init();
     int i=0;
     for(i=0;i<all_town[0].nb_layer;i++){
-        printLayer(window,screen,all_town[0].layer[i],all_town[0].source_grid,all_town[0].first_grid,all_town[0].tile_width,all_town[0].tile_height);
-    }*/
-    printLayer(window,screen,sol,"images/pokemon_style.png",1,16,16);
-    printLayer(window,screen,chemin,"images/pokemon_style.png",1,16,16);
-    printLayer(window,screen,arbre,"images/pokemon_style.png",1,16,16);
-    printLayer(window,screen,buissons,"images/pokemon_style.png",1,16,16);
-    printLayer(window,screen,objets,"images/pokemon_style.png",1,16,16);
+        printLayer(window,screen,all_town[player.current_town].layer[i],all_town[player.current_town].source_grid,all_town[player.current_town].first_grid,all_town[player.current_town].tile_width,all_town[player.current_town].tile_height);
+    }
     //***
     
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);

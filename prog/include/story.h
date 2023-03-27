@@ -11,6 +11,9 @@
 #define ROUTE 1
 #define MAISON 3
 #define TILES_SIZE 16
+#define VILLEA 0
+#define SCN_CMB 1
+#define CENTRE_SDLON 2
 
 typedef struct town_s{
     char * name;
