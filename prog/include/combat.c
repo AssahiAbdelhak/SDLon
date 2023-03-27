@@ -1,5 +1,7 @@
 #include "combat.h"
 #include "player.h"
+#include "item.h"
+#include "sdlon_init.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -188,6 +190,54 @@ int can_fight(player_t player){
   }
     return 0;
 }
+
+int get_evolution(sdlon *sd){
+  if(sd->evolution!=0){
+    if((sdlon_s[(sd->evolution)].level) <= (sd->level)){
+      //assign les spec
+      return 1;
+    }else{return 0;}
+  }else{
+    return 0;
+  }
+}
+
+/**
+ * Fonction qui gère le gain de niveau d'un sdlon
+ * retourne 1 si le sdlon grimpe de niveau
+ * 0 sinon
+*/
+int get_level(sdlon *sd){
+  if(sd->xp<100){
+    return 0;
+  }else if(sd->xp>100){
+    sd->level++;
+    sd->xp=(sd->xp-100);
+    get_evolution(sd);
+  }
+  return 1;
+}
+
+/**
+ * Fonction qui gère le gain d'expérience
+ * retourne le nombre de sdlon ayant grimper de niveau
+*/
+int get_xp(player_t *player){
+  int i=0, cpt=0;
+  for(i=0;i<player->nb_current_sdlon;i++){
+    player->sd[i].xp += (100-player->sd[i].level);
+    cpt += get_level(&(player->sd[i]));
+  }
+  return cpt;
+}
+
+/**
+ * Fonction retournant un gain ($) après une victoire
+*/
+int get_loot(player_t *player){
+  return((rand()%MAX_GAIN)+1);
+}
+
 
 
 int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utiliser
