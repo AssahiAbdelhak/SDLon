@@ -151,6 +151,9 @@ void afficherDescription(SDL_Window *window,SDL_Surface * screen,SDL_Surface * s
     SDL_UpdateWindowSurface(window);
 }
 
+/**
+ * fonction d'affichage de la boutique 
+*/
 void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,player_t player,int x_map,int y_map){
     SDL_FillRect(surface,NULL,0xffffff);
     char * argent_texte = malloc(MAX_LEN_NAME);
@@ -166,7 +169,7 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
     SDL_Rect arg_rect = {0,0,argent->w,argent->h};
     SDL_BlitSurface(argent,NULL,surface,&arg_rect);
     SDL_Rect container_rect = {x_map,y_map,surface->h,surface->w};
-    /*image*/
+    //image
     SDL_Surface * sac = IMG_Load("images/sac.png");
     SDL_Surface * image_container = SDL_CreateRGBSurface(0, sac->w,sac->h, surface->format->BitsPerPixel, 0, 255, 255, 255);
     SDL_FillRect(image_container,NULL,0xa51209);
@@ -174,7 +177,7 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
     SDL_BlitSurface(sac,NULL,image_container,&image_rect);
     SDL_Rect image_cont_rect = {0,argent->h,image_container->w,image_container->h};
     SDL_BlitSurface(image_container,NULL,surface,&image_cont_rect);
-    /*description*/
+    //description
     SDL_Surface *desc_container = SDL_CreateRGBSurface(0, 640/2, 640-(sac->h+argent->h), 32, 0, 255, 255, 255);
     SDL_FillRect(desc_container,NULL,0xFFFFFF);
     SDL_Color white = {0,0,0};
@@ -185,7 +188,7 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
     SDL_Rect rect_container = {0,sac->h+argent->h+100,desc_texte->h,desc_texte->w};
     SDL_BlitSurface(desc_container,NULL,surface,&rect_container);
     SDL_FreeSurface(desc_container);
-    /*items*///337
+    //item
     afficherItem(window,surface,"hello",15,0,player,0);
     afficherItem(window,surface,"hello",15,50,player,0);
     afficherItem(window,surface,"hello",15,100,player,0);
@@ -197,7 +200,7 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
     SDL_Rect btn_in_screen = {337+x_map,600+y_map,320,40};
     botton(surface,"Quitter",btn.w, btn.h, btn.x, btn.y, 0);
     
-    /*arrow*/
+    //arrow
     int nb=0;
     SDL_Surface * arrow =  IMG_Load("images/select.png");
     SDL_Rect rect_arrow = {5+337,(50)*(nb)+15,arrow->h,arrow->w};
@@ -268,7 +271,10 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
         }
     }
 }
-/*Afficher le centre pokemon*/
+
+/**
+ * Afficher le centre sdlon
+*/
 int printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int colission[1600]){
     SDL_Surface * map = IMG_Load("../tiledmap/market_map.png");
     Uint32 bg = 0x000000;
@@ -284,14 +290,22 @@ int printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int coli
     SDL_UpdateWindowSurface(window);
     return var;
 }
-/*verification des coordonnées*/
+/**
+ * fonction verification des coordonnées
+*/
 int coordonnesValide(int colission[1600],int x,int y){
     SDL_Log("%d",colission[(y/16)*40+(x/16)]);
     if(colission[(y/16)*40+(x/16)]&&colission[(y/16)*40+(x/16)]!=porte_market&&colission[(y/16)*40+(x/16)]!=store&&colission[(y/16)*40+(x/16)]!=dame)
         return 0;
     return 1;
 }
-/*detecter les points d'achats et le sortie*/
+
+/**
+ * Detectcte les points de:
+ * - Achat
+ * - Sortie
+ * - Soins
+*/
 int detecteur(SDL_Window *window,SDL_Surface *screen,int col[1600],int x,int y){
     SDL_Log("here in %d",col[col[(y/16)*40+(x/16)]]);
     SDL_Rect rect = {0,800,WIDTH,HEIGHT-700};
@@ -320,10 +334,15 @@ int detecteur(SDL_Window *window,SDL_Surface *screen,int col[1600],int x,int y){
     TTF_CloseFont(font);
     return retour;
 }
-/*afficher le personnage sur la map*/
+
+/**
+ * Gestion de ses collisions
+ * Affichage du personnages dans la map
+ * 
+*/
 int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,player_t player,int x_map,int y_map,int colission[1600]){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
-    int movePers=1,i=0,detecter=VIDE;
+    int movePers=1,i=0,detecter=VIDE,retour;
     item_init();
     SDL_Log("x == %d\ty == %d",x_map,y_map);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -333,7 +352,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
     sdlon_init();
     enum directions dir = DOWN;
     enum actions act = DEF1;
-// prq 32 et pas 16 pcq on veut recuperer les 4 part du personnage
+    // prq 32 et pas 16 pcq on veut recuperer les 4 part du personnage
     SDL_Rect src_rect = {dir*16,act*16,32,32};
     SDL_Surface* copy = SDL_CreateRGBSurface(0, 32, 32, screen->format->BitsPerPixel, 0, 0, 0, 0);
     SDL_BlitSurface(screen,&rect,copy,&copy_rect);
@@ -359,7 +378,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                      break;
 
                     case SDLK_i:
-                        int retour = afficherTableauMenu(window,screen,500,700);
+                        retour = afficherTableauMenu(window,screen,500,700);
                         switch (retour){
                             // sdlon sac informations
                         case 1:

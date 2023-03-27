@@ -55,6 +55,11 @@ void town_init(){
     free(name);    
 }
 
+
+/**
+ * Fonction qui affiche les specs d'une ville
+ * Permet de débuger plus facilement les erreurs
+*/
 void display_town(town_t town){
     printf("Nom de la ville: %s\n", town.name);
     printf("Environnement de la ville: %d\n", town.environnement);

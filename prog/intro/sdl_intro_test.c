@@ -97,7 +97,7 @@ int afficherCinematique(SDL_Window * window,SDL_Surface *screen){
           
           print_image(screen, "images/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
           SDL_Log("et par la 1\n");
-          print_text(screen, "RosesareFF0000.ttf", "Bonjour dresseur, je suis le professeur SDLon, mon nom est Ange.", MARGE, LIGNE1, 255, 255, 255);
+          print_text(screen, "RosesareFF0000.ttf", "Bonjour Dresseur, je suis le professeur de Sdlon, mon nom est Ange.", MARGE, LIGNE1, 255, 255, 255);
           SDL_Log("et par la 2\n");
           affichage(window);
           SDL_Log("error here ?\n");
@@ -115,7 +115,7 @@ affichage(window);
           test_cond = 0;
 
           print_image(screen, "images/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
-          print_text(screen, "RosesareFF0000.ttf", "Si tu est ici c'est que tu comptes attraper des SDLon je suppose.", MARGE, LIGNE1, 255, 255, 255);
+          print_text(screen, "RosesareFF0000.ttf", "Si tu est ici c'est que tu comptes attraper des Sdlons je suppose.", MARGE, LIGNE1, 255, 255, 255);
 affichage(window);
           break;
         case 2 :
@@ -132,7 +132,7 @@ affichage(window);
           
           print_image(screen, "images/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
           print_image(screen, "images/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
-          print_text(screen, "RosesareFF0000.ttf", "Tres bien, vois tu, ceci est un sdlon !", MARGE, LIGNE1, 255, 255, 255);
+          print_text(screen, "RosesareFF0000.ttf", "Tres bien, pour commencer, voici ce qu'est un sdlon !", MARGE, LIGNE1, 255, 255, 255);
 affichage(window);
           break;
         case 3 :
@@ -149,12 +149,12 @@ affichage(window);
 
           print_image(screen, "images/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
           print_image(screen, "images/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
-          print_text(screen, "RosesareFF0000.ttf", "Tout d'abord j'ai une question.", MARGE, LIGNE1, 255, 255, 255);
+          print_text(screen, "RosesareFF0000.ttf", "Mais avant tout, j'ai une question.", MARGE, LIGNE1, 255, 255, 255);
           print_text(screen, "RosesareFF0000.ttf", "Est-tu un homme ou une femme ?", MARGE, LIGNE2, 255, 255, 255);
 
           //display du choix de sexe avec changement de couleur
-          print_text(screen, "RosesareFF0000.ttf", "homme", 400, 100, 255, 255, 255);
-          print_text(screen, "RosesareFF0000.ttf", "femme", 800, 100, 255, 255, 255);
+          print_text(screen, "RosesareFF0000.ttf", "Homme", 400, 100, 255, 255, 255);
+          print_text(screen, "RosesareFF0000.ttf", "Femme", 800, 100, 255, 255, 255);
 affichage(window);
           break;
         
@@ -173,8 +173,8 @@ affichage(window);
 
           print_image(screen, "images/asset/SDLon_character/trfront.png", 540, 320, 200, 200);
           print_image(screen, "images/asset/SDLon_creature/667s.png", 450, 355, 200, 200);
-          print_text(screen, "RosesareFF0000.ttf", "Tres bien, n'oublie pas de passer me voir au labo, j'ai quelques choses", MARGE, LIGNE1, 255, 255, 255);
-          print_text(screen, "RosesareFF0000.ttf", "a te donner, je te souhaite une bonne aventure", MARGE, LIGNE2, 255, 255, 255);
+          print_text(screen, "RosesareFF0000.ttf", "Tres bien, n'oublie pas de passer me voir au labo, j'ai quelque chose", MARGE, LIGNE1, 255, 255, 255);
+          print_text(screen, "RosesareFF0000.ttf", "a te donner. Je te souhaite une bonne aventure!", MARGE, LIGNE2, 255, 255, 255);
           affichage(window);
           //voir programme de abdelhak pour créer un choix via l'écran et sauvegarder la valeur dans le jeu ou un fichier annexe.
           break;
@@ -223,8 +223,8 @@ affichage(window);
           //Choisi d'etre un homme
           case SDLK_LEFT:
             if(clefbas == 3){
-              print_text(screen, "RosesareFF0000.ttf", "homme", 400, 100, 0, 0, 255);
-              print_text(screen, "RosesareFF0000.ttf", "femme", 800, 100, 255, 255, 255);
+              print_text(screen, "RosesareFF0000.ttf", "Homme", 400, 100, 0, 0, 255);
+              print_text(screen, "RosesareFF0000.ttf", "Femme", 800, 100, 255, 255, 255);
               HoF=0;
             }
             break;
@@ -232,8 +232,8 @@ affichage(window);
           //Choisi d'etre une femme
           case SDLK_RIGHT:
             if(clefbas == 3){
-              print_text(screen, "RosesareFF0000.ttf", "femme", 800, 100, 0, 0, 255);
-              print_text(screen, "RosesareFF0000.ttf", "homme", 400, 100, 255, 255, 255);
+              print_text(screen, "RosesareFF0000.ttf", "Femme", 800, 100, 0, 0, 255);
+              print_text(screen, "RosesareFF0000.ttf", "Homme", 400, 100, 255, 255, 255);
               HoF=1;
             }
             break;
