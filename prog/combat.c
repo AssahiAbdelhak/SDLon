@@ -206,6 +206,10 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
     }else{
         //on affiche un message puis on quitte
         printf("Fin du combat, vous avez gagné");
+        get_loot(&player);
+        printf("xp avant prise d'exp: %d\n", player.sd[0].xp);
+        get_xp(&player);
+        printf("xp après prise d'exp: %d\n", player.sd[0].xp);
         afficherLeCombat(window,screen,player,sd,0,4);//temporairement on reviens au combat
     }
     return;
