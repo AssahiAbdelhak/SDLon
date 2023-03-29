@@ -1,12 +1,16 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "time.h"
-
+/**
+ * @brief retourne un entier au hazard entre min et max
+*/
 int rng (int min, int max) {
     srand(time(NULL)); // initialisation de la génération aléatoire
     return rand() % (max - min + 1) + min; // renvoie un entier aléatoire entre min et max (inclus)
 }
-
+/**
+ * @brief retourne un pointeur sur une replique de pnj
+*/
 char * pnjSpeak(int choix){
     switch (choix){
         case 0 : 
