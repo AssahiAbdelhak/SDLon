@@ -389,7 +389,7 @@ int send_sdlon_in_box(sdlon sd){
  * @brief Fonction qui charge les sdlons 
  * dans la boite de stockage
 */
-/*
+
 int load_box(char * name){
     FILE *f = fopen(name, "r");
     enTeteBox();
@@ -412,25 +412,25 @@ int load_box(char * name){
 
     return 0;
 }
-*/
+
 
 /**
  * @brief créé une boite
  * dans laquel le joueur
  * pourras stocker ses sdlons
 */
-/*
+
 int create_box(){
     boiteASdlon = malloc(sizeof(box));
     boiteASdlon->next = NULL;
     boiteASdlon->precedent = NULL;
     return 0;
 }
-*/
+
 /**
 *@brief fonction sauvegarde de la box
 */
-/*
+
 int save_box(char *name){
     FILE *f = fopen(name, "w+");
     enTeteBox();
@@ -453,7 +453,7 @@ int save_box(char *name){
     return 1;
 
 }
-*/
+
 /**
  * @brief fonction de sauvegarde des donnée
  * des datas du joueurs
