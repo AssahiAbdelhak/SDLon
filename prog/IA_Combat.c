@@ -3,7 +3,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-int ia_Combat(sdlon * sd_at, sdlon * sd_target){ // retourne le numero d'attaque a utiliser
+int ia_Combat(sdlon * sd_at, sdlon * sd_target){
+/**
+* @brief Retourne l'attaque à effectuer pour le sdlon adverse
+*/
+    
     float pv; //pourcentage de vie 
     pv = (sd_at->vie / sd_at->vie_max) * 100;
     int chance = (rand()%100);

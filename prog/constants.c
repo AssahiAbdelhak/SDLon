@@ -1,4 +1,7 @@
 #include "constants.h"
+/**
+* @brief Contient le tableau des collisions de la map
+*/
 
 
 int sol[4160] = {
