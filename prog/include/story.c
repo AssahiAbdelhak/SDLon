@@ -1,3 +1,14 @@
+/**
+* @file story.c
+* Fichier gestion de l'histoire, des pnj et de la map 
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include "story.h"
 #include "item.h"
 #include <stdio.h>
@@ -11,7 +22,7 @@
 town_t all_town[NB_TOWN];
 
 /**
- * Fonction qui initialise les villes
+ * @brief Fonction qui initialise les villes
 */
 void town_init(){
     char * path = "include/data/init_town.txt";
@@ -57,7 +68,7 @@ void town_init(){
 
 
 /**
- * Fonction qui affiche les specs d'une ville
+ * @brief Fonction qui affiche les specs d'une ville
  * Permet de débuger plus facilement les erreurs
 */
 void display_town(town_t town){
@@ -74,7 +85,7 @@ void display_town(town_t town){
 
 
 /**
- * Vérifie que l'on peu aller dans la ville suivante
+ * @brief Vérifie que l'on peu aller dans la ville suivante
  * En ayant complété l'histoire du jeu
  * dans la ville actuelle
  * Passage dans la ville suivante nécéssite l'obtention du badge
@@ -82,7 +93,9 @@ void display_town(town_t town){
 int can_next_town(player_t player, town_t town){
     return(town.badge_required<=player.badges);
 }
-
+/**
+ * @brief retourne le type de la map (eau/feu/terre/air)
+*/
 int get_town_environnement(town_t town){
     return town.environnement;
 }
