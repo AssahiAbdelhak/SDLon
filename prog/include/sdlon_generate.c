@@ -1,3 +1,14 @@
+/**
+* @file sdlon_generate.c
+* Fichier de generation des sdlons 
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include "sdlon_generate.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,7 +17,7 @@
 
 
 /**
- * génère un niveau aléatoire
+ * @brief génère un niveau aléatoire
  * en fonction d'une borne min et max
 */
 int gen_level(int min, int max){
@@ -19,7 +30,7 @@ int gen_level(int min, int max){
 }
 
 /**
- * génère la vie du sdlon
+ * @brief génère la vie du sdlon
  * en fonction de son niveau
  * et de ses spécifications
 */
@@ -28,7 +39,7 @@ int gen_life(int level, int vie){
 }
 
 /**
- * corrige les bornes min inutilisables
+ * @brief corrige les bornes min inutilisables
 */
 int correctif(int min){
     switch (min)
@@ -48,7 +59,7 @@ int correctif(int min){
 }
 
 /**
- * Vérifie si le sdlon courant est utilisable ou non
+ * @brief Vérifie si le sdlon courant est utilisable ou non
 */
 int is_usable(sdlon sd, int min, int max){
     if(sd.level <= max && sd.level >= min){
@@ -64,7 +75,7 @@ int is_usable(sdlon sd, int min, int max){
 }
 
 /**
- * génération du sdlon 
+ * @brief génération du sdlon 
  * assigne les stats en fonction des spéc
 */
 sdlon assign_sd(int i, int min, int max){
@@ -90,7 +101,7 @@ sdlon assign_sd(int i, int min, int max){
 }
 
 /**
- * fonction principales de génération des sdlons
+ * @brief fonction principales de génération des sdlons
 */
 sdlon generate_sdlon(int environement, int min_level, int max_level){
 
