@@ -402,11 +402,14 @@ int capture(int lasso, int vie, int vieMax) {
   float pourcentageVie = ((float) vie / (float) vieMax) * 100.0; // Calcul du pourcentage de vie 
   int rng = rand() % 101; // Génération d'un nombre aléatoire entre 0 et 100 
   rng -= pourcentageVie/2;
-  if (lasso == 1 && rng < 25) { 
+  if (lasso == 1 && rng < 5) { 
+    printf("lasso 1 utilise\n");
     return 1; 
-    } else if (lasso == 2 && rng < 50) { 
+    } else if (lasso == 2 && rng < 20) { 
+      printf("lasso 2 utilise\n");
       return 1; 
       } else if (lasso == 3 && rng < 75) {
+        printf("lasso 3 utilise\n");
          return 1; 
          } 
   return 0;

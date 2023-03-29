@@ -528,6 +528,7 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
     char * nombre = malloc(sizeof(char )* MAX_LEN_NAME);
     
     sprintf(nombre,"x %d", player.inventaire.list_item[index]);
+    printf("%s\n",nombre);
     SDL_Surface *item_quant = TTF_RenderUTF8_Blended(font,nombre,color);
     free(nombre);
     SDL_Rect rect_qnt = {(item_container->w - item_quant->w - 20),10,item_quant->h,item_quant->w};
@@ -624,7 +625,22 @@ int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[]
                         break;
                     case SDLK_RETURN:
                         SDL_Log("nb sdlons avant %d",player->nb_current_sdlon);
-                        add_sdlon_in_set(sd,player);
+                        if(player->inventaire.list_item[nb]>0&&nb<=2&&nb>=0){
+                            int isCatched = capture(nb+1,sd.vie,sd.vie_max);
+                            if(isCatched){
+                                add_sdlon_in_set(sd,player);
+                                player->inventaire.list_item[nb]--;
+                                afficherLeCombat(window,screen,*player,sd,0,15);
+                            }else{
+                                player->inventaire.list_item[nb]--;
+                                afficherLeCombat(window,screen,*player,sd,0,13);
+                            }
+                            
+                            /*showItem(window,items_surface,noms[nb],2, (60*nb)+40, *player, nb);
+                            SDL_FillRect(items_surface,&rect_arrow,items_bg);
+    SDL_UpdateWindowSurface(window);*/
+                        }
+                        
                         SDL_Log("nb sdlons apres %d",player->nb_current_sdlon);
                         break;
                 }
@@ -980,6 +996,10 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
             sprintf(sdlon_name,"Parfait vous avez vaincu \"%s\"",sd.nom);
         if(nb_attaque==5)
             sprintf(sdlon_name,"Dommage \"%s\" vous a vaincu",sd.nom);
+        if(nb_attaque==15)
+            sprintf(sdlon_name,"Vous avez capturé \"%s\"",sd.nom);
+        if(nb_attaque==13)
+            sprintf(sdlon_name,"Vous avez echoue a capturer \"%s\"",sd.nom);
     }
     SDL_Rect rect = { 250, HEIGHT - 100 - 20, bandeau->w, bandeau->h };
     if(nb_attaque!=-10){
@@ -999,6 +1019,16 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
         SDL_Log("here 3");
     SDL_UpdateWindowSurface(window);
         SDL_Delay(3000);
+        if(nb_attaque==15){
+            printMap(window,screen,player);
+        }
+        if(nb_attaque==13){
+            int nb = ia(&sd,&(player.sd[player.sd_in_use]));
+            sats(&sd,&(player.sd[player.sd_in_use]),nb);
+            printf("player vie %d\tplayer vie max %d\n",player.sd[player.sd_in_use].vie,player.sd[player.sd_in_use].vie_max);
+            printPlayerStats(window,screen,player.sd[player.sd_in_use].nom,WIDTH-320,450,player.sd[player.sd_in_use].level,player.sd[player.sd_in_use].vie*100);
+            SDL_UpdateWindowSurface(window);
+        }
         SDL_Log("here 4");
         SDL_BlitSurface(copy, NULL, screen, &rect);
         SDL_FreeSurface(copy);

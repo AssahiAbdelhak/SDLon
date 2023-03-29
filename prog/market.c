@@ -276,8 +276,8 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
 /**
  * Afficher le centre sdlon
 */
-int printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int colission[1600]){
-    SDL_Surface * map = IMG_Load("../tiledmap/market_map.png");
+int printMarket(SDL_Window *window,SDL_Surface * screen,player_t *player,char *nom_fichier,int colission[1600]){
+    SDL_Surface * map = IMG_Load(nom_fichier);
     Uint32 bg = 0x000000;
     SDL_FillRect(screen,NULL,bg);
     printf("error here\n");
@@ -289,10 +289,10 @@ int printMarket(SDL_Window *window,SDL_Surface * screen,player_t player,int coli
     SDL_FreeSurface(map);
     SDL_Log("x == %d\ty == %d",x_map,y_map);
     int var;
-    if(player.genre==HOMME)
-        var = printSpiritInMarket(window,screen,"images/mec.png",100,100,player,x_map,y_map,colission);
+    if(player->genre==HOMME)
+        var = printSpiritInMarket(window,screen,"images/mec.png",100,100,*player,x_map,y_map,colission);
     else
-        var = printSpiritInMarket(window,screen,"images/meuf.png",100,100,player,x_map,y_map,colission);
+        var = printSpiritInMarket(window,screen,"images/meuf.png",100,100,*player,x_map,y_map,colission);
     SDL_UpdateWindowSurface(window);
     return var;
 }
@@ -392,7 +392,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             break;
                         case 2:;
                             int nbRetour = showAllSDlons(window,screen,4,player);
-                            printMarket(window,screen,player,market_collision);
+                            printMarket(window,screen,&player,market_collision);
                             //if(nbRetour==player.nb_current_sdlon)
                             break;
                         case 3:;
@@ -409,10 +409,10 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                 strcpy(descs[i], items[i].description);
                             }
                             sdlon sd;
-                            int returnValue = showSac(window,screen,noms,descs,5,player,sd);
+                            int returnValue = showSac(window,screen,noms,descs,5,&player,sd);
                             if(returnValue==-1){
                                 TTF_CloseFont(font);
-                                printMarket(window,screen,player,market_collision);
+                                printMarket(window,screen,&player,market_collision);
                             }
                             break;
                         case 4:
@@ -492,7 +492,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             SDL_Surface * surface = SDL_CreateRGBSurface(0, 640, 640, screen->format->BitsPerPixel, 0, 255, 255, 255);
                             afficherLaBoutique(window,screen,surface,&player,x_map,y_map);
                             SDL_FillRect(screen,NULL,0x000000);
-                            printMarket(window,screen,player,market_collision);
+                            printMarket(window,screen,&player,market_collision);
                             return -1;
                         }
                         break;

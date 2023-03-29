@@ -309,7 +309,8 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                                 strcpy(descs[i], items[i].description);
                             }
                             sdlon sd;
-                            int returnValue = showSac(window,screen,noms,descs,5,player,sd);
+                            printf("nb itemms %d\n",player.inventaire.list_item[0]);
+                            int returnValue = showSac(window,screen,noms,descs,5,&player,sd);
                             if(returnValue==-1){
                                 TTF_CloseFont(font);
                                 printMap(window,screen,player);
@@ -364,10 +365,16 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_f:
                         if(dansLesBuissons==PORTE){
-                            printMarket(window,screen,player,market_collision);
+                            printMarket(window,screen,&player,market_collision);
                             return ;
                         }
                         break;
+                    case SDLK_f:
+                        move=0;
+                        movePers=0;
+                        if(dansLesBuissons==LABO){
+                            printMarket(window,scree,&player,"tiledmap/laboratoire.png");
+                        }
                     case SDLK_e:
                         move=0;
                         movePers=0;
@@ -512,6 +519,7 @@ int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_S
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur L pour passer au labo",white);
             printf("got here\n");
         }
+
         else
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour chercher le sdlon",white);
     }
