@@ -1,3 +1,14 @@
+/**
+* @file combat.c
+* Fichier de gestion des attaques
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include "combat.h"
 #include "player.h"
 #include "item.h"
@@ -7,7 +18,7 @@
 #include <time.h>
 
 /**
- * Si vie en mois, on heal
+ * @brief Si vie en mois, on heal
  * sinon retour
  * retourne 0 si réussis
  * 1 sinon
@@ -28,7 +39,7 @@ int heal(sdlon * sd, int value){
 }
 
 /**
- * Calcul le nombre de degat 
+ * @brief Calcul le nombre de degat 
  * en fonction du type
 */
 int conf_dgt(int degat, int type_at, int type_target){
@@ -78,7 +89,9 @@ int conf_dgt(int degat, int type_at, int type_target){
 
     }
 }
-
+/**
+* @brief applique les degats sur un sdlon
+*/
 int apply_attaque(sdlon *sd, int degat){
     
     srand(time(NULL));
@@ -92,7 +105,9 @@ int apply_attaque(sdlon *sd, int degat){
     }
     
 }
-
+/**
+* @brief applique une attaque
+*/
 int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
 
     attaque at;
@@ -146,7 +161,7 @@ int sats(sdlon * sd_at, sdlon * sd_target, int num_at){
 }
 
 /**
- * Retourne le nombre de sdlons utilisables
+ * @brief Retourne le nombre de sdlons utilisables
 */
 int get_usable_sdlon(player_t player){
   int i = 0, cpt=0;
@@ -159,7 +174,7 @@ int get_usable_sdlon(player_t player){
 }
 
 /**
- * renvoie le status d'un combat
+ * @brief renvoie le status d'un combat
  * 0: gagné
  * 1: sdlon tué mais d'autre en rab
  * 2: continue
@@ -180,7 +195,7 @@ int status_combat(player_t player, sdlon sd){
 }
 
 /**
- * Fonction qui renvoie:
+ * @brief Fonction qui renvoie:
  * 1 si l'on peu se battre
  * 0 sinon
 */
@@ -203,7 +218,7 @@ int get_evolution(sdlon *sd){
 }
 
 /**
- * Fonction qui gère le gain de niveau d'un sdlon
+ * @brief Fonction qui gère le gain de niveau d'un sdlon
  * retourne 1 si le sdlon grimpe de niveau
  * 0 sinon
 */
@@ -219,7 +234,7 @@ int get_level(sdlon *sd){
 }
 
 /**
- * Fonction qui gère le gain d'expérience
+ * @brief Fonction qui gère le gain d'expérience
  * retourne le nombre de sdlon ayant grimper de niveau
 */
 int get_xp(player_t *player){
@@ -232,13 +247,15 @@ int get_xp(player_t *player){
 }
 
 /**
- * Fonction retournant un gain ($) après une victoire
+ * @brief Fonction retournant un gain ($) après une victoire
 */
 int get_loot(player_t *player){
   return((rand()%MAX_GAIN)+1);
 }
 
-
+/**
+ * @brief Fonction qui retourne le numero d'attaque a utiliser par l'ordinateur
+*/
 
 int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utiliser
 
@@ -363,7 +380,10 @@ int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utili
 }
 
 
-
+/**
+ * @brief retourne 1 si on capture le sdlon sinon retourne 0
+ * 
+*/
 int capture(int lasso, int vie, int vieMax) { 
   float pourcentageVie = ((float) vie / (float) vieMax) * 100.0; // Calcul du pourcentage de vie 
   int rng = rand() % 101; // Génération d'un nombre aléatoire entre 0 et 100 
