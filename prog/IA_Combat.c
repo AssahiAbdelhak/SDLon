@@ -1,3 +1,15 @@
+/**
+* @file IA_Combat.c
+* Fichier de gestion des attaques
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
+
 #include "include/sdlon_init.h"
 #include <stdio.h>
 #include <stdlib.h>

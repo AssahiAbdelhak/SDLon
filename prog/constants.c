@@ -1,4 +1,17 @@
+/**
+* @file constants.c
+* Fichier de gestion des attaques
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
+
 #include "constants.h"
+
 /**
 * @brief Contient le tableau des collisions de la map
 */
