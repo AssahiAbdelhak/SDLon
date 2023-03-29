@@ -19,6 +19,8 @@
 #define frameTime 100
 #define BUISSONS 1
 #define PORTE 2
+#define VILLESUIVANTE 3
+#define LABO 4
 
 enum directions{DOWN,LEFT,RIGHT,UP};
 enum actions{DEF1,WALK1,DEF2,WALK2};
@@ -103,10 +105,12 @@ void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * n
 }
 /*fonction qui verifie si les coordonnees du personnage sont valides ou pas*/
 int localisationValide(int x,int y){
+    printf("labo == %d\t,labo == %d\n",labo,collision[(y/16)*80+(x/16)]);
     if(x<0||x>WIDTH-32||y<0||y>HEIGHT-32)
         return 0;
-    if(collision[(y/16)*80+(x/16)]&&collision[(y/16)*80+(x/16)]!=porte)
+    if(collision[(y/16)*80+(x/16)]&&collision[(y/16)*80+(x/16)]!=porte&&collision[(y/16)*80+(x/16)]!=ville_suivante&&collision[(y/16)*80+(x/16)]!=labo)
         return 0;
+    printf("Localistion n'est pas valide\n");
     return 1;
 }
 
@@ -367,6 +371,9 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                     case SDLK_e:
                         move=0;
                         movePers=0;
+                        if(dansLesBuissons==VILLESUIVANTE){
+                            printf("goooo\n");
+                        }
                         if(dansLesBuissons==BUISSONS){
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
@@ -495,9 +502,16 @@ int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
 int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font,SDL_Color white,int move){
     
     SDL_Log("valeurs de collision %d",collision[(y/16)*80+(x/16)]);
+    printf("move == %d\n",move);
     if(move){
         if(collision[(y/16)*80+(x/16)]==porte)
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour Entrer a la maison",white);
+        else if(collision[(y/16)*80+(x/16)]==ville_suivante)
+            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour passer a la ville",white);
+        else if(collision[(y/16)*80+(x/16)]==labo){
+            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur L pour passer au labo",white);
+            printf("got here\n");
+        }
         else
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour chercher le sdlon",white);
     }
@@ -505,12 +519,20 @@ int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_S
         hint = TTF_RenderUTF8_Blended(font,"Vous n'avez pas trouve de sdlon",white);
     }
     SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
-    if(buissons[(y/16)*80+(x/16)]||collision[(y/16)*80+(x/16)]==porte){
+    if(buissons[(y/16)*80+(x/16)]||collision[(y/16)*80+(x/16)]==porte||collision[(y/16)*80+(x/16)]==ville_suivante||collision[(y/16)*80+(x/16)]==labo){
         SDL_Log("print message");
-        SDL_BlitSurface(hint,&hintContainer,screen,&hintBox);
+        SDL_BlitSurface(hint,NULL,screen,&hintBox);
         SDL_UpdateWindowSurface(window);
         if(collision[(y/16)*80+(x/16)]==porte)
             return PORTE;
+        else if(collision[(y/16)*80+(x/16)]==ville_suivante){
+            printf("Passer a la ville suivante\n");
+            return VILLESUIVANTE;
+        }
+        else if(collision[(y/16)*80+(x/16)]==labo){
+            printf("Passer au labo\n");
+            return LABO;
+        }
         else
             return BUISSONS;
     }else{        
