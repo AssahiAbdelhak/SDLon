@@ -292,7 +292,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             sspi(player);
                             break;
                         case 2:;
-                            int nbRetour = showAllSDlons(window,screen,4,player);
+                            int nbRetour = showAllSDlons(window,screen,7,player);
                             handle_sdlons_inventaire_events(window,screen,nbRetour,&player);
                             break;
                         case 3:;
