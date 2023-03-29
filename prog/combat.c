@@ -242,6 +242,10 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
     }else{
         //on affiche un message puis on quitte
         printf("Fin du combat, vous avez gagné");
+        get_loot(&player);
+        printf("xp avant prise d'exp: %d\n", player.sd[0].xp);
+        get_xp(&player);
+        printf("xp après prise d'exp: %d\n", player.sd[0].xp);
         afficherLeCombat(window,screen,player,sd,0,4);//temporairement on reviens au combat
     }
     return;
@@ -366,10 +370,10 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     int y=60,x=30;
     int i;
     for(i=0;i<player.nb_current_sdlon;i++){
-        x=(i%2==0)?30:730;
-        y=60+(300)*(i/2);
+        x=(i%2==0)?60:700;
+        y=60+(200)*(i/2);
         SDL_Log("vie %d et vie courante %d et vie max %d",((player.sd[i].vie*100)/(player.sd[i].vie_max)), player.sd[i].vie, player.sd[i].vie_max);
-        printSdlonBar(window,screen,500,200,x,y,player.sd[i].nom,"M",((player.sd[i].vie*100)/player.sd[i].vie_max),player.sd[i].level,(n==i),player.sd[i].front_face);
+        printSdlonBar(window,screen,500,180,x,y,player.sd[i].nom,"M",((player.sd[i].vie*100)/player.sd[i].vie_max),player.sd[i].level,(n==i),player.sd[i].front_face);
         
     }
     /*printSdlonBar(window,screen,500,200,30,60,"Abdelhak","M",90,10,(n==0));
@@ -691,7 +695,7 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
             return;
             break;
         case 2:;
-            int nbRetour = showAllSDlons(window,screen,4,*player);
+            int nbRetour = showAllSDlons(window,screen,7,*player);
             SDL_Log("nb_current sdlon est %d",player->sd_in_use);
             handle_sdlons_events(window,screen,nbRetour,player,sd);
             SDL_Log("nb_current sdlon est %d",player->sd_in_use);

@@ -210,6 +210,15 @@ int get_evolution(sdlon *sd){
   if(sd->evolution!=0){
     if((sdlon_s[(sd->evolution)].level) <= (sd->level)){
       //assign les spec
+      printf("On évolue\n");
+      sdlon sd_stock;
+      sd_stock = sdlon_s[sd->evolution];
+      printf("Nom évol: %s\n", sd_stock.nom);
+      sd_stock.level = sd->level;
+      sd_stock.vie = sd->vie;
+      sd_stock.xp = sd->xp;
+      sd = &sd_stock;
+      printf("Nom évol: %s\n", sd->nom);
       return 1;
     }else{return 0;}
   }else{
@@ -229,6 +238,7 @@ int get_level(sdlon *sd){
     sd->level++;
     sd->xp=(sd->xp-100);
     get_evolution(sd);
+    printf("Nom évol: %s\n", sd->nom);
   }
   return 1;
 }
@@ -242,6 +252,7 @@ int get_xp(player_t *player){
   for(i=0;i<player->nb_current_sdlon;i++){
     player->sd[i].xp += (100-player->sd[i].level);
     cpt += get_level(&(player->sd[i]));
+    printf("Nom évol: %s\n", player->sd[i].nom);
   }
   return cpt;
 }
@@ -250,7 +261,10 @@ int get_xp(player_t *player){
  * @brief Fonction retournant un gain ($) après une victoire
 */
 int get_loot(player_t *player){
-  return((rand()%MAX_GAIN)+1);
+  int loot = (rand()%MAX_GAIN)+1;
+  player->argent += loot;
+  printf("le loot gagné est de: %d", loot);
+  return loot;
 }
 
 /**
