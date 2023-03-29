@@ -1,3 +1,16 @@
+/**
+* @file combat.c
+* Fichier de gestion des attaques
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
+
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -10,11 +23,21 @@
 #define WIDTH 1280
 
 void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd);
+
 void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,player_t player, sdlon sd);
+
 void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected);
+
 int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd,int isFirst,int nb_attaque);
-/*MAJ des menus sur le jeu*/
+
+
+
 void updateMenus(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n){
+/**
+* @brief Mise à jour des menus sur le jeu
+* 
+*/
+
     Uint32 bg = 0xae48f1;
     SDL_Rect rect = {(WIDTH - width)/2,(HEIGHT-height)/2,width,height};
     SDL_FillRect(surface,NULL,bg);
@@ -27,8 +50,12 @@ void updateMenus(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int
     SDL_BlitSurface(surface,NULL,screen,&rect);
     SDL_UpdateWindowSurface(window);
 }
-/*affichage du tableau de meuns*/
+
 int afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int height){
+/**
+* @brief Affichage du tableau de menus
+* 
+*/
     SDL_Surface *tableauMenus = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
     Uint32 bg = 0xdbeaa9;
     SDL_FillRect(tableauMenus,NULL,bg);
@@ -69,8 +96,12 @@ int afficherTableauMenu(SDL_Window *window,SDL_Surface * screen,int width,int he
     }
     return 0;
 }
-/*fonction qui affiche chaque attaque*/
 void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int height,SDL_Surface *surface,int x,int y,char *name_attaque,int type_sdl,int selected){
+/**
+* @brief Fonction qui affivhe chaque attaque
+* 
+*/
+
     /*TODO : creer des variables pour les couleurs de haque type*/
     SDL_Surface *attaque_surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 219, 233, 172);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -154,6 +185,11 @@ void attaque_graphique(SDL_Window *window,SDL_Surface *screen,int width,int heig
  * applique les dégat et récupère le status du combat
 */
 void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player, sdlon sd){
+/**
+* @brief Fonction qui gère l'attaque choisis et applique les dégâts et récupère le status du combat
+* 
+*/
+
     int status;
     switch (nb){
     case 0:
@@ -206,16 +242,17 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
     }else{
         //on affiche un message puis on quitte
         printf("Fin du combat, vous avez gagné");
-        get_loot(&player);
-        printf("xp avant prise d'exp: %d\n", player.sd[0].xp);
-        get_xp(&player);
-        printf("xp après prise d'exp: %d\n", player.sd[0].xp);
         afficherLeCombat(window,screen,player,sd,0,4);//temporairement on reviens au combat
     }
     return;
 }
-/*fonction qui change le sdlon utilise*/
+
 void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t *player, sdlon sd){
+/**
+* @brief Fonction qui change le sdlon utilisé
+*
+*/
+
     if(nb==player->nb_current_sdlon){
         afficherLeCombat(window,screen,*player, sd,0,-10);
     }else{
@@ -240,8 +277,13 @@ void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t
     }
     return;*/
 }
-/*affichage carte de chaque sdlon*/
+
 void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected,char * path){
+/**
+* @brief Affichage carte de chaque sdlon
+*
+*/
+
     SDL_Surface *container = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     Uint32 blue_bg = 0x69bdef;
     Uint32 bg_selected = 0xdaed9c;
@@ -304,8 +346,13 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     TTF_CloseFont(font);
     SDL_UpdateWindowSurface(window);
 }
-/*MAJ des cartes des sdlons*/
+
 void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
+/**
+* @brief Mise à jour des cartes des sdlons
+*
+*/
+
     Uint32 bg = 0x285171;
     SDL_FillRect(screen,NULL,bg);
     /*tittre*/
@@ -333,10 +380,13 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
     TTF_CloseFont(font);
     SDL_UpdateWindowSurface(window);
 }
-/*affichage de tous les sdlons*/
-// max de n  est 4 je crois
+// max de n est 4 je crois
+
 int showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
-    
+/**
+* @brief Affichage de tous les sdlons
+*
+*/    
     /*print sdlons*/
     int nb = 0;
     updateSdlons(window,screen,nb,player);
@@ -377,8 +427,12 @@ int showAllSDlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
         }
     }
 }
-/*fonction generique pour affichage des buttons sur l'écran*/
 void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,int selected){
+/**
+* @brief fonction generique pour affichage des buttons sur l'écran
+*
+*/
+
     SDL_Surface *annuler_rect = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     Uint32 bg = 0x285171;
@@ -404,8 +458,13 @@ void botton(SDL_Surface *surface,char * titre,int width,int height,int x,int y,i
     TTF_CloseFont(font);
     SDL_FreeSurface(annuler_rect);
 }
-/*afficher tous les options*/
+
 void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int selected,player_t player){
+/**
+* @brief Afficher toutes les options
+*
+*/
+
     Uint32 border_color = 0xfbfbf9;
     SDL_FillRect(surface, NULL, border_color);
     SDL_Log("attaque : %s\n",player.sd[0].attaque_1.nom_attaque);
@@ -421,12 +480,14 @@ void drawAllOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,
     SDL_BlitSurface(surface, NULL, screen, &pos);
     SDL_UpdateWindowSurface(window);
 }
-/*MAj la position de la fleche*/
-void updateArrowSelector(SDL_Window *window,SDL_Surface * surface,int n){
-    
-}
-/*affichage de la description de chaque item*/
+
+
 void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
+/**
+* @brief Affichage de la description de chaque item
+*
+*/
+
     SDL_Surface *desc_container = SDL_CreateRGBSurface(0, WIDTH/2, 300, 32, 0, 255, 255, 255);
     SDL_FillRect(desc_container,NULL,0xFFFFFF);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 40);
@@ -441,10 +502,11 @@ void showDescription(SDL_Window *window,SDL_Surface * screen, char * desc){
     TTF_CloseFont(font);
 }
 
-/**
- * Fonction permettant d'afficher les items dans le sac
-*/
 void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y, player_t player, int index){
+/**
+* @brief Fonction permettant d'afficher les items dans le sac
+*
+*/
     /*Varibles*/
     Uint32 bg = 0xFFFFFF;
     SDL_Color color = {96,96,96};
@@ -476,8 +538,13 @@ void showItem(SDL_Window *window,SDL_Surface * surface,char * nom, int qnt,int y
 }
 
 
-/*sac*/
+
 int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[],int n,player_t *player,sdlon sd){
+/**
+* @brief Affiche le sac
+*
+*/
+
     Uint32 bg = 0x285171;
     Uint32 items_bg = 0xf8e088;
     item_init();
@@ -591,9 +658,12 @@ int showSac(SDL_Window *window,SDL_Surface * screen,char * noms[],char * descs[]
         }
     }
 }
-/*fin sac*/
-/*fonction qui gere les eventement lors de l'affichage du combat */
+
 void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,int n,player_t *player, sdlon sd){
+/**
+* @brief Fonction qui gere les eventement lors de l'affichage du combat
+*/
+
     switch(n){
         case 0:
             onAttack(window,screen,surface,width,height,*player, sd);
@@ -633,8 +703,12 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
             break;
     }
 }
-/*fonction appelle des qu'on click sur l'option attaque*/
+
 void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int width,int height,player_t player, sdlon sd){
+/**
+* @brief Fonction appelle dès que l'on clique sur l'option attaque
+*/
+
     int nb=0;
     drawAllOptions(window,screen,surface,width,height,nb,player);
     int running = 1;
@@ -672,8 +746,11 @@ void onAttack(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int wi
     }
     return ;
 }
-/*MAj les option sdans l'ecran*/
 void updateOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,int n,int width,int height){
+/**
+* @brief Mise à jour des options dans l'écran
+*/
+
     Uint32 border_color = 0xf8f8d8;
     SDL_FillRect(surface, NULL, border_color);
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
@@ -732,9 +809,13 @@ void updateOptions(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surface,i
     TTF_CloseFont(font);
     SDL_UpdateWindowSurface(window);
 }
-/*affichage des options*/
+
+
 void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd){
-     
+/**
+* @brief Affichage des options
+*/
+
     // Create a surface for the rectangle border
     int width = 400;
     int height = 250;
@@ -784,8 +865,12 @@ void printControlles(SDL_Window *window,SDL_Surface * screen,player_t player, sd
         }
     }
 }
-/*affichage de sinformation des joueur*/
+
 void printPlayerStats(SDL_Window *window,SDL_Surface * screen,char * nom,int x,int y, int niveau,int vie){
+/**
+* @brief Affichage des statistiques des joueurs
+*/
+
     Uint32 border_color = 0xf8f8d8;
 
     // Create a surface for the rectangle border
@@ -819,8 +904,12 @@ void printPlayerStats(SDL_Window *window,SDL_Surface * screen,char * nom,int x,i
     TTF_CloseFont(font);
     SDL_UpdateWindowSurface(window);
 }
-/*affichage de sdlon*/
+
 void printPokemon(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y){
+/**
+* @brief Affichage de sdlon
+*/
+
     printf("Nom du fichier: %s\n", nom_fichier);
     printf("OK\n");
     SDL_Surface *pokemon = IMG_Load(nom_fichier);
@@ -833,8 +922,12 @@ void printPokemon(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int 
     SDL_FreeSurface(pokemon);
     SDL_UpdateWindowSurface(window);
 }
-/*affichage de la scène de combat*/
+
 int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sdlon sd,int isFirst,int nb_attaque){
+/**
+* @brief Affichage de la scène de combat
+*/
+
     SDL_Log("isFirst %d\t nb_attaque %d\n",isFirst,nb_attaque);
     //sdlon sd = generate_sdlon(0,1,15);
     SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
