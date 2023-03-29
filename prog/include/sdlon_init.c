@@ -1,17 +1,28 @@
+/**
+* @file sdlon_init.c
+* Fichier d'initialisation des sdlons 
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include "sdlon_init.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 /**
-Déclaration des tableaux de sdlons & attaques
+*@brief Déclaration des tableaux de sdlons & attaques
 */
 sdlon sdlon_s[NB_SDLON];
 attaque attaque_s[NB_SDLON];
 
-/*
-Fonction d'initialisation du tableau d'attaques
-**/
+/**
+*@brief Fonction d'initialisation du tableau d'attaques
+*/
 int attaque_init() {
   int i = 0;
   char *name_file = "include/data/init_at.txt";
@@ -42,9 +53,9 @@ int attaque_init() {
   return 0;
 }
 
-/*
-Fonction d'initialisation du tableau de sdlons
-**/
+/**
+* @brief Fonction d'initialisation du tableau de sdlons
+*/
 int sdlon_init() {
 
   attaque_init();
@@ -89,7 +100,9 @@ int sdlon_init() {
   SDL_Log("nom de sdlon_s[0] : %s\n",sdlon_s[0].nom);
   return 0;
 }
-
+/**
+ * @brief recupere l'indice d'un sdlon depuis le tableau
+*/
 int get_sdlon_index(char * name){
   int i = 0;
   while(strcmp(sdlon_s[i].nom, name)){
@@ -97,7 +110,9 @@ int get_sdlon_index(char * name){
   }
   return i;
 }
-
+/**
+ * @brief compare les sdlons retourne 1 si ils sont differents
+*/
 int sdloncmp(sdlon sd_src, sdlon sd_origin){
   int diff = 0;
   diff += strcmp(sd_src.nom, sd_origin.nom);
@@ -125,8 +140,8 @@ int sdloncmp(sdlon sd_src, sdlon sd_origin){
   return (diff);
 }
 
-/*
-  afficher un sdlon s
+/**
+* @brief afficher un sdlon s
 */
 
 extern void afficheSDLon(sdlon s){
