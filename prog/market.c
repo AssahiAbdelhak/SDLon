@@ -277,7 +277,10 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
  * Afficher le centre sdlon
 */
 int printMarket(SDL_Window *window,SDL_Surface * screen,player_t *player,char *nom_fichier,int colission[1600]){
+    printf("nom du fichier %s\n",nom_fichier);
     SDL_Surface * map = IMG_Load(nom_fichier);
+    if(!map)
+        printf("error image\n");
     Uint32 bg = 0x000000;
     SDL_FillRect(screen,NULL,bg);
     printf("error here\n");
@@ -392,7 +395,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             break;
                         case 2:;
                             int nbRetour = showAllSDlons(window,screen,4,player);
-                            printMarket(window,screen,&player,market_collision);
+                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision);
                             //if(nbRetour==player.nb_current_sdlon)
                             break;
                         case 3:;
@@ -412,7 +415,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             int returnValue = showSac(window,screen,noms,descs,5,&player,sd);
                             if(returnValue==-1){
                                 TTF_CloseFont(font);
-                                printMarket(window,screen,&player,market_collision);
+                                printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision);
                             }
                             break;
                         case 4:
@@ -491,8 +494,10 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             SDL_Log("go to store2");
                             SDL_Surface * surface = SDL_CreateRGBSurface(0, 640, 640, screen->format->BitsPerPixel, 0, 255, 255, 255);
                             afficherLaBoutique(window,screen,surface,&player,x_map,y_map);
+                            player.x=x;
+                            player.y=y;
                             SDL_FillRect(screen,NULL,0x000000);
-                            printMarket(window,screen,&player,market_collision);
+                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision);
                             return -1;
                         }
                         break;

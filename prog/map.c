@@ -365,16 +365,15 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_f:
                         if(dansLesBuissons==PORTE){
-                            printMarket(window,screen,&player,market_collision);
+                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision);
+                            return ;
+                        }
+                        if(dansLesBuissons==LABO){
+                            printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos);
                             return ;
                         }
                         break;
-                    case SDLK_f:
-                        move=0;
-                        movePers=0;
-                        if(dansLesBuissons==LABO){
-                            printMarket(window,scree,&player,"tiledmap/laboratoire.png");
-                        }
+                    
                     case SDLK_e:
                         move=0;
                         movePers=0;

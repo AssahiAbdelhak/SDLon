@@ -23,4 +23,5 @@ extern int store;
 extern int dame;
 extern int ville_suivante;
 extern int labo;
+extern int labos[1600];
 extern int market_collision[1600];
