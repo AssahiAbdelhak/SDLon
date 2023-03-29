@@ -1,3 +1,14 @@
+/**
+* @file map-testing.c
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
@@ -14,6 +25,9 @@ enum directions{DOWN,LEFT,RIGHT,UP};
 enum actions{DEF1,WALK1,DEF2,WALK2};
 
 void waiting(Uint32 *start_time){
+/**
+* @brief Framerate
+*/
     *start_time = SDL_GetTicks();
     Uint32 elapsed_time = SDL_GetTicks() - *start_time;
     if (elapsed_time < frameTime){
@@ -25,6 +39,10 @@ void waiting(Uint32 *start_time){
 
 void movePlayer(SDL_Surface *spirit,SDL_Surface *screen,SDL_Surface *copy,SDL_Rect pre_rect,SDL_Rect rect,enum directions dir,enum actions act,Uint32 *start_time){
     
+/**
+* @brief Fonction de mouvement du joueur
+*/
+
     SDL_BlitSurface(copy,NULL,screen,&pre_rect);
     SDL_Rect copy_rect = {0,0,32,32};
     SDL_BlitSurface(screen,&rect,copy,&copy_rect);
@@ -96,13 +114,20 @@ int collision[4160] = {
 };
 
 void destroy(SDL_Window *pWindow,SDL_Surface *surface){
+/**
+* @brief Fonction de destruction de surface et de la fenêtre
+*/
     SDL_FreeSurface(surface);
-  SDL_DestroyWindow(pWindow);
+    SDL_DestroyWindow(pWindow);
     SDL_Quit();
     exit(1);
 }
 
 int initSDL() {
+/**
+* @brief Initialisation de la bibliothèque SDL et création de la fenêtre
+*/
+
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "SDL_Init Error: %s\n", SDL_GetError());
         return 1;
@@ -119,6 +144,10 @@ int initSDL() {
     return 0;
 }
 int printLayer(SDL_Surface * screen,int tiles[4160],char * nom_fichier,int firstgid, int tile_width,int tile_height){
+/**
+* @brief affiche la map couche par couche
+*/
+    
     SDL_Surface * tile = IMG_Load(nom_fichier);
     SDL_Rect rect = {0,0,tile_width,tile_height};
     int tile_x;
@@ -146,6 +175,9 @@ int printLayer(SDL_Surface * screen,int tiles[4160],char * nom_fichier,int first
 }
 
 int localisationValide(int x,int y){
+/**
+* @brief Compare la position du joueur avec le table des collisions
+*/
     if(x<0||x>HEIGHT-32||y<0||y>WIDTH-32)
         return 0;
     if(collision[(y/16)*80+(x/16)])
@@ -154,6 +186,9 @@ int localisationValide(int x,int y){
 }
 
 void printSpirit(SDL_Surface * screen,char *nom_fichier,int x,int y){
+/**
+* @brief Affiche le joueur sur la map
+*/ 
     SDL_Surface * spirit = IMG_Load(nom_fichier);
     printf("image good");
     int i=0;

@@ -1,6 +1,5 @@
 /**
 * @file IA_Combat.c
-* Fichier de gestion des attaques
 * @author Wandrille Ballereau
 * @author Abdelhak Assahi
 * @author Lilian Colla
