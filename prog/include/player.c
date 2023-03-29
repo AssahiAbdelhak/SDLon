@@ -1,3 +1,14 @@
+/**
+* @file player.c
+* Fichier du gestion du joueur 
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include "player.h"
 #include "sdlon_init.h"
 #include "item.h"
@@ -6,7 +17,7 @@
 #include <string.h>
 //#include "Primitives_Box.h"
 /**
- * crée l'inventaire du joueur
+ * @brief crée l'inventaire du joueur
  * et le met à 0
 */
 inventory player_inventory_create(char * file_name){
@@ -27,7 +38,9 @@ inventory player_inventory_create(char * file_name){
 
     return inventaire;
 }
-
+/**
+ * @brief creer un joueur pour une nouvelle partie 
+*/
 player_t player_create(char * name, int genre, char * file_name){
 
     player_t player;
@@ -73,7 +86,9 @@ player_t player_create(char * name, int genre, char * file_name){
     free(path);
     return player;
 }
-
+/**
+ * @brief initialise les specs d'un joueur a partir d'un fichier de sauvegarde
+*/
 player_t player_init(char * file_name){
 
     player_t player;
@@ -153,7 +168,9 @@ player_t player_init(char * file_name){
     return player;
 }
 
-/*replace l'indice du sdlon courrant utiliser*/
+/**
+ * @brief replace l'indice corrant sur le premier sdlon
+*/
 void replace_current_sd(player_t * player){
     int i = 0;
 
@@ -169,10 +186,10 @@ void replace_current_sd(player_t * player){
     return;
 }
 
-
 /**
- * Libere la mémoire utiliser par le joueurs
+ * @brief Libere la mémoire utiliser par le joueurs
 */
+
 int player_quit(player_t * player){
     if(player==NULL){
         return 1;
@@ -183,7 +200,9 @@ int player_quit(player_t * player){
     player->name=NULL;
     return 0;
 }
-
+/**
+ * @brief afficher les sdlon du kit du joueur "debogage" 
+*/
 int display_pss(player_t player){
     int i;
     SDL_log("hfhveihfvbiebvier");
@@ -195,7 +214,7 @@ int display_pss(player_t player){
 }
 
 /**
- * save set, player, item
+ * @brief save set, player, item
  * pour sauvegarder ses données
  * dans le bon format
 */
@@ -230,7 +249,7 @@ int sspi(player_t player){
 }
 
 /**
- * Permet de retourner la quantité
+ * @brief Permet de retourner la quantité
  * d'un item posséder par le joueur
 */
 int get_player_item(player_t * player, int num_item){
@@ -238,7 +257,7 @@ int get_player_item(player_t * player, int num_item){
 }
 
 /**
- * Ajoute un item
+ * @brief Ajoute un item
  * à l'inventaire du joueurs
  * retourne 0 si réussis
  * 1 si aucun item recevable
@@ -259,7 +278,7 @@ int add_items(int num_item, int qtt, player_t * player){
 }
 
 /**
- * retire un item
+ * @brief retire un item
  * à l'inventaire du joueur
 */
 int remove_items(int num_item, int qtt, player_t * player){
@@ -277,14 +296,14 @@ int remove_items(int num_item, int qtt, player_t * player){
 }
 
 /**
- * utilise un item dans l'inventaire du joueur
+ * @brief utilise un item dans l'inventaire du joueur
 */
 int use_item(){
     return 0;
 }
 
 /**
- * Fonction qui ajoute un sdlon
+ * @brief Fonction qui ajoute un sdlon
  * dans la main courante d'un joueurs
 */
 int add_sdlon_in_set(sdlon sd, player_t * player){
@@ -315,7 +334,7 @@ int add_sdlon_in_set(sdlon sd, player_t * player){
 }
 
 /**
- * Fonction qui retire un sdlon
+ * @brief Fonction qui retire un sdlon
  * de la main courante d'un joueurs
 */
 int remove_sdlon_in_set(sdlon sd, player_t * player){
@@ -348,7 +367,7 @@ int remove_sdlon_in_set(sdlon sd, player_t * player){
 }
 
 /**
- * Fonction qui switch
+ * @brief Fonction qui switch
  * les sdlons du set du joueur
 */
 int switch_sdlon_from_set(sdlon sd_in, sdlon sd_out, player_t * player){
@@ -358,7 +377,7 @@ int switch_sdlon_from_set(sdlon sd_in, sdlon sd_out, player_t * player){
 }
 
 /**
- * Fonction qui envoie un sdlon dans une boite
+ * @brief Fonction qui envoie un sdlon dans une boite
  * pour capturer des sdlons
  * sans les avoir dans sa main
 */
@@ -367,10 +386,10 @@ int send_sdlon_in_box(sdlon sd){
 }
 
 /**
- * Fonction qui charge les sdlons 
+ * @brief Fonction qui charge les sdlons 
  * dans la boite de stockage
 */
-/*
+
 int load_box(char * name){
     FILE *f = fopen(name, "r");
     enTeteBox();
@@ -393,25 +412,25 @@ int load_box(char * name){
 
     return 0;
 }
-*/
+
 
 /**
- * créé une boite
+ * @brief créé une boite
  * dans laquel le joueur
  * pourras stocker ses sdlons
 */
-/*
+
 int create_box(){
     boiteASdlon = malloc(sizeof(box));
     boiteASdlon->next = NULL;
     boiteASdlon->precedent = NULL;
     return 0;
 }
+
+/**
+*@brief fonction sauvegarde de la box
 */
-/*
-    fonction sauvegarde de la box
-*/
-/*
+
 int save_box(char *name){
     FILE *f = fopen(name, "w+");
     enTeteBox();
@@ -434,9 +453,9 @@ int save_box(char *name){
     return 1;
 
 }
-*/
+
 /**
- * fonction de sauvegarde des donnée
+ * @brief fonction de sauvegarde des donnée
  * des datas du joueurs
  * box/set/items
  * optionel en fonction des autres système de sauvegarde de l'initialisation

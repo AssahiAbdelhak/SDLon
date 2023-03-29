@@ -1,0 +1,3 @@
+
+
+char * pnjSpeak(int choix);

@@ -1,9 +1,20 @@
+/**
+* @file test_header.c
+* Fichier de tests des headers 
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include "test_header.h"
 #include <stdio.h>
 
 
 /**
- * affiche l'etat du test
+ * @brief affiche l'etat du test
  * dans le cas ou le resultat du test = 1
 */
 void posi_test_print(int test, int verbose){
@@ -16,7 +27,7 @@ void posi_test_print(int test, int verbose){
 }
 
 /**
- * affiche l'etat du test
+ * @brief affiche l'etat du test
  * dans le cas ou le resultat du test = 0
 */
 void nega_test_print(int test, int verbose){
@@ -29,7 +40,7 @@ void nega_test_print(int test, int verbose){
 }
 
 /**
- * Affiche le test actuelle
+ * @brief Affiche le test actuelle
 */
 void affiche_test(char * str, int verbose){
   if(verbose){
@@ -40,7 +51,7 @@ void affiche_test(char * str, int verbose){
 }
 
 /**
- * Affiche la fiabilité d'une donnée
+ * @brief Affiche la fiabilité d'une donnée
  * ratio entre le nombre d'une donnée
  * et le nombre de génération au cours du test
 */

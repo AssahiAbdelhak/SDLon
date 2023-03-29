@@ -37,7 +37,7 @@ typedef struct box{
     struct box * next;
     struct box * precedent;
 }box;
-//box * boiteASdlon;
+box * boiteASdlon;
 
 player_t player_create(char * name, int genre, char * file_name);
 player_t player_init(char * file_name);

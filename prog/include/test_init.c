@@ -1,3 +1,14 @@
+/**
+* @file test_init.c
+* Fichier de tests et de debogage
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include "Primitives_Box.h"
 #include "sdlon_generate.h"
 #include "combat.h"
@@ -8,7 +19,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+/**
+ * @brief jeu de tests et de debogage
+*/
 int main(int argc, char * argv[]) {
 
   int test=0, verbose = 0, cpt=40, error=0, i;
