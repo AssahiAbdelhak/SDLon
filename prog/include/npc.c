@@ -1,3 +1,14 @@
+/**
+* @file npc.c
+* Fichier des repliques de pnjs 
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include "stdio.h"
 #include "stdlib.h"
 #include "time.h"
