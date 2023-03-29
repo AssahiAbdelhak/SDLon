@@ -1,10 +1,23 @@
+/**
+* @file item.c
+* Fichier des items
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "item.h"
 
 item_t items[NB_ITEMS];
-
+/**
+ * @brief initialise le tableau d'item en fonction du fichier d'entrée
+*/
 int item_init(){
     int i = 0, type, usage, opt_degat, opt_tag, prix;
     char *name_file = "include/data/init_item.txt";
@@ -41,7 +54,9 @@ int item_init(){
 
     return 0;
 }
-
+/**
+ * @brief libere la memoire
+*/
 int item_quit(){
     int i;
     for(i=0;i<NB_ITEMS;i++){
@@ -52,7 +67,9 @@ int item_quit(){
     }
     return 1;
 }
-
+/**
+ * @brief affichage des items "debogage"
+*/
 int display_all_items(){
     int i;
     SDL_Log("Début de l'affichage de tous les items:\n");
