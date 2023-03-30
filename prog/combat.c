@@ -282,7 +282,7 @@ void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t
     return;*/
 }
 
-void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected,char * path){
+void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected,char * path,int type){
 /**
 * @brief Affichage carte de chaque sdlon
 *
@@ -309,14 +309,28 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     /*fin image*/
     /*nom de pokemon*/
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color red = {255,0,0};
     SDL_Color white = {255,255,255};
+    SDL_Color brown = {165,42,42};
+    SDL_Color blue = {0,0,255};
     SDL_Surface *titre = TTF_RenderUTF8_Blended(font,nom,white);
+    
     SDL_Rect nom_rect = {230,10,titre->h,titre->w};
     SDL_BlitSurface(titre,NULL,container,&nom_rect);
     SDL_FreeSurface(titre);
     /*fin de pokemon*/
-    /*genre*/
-    SDL_Surface *genre = TTF_RenderUTF8_Blended(font,gendre,white);
+    /*type*/
+    SDL_Surface *genre;
+    if(type==EAU){
+        genre = TTF_RenderUTF8_Blended(font,"EAU",blue);
+    }else if(type==TERRE){
+        genre = TTF_RenderUTF8_Blended(font,"TERRE",brown);
+    }else if(type==AIR){
+        genre = TTF_RenderUTF8_Blended(font,"AIR",white);
+    }else{
+       genre = TTF_RenderUTF8_Blended(font,"FEU",red);
+    }
+
     SDL_Rect genre_rect = {width - genre->w - 20,10,genre->h,genre->w};
     SDL_BlitSurface(genre,NULL,container,&genre_rect);
     SDL_FreeSurface(genre);
@@ -373,7 +387,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
         x=(i%2==0)?60:700;
         y=60+(200)*(i/2);
         SDL_Log("vie %d et vie courante %d et vie max %d",((player.sd[i].vie*100)/(player.sd[i].vie_max)), player.sd[i].vie, player.sd[i].vie_max);
-        printSdlonBar(window,screen,500,180,x,y,player.sd[i].nom,"M",((player.sd[i].vie*100)/player.sd[i].vie_max),player.sd[i].level,(n==i),player.sd[i].front_face);
+        printSdlonBar(window,screen,500,180,x,y,player.sd[i].nom,"M",((player.sd[i].vie*100)/player.sd[i].vie_max),player.sd[i].level,(n==i),player.sd[i].front_face, player.sd[i].type);
         
     }
     /*printSdlonBar(window,screen,500,200,30,60,"Abdelhak","M",90,10,(n==0));

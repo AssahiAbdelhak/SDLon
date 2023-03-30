@@ -1,5 +1,5 @@
 0 barcasse 44 1 4 3 4 1 1 31 images/asset/SDLon_creature/BarcasseF.png images/asset/SDLon_creature/BarcasseB.png
-0 cuiracié 60 5 4 3 4 2 17 32 images/asset/SDLon_creature/CuiracieF.png images/asset/SDLon_creature/CuiraciéB.png
+0 cuiracié 60 5 4 3 4 2 17 32 images/asset/SDLon_creature/CuiracieF.png images/asset/SDLon_creature/CuiracieB.png
 0 soumalin 79 3 4 2 1 0 39 33 images/asset/SDLon_creature/SoumalinF.png images/asset/SDLon_creature/SoumalinB.png
 0 Aquaconda 85 1 4 1 1 0 30 11 images/asset/SDLon_creature/AquacondaF.png images/asset/SDLon_creature/AquacondaB.png
 0 Geyseron 65 1 4 1 1 0 21 11 images/asset/SDLon_creature/GeyseronF.png images/asset/SDLon_creature/GeyseronB.png

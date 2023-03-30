@@ -475,7 +475,10 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         move=0;
                         movePers=0;
                         if(detecter==DAME){
-                            player.sd[player.sd_in_use].vie = player.sd[player.sd_in_use].vie_max;
+                            int nb_sd=0;
+                            for(nb_sd=0;nb_sd<player.nb_current_sdlon;nb_sd++){
+                                player.sd[nb_sd].vie = player.sd[nb_sd].vie_max;
+                            }
                         }
                         break;
                     case SDLK_q:
