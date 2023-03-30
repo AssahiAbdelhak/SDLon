@@ -293,9 +293,9 @@ int printMarket(SDL_Window *window,SDL_Surface * screen,player_t *player,char *n
     SDL_Log("x == %d\ty == %d",x_map,y_map);
     int var;
     if(player->genre==HOMME)
-        var = printSpiritInMarket(window,screen,"images/mec.png",100,100,*player,x_map,y_map,colission);
+        var = printSpiritInMarket(window,screen,"images/mec.png",305,550,*player,x_map,y_map,colission);
     else
-        var = printSpiritInMarket(window,screen,"images/meuf.png",100,100,*player,x_map,y_map,colission);
+        var = printSpiritInMarket(window,screen,"images/meuf.png",305,550,*player,x_map,y_map,colission);
     SDL_UpdateWindowSurface(window);
     return var;
 }
@@ -475,7 +475,10 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         move=0;
                         movePers=0;
                         if(detecter==DAME){
-                            player.sd[player.sd_in_use].vie = player.sd[player.sd_in_use].vie_max;
+                            int nb_sd=0;
+                            for(nb_sd=0;nb_sd<player.nb_current_sdlon;nb_sd++){
+                                player.sd[nb_sd].vie = player.sd[nb_sd].vie_max;
+                            }
                         }
                         break;
                     case SDLK_q:
@@ -494,8 +497,6 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             SDL_Log("go to store2");
                             SDL_Surface * surface = SDL_CreateRGBSurface(0, 640, 640, screen->format->BitsPerPixel, 0, 255, 255, 255);
                             afficherLaBoutique(window,screen,surface,&player,x_map,y_map);
-                            player.x=x;
-                            player.y=y;
                             SDL_FillRect(screen,NULL,0x000000);
                             printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision);
                             return -1;

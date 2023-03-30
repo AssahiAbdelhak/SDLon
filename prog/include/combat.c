@@ -206,18 +206,17 @@ int can_fight(player_t player){
     return 0;
 }
 
-int get_evolution(sdlon *sd){
+int get_evolution(sdlon *sd){//erreur de pointeur, variable détruite après
   if(sd->evolution!=0){
     if((sdlon_s[(sd->evolution)].level) <= (sd->level)){
       //assign les spec
       printf("On évolue\n");
       sdlon sd_stock;
       sd_stock = sdlon_s[sd->evolution];
-      printf("Nom évol: %s\n", sd_stock.nom);
       sd_stock.level = sd->level;
       sd_stock.vie = sd->vie;
       sd_stock.xp = sd->xp;
-      sd = &sd_stock;
+      *sd = sd_stock;
       printf("Nom évol: %s\n", sd->nom);
       return 1;
     }else{return 0;}
