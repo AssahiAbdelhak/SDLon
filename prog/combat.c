@@ -282,7 +282,7 @@ void handle_sdlons_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t
     return;*/
 }
 
-void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected,char * path){
+void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,int x,int y,char * nom,char *gendre,int vie,int lev,int selected,char * path,int type){
 /**
 * @brief Affichage carte de chaque sdlon
 *
@@ -302,32 +302,46 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
         return ;
     }
     /*image*/
-    SDL_Rect title_rect = {10,10,img->h,img->w};
+    SDL_Rect title_rect = {-10,0,img->h,img->w};
     SDL_BlitSurface(img,NULL,container,&title_rect);
     SDL_FreeSurface(img);
     SDL_Rect container_rect = {x,y,height,width};
     /*fin image*/
     /*nom de pokemon*/
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
+    SDL_Color red = {255,0,0};
     SDL_Color white = {255,255,255};
+    SDL_Color brown = {120,60,60};
+    SDL_Color blue = {0,0,255};
     SDL_Surface *titre = TTF_RenderUTF8_Blended(font,nom,white);
-    SDL_Rect nom_rect = {170,10,titre->h,titre->w};
+    
+    SDL_Rect nom_rect = {230,10,titre->h,titre->w};
     SDL_BlitSurface(titre,NULL,container,&nom_rect);
     SDL_FreeSurface(titre);
     /*fin de pokemon*/
-    /*genre*/
-    SDL_Surface *genre = TTF_RenderUTF8_Blended(font,gendre,white);
+    /*type*/
+    SDL_Surface *genre;
+    if(type==EAU){
+        genre = TTF_RenderUTF8_Blended(font,"EAU",blue);
+    }else if(type==TERRE){
+        genre = TTF_RenderUTF8_Blended(font,"TERRE",brown);
+    }else if(type==AIR){
+        genre = TTF_RenderUTF8_Blended(font,"AIR",white);
+    }else{
+       genre = TTF_RenderUTF8_Blended(font,"FEU",red);
+    }
+
     SDL_Rect genre_rect = {width - genre->w - 20,10,genre->h,genre->w};
     SDL_BlitSurface(genre,NULL,container,&genre_rect);
     SDL_FreeSurface(genre);
     /*fin genre*/
     /*hp*/
-    SDL_Surface *niv_vie = TTF_RenderUTF8_Blended(font,"HP",white);
-    SDL_Rect hp = { 170, 80, niv_vie->h, niv_vie->w };
+    SDL_Surface *niv_vie = TTF_RenderUTF8_Blended(font,"PV",white);
+    SDL_Rect hp = { 230, 80, niv_vie->h, niv_vie->w };
     SDL_BlitSurface(niv_vie, NULL, container, &hp);
     SDL_FreeSurface(niv_vie);
-    SDL_Rect bar_vie = {200,85,200,20};
-    SDL_Rect bar_vie_sdlon = {200,85,(vie*200)/100,20};
+    SDL_Rect bar_vie = {260,85,200,20};
+    SDL_Rect bar_vie_sdlon = {260,85,(vie*200)/100,20};
     SDL_FillRect(container,&bar_vie,SDL_MapRGB(container->format,214,248,228));  // 106,238,158
     SDL_FillRect(container,&bar_vie_sdlon,SDL_MapRGB(container->format,106,238,158));
     /*fin hp*/
@@ -373,7 +387,7 @@ void updateSdlons(SDL_Window *window,SDL_Surface *screen,int n,player_t player){
         x=(i%2==0)?60:700;
         y=60+(200)*(i/2);
         SDL_Log("vie %d et vie courante %d et vie max %d",((player.sd[i].vie*100)/(player.sd[i].vie_max)), player.sd[i].vie, player.sd[i].vie_max);
-        printSdlonBar(window,screen,500,180,x,y,player.sd[i].nom,"M",((player.sd[i].vie*100)/player.sd[i].vie_max),player.sd[i].level,(n==i),player.sd[i].front_face);
+        printSdlonBar(window,screen,500,180,x,y,player.sd[i].nom,"M",((player.sd[i].vie*100)/player.sd[i].vie_max),player.sd[i].level,(n==i),player.sd[i].front_face, player.sd[i].type);
         
     }
     /*printSdlonBar(window,screen,500,200,30,60,"Abdelhak","M",90,10,(n==0));
@@ -962,11 +976,11 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     //printLayer(window,screen,combat_ciel,"images/pokemon_style.png",1,16,16);
     //printLayer(window,screen,combat_arbre,"images/pokemon_style.png",1,16,16);
 
-    printPokemon(window,screen,sd.front_face,WIDTH-280,250);
+    printPokemon(window,screen,sd.front_face,WIDTH-350,220);
     printf("In use: %d\n", player.sd_in_use);
     printf("Path sdlon in use: %s\n", player.sd[player.sd_in_use].back_face);
     printf("Path sdlon 0: %s\n", player.sd[0].back_face);
-    printPokemon(window,screen,player.sd[player.sd_in_use].back_face,50,HEIGHT-150);//player indice in use bug. jpense ca viens du pointeur du sdlon courrant
+    printPokemon(window,screen,player.sd[player.sd_in_use].back_face,0,HEIGHT-230);//player indice in use bug. jpense ca viens du pointeur du sdlon courrant
     SDL_Log("vie courante %d\tvie max %d\n",player.sd[player.sd_in_use].vie,player.sd[0].vie_max);
     SDL_Log("niveau %d\n",player.sd[0].level);
     printPlayerStats(window,screen,player.sd[player.sd_in_use].nom,WIDTH-320,450,player.sd[player.sd_in_use].level,(player.sd[player.sd_in_use].vie*100)/player.sd[player.sd_in_use].vie_max);
