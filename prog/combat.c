@@ -302,7 +302,7 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
         return ;
     }
     /*image*/
-    SDL_Rect title_rect = {10,10,img->h,img->w};
+    SDL_Rect title_rect = {-10,0,img->h,img->w};
     SDL_BlitSurface(img,NULL,container,&title_rect);
     SDL_FreeSurface(img);
     SDL_Rect container_rect = {x,y,height,width};
@@ -311,7 +311,7 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color white = {255,255,255};
     SDL_Surface *titre = TTF_RenderUTF8_Blended(font,nom,white);
-    SDL_Rect nom_rect = {170,10,titre->h,titre->w};
+    SDL_Rect nom_rect = {230,10,titre->h,titre->w};
     SDL_BlitSurface(titre,NULL,container,&nom_rect);
     SDL_FreeSurface(titre);
     /*fin de pokemon*/
@@ -322,12 +322,12 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     SDL_FreeSurface(genre);
     /*fin genre*/
     /*hp*/
-    SDL_Surface *niv_vie = TTF_RenderUTF8_Blended(font,"HP",white);
-    SDL_Rect hp = { 170, 80, niv_vie->h, niv_vie->w };
+    SDL_Surface *niv_vie = TTF_RenderUTF8_Blended(font,"PV",white);
+    SDL_Rect hp = { 230, 80, niv_vie->h, niv_vie->w };
     SDL_BlitSurface(niv_vie, NULL, container, &hp);
     SDL_FreeSurface(niv_vie);
-    SDL_Rect bar_vie = {200,85,200,20};
-    SDL_Rect bar_vie_sdlon = {200,85,(vie*200)/100,20};
+    SDL_Rect bar_vie = {260,85,200,20};
+    SDL_Rect bar_vie_sdlon = {260,85,(vie*200)/100,20};
     SDL_FillRect(container,&bar_vie,SDL_MapRGB(container->format,214,248,228));  // 106,238,158
     SDL_FillRect(container,&bar_vie_sdlon,SDL_MapRGB(container->format,106,238,158));
     /*fin hp*/
