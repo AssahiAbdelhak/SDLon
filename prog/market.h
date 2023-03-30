@@ -1,1 +1,1 @@
-int printMarket(SDL_Window *window,SDL_Surface * screen,player_t *player,char * nom_fichier,int colission[1600]);
+int printMarket(SDL_Window *window,SDL_Surface * screen,player_t *player,char * nom_fichier,int colission[1600],int map_indice);

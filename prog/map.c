@@ -365,11 +365,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_f:
                         if(dansLesBuissons==PORTE){
-                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision);
+                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision,0);
                             return ;
                         }
                         if(dansLesBuissons==LABO){
-                            printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos);
+                            printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos,1);
                             return ;
                         }
                         break;
@@ -384,8 +384,8 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
                                 //SDL_Log("nombre de sdlon insuffisants");
-                                sdlon sd = generate_sdlon(0,70,100);
-                                add_sdlon_in_set(sd,&player);
+                                //sdlon sd = generate_sdlon(0,70,100);
+                                //add_sdlon_in_set(sd,&player);
                             }else{
                                 if(can_fight(player)){
                                     //SDL_Log("E cliqué\n");
