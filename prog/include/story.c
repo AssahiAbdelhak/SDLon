@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "sdlon_generate.h"
 
 //gestion des pnj
 //gestion de l'histoire du jeu
@@ -98,4 +99,19 @@ int can_next_town(player_t player, town_t town){
 */
 int get_town_environnement(town_t town){
     return town.environnement;
+}
+
+/**
+ * @brief retourne le sdlon choisi par le joueur
+*/
+sdlon choix(int i){
+    switch(i){
+        case 1:
+            return assign_sd(0,4,7);
+        case 2:
+            return assign_sd(7,4,7);
+        case 3:
+            return assign_sd(16,4,7);
+    }
+    return ;
 }

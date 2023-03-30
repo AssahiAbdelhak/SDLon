@@ -9,4 +9,5 @@
 déclaration des prototypes des fonctions
 */
 extern sdlon generate_sdlon(int environement, int min_level, int difficulty);
+extern sdlon assign_sd(int i, int min, int max);
 #endif
