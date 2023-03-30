@@ -1,3 +1,15 @@
+/**
+* @file lib_sdl_facile.c
+* Fichier des fonction sdl simplifiées
+* @author Wandrille Ballereau
+* @author Abdelhak Assahi
+* @author Lilian Colla
+* @author Mohamed Besbes
+* @date 2023
+* @version 1.0 Alpha
+*
+*/
+
 # include <stdio.h>
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
@@ -24,7 +36,9 @@ float taille_y(int y){
 }
 
 
-
+/**
+ * @brief met un black screen
+*/
 void blackscreen(SDL_Surface * screen){
   Uint32 black = 0x000;
   SDL_FillRect(screen,NULL,black);
@@ -74,7 +88,9 @@ void cadre(SDL_Renderer * renderer, int xc, int yc){
   SDL_RenderPresent(renderer);
 
 }
-
+/**
+ * @brief affiche une image
+*/
 void print_image(SDL_Surface * screen, char * img, int xi, int yi, int hi, int wi){
   
   
@@ -99,7 +115,9 @@ void print_image(SDL_Surface * screen, char * img, int xi, int yi, int hi, int w
 }
 
 
-
+/**
+ * @brief affiche un texte
+*/
 void print_text(SDL_Surface * screen, const char * fontName, const char * texte, const int xt, const int yt, const int r, const int g, const int b){
 
   //fonction qui affiche du texte
@@ -147,7 +165,9 @@ void print_text(SDL_Surface * screen, const char * fontName, const char * texte,
 }
 
 
-
+/**
+ * @brief finalisation de l'affichage
+*/
 void affichage(SDL_Window * window){
   //Pour la finalisation et l'affichage
   SDL_UpdateWindowSurface(window);

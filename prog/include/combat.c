@@ -405,12 +405,15 @@ int capture(int lasso, int vie, int vieMax) {
   if (lasso == 1 && rng < 5) { 
     printf("lasso 1 utilise\n");
     return 1; 
-    } else if (lasso == 2 && rng < 20) { 
-      printf("lasso 2 utilise\n");
-      return 1; 
-      } else if (lasso == 3 && rng < 75) {
-        printf("lasso 3 utilise\n");
-         return 1; 
-         } 
+  }
+  if (lasso == 2 && rng < 20) { 
+    printf("lasso 2 utilise\n");
+    return 1; 
+  }
+  if (lasso == 3 && rng < 75) {
+    printf("lasso 3 utilise\n");
+    return 1; 
+  } 
+  printf("\nOn ne reussit pas a capturer\n");
   return 0;
 }
