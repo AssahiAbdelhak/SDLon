@@ -390,7 +390,8 @@ int ia(sdlon *sd_at, sdlon *sd_target) { // retourne le numero d'attaque a utili
       break;
     }
   }
-  return -1;
+  int rng = rand() % 4 +1;
+  return rng;
 }
 
 
