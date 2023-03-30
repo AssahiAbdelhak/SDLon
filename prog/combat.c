@@ -311,7 +311,7 @@ void printSdlonBar(SDL_Window *window,SDL_Surface *screen,int width, int height,
     TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
     SDL_Color red = {255,0,0};
     SDL_Color white = {255,255,255};
-    SDL_Color brown = {165,42,42};
+    SDL_Color brown = {120,60,60};
     SDL_Color blue = {0,0,255};
     SDL_Surface *titre = TTF_RenderUTF8_Blended(font,nom,white);
     
