@@ -292,6 +292,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             sspi(player);
                             break;
                         case 2:;
+                            printf("nb sdlons = %d\n",player.nb_current_sdlon);
                             int nbRetour = showAllSDlons(window,screen,7,player);
                             handle_sdlons_inventaire_events(window,screen,nbRetour,&player);
                             break;
@@ -365,11 +366,12 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_f:
                         if(dansLesBuissons==PORTE){
-                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision,0);
+                            printf("position x==%d y == %d\n",player.x,player.y);
+                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision,0,305,600);
                             return ;
                         }
                         if(dansLesBuissons==LABO){
-                            printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos,1);
+                            printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos,1,305,600);
                             return ;
                         }
                         break;
@@ -378,7 +380,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         move=0;
                         movePers=0;
                         if(dansLesBuissons==VILLESUIVANTE){
-                            printf("goooo\n");
+                            SDL_FillRect(screen,NULL,0x000000);
+                            for(int i=0; i < all_town[1].nb_layer; i++){
+                                
+                                printLayer(window,screen,all_town[1].layer[i],all_town[1].source_grid,all_town[1].first_grid,all_town[1].tile_width,all_town[1].tile_height);
+                            }
                         }
                         if(dansLesBuissons==BUISSONS){
                             if(player.nb_current_sdlon<1){

@@ -22,6 +22,7 @@
 #define PROFESSEUR 0
 #define DAME 3
 #define VIDE -1
+#define PORTE_LABO 4
 
 enum directions{DOWN,LEFT,RIGHT,UP};
 enum actions{DEF1,WALK1,DEF2,WALK2};
@@ -171,13 +172,15 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
     SDL_BlitSurface(argent,NULL,surface,&arg_rect);
     SDL_Rect container_rect = {x_map,y_map,surface->h,surface->w};
     //image
-    SDL_Surface * sac = IMG_Load("images/sac.png");
+int nb=0;
+    SDL_Surface * sac = IMG_Load(items[nb].path);
     SDL_Surface * image_container = SDL_CreateRGBSurface(0, sac->w,sac->h, surface->format->BitsPerPixel, 0, 255, 255, 255);
     SDL_FillRect(image_container,NULL,0xa51209);
     SDL_Rect image_rect = {0,0,sac->w,sac->h};
     SDL_BlitSurface(sac,NULL,image_container,&image_rect);
     SDL_Rect image_cont_rect = {0,argent->h,image_container->w,image_container->h};
     SDL_BlitSurface(image_container,NULL,surface,&image_cont_rect);
+    
     //description
     SDL_Surface *desc_container = SDL_CreateRGBSurface(0, 640/2, 640-(sac->h+argent->h), 32, 0, 255, 255, 255);
     SDL_FillRect(desc_container,NULL,0xFFFFFF);
@@ -200,7 +203,7 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
     botton(surface,"Quitter",btn.w, btn.h, btn.x, btn.y, 0);
     
     //arrow
-    int nb=0;
+    
     SDL_Surface * arrow =  IMG_Load("images/select.png");
     SDL_Rect rect_arrow = {5+337,(50)*(nb)+15,arrow->h,arrow->w};
     SDL_BlitSurface(arrow,NULL,surface,&rect_arrow);
@@ -235,17 +238,24 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
                     case SDLK_RETURN:
                         SDL_Log("player argent avant %d",player->argent);
                         int total = confirmation(window,screen,surface,x_map+340,500,container_rect,nb);
+                        if(player->argent>=(total*(-1))){
                         int qtt = (total/items[nb].prix)*(-1);
                         player->argent += total;
                         add_items(nb,qtt,player);
                         SDL_Log("player argent apres %d",player->argent);
                         SDL_FillRect(screen,NULL,0x000000);
+                        }
                         afficherLaBoutique(window,screen,surface,player,x_map,y_map);
+                        
                         return;
                         break;
                 }
                 SDL_FillRect(surface,&rect_arrow,0xffffff);
                 afficherDescription(window,screen,surface,sac,argent,items[nb].description,container_rect);
+                sac = IMG_Load(items[nb].path);
+    SDL_FillRect(image_container,NULL,0xa51209);
+    SDL_BlitSurface(sac,NULL,image_container,&image_rect);
+    SDL_BlitSurface(image_container,NULL,surface,&image_cont_rect);
                 /*SDL_Log("%s",items[nb].path);
                 sac = IMG_Load(items[nb].path);
                 SDL_Rect rect = {100,100,sac->h,sac->w};
@@ -277,7 +287,7 @@ void afficherLaBoutique(SDL_Window *window,SDL_Surface *screen,SDL_Surface *surf
 /**
  * Afficher le centre sdlon
 */
-int printMarket(SDL_Window *window,SDL_Surface * screen,player_t *player,char *nom_fichier,int colission[1600],int map_indice){
+int printMarket(SDL_Window *window,SDL_Surface * screen,player_t *player,char *nom_fichier,int colission[1600],int map_indice,int x,int y){
     printf("nom du fichier %s\n",nom_fichier);
     SDL_Surface * map = IMG_Load(nom_fichier);
     if(!map)
@@ -308,9 +318,9 @@ int printMarket(SDL_Window *window,SDL_Surface * screen,player_t *player,char *n
     }
 
     if(player->genre==HOMME)
-        var = printSpiritInMarket(window,screen,"images/mec.png",100,100,*player,x_map,y_map,colission,map_indice);
+        var = printSpiritInMarket(window,screen,"images/mec.png",x,y,*player,x_map,y_map,colission,map_indice);
     else
-        var = printSpiritInMarket(window,screen,"images/meuf.png",100,100,*player,x_map,y_map,colission,map_indice);
+        var = printSpiritInMarket(window,screen,"images/meuf.png",x,y,*player,x_map,y_map,colission,map_indice);
     SDL_UpdateWindowSurface(window);
     return var;
 }
@@ -365,7 +375,12 @@ int detecteur(SDL_Window *window,SDL_Surface *screen,int col[1600],int x,int y,i
         message = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour parler",white);
         printf("afficxher le message\n");
         retour = PROFESSEUR;
-        }else{
+        }else if(col[(y/16)*40+(x/16)]==porte_labo){
+        message = TTF_RenderUTF8_Blended(font,"Cliquez sur Q pour sortir",white);
+        printf("afficxher le message\n");
+        retour = PORTE_LABO;
+        }
+        else{
         return VIDE;
         }
     }
@@ -420,53 +435,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         sspi(player);
                      break;
 
-                    case SDLK_i:
-                        retour = afficherTableauMenu(window,screen,500,700);
-                        switch (retour){
-                            // sdlon sac informations
-                        case 1:
-                            sspi(player);
-                            break;
-                        case 2:;
-                            int nbRetour = showAllSDlons(window,screen,4,player);
-                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision,1);
-                            //if(nbRetour==player.nb_current_sdlon)
-                            break;
-                        case 3:;
-                            //char * noms[5] = {"Sdlasso","Super-sdlasso","CABB-sdlasso","Relique","Extracteur"};
-                            //char * descs[5] = {"Un objet particulier qui permet de capturer des sdlons.","Un sdlasso renforcer et amélioré qui permet de capturer des sdlons avec un meilleuhr rendement.","Un objet basé sur le fonctionnement des des sdlasso mais perfectionné par des artisants pour fonctionner à tous les coups.","Une relique êxtremement rare n'ayant que peu d'intêret.","Un outil pouvant être utilisé par des chercheur permettant l'extraction d'une relique."};
-                            
-                            char * noms[NB_ITEMS];
-                            char * descs[NB_ITEMS];
-                            display_all_items();
-                            for(i=0;i<NB_ITEMS;i++){
-                                noms[i] = malloc(sizeof(char)*MAX_LEN_NAME);
-                                descs[i] = malloc(sizeof(char)*MAX_LEN_DESCR);
-                                strcpy(noms[i], items[i].name);
-                                strcpy(descs[i], items[i].description);
-                            }
-                            sdlon sd;
-                            int returnValue = showSac(window,screen,noms,descs,5,&player,sd);
-                            if(returnValue==-1){
-                                TTF_CloseFont(font);
-                                printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision,0);
-                            }
-                            break;
-                        case 4:
-                            showCarte(window,screen,player.name,player.nb_current_sdlon,player.argent,player.genre);
-                            
-                            break;
-                        case 5: ;
-                            TTF_CloseFont(font);
-                            TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
-                            char *menus[4] = {"Nouvelle Partie","Charger Partie","Charger Patch","Quitter"};
-                            afficherMenu(window,screen,menus,4,font);
-                            return ;
-                            break;
-                        default:
-                            break;
-                        }
-                     break;
+                    
 
                     case SDLK_UP:
                         movePers=1;
@@ -528,8 +497,17 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         move=0;
                         movePers=0;
                         if(detecter==PORTE){
+                            player.y=240;
+                            player.x=170;
                             printMap(window,screen,player);
                         }
+                        if(detecter==PORTE_LABO){
+                                printf("il faut cliquer sur q\n");
+                                player.x=390;
+                                player.y=470;
+                                printf("sortir de la\n");
+                                printMap(window,screen,player);
+                            }
                         break;
                         case SDLK_a:
                             SDL_Log("go to store1");
@@ -541,22 +519,46 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             SDL_Surface * surface = SDL_CreateRGBSurface(0, 640, 640, screen->format->BitsPerPixel, 0, 255, 255, 255);
                             afficherLaBoutique(window,screen,surface,&player,x_map,y_map);
                             SDL_FillRect(screen,NULL,0x000000);
-                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision,0);
+                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision,0,player.x,player.y);
                             return -1;
                         }
                         break;
                     }
                     else if(map_indice==1){
+                        
                         case SDLK_e:
                             if(detecter==PROFESSEUR){
                                 int nb=5;
-                                char * repliques[] = {"Ohhhh !  tu es la toi.","Replique 2","Replique 3","Replique 4","Replique 5"};
+                                char * repliques[] = {"Ohhhh! Tu es la toi.","Je pensais que tu viendrais jamais!","J'ai un cadeau pour toi.","Je vais t'offrir ton premier SDLon.","Choisis celui qui te plait!"};
                                 TTF_Font *font = TTF_OpenFont("OpenSans-Bold.ttf", 20);
                                 SDL_Surface * replique;
                                 SDL_Surface *container = SDL_CreateRGBSurface(0, 300, 100, 32, 0, 0, 0, 0);
                                 SDL_Color noir = {0,0,0};
                                 int i=0;
                                 SDL_Rect rect_container = {500,500,container->w,container->h};
+                                if(player.story_position==1){
+                                    SDL_FillRect(container,NULL,0xffffff);
+                                    replique = TTF_RenderText_Blended_Wrapped(font,"Abuse pas je t'en ai déjà offert un!",noir,container->w);
+                                    SDL_Rect rect_message = {(container->w - replique->w)/2,(container->h - replique->h)/2,replique->w,replique->h};
+                                    SDL_BlitSurface(replique,NULL,container,&rect_message);
+                                    SDL_BlitSurface(container,NULL,screen,&rect_container);
+                                    SDL_UpdateWindowSurface(window);
+                                    int running = 1;
+                                    while (running) {
+                                        SDL_Event e;
+                                        while (SDL_PollEvent( & e)) {
+                                            switch (e.type) {
+                                            case SDL_KEYDOWN:
+                                                switch (e.key.keysym.sym){
+                                                    case SDLK_SPACE:
+                                                        running=0;
+                                                }
+                                                                
+                                            }
+                                        }
+                                    }
+                                    printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos,1,400,300);
+                                }
                                 while(i<nb){
                                     SDL_FillRect(container,NULL,0xffffff);
                                     replique = TTF_RenderText_Blended_Wrapped(font,repliques[i],noir,container->w);
@@ -593,7 +595,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                 SDL_Rect message_rect = {(WIDTH - message->w)/2,100,message->w,message->h};
                                 SDL_BlitSurface(message,NULL,screen,&message_rect);
                                 SDL_Surface *fleche = IMG_Load("images/fleche.png");
-                                SDL_Rect rect_fleche = {300 + (240)*0 + 90,400,fleche->w,fleche->h};
+                                SDL_Rect rect_fleche = {300 + (240)*selected + 90,400,fleche->w,fleche->h};
                                 
                                 SDL_BlitSurface(fleche,NULL,screen,&rect_fleche);
                                 for(int i = 0 ; i < 3 ; i++){
@@ -634,6 +636,9 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                                         break;
                                                     case SDLK_RETURN:
                                                         add_sdlon_in_set(sdlon_s[tab[selected]],&player);
+                                                        player.x=390;
+                                                        player.y=470;
+                                                        player.story_position++;
                                                         printMap(window,screen,player);
                                                         break;
                                                     default:
@@ -646,6 +651,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                     }
                             break;
                         }
+                            
                     }
                     default:
                         move=0;
@@ -687,6 +693,8 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                     }
                     
         } 
+        player.x=x;
+        player.y=y;
         if (SDL_GetTicks() - start_time > 2000){
                     Uint32 start_temps = SDL_GetTicks();
                     movePlayer(window,spirit,screen,copy,rect,rect,dir,DEF1,&start_temps);

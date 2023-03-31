@@ -26,6 +26,7 @@ typedef struct player_s{
     int sd_in_use;
     int argent;
     int current_town;
+    int story_position;
 }player_t;
 
 /*

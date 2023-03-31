@@ -27,3 +27,4 @@ extern int market_collision[1600];
 extern int labos[1600];
 extern int block_labo;
 extern int professeur;
+extern int porte_labo;
