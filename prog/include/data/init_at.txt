@@ -16,8 +16,8 @@ Dominiqued 1 1 70
 VibroSismique 1 1 15
 PlaqueTectonique 1 1 20
 BoisDeBoueBoul 1 0 70
-SiroccoSiffredi 1 1 69
-Nathalied 1 1 70
-OlivierGirouette 1 1 20
-BourassQuoiFeur 1 1 45
+SiroccoSiffredi 2 1 69
+Nathalied 2 1 70
+OlivierGirouette 2 1 20
+BourassQuoiFeur 2 1 45
 
