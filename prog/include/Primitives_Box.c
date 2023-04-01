@@ -20,27 +20,28 @@
 /**
  * @brief retourne le sdlon recedent dans la box
 */
+/*
 void precedentBox(){
     boiteASdlon = boiteASdlon->precedent;
 }
 /**
  * @brief retourne en tete de la box a sdlon
 */
-void enTeteBox(){
+/*void enTeteBox(){
     while(boiteASdlon->precedent != NULL){
         precedentBox();
     }
-}
+}*/
 /**
  * @brief passe au sdlon suivant
 */
-void suivantBox(){
+/*void suivantBox(){
     boiteASdlon = boiteASdlon->next;
-}
+}*/
 /**
  * @brief rajoute un sdlon a la box
 */
-void append(box** head_ref, sdlon new_data) {
+/*void append(box** head_ref, sdlon new_data) {
     box* new_sdlon = malloc(sizeof(box));
     box *last = *head_ref;
     new_sdlon->current = new_data;
@@ -55,11 +56,11 @@ void append(box** head_ref, sdlon new_data) {
     last->next = new_sdlon;
     last->next->precedent = last;
     return;
-}
+}*/
 /**
  * @brief affiche les sdlons de la box "debogage"
 */
-void displayBox(box* head) {
+/*void displayBox(box* head) {
     box* aux = head;
 
     while (aux != NULL) {
@@ -67,4 +68,4 @@ void displayBox(box* head) {
         aux = aux->next;
     }
     printf("\n");
-}
+}*/

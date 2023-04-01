@@ -439,7 +439,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
 
                     case SDLK_UP:
                         movePers=1;
-                        if(coordonnesValide(colission,x,y-16,map_indice)){
+                        if(coordonnesValide(colission,x,y,map_indice)&&coordonnesValide(colission,x+16,y,map_indice)){
                             move = 1;
                             dir = UP;
                         }else{
@@ -448,7 +448,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         break;
                     case SDLK_DOWN:
                         movePers=1;
-                        if(coordonnesValide(colission,x,y+16,map_indice)){
+                        if(coordonnesValide(colission,x,y+32,map_indice)&&coordonnesValide(colission,x+16,y+32,map_indice)){
                             move = 1;
                             dir = DOWN;
                             
@@ -458,7 +458,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         break;
                     case SDLK_LEFT:
                         movePers=1;
-                        if(coordonnesValide(colission,x-16,y,map_indice)){
+                        if(coordonnesValide(colission,x-16,y+16,map_indice)){
                             move = 1;
                             dir = LEFT;
                             
@@ -468,7 +468,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         break;
                     case SDLK_RIGHT:
                         move=1;
-                        if(coordonnesValide(colission,x+16,y,map_indice)){
+                        if(coordonnesValide(colission,x+16,y+16,map_indice)){
                             movePers = 1;
                             dir = RIGHT;
                             
@@ -658,14 +658,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         break;
                 }
                 //dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint,font,white,movePers);
-                
-                break;
-            case SDL_MOUSEMOTION:
-                break;
-            }
-               
-        }
-        if(move){
+                if(move){
             if(dir==UP){
                 detecter = detecteur(window,screen,colission,x,y,map_indice);
                 SDL_Rect nouv_rect = {rect.x,rect.y-16,rect.h,rect.w};
@@ -700,5 +693,12 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                     movePlayer(window,spirit,screen,copy,rect,rect,dir,DEF1,&start_temps);
                     movePlayer(window,spirit,screen,copy,rect,rect,dir,DEF2,&start_temps);
         }
+                break;
+            case SDL_MOUSEMOTION:
+                break;
+            }
+               
+        }
+        
     }
 }
