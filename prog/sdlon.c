@@ -214,7 +214,7 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
 void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
   SDL_Rect rect;
   SDL_Color white = {255,255,255};
-  SDL_Surface *title = TTF_RenderUTF8_Blended(font,"Charger Le jeu",white);
+  SDL_Surface *title = TTF_RenderUTF8_Blended(font,"Charger une partie...",white);
   rect.x = (WIDTH - title->w)/2;
   rect.y = 30;
   rect.h = title->h;
@@ -267,19 +267,23 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
 /*fonction pour afficher le menu d'accueil*/
 void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,TTF_Font *font){
     
+    SDL_Surface *img_bg = IMG_Load("images/asset/scene_de_combat/sdlon.jpg");
+
     SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+    SDL_BlitSurface(img_bg, NULL, screen, NULL);
     SDL_Surface *btns[N];
-    SDL_Color colors[2] = {{255,0,0},{255,255,255}};
+    SDL_Color colors[2] = {{255,255,255},{0,0,0}};
     SDL_Rect rects[N];
     int active[N];
     int i;
+
     while(1){
       for( i=0;i<N;i++){
       btns[i] = TTF_RenderUTF8_Blended(font,menus[i],colors[1]);
       /**/
       rects[i].w =200;
       rects[i].h = btns[i]->h;
-      rects[i].x = (WIDTH - 200 - (btns[i]->w)/2)/2;
+      rects[i].x = (WIDTH - 100 - (btns[i]->w)/2)/2;
       rects[i].y = (HEIGHT - N*btns[i]->h - (N-1)*btns[i]->h)/2 + (i)*2*btns[i]->h;
       printf("%d %d %d %d\n",rects[i].h,rects[i].w,rects[i].x,rects[i].y);
       SDL_BlitSurface(btns[i],NULL,screen,&rects[i]);
@@ -320,12 +324,14 @@ void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,T
                     if (SDL_PointInRect(&mousePosition, &rects[i])) {
                         switch(i){
                           case 0:
-                            SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+                            //SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+                            SDL_BlitSurface(img_bg, NULL, screen, NULL);
                             SDL_UpdateWindowSurface(pWindow);
                             return newSaveGame(pWindow,font,screen);
                             break;
                           case 1:
-                            SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+                            //SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+                            SDL_BlitSurface(img_bg, NULL, screen, NULL);
                             SDL_UpdateWindowSurface(pWindow);
                             return getSaveGames(pWindow,font,screen);
                             break;
@@ -380,7 +386,7 @@ int main(int argc, char ** argv) {
       exit(EXIT_FAILURE);
     }
     
-    if ((police = TTF_OpenFont("OpenSans-Bold.ttf", 20)) == NULL) {
+    if ((police = TTF_OpenFont("OpenSans-Bold.ttf", 25)) == NULL) {
       fprintf(stderr, " erreur  font \n ");
     }
     SDL_Surface * screen;
