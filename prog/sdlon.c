@@ -95,8 +95,8 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
   SDL_Color red = {255,0,0};
   SDL_Surface *name;
   SDL_Surface *btn = TTF_RenderUTF8_Blended(font,"Commencer",white),*retour=TTF_RenderUTF8_Blended(font,"retour",white),*error=TTF_RenderUTF8_Blended(font,"",red);
-  SDL_Surface *welcomeMsg = TTF_RenderUTF8_Blended(font,"Bienvenue Sur SDLon",white);
-  SDL_Surface *instrctionMsg = TTF_RenderUTF8_Blended(font,"Veuillez saisir le nom de votre sauvgarde",white);
+  SDL_Surface *welcomeMsg = TTF_RenderUTF8_Blended(font,"Bienvenue dans SDLon",white);
+  SDL_Surface *instrctionMsg = TTF_RenderUTF8_Blended(font,"Veuillez saisir votre nom",white);
   SDL_Rect rect,btnRect,retourRect;
   rect.x = (WIDTH - welcomeMsg->w)/2;
   rect.y = 50;
@@ -324,14 +324,14 @@ void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,T
                     if (SDL_PointInRect(&mousePosition, &rects[i])) {
                         switch(i){
                           case 0:
-                            //SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
-                            SDL_BlitSurface(img_bg, NULL, screen, NULL);
+                            SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+                            //SDL_BlitSurface(img_bg, NULL, screen, NULL);
                             SDL_UpdateWindowSurface(pWindow);
                             return newSaveGame(pWindow,font,screen);
                             break;
                           case 1:
-                            //SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
-                            SDL_BlitSurface(img_bg, NULL, screen, NULL);
+                            SDL_FillRect(screen,NULL,SDL_MapRGB(screen->format,0,0,0));
+                            //SDL_BlitSurface(img_bg, NULL, screen, NULL);
                             SDL_UpdateWindowSurface(pWindow);
                             return getSaveGames(pWindow,font,screen);
                             break;
