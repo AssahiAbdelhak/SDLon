@@ -217,7 +217,7 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
         break;
     }
     //on regarde le status du combat
-    status = status_combat(player, sd);
+    status = status_combat(&player, sd);
 
     //si le combat n'est pas terminé
     if(status==1 || status ==2){
@@ -226,7 +226,7 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
         sats(&sd,&(player.sd[player.sd_in_use]),1);//remplacer par le numéro d'attaque quand ia opérationelle
 
         //on regarde le status du combat
-        status = status_combat(player, sd);
+        status = status_combat(&player, sd);
 
         //combat non terminer
         if(status==1 || status==2){
@@ -234,19 +234,27 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
             afficherLeCombat(window,screen,player,sd,0,nb);
         }else{
             //défaite du joueur
-            printf("Vous avez perdu");
+            SDL_Log("Vous avez perdu");
             afficherLeCombat(window,screen,player,sd,0,5);//temporairement
+            return ;
         }
 
         
     }else{
         //on affiche un message puis on quitte
-        printf("Fin du combat, vous avez gagné");
+        SDL_Log("Fin du combat, vous avez gagné");
         get_loot(&player);
-        printf("xp avant prise d'exp: %d\n", player.sd[0].xp);
+        SDL_Log("xp avant prise d'exp: %d\n", player.sd[0].xp);
         get_xp(&player);
-        printf("xp après prise d'exp: %d\n", player.sd[0].xp);
+        SDL_Log("xp après prise d'exp: %d\n", player.sd[0].xp);
         afficherLeCombat(window,screen,player,sd,0,4);//temporairement on reviens au combat
+        if(player.current_town==0)
+                  printMap(window,screen,player,collision,buissons);
+                else if(player.current_town==1)
+                  printMap(window,screen,player,collision_map_2,buissons_map2);
+                else if(player.current_town==2)
+                  printMap(window,screen,player,collision_map_3,buissons_map_3);
+        return ;
     }
     return;
 }
@@ -735,6 +743,8 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
                 printMap(window,screen,*player,collision,buissons);
             else if(player->current_town==1)
                   printMap(window,screen,*player,collision_map_2,buissons_map2);
+            else if(player->current_town==2)
+                  printMap(window,screen,*player,collision_map_3,buissons_map_3);
             break;
         default:
             break;
@@ -1041,6 +1051,8 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
                   printMap(window,screen,player,collision,buissons);
             else if(player.current_town==1)
                   printMap(window,screen,player,collision_map_2,buissons_map2);
+            else if(player.current_town==2)
+                  printMap(window,screen,player,collision_map_3,buissons_map_3);
         }
         if(nb_attaque==13){
             int nb = ia(&sd,&(player.sd[player.sd_in_use]));
@@ -1065,22 +1077,10 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
             printMap(window,screen,player,collision,buissons);
         else if(player.current_town==1)
             printMap(window,screen,player,collision_map_2,buissons_map2);
+        else if(player.current_town==2)
+                  printMap(window,screen,player,collision_map_3,buissons_map_3);
     }
     TTF_CloseFont(font);
     printControlles(window,screen,player,sd);
     return 0;
-    // int running = 1;
-    // while (running) {
-    //     SDL_Event e;
-    //     while (SDL_PollEvent( & e)) {
-    //       switch (e.type) {
-    //         case SDL_QUIT:
-    //             SDL_DestroyWindow(window);
-    //             SDL_Quit();
-    //             running = 0;
-    //             return 0;
-    //             break;
-    //       }
-    //     }
-    // }
 }

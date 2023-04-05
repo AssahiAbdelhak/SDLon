@@ -31,16 +31,19 @@ void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *f
   sdlon_init();
   SDL_Rect rects[N];
   SDL_Color white = {255,255,255};
-  int y = (HEIGHT - (50*2) - (50*N))/N;
+  //int y = (HEIGHT - (50*2) - (50*N))/N;
+  int y = 80;
+  if(N>12)
+    N=12;
   for(int i=0;i<N;i++){
     rects[i].y = y;
     SDL_Surface *texte = TTF_RenderUTF8_Blended(font,strings[i],white);
-    rects[i].x = (WIDTH - 200 )/2;
+    rects[i].x = (WIDTH - 300 )/2;
     rects[i].h = 50;
-    rects[i].w = 200;
+    rects[i].w = 300;
     SDL_FillRect(screen,&rects[i],SDL_MapRGB(screen->format,180,180,180));
     rects[i].x = (WIDTH - texte->w )/2;
-    rects[i].y += (texte->h)/2;
+    rects[i].y += (50 -(texte->h))/2;
     SDL_BlitSurface(texte,NULL,screen,&rects[i]);
     SDL_FreeSurface(texte);
     y+=55;
@@ -71,6 +74,8 @@ void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *f
                   printMap(pWindow,screen,player,collision,buissons);
                 else if(player.current_town==1)
                   printMap(pWindow,screen,player,collision_map_2,buissons_map2);
+                else if(player.current_town==2)
+                  printMap(pWindow,screen,player,collision_map_3,buissons_map_3);
               } 
             }
             
@@ -124,6 +129,7 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
       SDL_FreeSurface(instrctionMsg);
       SDL_UpdateWindowSurface(pWindow);
       rect.y=300;
+      SDL_Rect all_input = {0,rect.y,WIDTH,rect.h};
   char savaGameName[255]={""};
   int index = 0;
   int running =1;
@@ -144,6 +150,7 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
             savaGameName[index]='\0';
           name = TTF_RenderUTF8_Blended(font,savaGameName, white);
           rect.x = (WIDTH - name->w)/2;
+          SDL_FillRect(screen,&all_input,0x000000);
           SDL_BlitSurface(name,NULL,screen,&rect);
           SDL_FreeSurface(name);
           SDL_UpdateWindowSurface(pWindow);
@@ -153,9 +160,9 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
           strcat(savaGameName,e.text.text);
           index++;
           savaGameName[index]='\0';
-          
+          SDL_FillRect(screen,&all_input,0x000000);
           name = TTF_RenderUTF8_Blended(font,savaGameName,white);
-          
+          rect.x = (WIDTH - name->w)/2;
           SDL_BlitSurface(name,NULL,screen,&rect);
           SDL_FreeSurface(name);
           SDL_UpdateWindowSurface(pWindow);
@@ -222,6 +229,7 @@ void getSaveGames(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
   SDL_BlitSurface(title,NULL,screen,&rect);
   title = TTF_RenderUTF8_Blended(font,"Retour",white);
   rect.y = HEIGHT - 100;
+  rect.x = (WIDTH - title->w)/2;
   SDL_BlitSurface(title,NULL,screen,&rect);
   SDL_FreeSurface(title);
   SDL_UpdateWindowSurface(pWindow);
@@ -303,6 +311,7 @@ void afficherMenu(SDL_Window *pWindow, SDL_Surface *screen,char *menus[],int N,T
                     if (SDL_PointInRect(&mousePosition, &rects[i])) {
                       if(!active[i]){
                         active[i]=1;
+                        SDL_BlitSurface(img_bg,&rects[i],screen,&rects[i]);
                         btns[i] = TTF_RenderUTF8_Blended(font,menus[i],colors[0]);
                         SDL_BlitSurface(btns[i],NULL,screen,&rects[i]);
                         SDL_FreeSurface(btns[i]);

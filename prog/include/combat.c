@@ -180,9 +180,10 @@ int get_usable_sdlon(player_t player){
  * 2: continue
  * 3: défaite
 */
-int status_combat(player_t player, sdlon sd){
-  if(player.sd[player.sd_in_use].vie<=0){
-    if(get_usable_sdlon(player) > 0){
+int status_combat(player_t *player, sdlon sd){
+  if(player->sd[player->sd_in_use].vie<=0){
+    if(get_usable_sdlon(*player) > 0){
+      player->sd_in_use++;
       return 1;//on en as encore dans notre set!
     }else{
       return 3;//on as perdu!
