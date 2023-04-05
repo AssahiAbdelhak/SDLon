@@ -32,14 +32,20 @@ SDL_Surface *pasSdlon;
 int dansLesBuissons=0;
 
 
-int printMap(SDL_Window *window,SDL_Surface * screen,player_t player);
+int printMap(SDL_Window *window,SDL_Surface * screen,player_t player,int col[4160],int buches[4160]);
 //town_init();
 /*cette fonction est appelle apres un evenement dans le sac et permet de prendre une decision*/
 void handle_sdlons_inventaire_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t *player){
     if(player->nb_current_sdlon!=nb){
         player->sd_in_use = nb;
     }
-    printMap(window,screen,*player);
+    if(player->current_town==0)
+        printMap(window,screen,*player,collision,buissons);
+    else if(player->current_town==1){
+        SDL_Log("map 2");
+        printMap(window,screen,*player,collision_map_2,buissons_map2);
+    }
+        
 }
 /*cette fonction empeche le personnage de se deplacer qu'apres un certain moment*/
 void waiting(Uint32 *start_time){
@@ -104,13 +110,13 @@ void printLayer(SDL_Window *window,SDL_Surface * screen,int tiles[4160],char * n
     
 }
 /*fonction qui verifie si les coordonnees du personnage sont valides ou pas*/
-int localisationValide(int x,int y){
-    SDL_Log("collision %d\n",collision[(y/16)*80+(x/16)]);
+int localisationValide(int x,int y,int tab[4160]){
+    SDL_Log("collision %d\n",tab[(y/16)*80+(x/16)]);
     if(x<0||x>WIDTH-32||y<0||y>HEIGHT-32){
         SDL_Log("Localistion n'est pas valide\n");
         return 0;
     }
-    if(collision[(y/16)*80+(x/16)]&&collision[(y/16)*80+(x/16)]!=porte&&collision[(y/16)*80+(x/16)]!=ville_suivante&&collision[(y/16)*80+(x/16)]!=labo){
+    if(tab[(y/16)*80+(x/16)]&&tab[(y/16)*80+(x/16)]!=porte&&tab[(y/16)*80+(x/16)]!=ville_suivante&&tab[(y/16)*80+(x/16)]!=labo){
         SDL_Log("Localistion n'est pas valide\n");
         return 0;
     }
@@ -250,7 +256,7 @@ void showCarte(SDL_Window * window,SDL_Surface * screen,char * nom, int nbCurren
     }
 }
 /*affichage du personnage sur la map*/
-void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player){
+void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,player_t player,int col[4160],int buches[4160]){
     SDL_Surface * spirit = IMG_Load(nom_fichier);
     int movePers=1,i=0,retour;
     item_init();
@@ -318,7 +324,10 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             int returnValue = showSac(window,screen,noms,descs,5,&player,sd);
                             if(returnValue==-1){
                                 TTF_CloseFont(font);
-                                printMap(window,screen,player);
+                                if(player.current_town==0)
+                                    printMap(window,screen,player,collision,buissons);
+                                else if(player.current_town==1)
+                                    printMap(window,screen,player,collision_map_2,buissons_map2);
                             }
                             break;
                         case 4:
@@ -339,7 +348,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
 
                     case SDLK_UP:
                         movePers=1;
-                        if(localisationValide(x,y)&&localisationValide(x+16,y)){
+                        if(localisationValide(x,y,col)&&localisationValide(x+16,y,col)){
                             move = 1;
                             dir = UP;
                         }else{
@@ -348,7 +357,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_DOWN:
                         movePers=1;
-                        if(localisationValide(x,y+32)&&localisationValide(x+16,y+32)){
+                        if(localisationValide(x,y+32,col)&&localisationValide(x+16,y+32,col)){
                             move = 1;
                             dir = DOWN;
                         }else{
@@ -357,7 +366,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_LEFT:
                         movePers=1;
-                        if(localisationValide(x-16,y+16)){
+                        if(localisationValide(x-16,y+16,col)){
                             move = 1;
                             dir = LEFT;
                         }else{
@@ -366,7 +375,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         break;
                     case SDLK_RIGHT:
                         move=1;
-                        if(localisationValide(x+16,y+16)){
+                        if(localisationValide(x+16,y+16,col)){
                             movePers = 1;
                             dir = RIGHT;
                         }else{
@@ -388,13 +397,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                     case SDLK_e:
                         move=0;
                         movePers=0;
-                        if(dansLesBuissons==VILLESUIVANTE){
-                            SDL_FillRect(screen,NULL,0x000000);
-                            for(int i=0; i < all_town[1].nb_layer; i++){
-                                
-                                printLayer(window,screen,all_town[1].layer[i],all_town[1].source_grid,all_town[1].first_grid,all_town[1].tile_width,all_town[1].tile_height);
-                            }
-                        }
+                        
                         if(dansLesBuissons==BUISSONS){
                             if(player.nb_current_sdlon<1){
                                 // afficher un message indiquant comme quoi il a pas assez de sdlon
@@ -431,7 +434,12 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                         move=0;
                         break;
                 }
-                dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint,font,white,movePers);
+                dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint,font,white,movePers,col,buches);
+                if(player.current_town==0&&dansLesBuissons==VILLESUIVANTE){
+                    SDL_Log("got here");
+                    player.current_town=1;
+                    printMap(window,screen,player,collision_map_2,buissons_map2);
+                }
                 if(move){
                 if(dir==UP){
                     SDL_Rect nouv_rect = {rect.x,rect.y-16,rect.h,rect.w};
@@ -477,10 +485,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
     }
 }
 /*afficher de la map (des couches multiples)*/
-int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
+int printMap(SDL_Window *window,SDL_Surface * screen,player_t player,int col[4160],int buches[4160]){
     town_init();
     int i=0;
-    for(i=0;i<all_town[0].nb_layer;i++){
+    SDL_Log("current_town : %d",player.current_town);
+    for(i=0;i<all_town[player.current_town].nb_layer;i++){
         printLayer(window,screen,all_town[player.current_town].layer[i],all_town[player.current_town].source_grid,all_town[player.current_town].first_grid,all_town[player.current_town].tile_width,all_town[player.current_town].tile_height);
     }
     //***
@@ -504,9 +513,9 @@ int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
     printf("print this\n");
     TTF_CloseFont(font);
     if(player.genre==HOMME)
-        printSpirit(window,screen,"images/mec.png",player.x,player.y,hintSliceFromMap, hint,player);
+        printSpirit(window,screen,"images/mec.png",player.x,player.y,hintSliceFromMap, hint,player,col,buches);
     else
-        printSpirit(window,screen,"images/meuf.png",player.x,player.y,hintSliceFromMap, hint,player);
+        printSpirit(window,screen,"images/meuf.png",player.x,player.y,hintSliceFromMap, hint,player,col,buches);
     return ;
     int running = 1;
       while (running) {
@@ -520,14 +529,14 @@ int printMap(SDL_Window *window,SDL_Surface * screen,player_t player){
       }
 }}
 /*fonction qui renvoie vrai si on est dans les buissons faux sinon*/
-int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font,SDL_Color white,int move){
+int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font,SDL_Color white,int move,int tab[4160],int buches[4160]){
     printf("move == %d\n",move);
     if(move){
-        if(collision[(y/16)*80+(x/16)]==porte)
+        if(tab[(y/16)*80+(x/16)]==porte)
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour Entrer a la maison",white);
-        else if(collision[(y/16)*80+(x/16)]==ville_suivante)
-            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour passer a la ville",white);
-        else if(collision[(y/16)*80+(x/16)]==labo){
+        /*else if(collision[(y/16)*80+(x/16)]==ville_suivante)
+            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour passer a la ville",white);*/
+        else if(tab[(y/16)*80+(x/16)]==labo){
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur L pour passer au labo",white);
             printf("got here\n");
         }
@@ -539,17 +548,17 @@ int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_S
         hint = TTF_RenderUTF8_Blended(font,"Vous n'avez pas trouve de sdlon",white);
     }
     SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
-    if(buissons[(y/16)*80+(x/16)]||collision[(y/16)*80+(x/16)]==porte||collision[(y/16)*80+(x/16)]==ville_suivante||collision[(y/16)*80+(x/16)]==labo){
-        SDL_Log("print message");
+    if(buches[(y/16)*80+(x/16)]||tab[(y/16)*80+(x/16)]==porte||tab[(y/16)*80+(x/16)]==ville_suivante||tab[(y/16)*80+(x/16)]==labo){
         SDL_BlitSurface(hint,NULL,screen,&hintBox);
         SDL_UpdateWindowSurface(window);
-        if(collision[(y/16)*80+(x/16)]==porte)
+        if(tab[(y/16)*80+(x/16)]==porte)
             return PORTE;
-        else if(collision[(y/16)*80+(x/16)]==ville_suivante){
-            printf("Passer a la ville suivante\n");
+        else if(tab[(y/16)*80+(x/16)]==ville_suivante){
+            SDL_Log("got here 1");
+            SDL_FillRect(screen,NULL,0x000000);
             return VILLESUIVANTE;
         }
-        else if(collision[(y/16)*80+(x/16)]==labo){
+        else if(tab[(y/16)*80+(x/16)]==labo){
             printf("Passer au labo\n");
             return LABO;
         }

@@ -67,7 +67,10 @@ void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *f
               if (SDL_PointInRect(&mousePosition, &rects[i])) {
                 player_t player = player_init(strings[i]);
                 TTF_CloseFont(font);
-                printMap(pWindow,screen,player);
+                if(player.current_town==0)
+                  printMap(pWindow,screen,player,collision,buissons);
+                else if(player.current_town==1)
+                  printMap(pWindow,screen,player,collision_map_2,buissons_map2);
               } 
             }
             
@@ -183,7 +186,10 @@ void newSaveGame(SDL_Window *pWindow,TTF_Font *font,SDL_Surface *screen){
                   // frees
                   SDL_FreeSurface(error);
                   TTF_CloseFont(font);
-                  printMap(pWindow,screen,player);
+                  if(player.current_town==0)
+                    printMap(pWindow,screen,player,collision,buissons);
+                  else if(player.current_town==1)
+                    printMap(pWindow,screen,player,collision_map_2,buissons_map2);
 
                   destroy_all(pWindow,font);
                 }

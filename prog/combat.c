@@ -731,7 +731,10 @@ void handle_option_events(SDL_Window *window,SDL_Surface *screen,SDL_Surface *su
             SDL_Log("nb_current sdlon est %d",player->sd_in_use);
             break;
         case 3: ;
-            printMap(window,screen,*player);
+            if(player->current_town==0)
+                printMap(window,screen,*player,collision,buissons);
+            else if(player->current_town==1)
+                  printMap(window,screen,*player,collision_map_2,buissons_map2);
             break;
         default:
             break;
@@ -1034,7 +1037,10 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     SDL_UpdateWindowSurface(window);
         SDL_Delay(3000);
         if(nb_attaque==15){
-            printMap(window,screen,player);
+            if(player.current_town==0)
+                  printMap(window,screen,player,collision,buissons);
+            else if(player.current_town==1)
+                  printMap(window,screen,player,collision_map_2,buissons_map2);
         }
         if(nb_attaque==13){
             int nb = ia(&sd,&(player.sd[player.sd_in_use]));
@@ -1055,7 +1061,10 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
         SDL_Log("name att 4 %s",player.sd[player.sd_in_use].attaque_4.nom_attaque);
     }
     if(nb_attaque==4||nb_attaque==5){
-        printMap(window,screen,player);
+        if(player.current_town==0)
+            printMap(window,screen,player,collision,buissons);
+        else if(player.current_town==1)
+            printMap(window,screen,player,collision_map_2,buissons_map2);
     }
     TTF_CloseFont(font);
     printControlles(window,screen,player,sd);

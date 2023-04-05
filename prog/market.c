@@ -333,6 +333,7 @@ int coordonnesValide(int colission[1600],int x,int y,int i){
     if(i==0){//center pokemon
         if(colission[(y/16)*40+(x/16)]&&colission[(y/16)*40+(x/16)]!=porte_market&&colission[(y/16)*40+(x/16)]!=store&&colission[(y/16)*40+(x/16)]!=dame)
             return 0;
+        SDL_Log("on detect qlq");
         return 1;
     }else if(i==1){
         if(colission[(y/16)*40+(x/16)]&&colission[(y/16)*40+(x/16)]!=professeur)
@@ -499,15 +500,21 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         if(detecter==PORTE){
                             player.y=240;
                             player.x=170;
-                            printMap(window,screen,player);
-                        }
+                            if(player.current_town==0)
+                                printMap(window,screen,player,collision,buissons);
+                                else if(player.current_town==1)
+                                printMap(window,screen,player,collision_map_2,buissons_map2);
+                            }
                         if(detecter==PORTE_LABO){
                                 printf("il faut cliquer sur q\n");
                                 player.x=390;
                                 player.y=470;
                                 printf("sortir de la\n");
-                                printMap(window,screen,player);
-                            }
+                                if(player.current_town==0)
+                                    printMap(window,screen,player,collision,buissons);
+                                    else if(player.current_town==1)
+                                    printMap(window,screen,player,collision_map_2,buissons_map2);
+                                }
                         break;
                         case SDLK_a:
                             SDL_Log("go to store1");
@@ -639,7 +646,10 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                                         player.x=390;
                                                         player.y=470;
                                                         player.story_position++;
-                                                        printMap(window,screen,player);
+                                                        if(player.current_town==0)
+                                                            printMap(window,screen,player,collision,buissons);
+                                                            else if(player.current_town==1)
+                                                            printMap(window,screen,player,collision_map_2,buissons_map2);
                                                         break;
                                                     default:
                                                         printf("sdlon selectionné %d\n",selected);
@@ -658,9 +668,10 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         break;
                 }
                 //dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint,font,white,movePers);
+                detecter = detecteur(window,screen,colission,x,y,map_indice);
                 if(move){
             if(dir==UP){
-                detecter = detecteur(window,screen,colission,x,y,map_indice);
+                
                 SDL_Rect nouv_rect = {rect.x,rect.y-16,rect.h,rect.w};
                             movePlayer(window,spirit,screen,copy,rect,nouv_rect,UP,WALK1,&start_time);
                             rect.y = nouv_rect.y;

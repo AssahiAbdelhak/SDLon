@@ -28,3 +28,5 @@ extern int labos[1600];
 extern int block_labo;
 extern int professeur;
 extern int porte_labo;
+extern int collision_map_2[4160];
+extern int buissons_map2[4160];
