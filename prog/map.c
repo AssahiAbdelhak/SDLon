@@ -389,7 +389,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             return ;
                         }
                         if(dansLesBuissons==LABO){
-                            printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos,1,305,600);
+                            printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos,1,305,550);
                             return ;
                         }
                         break;
@@ -469,6 +469,8 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                                 x=x+16;
                                 player.x=x;
                         }
+                        SDL_FlushEvent(SDL_KEYDOWN);
+                        SDL_FlushEvent(SDL_KEYUP);
             } 
             if (SDL_GetTicks() - start_time > 2000){
                         Uint32 start_temps = SDL_GetTicks();

@@ -336,7 +336,7 @@ int coordonnesValide(int colission[1600],int x,int y,int i){
         SDL_Log("on detect qlq");
         return 1;
     }else if(i==1){
-        if(colission[(y/16)*40+(x/16)]&&colission[(y/16)*40+(x/16)]!=professeur)
+        if(colission[(y/16)*40+(x/16)]&&colission[(y/16)*40+(x/16)]!=professeur&&colission[(y/16)*40+(x/16)]!=porte_labo)
             return 0;
         return 1;
     }
