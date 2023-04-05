@@ -436,9 +436,24 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                 }
                 dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint,font,white,movePers,col,buches);
                 if(player.current_town==0&&dansLesBuissons==VILLESUIVANTE){
-                    SDL_Log("got here");
+                    printf("on est dans ville 1\n on passe a la ville 2\n");
                     player.current_town=1;
+                    player.x = 10;
+                    player.y = 150;
                     printMap(window,screen,player,collision_map_2,buissons_map2);
+                }
+                if(player.current_town==1&&dansLesBuissons==VILLESUIVANTE){
+                    printf("on est dans ville 2\n on passe a la ville 1\n");
+                    if(player.x<100){
+                        player.current_town=0;
+                        player.x = 600;
+                        player.y = 300;
+                            printf("go to map 1\n");
+                            printMap(window,screen,player,collision,buissons);
+                        }else{
+                            
+                        }
+                    
                 }
                 if(move){
                 if(dir==UP){

@@ -695,7 +695,8 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             rect.x = nouv_rect.x;
                             x=x+16;
                     }
-                    
+                    SDL_FlushEvent(SDL_KEYDOWN);
+                        SDL_FlushEvent(SDL_KEYUP);
         } 
         player.x=x;
         player.y=y;
