@@ -1,0 +1,156 @@
+\hypertarget{map-testing_8c}{}\doxysection{Référence du fichier prog/map-\/testing.c}
+\label{map-testing_8c}\index{prog/map-\/testing.c@{prog/map-\/testing.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{map-testing_8c_a62ecd70800687eb2d625af180c4210d7}\label{map-testing_8c_a62ecd70800687eb2d625af180c4210d7}} 
+\#define {\bfseries TILE\+\_\+\+SIZE}~32
+\item 
+\mbox{\Hypertarget{map-testing_8c_aed89bd71aee8be823e8a20ec4e093c1e}\label{map-testing_8c_aed89bd71aee8be823e8a20ec4e093c1e}} 
+\#define {\bfseries HEIGHT}~1280
+\item 
+\mbox{\Hypertarget{map-testing_8c_a241aeeb764887ae5e3de58b98f04b16d}\label{map-testing_8c_a241aeeb764887ae5e3de58b98f04b16d}} 
+\#define {\bfseries WIDTH}~832
+\item 
+\mbox{\Hypertarget{map-testing_8c_a94042e6ee6cdae77c9aae4c4670c162c}\label{map-testing_8c_a94042e6ee6cdae77c9aae4c4670c162c}} 
+\#define {\bfseries frame\+Time}~100
+\end{DoxyCompactItemize}
+\doxysubsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{map-testing_8c_a94c73cf6934fd835103f0f2794071ee9}\label{map-testing_8c_a94c73cf6934fd835103f0f2794071ee9}} 
+enum {\bfseries directions} \{ \newline
+{\bfseries DOWN}
+, {\bfseries LEFT}
+, {\bfseries RIGHT}
+, {\bfseries UP}
+, \newline
+{\bfseries DOWN}
+, {\bfseries LEFT}
+, {\bfseries RIGHT}
+, {\bfseries UP}
+, \newline
+{\bfseries DOWN}
+, {\bfseries LEFT}
+, {\bfseries RIGHT}
+, {\bfseries UP}
+ \}
+\item 
+\mbox{\Hypertarget{map-testing_8c_af806efc6052edbc741683ec893bb2fe1}\label{map-testing_8c_af806efc6052edbc741683ec893bb2fe1}} 
+enum {\bfseries actions} \{ \newline
+{\bfseries DEF1}
+, {\bfseries WALK1}
+, {\bfseries DEF2}
+, {\bfseries WALK2}
+, \newline
+{\bfseries DEF1}
+, {\bfseries WALK1}
+, {\bfseries DEF2}
+, {\bfseries WALK2}
+, \newline
+{\bfseries DEF1}
+, {\bfseries WALK1}
+, {\bfseries DEF2}
+, {\bfseries WALK2}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{map-testing_8c_a605e4de241fca8609de5dea7d89e225f}{waiting}} (Uint32 $\ast$start\+\_\+time)
+\item 
+void \mbox{\hyperlink{map-testing_8c_a89d0e4c4c2c6dd8b28e14ffce705f427}{move\+Player}} (SDL\+\_\+\+Surface $\ast$spirit, SDL\+\_\+\+Surface $\ast$screen, SDL\+\_\+\+Surface $\ast$copy, SDL\+\_\+\+Rect pre\+\_\+rect, SDL\+\_\+\+Rect rect, enum directions dir, enum actions act, Uint32 $\ast$start\+\_\+time)
+\item 
+void \mbox{\hyperlink{map-testing_8c_a166828c3132476e9148d022d3221a71b}{destroy}} (SDL\+\_\+\+Window $\ast$p\+Window, SDL\+\_\+\+Surface $\ast$surface)
+\item 
+int \mbox{\hyperlink{map-testing_8c_a9b043e37d70fb76bac0a10f7c0680b82}{init\+SDL}} ()
+\item 
+int \mbox{\hyperlink{map-testing_8c_a35ea3ea89505407cd76efe39eab8a110}{print\+Layer}} (SDL\+\_\+\+Surface $\ast$screen, int tiles\mbox{[}4160\mbox{]}, char $\ast$nom\+\_\+fichier, int firstgid, int tile\+\_\+width, int tile\+\_\+height)
+\item 
+int \mbox{\hyperlink{map-testing_8c_aa6be541d7b17f242a3b2ed4bce2eb90a}{localisation\+Valide}} (int x, int y)
+\item 
+void \mbox{\hyperlink{map-testing_8c_ab3d2f34a5af5d6e1f40ff8d70368bc2b}{print\+Spirit}} (SDL\+\_\+\+Surface $\ast$screen, char $\ast$nom\+\_\+fichier, int x, int y)
+\item 
+\mbox{\Hypertarget{map-testing_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{map-testing_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{map-testing_8c_aaa8e409e04dcf575ef63fd5fb3db06f9}\label{map-testing_8c_aaa8e409e04dcf575ef63fd5fb3db06f9}} 
+SDL\+\_\+\+Window $\ast$ {\bfseries window}
+\item 
+\mbox{\Hypertarget{map-testing_8c_a966da7a60c4ea3ba301e26ccc5efe452}\label{map-testing_8c_a966da7a60c4ea3ba301e26ccc5efe452}} 
+SDL\+\_\+\+Renderer $\ast$ {\bfseries renderer}
+\item 
+\mbox{\Hypertarget{map-testing_8c_aa20890a9cdd484fd6ef51b2a17136ae0}\label{map-testing_8c_aa20890a9cdd484fd6ef51b2a17136ae0}} 
+int {\bfseries collision} \mbox{[}4160\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+\begin{DoxyAuthor}{Auteur}
+Wandrille Ballereau 
+
+Abdelhak Assahi 
+
+Lilian Colla 
+
+Mohamed Besbes 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 Alpha 
+\end{DoxyVersion}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{map-testing_8c_a166828c3132476e9148d022d3221a71b}\label{map-testing_8c_a166828c3132476e9148d022d3221a71b}} 
+\index{map-\/testing.c@{map-\/testing.c}!destroy@{destroy}}
+\index{destroy@{destroy}!map-\/testing.c@{map-\/testing.c}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily void destroy (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{p\+Window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{surface }\end{DoxyParamCaption})}
+
+Fonction de destruction de surface et de la fenêtre\mbox{\Hypertarget{map-testing_8c_a9b043e37d70fb76bac0a10f7c0680b82}\label{map-testing_8c_a9b043e37d70fb76bac0a10f7c0680b82}} 
+\index{map-\/testing.c@{map-\/testing.c}!initSDL@{initSDL}}
+\index{initSDL@{initSDL}!map-\/testing.c@{map-\/testing.c}}
+\doxysubsubsection{\texorpdfstring{initSDL()}{initSDL()}}
+{\footnotesize\ttfamily int init\+SDL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Initialisation de la bibliothèque SDL et création de la fenêtre\mbox{\Hypertarget{map-testing_8c_aa6be541d7b17f242a3b2ed4bce2eb90a}\label{map-testing_8c_aa6be541d7b17f242a3b2ed4bce2eb90a}} 
+\index{map-\/testing.c@{map-\/testing.c}!localisationValide@{localisationValide}}
+\index{localisationValide@{localisationValide}!map-\/testing.c@{map-\/testing.c}}
+\doxysubsubsection{\texorpdfstring{localisationValide()}{localisationValide()}}
+{\footnotesize\ttfamily int localisation\+Valide (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Compare la position du joueur avec le table des collisions\mbox{\Hypertarget{map-testing_8c_a89d0e4c4c2c6dd8b28e14ffce705f427}\label{map-testing_8c_a89d0e4c4c2c6dd8b28e14ffce705f427}} 
+\index{map-\/testing.c@{map-\/testing.c}!movePlayer@{movePlayer}}
+\index{movePlayer@{movePlayer}!map-\/testing.c@{map-\/testing.c}}
+\doxysubsubsection{\texorpdfstring{movePlayer()}{movePlayer()}}
+{\footnotesize\ttfamily void move\+Player (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Surface $\ast$}]{spirit,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{SDL\+\_\+\+Surface $\ast$}]{copy,  }\item[{SDL\+\_\+\+Rect}]{pre\+\_\+rect,  }\item[{SDL\+\_\+\+Rect}]{rect,  }\item[{enum directions}]{dir,  }\item[{enum actions}]{act,  }\item[{Uint32 $\ast$}]{start\+\_\+time }\end{DoxyParamCaption})}
+
+Fonction de mouvement du joueur\mbox{\Hypertarget{map-testing_8c_a35ea3ea89505407cd76efe39eab8a110}\label{map-testing_8c_a35ea3ea89505407cd76efe39eab8a110}} 
+\index{map-\/testing.c@{map-\/testing.c}!printLayer@{printLayer}}
+\index{printLayer@{printLayer}!map-\/testing.c@{map-\/testing.c}}
+\doxysubsubsection{\texorpdfstring{printLayer()}{printLayer()}}
+{\footnotesize\ttfamily int print\+Layer (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{int}]{tiles\mbox{[}4160\mbox{]},  }\item[{char $\ast$}]{nom\+\_\+fichier,  }\item[{int}]{firstgid,  }\item[{int}]{tile\+\_\+width,  }\item[{int}]{tile\+\_\+height }\end{DoxyParamCaption})}
+
+affiche la map couche par couche\mbox{\Hypertarget{map-testing_8c_ab3d2f34a5af5d6e1f40ff8d70368bc2b}\label{map-testing_8c_ab3d2f34a5af5d6e1f40ff8d70368bc2b}} 
+\index{map-\/testing.c@{map-\/testing.c}!printSpirit@{printSpirit}}
+\index{printSpirit@{printSpirit}!map-\/testing.c@{map-\/testing.c}}
+\doxysubsubsection{\texorpdfstring{printSpirit()}{printSpirit()}}
+{\footnotesize\ttfamily void print\+Spirit (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{char $\ast$}]{nom\+\_\+fichier,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Affiche le joueur sur la map\mbox{\Hypertarget{map-testing_8c_a605e4de241fca8609de5dea7d89e225f}\label{map-testing_8c_a605e4de241fca8609de5dea7d89e225f}} 
+\index{map-\/testing.c@{map-\/testing.c}!waiting@{waiting}}
+\index{waiting@{waiting}!map-\/testing.c@{map-\/testing.c}}
+\doxysubsubsection{\texorpdfstring{waiting()}{waiting()}}
+{\footnotesize\ttfamily void waiting (\begin{DoxyParamCaption}\item[{Uint32 $\ast$}]{start\+\_\+time }\end{DoxyParamCaption})}
+
+Framerate

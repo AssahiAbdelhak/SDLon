@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDLon:  Fichier source de prog/include/player.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SDLon
+   &#160;<span id="projectnumber">1.0 Alpha</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_dfe6bed94bcf04987b38a6f8493ab81c.html">prog</a></li><li class="navelem"><a class="el" href="dir_cb0c0de03e6071efc1c0e17eea8d8ce8.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">player.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef HOMME</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;sdlon_init.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;item.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define HOMME 0</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define FEMME 1</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define MAIN_MAX 6</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structplayer__s.html">   17</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structplayer__s.html">player_s</a>{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">char</span> * name;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">int</span> genre;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">int</span> x;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">int</span> y;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">int</span> nb_current_sdlon;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">int</span> badges;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="structstruct__sdlon.html">sdlon</a> sd[6];</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    inventory inventaire;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> sd_in_use;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> argent;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> current_town;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> story_position;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}<a class="code" href="structplayer__s.html">player_t</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    Definition de la box</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structbox.html">   36</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structbox.html">box</a>{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="structstruct__sdlon.html">sdlon</a> current;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">struct </span><a class="code" href="structbox.html">box</a> * next;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">struct </span><a class="code" href="structbox.html">box</a> * precedent;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}<a class="code" href="structbox.html">box</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//box * boiteASdlon;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="structplayer__s.html">player_t</a> <a class="code" href="player_8c.html#abd71e1269584edc9ce5deefadc178f2d">player_create</a>(<span class="keywordtype">char</span> * name, <span class="keywordtype">int</span> genre, <span class="keywordtype">char</span> * file_name);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="structplayer__s.html">player_t</a> <a class="code" href="player_8c.html#a139f526d05c16344a672411817d9184a">player_init</a>(<span class="keywordtype">char</span> * file_name);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">int</span> <a class="code" href="player_8c.html#ae47b800cb2b89874d91f406ad7b97571">player_quit</a>(<a class="code" href="structplayer__s.html">player_t</a> * p);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">int</span> <a class="code" href="player_8c.html#a7e0ca978553f48af0abd4b55dca6d33d">add_sdlon_in_set</a>(<a class="code" href="structstruct__sdlon.html">sdlon</a> sd, <a class="code" href="structplayer__s.html">player_t</a> * player);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">int</span> <a class="code" href="player_8c.html#afdf4753bb086c4eb88da6d6ca6bdc9fa">remove_sdlon_in_set</a>(<a class="code" href="structstruct__sdlon.html">sdlon</a> sd, <a class="code" href="structplayer__s.html">player_t</a> * player);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">int</span> <a class="code" href="player_8c.html#a2223bdb92bc352fe16604b94a4608c5a">switch_sdlon_from_set</a>(<a class="code" href="structstruct__sdlon.html">sdlon</a> sd_in, <a class="code" href="structstruct__sdlon.html">sdlon</a> sd_out, <a class="code" href="structplayer__s.html">player_t</a> * player);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">//int send_sdlon_in_box(sdlon sd);</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//int load_box(char * name);</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">//int create_box();</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">int</span> <a class="code" href="player_8c.html#a3b0a40c9bf1b50ab4b05e9f6b5114238">get_player_item</a>(<a class="code" href="structplayer__s.html">player_t</a> * player, <span class="keywordtype">int</span> num_item);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">int</span> <a class="code" href="player_8c.html#a1d46baddd743748600103ca006f0eca0">add_items</a>(<span class="keywordtype">int</span> num_item, <span class="keywordtype">int</span> qtt, <a class="code" href="structplayer__s.html">player_t</a> * player);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">int</span> <a class="code" href="player_8c.html#ae8b4465a011fcc237ecb115669f2c454">remove_items</a>(<span class="keywordtype">int</span> num_item, <span class="keywordtype">int</span> qtt, <a class="code" href="structplayer__s.html">player_t</a> * player);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="player_8c.html#a161fcb12589a4ce4f4274c190a8d3381">sspi</a>(<a class="code" href="structplayer__s.html">player_t</a> player);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="player_8c.html#a851226828eaa43192c0439993b032ce1">display_pss</a>(<a class="code" href="structplayer__s.html">player_t</a> player);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aplayer_8c_html_a139f526d05c16344a672411817d9184a"><div class="ttname"><a href="player_8c.html#a139f526d05c16344a672411817d9184a">player_init</a></div><div class="ttdeci">player_t player_init(char *file_name)</div><div class="ttdoc">initialise les specs d'un joueur a partir d'un fichier de sauvegarde</div><div class="ttdef"><b>Definition:</b> player.c:93</div></div>
+<div class="ttc" id="aplayer_8c_html_a161fcb12589a4ce4f4274c190a8d3381"><div class="ttname"><a href="player_8c.html#a161fcb12589a4ce4f4274c190a8d3381">sspi</a></div><div class="ttdeci">int sspi(player_t player)</div><div class="ttdoc">save set, player, item pour sauvegarder ses données dans le bon format</div><div class="ttdef"><b>Definition:</b> player.c:223</div></div>
+<div class="ttc" id="aplayer_8c_html_a1d46baddd743748600103ca006f0eca0"><div class="ttname"><a href="player_8c.html#a1d46baddd743748600103ca006f0eca0">add_items</a></div><div class="ttdeci">int add_items(int num_item, int qtt, player_t *player)</div><div class="ttdoc">Ajoute un item à l'inventaire du joueurs retourne 0 si réussis 1 si aucun item recevable et le nombre...</div><div class="ttdef"><b>Definition:</b> player.c:268</div></div>
+<div class="ttc" id="aplayer_8c_html_a2223bdb92bc352fe16604b94a4608c5a"><div class="ttname"><a href="player_8c.html#a2223bdb92bc352fe16604b94a4608c5a">switch_sdlon_from_set</a></div><div class="ttdeci">int switch_sdlon_from_set(sdlon sd_in, sdlon sd_out, player_t *player)</div><div class="ttdoc">Fonction qui switch les sdlons du set du joueur.</div><div class="ttdef"><b>Definition:</b> player.c:375</div></div>
+<div class="ttc" id="aplayer_8c_html_a3b0a40c9bf1b50ab4b05e9f6b5114238"><div class="ttname"><a href="player_8c.html#a3b0a40c9bf1b50ab4b05e9f6b5114238">get_player_item</a></div><div class="ttdeci">int get_player_item(player_t *player, int num_item)</div><div class="ttdoc">Permet de retourner la quantité d'un item posséder par le joueur.</div><div class="ttdef"><b>Definition:</b> player.c:257</div></div>
+<div class="ttc" id="aplayer_8c_html_a7e0ca978553f48af0abd4b55dca6d33d"><div class="ttname"><a href="player_8c.html#a7e0ca978553f48af0abd4b55dca6d33d">add_sdlon_in_set</a></div><div class="ttdeci">int add_sdlon_in_set(sdlon sd, player_t *player)</div><div class="ttdoc">Fonction qui ajoute un sdlon dans la main courante d'un joueurs.</div><div class="ttdef"><b>Definition:</b> player.c:311</div></div>
+<div class="ttc" id="aplayer_8c_html_a851226828eaa43192c0439993b032ce1"><div class="ttname"><a href="player_8c.html#a851226828eaa43192c0439993b032ce1">display_pss</a></div><div class="ttdeci">int display_pss(player_t player)</div><div class="ttdoc">afficher les sdlon du kit du joueur &quot;debogage&quot;</div><div class="ttdef"><b>Definition:</b> player.c:208</div></div>
+<div class="ttc" id="aplayer_8c_html_abd71e1269584edc9ce5deefadc178f2d"><div class="ttname"><a href="player_8c.html#abd71e1269584edc9ce5deefadc178f2d">player_create</a></div><div class="ttdeci">player_t player_create(char *name, int genre, char *file_name)</div><div class="ttdoc">creer un joueur pour une nouvelle partie</div><div class="ttdef"><b>Definition:</b> player.c:44</div></div>
+<div class="ttc" id="aplayer_8c_html_ae47b800cb2b89874d91f406ad7b97571"><div class="ttname"><a href="player_8c.html#ae47b800cb2b89874d91f406ad7b97571">player_quit</a></div><div class="ttdeci">int player_quit(player_t *player)</div><div class="ttdoc">Libere la mémoire utiliser par le joueurs.</div><div class="ttdef"><b>Definition:</b> player.c:195</div></div>
+<div class="ttc" id="aplayer_8c_html_ae8b4465a011fcc237ecb115669f2c454"><div class="ttname"><a href="player_8c.html#ae8b4465a011fcc237ecb115669f2c454">remove_items</a></div><div class="ttdeci">int remove_items(int num_item, int qtt, player_t *player)</div><div class="ttdoc">retire un item à l'inventaire du joueur</div><div class="ttdef"><b>Definition:</b> player.c:286</div></div>
+<div class="ttc" id="aplayer_8c_html_afdf4753bb086c4eb88da6d6ca6bdc9fa"><div class="ttname"><a href="player_8c.html#afdf4753bb086c4eb88da6d6ca6bdc9fa">remove_sdlon_in_set</a></div><div class="ttdeci">int remove_sdlon_in_set(sdlon sd, player_t *player)</div><div class="ttdoc">Fonction qui retire un sdlon de la main courante d'un joueurs.</div><div class="ttdef"><b>Definition:</b> player.c:342</div></div>
+<div class="ttc" id="astructbox_html"><div class="ttname"><a href="structbox.html">box</a></div><div class="ttdef"><b>Definition:</b> player.h:36</div></div>
+<div class="ttc" id="astructplayer__s_html"><div class="ttname"><a href="structplayer__s.html">player_s</a></div><div class="ttdef"><b>Definition:</b> player.h:17</div></div>
+<div class="ttc" id="astructstruct__sdlon_html"><div class="ttname"><a href="structstruct__sdlon.html">struct_sdlon</a></div><div class="ttdef"><b>Definition:</b> sdlon_init.h:23</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

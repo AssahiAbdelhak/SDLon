@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDLon:  Fichier source de prog/include/combat.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SDLon
+   &#160;<span id="projectnumber">1.0 Alpha</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_dfe6bed94bcf04987b38a6f8493ab81c.html">prog</a></li><li class="navelem"><a class="el" href="dir_cb0c0de03e6071efc1c0e17eea8d8ce8.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">combat.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;sdlon_generate.h&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;sdlon_init.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;player.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define MAX_GAIN 1000</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">int</span> <a class="code" href="include_2combat_8c.html#afa09906542afe88880a7a97993c517e2">sats</a>(<a class="code" href="structstruct__sdlon.html">sdlon</a> * sd_at, <a class="code" href="structstruct__sdlon.html">sdlon</a> * sd_target, <span class="keywordtype">int</span> num_at);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">int</span> <a class="code" href="include_2combat_8c.html#a498f032372ad8e0f8f4aafcd981fb7ad">ia</a>(<a class="code" href="structstruct__sdlon.html">sdlon</a> *sd_at, <a class="code" href="structstruct__sdlon.html">sdlon</a> *sd_target);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">int</span> <a class="code" href="include_2combat_8c.html#a14b2f065446466336b506888a6d3b646">status_combat</a>(<a class="code" href="structplayer__s.html">player_t</a> player, <a class="code" href="structstruct__sdlon.html">sdlon</a> sd);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">int</span> <a class="code" href="include_2combat_8c.html#a5e4a02ac81286430e5d502f48648eb8f">can_fight</a>(<a class="code" href="structplayer__s.html">player_t</a> player);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">int</span> <a class="code" href="include_2combat_8c.html#a0738cae7b645a0bf97c438e9afa6090b">get_xp</a>(<a class="code" href="structplayer__s.html">player_t</a> *player);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">int</span> <a class="code" href="include_2combat_8c.html#a59d9e89ac5852cb7f303d39f9104da8d">capture</a>(<span class="keywordtype">int</span> lasso, <span class="keywordtype">int</span> vie, <span class="keywordtype">int</span> vieMax);</div>
+<div class="ttc" id="ainclude_2combat_8c_html_a0738cae7b645a0bf97c438e9afa6090b"><div class="ttname"><a href="include_2combat_8c.html#a0738cae7b645a0bf97c438e9afa6090b">get_xp</a></div><div class="ttdeci">int get_xp(player_t *player)</div><div class="ttdoc">Fonction qui gère le gain d'expérience retourne le nombre de sdlon ayant grimper de niveau.</div><div class="ttdef"><b>Definition:</b> combat.c:249</div></div>
+<div class="ttc" id="ainclude_2combat_8c_html_a14b2f065446466336b506888a6d3b646"><div class="ttname"><a href="include_2combat_8c.html#a14b2f065446466336b506888a6d3b646">status_combat</a></div><div class="ttdeci">int status_combat(player_t player, sdlon sd)</div><div class="ttdoc">renvoie le status d'un combat 0: gagné 1: sdlon tué mais d'autre en rab 2: continue 3: défaite</div><div class="ttdef"><b>Definition:</b> combat.c:183</div></div>
+<div class="ttc" id="ainclude_2combat_8c_html_a498f032372ad8e0f8f4aafcd981fb7ad"><div class="ttname"><a href="include_2combat_8c.html#a498f032372ad8e0f8f4aafcd981fb7ad">ia</a></div><div class="ttdeci">int ia(sdlon *sd_at, sdlon *sd_target)</div><div class="ttdoc">Fonction qui retourne le numero d'attaque a utiliser par l'ordinateur.</div><div class="ttdef"><b>Definition:</b> combat.c:273</div></div>
+<div class="ttc" id="ainclude_2combat_8c_html_a59d9e89ac5852cb7f303d39f9104da8d"><div class="ttname"><a href="include_2combat_8c.html#a59d9e89ac5852cb7f303d39f9104da8d">capture</a></div><div class="ttdeci">int capture(int lasso, int vie, int vieMax)</div><div class="ttdoc">retourne 1 si on capture le sdlon sinon retourne 0</div><div class="ttdef"><b>Definition:</b> combat.c:401</div></div>
+<div class="ttc" id="ainclude_2combat_8c_html_a5e4a02ac81286430e5d502f48648eb8f"><div class="ttname"><a href="include_2combat_8c.html#a5e4a02ac81286430e5d502f48648eb8f">can_fight</a></div><div class="ttdeci">int can_fight(player_t player)</div><div class="ttdoc">Fonction qui renvoie: 1 si l'on peu se battre 0 sinon.</div><div class="ttdef"><b>Definition:</b> combat.c:202</div></div>
+<div class="ttc" id="ainclude_2combat_8c_html_afa09906542afe88880a7a97993c517e2"><div class="ttname"><a href="include_2combat_8c.html#afa09906542afe88880a7a97993c517e2">sats</a></div><div class="ttdeci">int sats(sdlon *sd_at, sdlon *sd_target, int num_at)</div><div class="ttdoc">applique une attaque</div><div class="ttdef"><b>Definition:</b> combat.c:111</div></div>
+<div class="ttc" id="astructplayer__s_html"><div class="ttname"><a href="structplayer__s.html">player_s</a></div><div class="ttdef"><b>Definition:</b> player.h:17</div></div>
+<div class="ttc" id="astructstruct__sdlon_html"><div class="ttname"><a href="structstruct__sdlon.html">struct_sdlon</a></div><div class="ttdef"><b>Definition:</b> sdlon_init.h:23</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

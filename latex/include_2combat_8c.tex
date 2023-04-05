@@ -1,0 +1,82 @@
+\hypertarget{include_2combat_8c}{}\doxysection{Référence du fichier prog/include/combat.c}
+\label{include_2combat_8c}\index{prog/include/combat.c@{prog/include/combat.c}}
+{\ttfamily \#include \char`\"{}combat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}player.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}item.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sdlon\+\_\+init.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{include_2combat_8c_abdda851c6725247c3cf2927b7acb603b}\label{include_2combat_8c_abdda851c6725247c3cf2927b7acb603b}} 
+int \mbox{\hyperlink{include_2combat_8c_abdda851c6725247c3cf2927b7acb603b}{heal}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$sd, int value)
+\begin{DoxyCompactList}\small\item\em Si vie en mois, on heal sinon retour retourne 0 si réussis 1 sinon. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_ab5210307acd854595193f5533b228dfe}\label{include_2combat_8c_ab5210307acd854595193f5533b228dfe}} 
+int \mbox{\hyperlink{include_2combat_8c_ab5210307acd854595193f5533b228dfe}{conf\+\_\+dgt}} (int degat, int type\+\_\+at, int type\+\_\+target)
+\begin{DoxyCompactList}\small\item\em Calcul le nombre de degat en fonction du type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_af471bb1da4af8c8293179c52e629964f}\label{include_2combat_8c_af471bb1da4af8c8293179c52e629964f}} 
+int \mbox{\hyperlink{include_2combat_8c_af471bb1da4af8c8293179c52e629964f}{apply\+\_\+attaque}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$sd, int degat)
+\begin{DoxyCompactList}\small\item\em applique les degats sur un sdlon \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{include_2combat_8c_afa09906542afe88880a7a97993c517e2}{sats}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$sd\+\_\+at, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$sd\+\_\+target, int num\+\_\+at)
+\begin{DoxyCompactList}\small\item\em applique une attaque \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_abe4d0763b6b22f30f95de43515e434d9}\label{include_2combat_8c_abe4d0763b6b22f30f95de43515e434d9}} 
+int \mbox{\hyperlink{include_2combat_8c_abe4d0763b6b22f30f95de43515e434d9}{get\+\_\+usable\+\_\+sdlon}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player)
+\begin{DoxyCompactList}\small\item\em Retourne le nombre de sdlons utilisables. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_a14b2f065446466336b506888a6d3b646}\label{include_2combat_8c_a14b2f065446466336b506888a6d3b646}} 
+int \mbox{\hyperlink{include_2combat_8c_a14b2f065446466336b506888a6d3b646}{status\+\_\+combat}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd)
+\begin{DoxyCompactList}\small\item\em renvoie le status d\textquotesingle{}un combat 0\+: gagné 1\+: sdlon tué mais d\textquotesingle{}autre en rab 2\+: continue 3\+: défaite \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_a5e4a02ac81286430e5d502f48648eb8f}\label{include_2combat_8c_a5e4a02ac81286430e5d502f48648eb8f}} 
+int \mbox{\hyperlink{include_2combat_8c_a5e4a02ac81286430e5d502f48648eb8f}{can\+\_\+fight}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player)
+\begin{DoxyCompactList}\small\item\em Fonction qui renvoie\+: 1 si l\textquotesingle{}on peu se battre 0 sinon. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_a7df6cc813c24af0c0eaa732d791f4263}\label{include_2combat_8c_a7df6cc813c24af0c0eaa732d791f4263}} 
+int {\bfseries get\+\_\+evolution} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$sd)
+\item 
+\mbox{\Hypertarget{include_2combat_8c_a8db465c5b556c2c54d1ec702013310ae}\label{include_2combat_8c_a8db465c5b556c2c54d1ec702013310ae}} 
+int \mbox{\hyperlink{include_2combat_8c_a8db465c5b556c2c54d1ec702013310ae}{get\+\_\+level}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$sd)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère le gain de niveau d\textquotesingle{}un sdlon retourne 1 si le sdlon grimpe de niveau 0 sinon. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_a0738cae7b645a0bf97c438e9afa6090b}\label{include_2combat_8c_a0738cae7b645a0bf97c438e9afa6090b}} 
+int \mbox{\hyperlink{include_2combat_8c_a0738cae7b645a0bf97c438e9afa6090b}{get\+\_\+xp}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère le gain d\textquotesingle{}expérience retourne le nombre de sdlon ayant grimper de niveau. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_acf7b17dcb1e371a8b4acf0fe811f9ed5}\label{include_2combat_8c_acf7b17dcb1e371a8b4acf0fe811f9ed5}} 
+int \mbox{\hyperlink{include_2combat_8c_acf7b17dcb1e371a8b4acf0fe811f9ed5}{get\+\_\+loot}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Fonction retournant un gain (\$) après une victoire. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_a498f032372ad8e0f8f4aafcd981fb7ad}\label{include_2combat_8c_a498f032372ad8e0f8f4aafcd981fb7ad}} 
+int \mbox{\hyperlink{include_2combat_8c_a498f032372ad8e0f8f4aafcd981fb7ad}{ia}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$sd\+\_\+at, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$sd\+\_\+target)
+\begin{DoxyCompactList}\small\item\em Fonction qui retourne le numero d\textquotesingle{}attaque a utiliser par l\textquotesingle{}ordinateur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{include_2combat_8c_a59d9e89ac5852cb7f303d39f9104da8d}\label{include_2combat_8c_a59d9e89ac5852cb7f303d39f9104da8d}} 
+int \mbox{\hyperlink{include_2combat_8c_a59d9e89ac5852cb7f303d39f9104da8d}{capture}} (int lasso, int vie, int vie\+Max)
+\begin{DoxyCompactList}\small\item\em retourne 1 si on capture le sdlon sinon retourne 0 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier de gestion des attaques \begin{DoxyAuthor}{Auteur}
+Wandrille Ballereau 
+
+Abdelhak Assahi 
+
+Lilian Colla 
+
+Mohamed Besbes 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 Alpha 
+\end{DoxyVersion}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{include_2combat_8c_afa09906542afe88880a7a97993c517e2}\label{include_2combat_8c_afa09906542afe88880a7a97993c517e2}} 
+\index{combat.c@{combat.c}!sats@{sats}}
+\index{sats@{sats}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{sats()}{sats()}}
+{\footnotesize\ttfamily int sats (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$}]{sd\+\_\+at,  }\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}} $\ast$}]{sd\+\_\+target,  }\item[{int}]{num\+\_\+at }\end{DoxyParamCaption})}
+
+
+
+applique une attaque 
+
+selon le mode de l\textquotesingle{}attaque on fait différent traitement 0\+: on heal 1\+: on attaque
