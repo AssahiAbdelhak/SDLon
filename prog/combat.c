@@ -982,7 +982,7 @@ int afficherLeCombat(SDL_Window *window,SDL_Surface * screen,player_t player, sd
     printPokemon(window,screen,sd.front_face,WIDTH-350,220);
     printf("In use: %d\n", player.sd_in_use);
     printf("Path sdlon in use: %s\n", player.sd[player.sd_in_use].back_face);
-    printf("Path sdlon 0: %s\n", player.sd[0].back_face);
+    printf("Path sdlon 0: %s\n,%d", player.sd[0].back_face,player.sd_in_use);
     printPokemon(window,screen,player.sd[player.sd_in_use].back_face,0,HEIGHT-230);//player indice in use bug. jpense ca viens du pointeur du sdlon courrant
     SDL_Log("vie courante %d\tvie max %d\n",player.sd[player.sd_in_use].vie,player.sd[0].vie_max);
     SDL_Log("niveau %d\n",player.sd[0].level);

@@ -385,7 +385,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                     case SDLK_f:
                         if(dansLesBuissons==PORTE){
                             printf("position x==%d y == %d\n",player.x,player.y);
-                            printMarket(window,screen,&player,"../tiledmap/market.png",market_collision,0,305,600);
+                            printMarket(window,screen,&player,"../tiledmap/market_test.png",market_collision,0,305,600);
                             return ;
                         }
                         if(dansLesBuissons==LABO){
@@ -416,7 +416,13 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                                     
                                     if(seed<=10){
                                         movePers=0;
-                                        sdlon sd = generate_sdlon(0, 1, 15);
+                                        sdlon sd;
+                                        if(player.current_town==0)
+                                            sd = generate_sdlon(all_town[player.current_town].environnement, 1, 15);
+                                        else if(player.current_town==1)
+                                            sd = generate_sdlon(all_town[player.current_town].environnement, 15, 30);
+                                        else if(player.current_town==2)
+                                            sd = generate_sdlon(all_town[player.current_town].environnement, 30, 70);
                                         TTF_CloseFont(font);
                                         afficherLeCombat(window,screen,player,sd);
                                         
@@ -451,7 +457,11 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                             printf("go to map 1\n");
                             printMap(window,screen,player,collision,buissons);
                         }else{
-                            
+                            player.current_town=2;
+                        player.x = 600;
+                        player.y = 300;
+                            printf("go to map 2\n");
+                            printMap(window,screen,player,collision_map_3,buissons_map_3);
                         }
                     
                 }

@@ -350,7 +350,7 @@ int coordonnesValide(int colission[1600],int x,int y,int i){
  * - Soins
 */
 int detecteur(SDL_Window *window,SDL_Surface *screen,int col[1600],int x,int y,int map_indice){
-    SDL_Log("here in %d",col[col[(y/16)*40+(x/16)]]);
+    SDL_Log("here in %d\n",col[col[(y/16)*40+(x/16)]]);
     SDL_Rect rect = {0,800,WIDTH,HEIGHT-700};
     Uint32 bg = 0x000000;
     int retour;
@@ -359,9 +359,11 @@ int detecteur(SDL_Window *window,SDL_Surface *screen,int col[1600],int x,int y,i
     SDL_Color white = {255,255,255};
     SDL_Surface * message = TTF_RenderUTF8_Blended(font,"",white);
     if(map_indice==0){
+        printf("%d et %d\n",col[(y/16)*40+(x/16)],porte_market);
         if(col[(y/16)*40+(x/16)]==porte_market){
         message = TTF_RenderUTF8_Blended(font,"Cliquez sur Q pour sortir",white);
         retour = PORTE;
+        printf("porte sortie\n");
         }else if(col[(y/16)*40+(x/16)]==dame){
         message = TTF_RenderUTF8_Blended(font,"Cliquez sur H pour soigner votre SDLon",white);
         retour = DAME;
@@ -668,7 +670,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                         break;
                 }
                 //dansLesBuissons = detecterBuissons(window,screen,x+16,y+16,hintSliceFromMap,hint,font,white,movePers);
-                detecter = detecteur(window,screen,colission,x,y,map_indice);
+                detecter = detecteur(window,screen,colission,x,y+16,map_indice);
                 if(move){
             if(dir==UP){
                 

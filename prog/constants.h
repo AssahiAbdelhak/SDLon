@@ -30,3 +30,5 @@ extern int professeur;
 extern int porte_labo;
 extern int collision_map_2[4160];
 extern int buissons_map2[4160];
+extern int collision_map_3[4160];
+extern int buissons_map_3[4160];
