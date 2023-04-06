@@ -254,6 +254,8 @@ void handle_events(SDL_Window *window,SDL_Surface *screen,int nb,player_t player
                   printMap(window,screen,player,collision_map_2,buissons_map2);
                 else if(player.current_town==2)
                   printMap(window,screen,player,collision_map_3,buissons_map_3);
+                else if(player.current_town==3)
+                  printMap(window,screen,player,collision_map_4,buissons_map_4);
         return ;
     }
     return;

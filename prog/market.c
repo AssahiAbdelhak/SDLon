@@ -504,15 +504,19 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             player.x=170;
                             if(player.current_town==0)
                                 printMap(window,screen,player,collision,buissons);
-                                else if(player.current_town==1)
-                                printMap(window,screen,player,collision_map_2,buissons_map2);
+                                else if(player.current_town==1){
+                                    player.y=150;
+                                    player.x=100;
+                                    printMap(window,screen,player,collision_map_2,buissons_map2);
+                                }
                                 else if(player.current_town==2){
                                     player.x = 430;
                                     player.y = 330;
                                     printMap(window,screen,player,collision_map_3,buissons_map_3);
                                     }
                                     else if(player.current_town==3){
-                                    
+                                    player.x = 1130;
+                                    player.y = 330;
                                     printMap(window,screen,player,collision_map_4,buissons_map_4);
                                     }
                             }
@@ -541,7 +545,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                             SDL_Surface * surface = SDL_CreateRGBSurface(0, 640, 640, screen->format->BitsPerPixel, 0, 255, 255, 255);
                             afficherLaBoutique(window,screen,surface,&player,x_map,y_map);
                             SDL_FillRect(screen,NULL,0x000000);
-                            printMarket(window,screen,&player,"../tiledmap/market_map.png",market_collision,0,player.x,player.y);
+                            printMarket(window,screen,&player,"../tiledmap/market_test.png",market_collision,0,player.x,player.y);
                             return -1;
                         }
                         break;
@@ -560,7 +564,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                 SDL_Rect rect_container = {500,500,container->w,container->h};
                                 if(player.story_position==1){
                                     SDL_FillRect(container,NULL,0xffffff);
-                                    replique = TTF_RenderText_Blended_Wrapped(font,"Abuse pas je t'en ai déjà offert un!",noir,container->w);
+                                    replique = TTF_RenderText_Blended_Wrapped(font,"Abuse pas je t'en ai deja offert un!",noir,container->w);
                                     SDL_Rect rect_message = {(container->w - replique->w)/2,(container->h - replique->h)/2,replique->w,replique->h};
                                     SDL_BlitSurface(replique,NULL,container,&rect_message);
                                     SDL_BlitSurface(container,NULL,screen,&rect_container);
@@ -579,7 +583,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                             }
                                         }
                                     }
-                                    printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos,1,400,300);
+                                    printMarket(window,screen,&player,"../tiledmap/labo_vf.png",labos,1,320,260);
                                 }
                                 while(i<nb){
                                     SDL_FillRect(container,NULL,0xffffff);

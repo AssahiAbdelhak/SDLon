@@ -76,6 +76,8 @@ void afficherLesSauvegardes(SDL_Window *pWindow,SDL_Surface * screen,TTF_Font *f
                   printMap(pWindow,screen,player,collision_map_2,buissons_map2);
                 else if(player.current_town==2)
                   printMap(pWindow,screen,player,collision_map_3,buissons_map_3);
+                else if(player.current_town==3)
+                  printMap(pWindow,screen,player,collision_map_4,buissons_map_4);
               } 
             }
             
