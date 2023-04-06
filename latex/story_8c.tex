@@ -1,0 +1,50 @@
+\hypertarget{story_8c}{}\doxysection{Référence du fichier prog/include/story.c}
+\label{story_8c}\index{prog/include/story.c@{prog/include/story.c}}
+{\ttfamily \#include \char`\"{}story.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}item.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}sdlon\+\_\+generate.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{story_8c_ac41de07bd713cd7d27f4dc1ac623f3ff}\label{story_8c_ac41de07bd713cd7d27f4dc1ac623f3ff}} 
+void \mbox{\hyperlink{story_8c_ac41de07bd713cd7d27f4dc1ac623f3ff}{town\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui initialise les villes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{story_8c_a0da045939f1e0845a774569296795592}\label{story_8c_a0da045939f1e0845a774569296795592}} 
+void \mbox{\hyperlink{story_8c_a0da045939f1e0845a774569296795592}{display\+\_\+town}} (\mbox{\hyperlink{structtown__s}{town\+\_\+t}} town)
+\begin{DoxyCompactList}\small\item\em Fonction qui affiche les specs d\textquotesingle{}une ville Permet de débuger plus facilement les erreurs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{story_8c_abd0d45e45588c003f3576470549e7995}\label{story_8c_abd0d45e45588c003f3576470549e7995}} 
+int \mbox{\hyperlink{story_8c_abd0d45e45588c003f3576470549e7995}{can\+\_\+next\+\_\+town}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player, \mbox{\hyperlink{structtown__s}{town\+\_\+t}} town)
+\begin{DoxyCompactList}\small\item\em Vérifie que l\textquotesingle{}on peu aller dans la ville suivante En ayant complété l\textquotesingle{}histoire du jeu dans la ville actuelle Passage dans la ville suivante nécéssite l\textquotesingle{}obtention du badge. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{story_8c_ac4fd9ed02d7a9e21a380105632a86d4b}\label{story_8c_ac4fd9ed02d7a9e21a380105632a86d4b}} 
+int \mbox{\hyperlink{story_8c_ac4fd9ed02d7a9e21a380105632a86d4b}{get\+\_\+town\+\_\+environnement}} (\mbox{\hyperlink{structtown__s}{town\+\_\+t}} town)
+\begin{DoxyCompactList}\small\item\em retourne le type de la map (eau/feu/terre/air) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{story_8c_a1d16e01d6d22a6df11fef00de36b0952}\label{story_8c_a1d16e01d6d22a6df11fef00de36b0952}} 
+\mbox{\hyperlink{structstruct__sdlon}{sdlon}} \mbox{\hyperlink{story_8c_a1d16e01d6d22a6df11fef00de36b0952}{choix}} (int i)
+\begin{DoxyCompactList}\small\item\em retourne le sdlon choisi par le joueur \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{story_8c_a67fb642202817f2f3b7612944d517217}\label{story_8c_a67fb642202817f2f3b7612944d517217}} 
+\mbox{\hyperlink{structtown__s}{town\+\_\+t}} {\bfseries all\+\_\+town} \mbox{[}NB\+\_\+\+TOWN\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier gestion de l\textquotesingle{}histoire, des pnj et de la map \begin{DoxyAuthor}{Auteur}
+Wandrille Ballereau 
+
+Abdelhak Assahi 
+
+Lilian Colla 
+
+Mohamed Besbes 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 Alpha 
+\end{DoxyVersion}

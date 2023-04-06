@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDLon: Référence du fichier prog/include/player.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SDLon
+   &#160;<span id="projectnumber">1.0 Alpha</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_dfe6bed94bcf04987b38a6f8493ab81c.html">prog</a></li><li class="navelem"><a class="el" href="dir_cb0c0de03e6071efc1c0e17eea8d8ce8.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier player.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;player.h&quot;</code><br />
+<code>#include &quot;sdlon_init.h&quot;</code><br />
+<code>#include &quot;item.h&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a08e96c2c806a8e83b6d496c33d066701"><td class="memItemLeft" align="right" valign="top"><a id="a08e96c2c806a8e83b6d496c33d066701"></a>
+inventory&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a08e96c2c806a8e83b6d496c33d066701">player_inventory_create</a> (char *file_name)</td></tr>
+<tr class="memdesc:a08e96c2c806a8e83b6d496c33d066701"><td class="mdescLeft">&#160;</td><td class="mdescRight">crée l'inventaire du joueur et le met à 0 <br /></td></tr>
+<tr class="separator:a08e96c2c806a8e83b6d496c33d066701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd71e1269584edc9ce5deefadc178f2d"><td class="memItemLeft" align="right" valign="top"><a id="abd71e1269584edc9ce5deefadc178f2d"></a>
+<a class="el" href="structplayer__s.html">player_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#abd71e1269584edc9ce5deefadc178f2d">player_create</a> (char *name, int genre, char *file_name)</td></tr>
+<tr class="memdesc:abd71e1269584edc9ce5deefadc178f2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">creer un joueur pour une nouvelle partie <br /></td></tr>
+<tr class="separator:abd71e1269584edc9ce5deefadc178f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a139f526d05c16344a672411817d9184a"><td class="memItemLeft" align="right" valign="top"><a id="a139f526d05c16344a672411817d9184a"></a>
+<a class="el" href="structplayer__s.html">player_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a139f526d05c16344a672411817d9184a">player_init</a> (char *file_name)</td></tr>
+<tr class="memdesc:a139f526d05c16344a672411817d9184a"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise les specs d'un joueur a partir d'un fichier de sauvegarde <br /></td></tr>
+<tr class="separator:a139f526d05c16344a672411817d9184a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9028aee34d8c16766954b9ff2cdf54ff"><td class="memItemLeft" align="right" valign="top"><a id="a9028aee34d8c16766954b9ff2cdf54ff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a9028aee34d8c16766954b9ff2cdf54ff">replace_current_sd</a> (<a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:a9028aee34d8c16766954b9ff2cdf54ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">replace l'indice corrant sur le premier sdlon <br /></td></tr>
+<tr class="separator:a9028aee34d8c16766954b9ff2cdf54ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae47b800cb2b89874d91f406ad7b97571"><td class="memItemLeft" align="right" valign="top"><a id="ae47b800cb2b89874d91f406ad7b97571"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#ae47b800cb2b89874d91f406ad7b97571">player_quit</a> (<a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:ae47b800cb2b89874d91f406ad7b97571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libere la mémoire utiliser par le joueurs. <br /></td></tr>
+<tr class="separator:ae47b800cb2b89874d91f406ad7b97571"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a851226828eaa43192c0439993b032ce1"><td class="memItemLeft" align="right" valign="top"><a id="a851226828eaa43192c0439993b032ce1"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a851226828eaa43192c0439993b032ce1">display_pss</a> (<a class="el" href="structplayer__s.html">player_t</a> player)</td></tr>
+<tr class="memdesc:a851226828eaa43192c0439993b032ce1"><td class="mdescLeft">&#160;</td><td class="mdescRight">afficher les sdlon du kit du joueur "debogage" <br /></td></tr>
+<tr class="separator:a851226828eaa43192c0439993b032ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a161fcb12589a4ce4f4274c190a8d3381"><td class="memItemLeft" align="right" valign="top"><a id="a161fcb12589a4ce4f4274c190a8d3381"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a161fcb12589a4ce4f4274c190a8d3381">sspi</a> (<a class="el" href="structplayer__s.html">player_t</a> player)</td></tr>
+<tr class="memdesc:a161fcb12589a4ce4f4274c190a8d3381"><td class="mdescLeft">&#160;</td><td class="mdescRight">save set, player, item pour sauvegarder ses données dans le bon format <br /></td></tr>
+<tr class="separator:a161fcb12589a4ce4f4274c190a8d3381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b0a40c9bf1b50ab4b05e9f6b5114238"><td class="memItemLeft" align="right" valign="top"><a id="a3b0a40c9bf1b50ab4b05e9f6b5114238"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a3b0a40c9bf1b50ab4b05e9f6b5114238">get_player_item</a> (<a class="el" href="structplayer__s.html">player_t</a> *player, int num_item)</td></tr>
+<tr class="memdesc:a3b0a40c9bf1b50ab4b05e9f6b5114238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de retourner la quantité d'un item posséder par le joueur. <br /></td></tr>
+<tr class="separator:a3b0a40c9bf1b50ab4b05e9f6b5114238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d46baddd743748600103ca006f0eca0"><td class="memItemLeft" align="right" valign="top"><a id="a1d46baddd743748600103ca006f0eca0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a1d46baddd743748600103ca006f0eca0">add_items</a> (int num_item, int qtt, <a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:a1d46baddd743748600103ca006f0eca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un item à l'inventaire du joueurs retourne 0 si réussis 1 si aucun item recevable et le nombre d'item non recevable si une partie est recevable. <br /></td></tr>
+<tr class="separator:a1d46baddd743748600103ca006f0eca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8b4465a011fcc237ecb115669f2c454"><td class="memItemLeft" align="right" valign="top"><a id="ae8b4465a011fcc237ecb115669f2c454"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#ae8b4465a011fcc237ecb115669f2c454">remove_items</a> (int num_item, int qtt, <a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:ae8b4465a011fcc237ecb115669f2c454"><td class="mdescLeft">&#160;</td><td class="mdescRight">retire un item à l'inventaire du joueur <br /></td></tr>
+<tr class="separator:ae8b4465a011fcc237ecb115669f2c454"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07946b19ce74a1e312f25af372076465"><td class="memItemLeft" align="right" valign="top"><a id="a07946b19ce74a1e312f25af372076465"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a07946b19ce74a1e312f25af372076465">use_item</a> ()</td></tr>
+<tr class="memdesc:a07946b19ce74a1e312f25af372076465"><td class="mdescLeft">&#160;</td><td class="mdescRight">utilise un item dans l'inventaire du joueur <br /></td></tr>
+<tr class="separator:a07946b19ce74a1e312f25af372076465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0ca978553f48af0abd4b55dca6d33d"><td class="memItemLeft" align="right" valign="top"><a id="a7e0ca978553f48af0abd4b55dca6d33d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a7e0ca978553f48af0abd4b55dca6d33d">add_sdlon_in_set</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> sd, <a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:a7e0ca978553f48af0abd4b55dca6d33d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui ajoute un sdlon dans la main courante d'un joueurs. <br /></td></tr>
+<tr class="separator:a7e0ca978553f48af0abd4b55dca6d33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdf4753bb086c4eb88da6d6ca6bdc9fa"><td class="memItemLeft" align="right" valign="top"><a id="afdf4753bb086c4eb88da6d6ca6bdc9fa"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#afdf4753bb086c4eb88da6d6ca6bdc9fa">remove_sdlon_in_set</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> sd, <a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:afdf4753bb086c4eb88da6d6ca6bdc9fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui retire un sdlon de la main courante d'un joueurs. <br /></td></tr>
+<tr class="separator:afdf4753bb086c4eb88da6d6ca6bdc9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2223bdb92bc352fe16604b94a4608c5a"><td class="memItemLeft" align="right" valign="top"><a id="a2223bdb92bc352fe16604b94a4608c5a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a2223bdb92bc352fe16604b94a4608c5a">switch_sdlon_from_set</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> sd_in, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd_out, <a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:a2223bdb92bc352fe16604b94a4608c5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui switch les sdlons du set du joueur. <br /></td></tr>
+<tr class="separator:a2223bdb92bc352fe16604b94a4608c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27bfb891e3dc368796ecdbac58fbe9ec"><td class="memItemLeft" align="right" valign="top"><a id="a27bfb891e3dc368796ecdbac58fbe9ec"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a27bfb891e3dc368796ecdbac58fbe9ec">send_sdlon_in_box</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> sd)</td></tr>
+<tr class="memdesc:a27bfb891e3dc368796ecdbac58fbe9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui envoie un sdlon dans une boite pour capturer des sdlons sans les avoir dans sa main. <br /></td></tr>
+<tr class="separator:a27bfb891e3dc368796ecdbac58fbe9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier du gestion du joueur </p><dl class="section author"><dt>Auteur</dt><dd>Wandrille Ballereau </dd>
+<dd>
+Abdelhak Assahi </dd>
+<dd>
+Lilian Colla </dd>
+<dd>
+Mohamed Besbes </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2023 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 Alpha </dd></dl>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

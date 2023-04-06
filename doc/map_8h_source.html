@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDLon:  Fichier source de prog/map.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SDLon
+   &#160;<span id="projectnumber">1.0 Alpha</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_dfe6bed94bcf04987b38a6f8493ab81c.html">prog</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">map.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_image.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;constants.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;include/player.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">void</span> <a class="code" href="map-testing_8c.html#a605e4de241fca8609de5dea7d89e225f">waiting</a>(Uint32 *start_time);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> <a class="code" href="map-testing_8c.html#a89d0e4c4c2c6dd8b28e14ffce705f427">movePlayer</a>(SDL_Window *widow,SDL_Surface *spirit,SDL_Surface *screen,SDL_Surface *copy,SDL_Rect pre_rect,SDL_Rect rect,<span class="keyword">enum</span> directions dir,<span class="keyword">enum</span> actions act,Uint32 *start_time);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">void</span> <a class="code" href="map-testing_8c.html#a166828c3132476e9148d022d3221a71b">destroy</a>(SDL_Window *pWindow,SDL_Surface *surface);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="map-testing_8c.html#a35ea3ea89505407cd76efe39eab8a110">printLayer</a>(SDL_Window *window,SDL_Surface * screen,<span class="keywordtype">int</span> tiles[4160],<span class="keywordtype">char</span> * nom_fichier,<span class="keywordtype">int</span> firstgid, <span class="keywordtype">int</span> tile_width,<span class="keywordtype">int</span> tile_height);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">int</span> <a class="code" href="map-testing_8c.html#aa6be541d7b17f242a3b2ed4bce2eb90a">localisationValide</a>(<span class="keywordtype">int</span> x,<span class="keywordtype">int</span> y,<span class="keywordtype">int</span> tab[4160]);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> <a class="code" href="map-testing_8c.html#ab3d2f34a5af5d6e1f40ff8d70368bc2b">printSpirit</a>(SDL_Window *widow,SDL_Surface * screen,<span class="keywordtype">char</span> *nom_fichier,<span class="keywordtype">int</span> x,<span class="keywordtype">int</span> y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,<a class="code" href="structplayer__s.html">player_t</a> player,<span class="keywordtype">int</span> col[4160],<span class="keywordtype">int</span> buches[4160]);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">int</span> printMap(SDL_Window *window,SDL_Surface * screen,<a class="code" href="structplayer__s.html">player_t</a> player,<span class="keywordtype">int</span> col[4160],<span class="keywordtype">int</span> buches[4160]);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">int</span> detecterBuissons(SDL_Window * window, SDL_Surface * screen,<span class="keywordtype">int</span> x,<span class="keywordtype">int</span> y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font , SDL_Color white,<span class="keywordtype">int</span> move,<span class="keywordtype">int</span> tab[4160],<span class="keywordtype">int</span> buches[4160]);</div>
+<div class="ttc" id="amap-testing_8c_html_a166828c3132476e9148d022d3221a71b"><div class="ttname"><a href="map-testing_8c.html#a166828c3132476e9148d022d3221a71b">destroy</a></div><div class="ttdeci">void destroy(SDL_Window *pWindow, SDL_Surface *surface)</div><div class="ttdef"><b>Definition:</b> map-testing.c:116</div></div>
+<div class="ttc" id="amap-testing_8c_html_a35ea3ea89505407cd76efe39eab8a110"><div class="ttname"><a href="map-testing_8c.html#a35ea3ea89505407cd76efe39eab8a110">printLayer</a></div><div class="ttdeci">int printLayer(SDL_Surface *screen, int tiles[4160], char *nom_fichier, int firstgid, int tile_width, int tile_height)</div><div class="ttdef"><b>Definition:</b> map-testing.c:146</div></div>
+<div class="ttc" id="amap-testing_8c_html_a605e4de241fca8609de5dea7d89e225f"><div class="ttname"><a href="map-testing_8c.html#a605e4de241fca8609de5dea7d89e225f">waiting</a></div><div class="ttdeci">void waiting(Uint32 *start_time)</div><div class="ttdef"><b>Definition:</b> map-testing.c:27</div></div>
+<div class="ttc" id="amap-testing_8c_html_a89d0e4c4c2c6dd8b28e14ffce705f427"><div class="ttname"><a href="map-testing_8c.html#a89d0e4c4c2c6dd8b28e14ffce705f427">movePlayer</a></div><div class="ttdeci">void movePlayer(SDL_Surface *spirit, SDL_Surface *screen, SDL_Surface *copy, SDL_Rect pre_rect, SDL_Rect rect, enum directions dir, enum actions act, Uint32 *start_time)</div><div class="ttdef"><b>Definition:</b> map-testing.c:40</div></div>
+<div class="ttc" id="amap-testing_8c_html_aa6be541d7b17f242a3b2ed4bce2eb90a"><div class="ttname"><a href="map-testing_8c.html#aa6be541d7b17f242a3b2ed4bce2eb90a">localisationValide</a></div><div class="ttdeci">int localisationValide(int x, int y)</div><div class="ttdef"><b>Definition:</b> map-testing.c:177</div></div>
+<div class="ttc" id="amap-testing_8c_html_ab3d2f34a5af5d6e1f40ff8d70368bc2b"><div class="ttname"><a href="map-testing_8c.html#ab3d2f34a5af5d6e1f40ff8d70368bc2b">printSpirit</a></div><div class="ttdeci">void printSpirit(SDL_Surface *screen, char *nom_fichier, int x, int y)</div><div class="ttdef"><b>Definition:</b> map-testing.c:188</div></div>
+<div class="ttc" id="astructplayer__s_html"><div class="ttname"><a href="structplayer__s.html">player_s</a></div><div class="ttdef"><b>Definition:</b> player.h:17</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

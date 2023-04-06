@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDLon: Référence du fichier prog/include/combat.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SDLon
+   &#160;<span id="projectnumber">1.0 Alpha</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_dfe6bed94bcf04987b38a6f8493ab81c.html">prog</a></li><li class="navelem"><a class="el" href="dir_cb0c0de03e6071efc1c0e17eea8d8ce8.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier combat.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;combat.h&quot;</code><br />
+<code>#include &quot;player.h&quot;</code><br />
+<code>#include &quot;item.h&quot;</code><br />
+<code>#include &quot;sdlon_init.h&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:abdda851c6725247c3cf2927b7acb603b"><td class="memItemLeft" align="right" valign="top"><a id="abdda851c6725247c3cf2927b7acb603b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#abdda851c6725247c3cf2927b7acb603b">heal</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> *sd, int value)</td></tr>
+<tr class="memdesc:abdda851c6725247c3cf2927b7acb603b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Si vie en mois, on heal sinon retour retourne 0 si réussis 1 sinon. <br /></td></tr>
+<tr class="separator:abdda851c6725247c3cf2927b7acb603b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5210307acd854595193f5533b228dfe"><td class="memItemLeft" align="right" valign="top"><a id="ab5210307acd854595193f5533b228dfe"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#ab5210307acd854595193f5533b228dfe">conf_dgt</a> (int degat, int type_at, int type_target)</td></tr>
+<tr class="memdesc:ab5210307acd854595193f5533b228dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcul le nombre de degat en fonction du type. <br /></td></tr>
+<tr class="separator:ab5210307acd854595193f5533b228dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af471bb1da4af8c8293179c52e629964f"><td class="memItemLeft" align="right" valign="top"><a id="af471bb1da4af8c8293179c52e629964f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#af471bb1da4af8c8293179c52e629964f">apply_attaque</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> *sd, int degat)</td></tr>
+<tr class="memdesc:af471bb1da4af8c8293179c52e629964f"><td class="mdescLeft">&#160;</td><td class="mdescRight">applique les degats sur un sdlon <br /></td></tr>
+<tr class="separator:af471bb1da4af8c8293179c52e629964f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa09906542afe88880a7a97993c517e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#afa09906542afe88880a7a97993c517e2">sats</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> *sd_at, <a class="el" href="structstruct__sdlon.html">sdlon</a> *sd_target, int num_at)</td></tr>
+<tr class="memdesc:afa09906542afe88880a7a97993c517e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">applique une attaque  <a href="include_2combat_8c.html#afa09906542afe88880a7a97993c517e2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afa09906542afe88880a7a97993c517e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe4d0763b6b22f30f95de43515e434d9"><td class="memItemLeft" align="right" valign="top"><a id="abe4d0763b6b22f30f95de43515e434d9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#abe4d0763b6b22f30f95de43515e434d9">get_usable_sdlon</a> (<a class="el" href="structplayer__s.html">player_t</a> player)</td></tr>
+<tr class="memdesc:abe4d0763b6b22f30f95de43515e434d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le nombre de sdlons utilisables. <br /></td></tr>
+<tr class="separator:abe4d0763b6b22f30f95de43515e434d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14b2f065446466336b506888a6d3b646"><td class="memItemLeft" align="right" valign="top"><a id="a14b2f065446466336b506888a6d3b646"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#a14b2f065446466336b506888a6d3b646">status_combat</a> (<a class="el" href="structplayer__s.html">player_t</a> player, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd)</td></tr>
+<tr class="memdesc:a14b2f065446466336b506888a6d3b646"><td class="mdescLeft">&#160;</td><td class="mdescRight">renvoie le status d'un combat 0: gagné 1: sdlon tué mais d'autre en rab 2: continue 3: défaite <br /></td></tr>
+<tr class="separator:a14b2f065446466336b506888a6d3b646"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e4a02ac81286430e5d502f48648eb8f"><td class="memItemLeft" align="right" valign="top"><a id="a5e4a02ac81286430e5d502f48648eb8f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#a5e4a02ac81286430e5d502f48648eb8f">can_fight</a> (<a class="el" href="structplayer__s.html">player_t</a> player)</td></tr>
+<tr class="memdesc:a5e4a02ac81286430e5d502f48648eb8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui renvoie: 1 si l'on peu se battre 0 sinon. <br /></td></tr>
+<tr class="separator:a5e4a02ac81286430e5d502f48648eb8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df6cc813c24af0c0eaa732d791f4263"><td class="memItemLeft" align="right" valign="top"><a id="a7df6cc813c24af0c0eaa732d791f4263"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>get_evolution</b> (<a class="el" href="structstruct__sdlon.html">sdlon</a> *sd)</td></tr>
+<tr class="separator:a7df6cc813c24af0c0eaa732d791f4263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8db465c5b556c2c54d1ec702013310ae"><td class="memItemLeft" align="right" valign="top"><a id="a8db465c5b556c2c54d1ec702013310ae"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#a8db465c5b556c2c54d1ec702013310ae">get_level</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> *sd)</td></tr>
+<tr class="memdesc:a8db465c5b556c2c54d1ec702013310ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui gère le gain de niveau d'un sdlon retourne 1 si le sdlon grimpe de niveau 0 sinon. <br /></td></tr>
+<tr class="separator:a8db465c5b556c2c54d1ec702013310ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0738cae7b645a0bf97c438e9afa6090b"><td class="memItemLeft" align="right" valign="top"><a id="a0738cae7b645a0bf97c438e9afa6090b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#a0738cae7b645a0bf97c438e9afa6090b">get_xp</a> (<a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:a0738cae7b645a0bf97c438e9afa6090b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui gère le gain d'expérience retourne le nombre de sdlon ayant grimper de niveau. <br /></td></tr>
+<tr class="separator:a0738cae7b645a0bf97c438e9afa6090b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf7b17dcb1e371a8b4acf0fe811f9ed5"><td class="memItemLeft" align="right" valign="top"><a id="acf7b17dcb1e371a8b4acf0fe811f9ed5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#acf7b17dcb1e371a8b4acf0fe811f9ed5">get_loot</a> (<a class="el" href="structplayer__s.html">player_t</a> *player)</td></tr>
+<tr class="memdesc:acf7b17dcb1e371a8b4acf0fe811f9ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction retournant un gain ($) après une victoire. <br /></td></tr>
+<tr class="separator:acf7b17dcb1e371a8b4acf0fe811f9ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a498f032372ad8e0f8f4aafcd981fb7ad"><td class="memItemLeft" align="right" valign="top"><a id="a498f032372ad8e0f8f4aafcd981fb7ad"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#a498f032372ad8e0f8f4aafcd981fb7ad">ia</a> (<a class="el" href="structstruct__sdlon.html">sdlon</a> *sd_at, <a class="el" href="structstruct__sdlon.html">sdlon</a> *sd_target)</td></tr>
+<tr class="memdesc:a498f032372ad8e0f8f4aafcd981fb7ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui retourne le numero d'attaque a utiliser par l'ordinateur. <br /></td></tr>
+<tr class="separator:a498f032372ad8e0f8f4aafcd981fb7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59d9e89ac5852cb7f303d39f9104da8d"><td class="memItemLeft" align="right" valign="top"><a id="a59d9e89ac5852cb7f303d39f9104da8d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="include_2combat_8c.html#a59d9e89ac5852cb7f303d39f9104da8d">capture</a> (int lasso, int vie, int vieMax)</td></tr>
+<tr class="memdesc:a59d9e89ac5852cb7f303d39f9104da8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">retourne 1 si on capture le sdlon sinon retourne 0 <br /></td></tr>
+<tr class="separator:a59d9e89ac5852cb7f303d39f9104da8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier de gestion des attaques </p><dl class="section author"><dt>Auteur</dt><dd>Wandrille Ballereau </dd>
+<dd>
+Abdelhak Assahi </dd>
+<dd>
+Lilian Colla </dd>
+<dd>
+Mohamed Besbes </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2023 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 Alpha </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="afa09906542afe88880a7a97993c517e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa09906542afe88880a7a97993c517e2">&#9670;&nbsp;</a></span>sats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sats </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a> *&#160;</td>
+          <td class="paramname"><em>sd_at</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a> *&#160;</td>
+          <td class="paramname"><em>sd_target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_at</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>applique une attaque </p>
+<p>selon le mode de l'attaque on fait différent traitement 0: on heal 1: on attaque</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
