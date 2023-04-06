@@ -1,0 +1,74 @@
+\hypertarget{player_8c}{}\doxysection{Référence du fichier prog/include/player.c}
+\label{player_8c}\index{prog/include/player.c@{prog/include/player.c}}
+{\ttfamily \#include \char`\"{}player.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sdlon\+\_\+init.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}item.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{player_8c_a08e96c2c806a8e83b6d496c33d066701}\label{player_8c_a08e96c2c806a8e83b6d496c33d066701}} 
+inventory \mbox{\hyperlink{player_8c_a08e96c2c806a8e83b6d496c33d066701}{player\+\_\+inventory\+\_\+create}} (char $\ast$file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em crée l\textquotesingle{}inventaire du joueur et le met à 0 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_abd71e1269584edc9ce5deefadc178f2d}\label{player_8c_abd71e1269584edc9ce5deefadc178f2d}} 
+\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} \mbox{\hyperlink{player_8c_abd71e1269584edc9ce5deefadc178f2d}{player\+\_\+create}} (char $\ast$name, int genre, char $\ast$file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em creer un joueur pour une nouvelle partie \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a139f526d05c16344a672411817d9184a}\label{player_8c_a139f526d05c16344a672411817d9184a}} 
+\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} \mbox{\hyperlink{player_8c_a139f526d05c16344a672411817d9184a}{player\+\_\+init}} (char $\ast$file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em initialise les specs d\textquotesingle{}un joueur a partir d\textquotesingle{}un fichier de sauvegarde \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a9028aee34d8c16766954b9ff2cdf54ff}\label{player_8c_a9028aee34d8c16766954b9ff2cdf54ff}} 
+void \mbox{\hyperlink{player_8c_a9028aee34d8c16766954b9ff2cdf54ff}{replace\+\_\+current\+\_\+sd}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em replace l\textquotesingle{}indice corrant sur le premier sdlon \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_ae47b800cb2b89874d91f406ad7b97571}\label{player_8c_ae47b800cb2b89874d91f406ad7b97571}} 
+int \mbox{\hyperlink{player_8c_ae47b800cb2b89874d91f406ad7b97571}{player\+\_\+quit}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Libere la mémoire utiliser par le joueurs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a851226828eaa43192c0439993b032ce1}\label{player_8c_a851226828eaa43192c0439993b032ce1}} 
+int \mbox{\hyperlink{player_8c_a851226828eaa43192c0439993b032ce1}{display\+\_\+pss}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player)
+\begin{DoxyCompactList}\small\item\em afficher les sdlon du kit du joueur \char`\"{}debogage\char`\"{} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a161fcb12589a4ce4f4274c190a8d3381}\label{player_8c_a161fcb12589a4ce4f4274c190a8d3381}} 
+int \mbox{\hyperlink{player_8c_a161fcb12589a4ce4f4274c190a8d3381}{sspi}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player)
+\begin{DoxyCompactList}\small\item\em save set, player, item pour sauvegarder ses données dans le bon format \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a3b0a40c9bf1b50ab4b05e9f6b5114238}\label{player_8c_a3b0a40c9bf1b50ab4b05e9f6b5114238}} 
+int \mbox{\hyperlink{player_8c_a3b0a40c9bf1b50ab4b05e9f6b5114238}{get\+\_\+player\+\_\+item}} (\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player, int num\+\_\+item)
+\begin{DoxyCompactList}\small\item\em Permet de retourner la quantité d\textquotesingle{}un item posséder par le joueur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a1d46baddd743748600103ca006f0eca0}\label{player_8c_a1d46baddd743748600103ca006f0eca0}} 
+int \mbox{\hyperlink{player_8c_a1d46baddd743748600103ca006f0eca0}{add\+\_\+items}} (int num\+\_\+item, int qtt, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Ajoute un item à l\textquotesingle{}inventaire du joueurs retourne 0 si réussis 1 si aucun item recevable et le nombre d\textquotesingle{}item non recevable si une partie est recevable. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_ae8b4465a011fcc237ecb115669f2c454}\label{player_8c_ae8b4465a011fcc237ecb115669f2c454}} 
+int \mbox{\hyperlink{player_8c_ae8b4465a011fcc237ecb115669f2c454}{remove\+\_\+items}} (int num\+\_\+item, int qtt, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em retire un item à l\textquotesingle{}inventaire du joueur \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a07946b19ce74a1e312f25af372076465}\label{player_8c_a07946b19ce74a1e312f25af372076465}} 
+int \mbox{\hyperlink{player_8c_a07946b19ce74a1e312f25af372076465}{use\+\_\+item}} ()
+\begin{DoxyCompactList}\small\item\em utilise un item dans l\textquotesingle{}inventaire du joueur \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a7e0ca978553f48af0abd4b55dca6d33d}\label{player_8c_a7e0ca978553f48af0abd4b55dca6d33d}} 
+int \mbox{\hyperlink{player_8c_a7e0ca978553f48af0abd4b55dca6d33d}{add\+\_\+sdlon\+\_\+in\+\_\+set}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Fonction qui ajoute un sdlon dans la main courante d\textquotesingle{}un joueurs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_afdf4753bb086c4eb88da6d6ca6bdc9fa}\label{player_8c_afdf4753bb086c4eb88da6d6ca6bdc9fa}} 
+int \mbox{\hyperlink{player_8c_afdf4753bb086c4eb88da6d6ca6bdc9fa}{remove\+\_\+sdlon\+\_\+in\+\_\+set}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Fonction qui retire un sdlon de la main courante d\textquotesingle{}un joueurs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a2223bdb92bc352fe16604b94a4608c5a}\label{player_8c_a2223bdb92bc352fe16604b94a4608c5a}} 
+int \mbox{\hyperlink{player_8c_a2223bdb92bc352fe16604b94a4608c5a}{switch\+\_\+sdlon\+\_\+from\+\_\+set}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd\+\_\+in, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd\+\_\+out, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Fonction qui switch les sdlons du set du joueur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{player_8c_a27bfb891e3dc368796ecdbac58fbe9ec}\label{player_8c_a27bfb891e3dc368796ecdbac58fbe9ec}} 
+int \mbox{\hyperlink{player_8c_a27bfb891e3dc368796ecdbac58fbe9ec}{send\+\_\+sdlon\+\_\+in\+\_\+box}} (\mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd)
+\begin{DoxyCompactList}\small\item\em Fonction qui envoie un sdlon dans une boite pour capturer des sdlons sans les avoir dans sa main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier du gestion du joueur \begin{DoxyAuthor}{Auteur}
+Wandrille Ballereau 
+
+Abdelhak Assahi 
+
+Lilian Colla 
+
+Mohamed Besbes 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 Alpha 
+\end{DoxyVersion}

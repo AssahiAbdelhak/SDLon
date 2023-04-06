@@ -1,0 +1,68 @@
+\hypertarget{lib__sdl__facile_8c}{}\doxysection{Référence du fichier prog/intro/lib\+\_\+sdl\+\_\+facile.c}
+\label{lib__sdl__facile_8c}\index{prog/intro/lib\_sdl\_facile.c@{prog/intro/lib\_sdl\_facile.c}}
+
+
+librairie simplifié pour créer et afficher des éléments  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/lib/lib\+\_\+sdl\+\_\+facile.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{lib__sdl__facile_8c_a5a6cd6c935860afa1bd7c7e018009030}\label{lib__sdl__facile_8c_a5a6cd6c935860afa1bd7c7e018009030}} 
+float {\bfseries taille\+\_\+x} (int x)
+\item 
+\mbox{\Hypertarget{lib__sdl__facile_8c_a24b2e57fedbf27f89a70b0c1c40ca6c1}\label{lib__sdl__facile_8c_a24b2e57fedbf27f89a70b0c1c40ca6c1}} 
+float {\bfseries taille\+\_\+y} (int y)
+\item 
+\mbox{\Hypertarget{lib__sdl__facile_8c_a34da1c2515842b47ab2935ebb9ea848d}\label{lib__sdl__facile_8c_a34da1c2515842b47ab2935ebb9ea848d}} 
+void \mbox{\hyperlink{lib__sdl__facile_8c_a34da1c2515842b47ab2935ebb9ea848d}{blackscreen}} (SDL\+\_\+\+Surface $\ast$screen)
+\begin{DoxyCompactList}\small\item\em met un black screen \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{lib__sdl__facile_8c_a1f2a959afd8ed2f7d91346c0666568c2}\label{lib__sdl__facile_8c_a1f2a959afd8ed2f7d91346c0666568c2}} 
+void {\bfseries cadre} (SDL\+\_\+\+Renderer $\ast$renderer, int xc, int yc)
+\item 
+\mbox{\Hypertarget{lib__sdl__facile_8c_a5677fdaf04b08c78b52d89268f230244}\label{lib__sdl__facile_8c_a5677fdaf04b08c78b52d89268f230244}} 
+void \mbox{\hyperlink{lib__sdl__facile_8c_a5677fdaf04b08c78b52d89268f230244}{print\+\_\+image}} (SDL\+\_\+\+Surface $\ast$screen, char $\ast$img, int xi, int yi, int hi, int wi)
+\begin{DoxyCompactList}\small\item\em affiche une image \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{lib__sdl__facile_8c_aa539718d0edbeadea827349612ecbdd3}\label{lib__sdl__facile_8c_aa539718d0edbeadea827349612ecbdd3}} 
+void \mbox{\hyperlink{lib__sdl__facile_8c_aa539718d0edbeadea827349612ecbdd3}{print\+\_\+text}} (SDL\+\_\+\+Surface $\ast$screen, const char $\ast$font\+Name, const char $\ast$texte, const int xt, const int yt, const int r, const int g, const int b)
+\begin{DoxyCompactList}\small\item\em affiche un texte \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{lib__sdl__facile_8c_a7de185daaaf04abd3df8a58feccd0e37}\label{lib__sdl__facile_8c_a7de185daaaf04abd3df8a58feccd0e37}} 
+void \mbox{\hyperlink{lib__sdl__facile_8c_a7de185daaaf04abd3df8a58feccd0e37}{affichage}} (SDL\+\_\+\+Window $\ast$window)
+\begin{DoxyCompactList}\small\item\em finalisation de l\textquotesingle{}affichage \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{lib__sdl__facile_8c_a58548b2f008222c3ec191e64b25017f6}\label{lib__sdl__facile_8c_a58548b2f008222c3ec191e64b25017f6}} 
+void {\bfseries Print\+Key\+Info} (SDL\+\_\+\+Keyboard\+Event $\ast$key)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+librairie simplifié pour créer et afficher des éléments 
+
+Fichier des fonction sdl simplifiées \begin{DoxyAuthor}{Auteur}
+Wandrille Ballereau 
+
+Abdelhak Assahi 
+
+Lilian Colla 
+
+Mohamed Besbes 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 Alpha
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Auteur}
+Lilian Colla 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16/02/2023 
+\end{DoxyDate}

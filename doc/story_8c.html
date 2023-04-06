@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDLon: Référence du fichier prog/include/story.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SDLon
+   &#160;<span id="projectnumber">1.0 Alpha</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_dfe6bed94bcf04987b38a6f8493ab81c.html">prog</a></li><li class="navelem"><a class="el" href="dir_cb0c0de03e6071efc1c0e17eea8d8ce8.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier story.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;story.h&quot;</code><br />
+<code>#include &quot;item.h&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;sdlon_generate.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ac41de07bd713cd7d27f4dc1ac623f3ff"><td class="memItemLeft" align="right" valign="top"><a id="ac41de07bd713cd7d27f4dc1ac623f3ff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="story_8c.html#ac41de07bd713cd7d27f4dc1ac623f3ff">town_init</a> ()</td></tr>
+<tr class="memdesc:ac41de07bd713cd7d27f4dc1ac623f3ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui initialise les villes. <br /></td></tr>
+<tr class="separator:ac41de07bd713cd7d27f4dc1ac623f3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da045939f1e0845a774569296795592"><td class="memItemLeft" align="right" valign="top"><a id="a0da045939f1e0845a774569296795592"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="story_8c.html#a0da045939f1e0845a774569296795592">display_town</a> (<a class="el" href="structtown__s.html">town_t</a> town)</td></tr>
+<tr class="memdesc:a0da045939f1e0845a774569296795592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui affiche les specs d'une ville Permet de débuger plus facilement les erreurs. <br /></td></tr>
+<tr class="separator:a0da045939f1e0845a774569296795592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd0d45e45588c003f3576470549e7995"><td class="memItemLeft" align="right" valign="top"><a id="abd0d45e45588c003f3576470549e7995"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="story_8c.html#abd0d45e45588c003f3576470549e7995">can_next_town</a> (<a class="el" href="structplayer__s.html">player_t</a> player, <a class="el" href="structtown__s.html">town_t</a> town)</td></tr>
+<tr class="memdesc:abd0d45e45588c003f3576470549e7995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie que l'on peu aller dans la ville suivante En ayant complété l'histoire du jeu dans la ville actuelle Passage dans la ville suivante nécéssite l'obtention du badge. <br /></td></tr>
+<tr class="separator:abd0d45e45588c003f3576470549e7995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4fd9ed02d7a9e21a380105632a86d4b"><td class="memItemLeft" align="right" valign="top"><a id="ac4fd9ed02d7a9e21a380105632a86d4b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="story_8c.html#ac4fd9ed02d7a9e21a380105632a86d4b">get_town_environnement</a> (<a class="el" href="structtown__s.html">town_t</a> town)</td></tr>
+<tr class="memdesc:ac4fd9ed02d7a9e21a380105632a86d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">retourne le type de la map (eau/feu/terre/air) <br /></td></tr>
+<tr class="separator:ac4fd9ed02d7a9e21a380105632a86d4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d16e01d6d22a6df11fef00de36b0952"><td class="memItemLeft" align="right" valign="top"><a id="a1d16e01d6d22a6df11fef00de36b0952"></a>
+<a class="el" href="structstruct__sdlon.html">sdlon</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="story_8c.html#a1d16e01d6d22a6df11fef00de36b0952">choix</a> (int i)</td></tr>
+<tr class="memdesc:a1d16e01d6d22a6df11fef00de36b0952"><td class="mdescLeft">&#160;</td><td class="mdescRight">retourne le sdlon choisi par le joueur <br /></td></tr>
+<tr class="separator:a1d16e01d6d22a6df11fef00de36b0952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a67fb642202817f2f3b7612944d517217"><td class="memItemLeft" align="right" valign="top"><a id="a67fb642202817f2f3b7612944d517217"></a>
+<a class="el" href="structtown__s.html">town_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>all_town</b> [NB_TOWN]</td></tr>
+<tr class="separator:a67fb642202817f2f3b7612944d517217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier gestion de l'histoire, des pnj et de la map </p><dl class="section author"><dt>Auteur</dt><dd>Wandrille Ballereau </dd>
+<dd>
+Abdelhak Assahi </dd>
+<dd>
+Lilian Colla </dd>
+<dd>
+Mohamed Besbes </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2023 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 Alpha </dd></dl>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

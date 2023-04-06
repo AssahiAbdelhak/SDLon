@@ -1,0 +1,1244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDLon: Référence du fichier prog/combat.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SDLon
+   &#160;<span id="projectnumber">1.0 Alpha</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_dfe6bed94bcf04987b38a6f8493ab81c.html">prog</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier combat.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
+<code>#include &quot;constants.h&quot;</code><br />
+<code>#include &quot;map.h&quot;</code><br />
+<code>#include &quot;include/sdlon_generate.h&quot;</code><br />
+<code>#include &quot;include/combat.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aed89bd71aee8be823e8a20ec4e093c1e"><td class="memItemLeft" align="right" valign="top"><a id="aed89bd71aee8be823e8a20ec4e093c1e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HEIGHT</b>&#160;&#160;&#160;840</td></tr>
+<tr class="separator:aed89bd71aee8be823e8a20ec4e093c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a241aeeb764887ae5e3de58b98f04b16d"><td class="memItemLeft" align="right" valign="top"><a id="a241aeeb764887ae5e3de58b98f04b16d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>WIDTH</b>&#160;&#160;&#160;1280</td></tr>
+<tr class="separator:a241aeeb764887ae5e3de58b98f04b16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:aaae4266dac6cc90455e6bc017b3a9cbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#aaae4266dac6cc90455e6bc017b3a9cbe">printControlles</a> (SDL_Window *window, SDL_Surface *screen, <a class="el" href="structplayer__s.html">player_t</a> player, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd)</td></tr>
+<tr class="separator:aaae4266dac6cc90455e6bc017b3a9cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37af3dfaf5ac995e4ed2a9f65900466a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a37af3dfaf5ac995e4ed2a9f65900466a">onAttack</a> (SDL_Window *window, SDL_Surface *screen, SDL_Surface *surface, int width, int height, <a class="el" href="structplayer__s.html">player_t</a> player, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd)</td></tr>
+<tr class="separator:a37af3dfaf5ac995e4ed2a9f65900466a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19e5a7acc5f32845cefc92508759b5cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a19e5a7acc5f32845cefc92508759b5cf">botton</a> (SDL_Surface *surface, char *titre, int width, int height, int x, int y, int selected)</td></tr>
+<tr class="separator:a19e5a7acc5f32845cefc92508759b5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cdda094020b5028eb1f067adee36828"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a3cdda094020b5028eb1f067adee36828">afficherLeCombat</a> (SDL_Window *window, SDL_Surface *screen, <a class="el" href="structplayer__s.html">player_t</a> player, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd, int isFirst, int nb_attaque)</td></tr>
+<tr class="separator:a3cdda094020b5028eb1f067adee36828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60f8779af86903953fc142e4a440d6ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a60f8779af86903953fc142e4a440d6ab">updateMenus</a> (SDL_Window *window, SDL_Surface *screen, SDL_Surface *surface, int width, int height, int n)</td></tr>
+<tr class="separator:a60f8779af86903953fc142e4a440d6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cec927746c1653d16ef82cbd581fdae"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a1cec927746c1653d16ef82cbd581fdae">afficherTableauMenu</a> (SDL_Window *window, SDL_Surface *screen, int width, int height)</td></tr>
+<tr class="separator:a1cec927746c1653d16ef82cbd581fdae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42823ba7d62993ecbaa6e739d85ccfba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a42823ba7d62993ecbaa6e739d85ccfba">attaque_graphique</a> (SDL_Window *window, SDL_Surface *screen, int width, int height, SDL_Surface *surface, int x, int y, char *name_attaque, int type_sdl, int selected)</td></tr>
+<tr class="separator:a42823ba7d62993ecbaa6e739d85ccfba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acedb2f3546aeed64f49890512cd50e61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#acedb2f3546aeed64f49890512cd50e61">handle_events</a> (SDL_Window *window, SDL_Surface *screen, int nb, <a class="el" href="structplayer__s.html">player_t</a> player, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd)</td></tr>
+<tr class="separator:acedb2f3546aeed64f49890512cd50e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7f09375c6f31e7b00c6118f9e9c3d18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#ad7f09375c6f31e7b00c6118f9e9c3d18">handle_sdlons_events</a> (SDL_Window *window, SDL_Surface *screen, int nb, <a class="el" href="structplayer__s.html">player_t</a> *player, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd)</td></tr>
+<tr class="separator:ad7f09375c6f31e7b00c6118f9e9c3d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49f5d4cc8d5eeb018b4981ebbb6c1e11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a49f5d4cc8d5eeb018b4981ebbb6c1e11">printSdlonBar</a> (SDL_Window *window, SDL_Surface *screen, int width, int height, int x, int y, char *nom, char *gendre, int vie, int lev, int selected, char *path, int type)</td></tr>
+<tr class="separator:a49f5d4cc8d5eeb018b4981ebbb6c1e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a044a3e0cd08f6a511fd2b47eb6240532"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a044a3e0cd08f6a511fd2b47eb6240532">updateSdlons</a> (SDL_Window *window, SDL_Surface *screen, int n, <a class="el" href="structplayer__s.html">player_t</a> player)</td></tr>
+<tr class="separator:a044a3e0cd08f6a511fd2b47eb6240532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaddf57bb376fd0c3c225a202f2dde318"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#aaddf57bb376fd0c3c225a202f2dde318">showAllSDlons</a> (SDL_Window *window, SDL_Surface *screen, int n, <a class="el" href="structplayer__s.html">player_t</a> player)</td></tr>
+<tr class="separator:aaddf57bb376fd0c3c225a202f2dde318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c4541359f884ab1b1bb3b058bf6eda9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a3c4541359f884ab1b1bb3b058bf6eda9">drawAllOptions</a> (SDL_Window *window, SDL_Surface *screen, SDL_Surface *surface, int width, int height, int selected, <a class="el" href="structplayer__s.html">player_t</a> player)</td></tr>
+<tr class="separator:a3c4541359f884ab1b1bb3b058bf6eda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6843f126f55bde4a74f013f13a9be3a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a6843f126f55bde4a74f013f13a9be3a1">showDescription</a> (SDL_Window *window, SDL_Surface *screen, char *desc)</td></tr>
+<tr class="separator:a6843f126f55bde4a74f013f13a9be3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adce5cb040ca1f89d4af5d5c7e56d67a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#adce5cb040ca1f89d4af5d5c7e56d67a6">showItem</a> (SDL_Window *window, SDL_Surface *surface, char *nom, int qnt, int y, <a class="el" href="structplayer__s.html">player_t</a> player, int index)</td></tr>
+<tr class="separator:adce5cb040ca1f89d4af5d5c7e56d67a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2546e3d610435a765cc87bebd665ad78"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a2546e3d610435a765cc87bebd665ad78">showSac</a> (SDL_Window *window, SDL_Surface *screen, char *noms[], char *descs[], int n, <a class="el" href="structplayer__s.html">player_t</a> *player, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd)</td></tr>
+<tr class="separator:a2546e3d610435a765cc87bebd665ad78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8a127834084ba0ff04e28abb60db069"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#ac8a127834084ba0ff04e28abb60db069">handle_option_events</a> (SDL_Window *window, SDL_Surface *screen, SDL_Surface *surface, int width, int height, int n, <a class="el" href="structplayer__s.html">player_t</a> *player, <a class="el" href="structstruct__sdlon.html">sdlon</a> sd)</td></tr>
+<tr class="separator:ac8a127834084ba0ff04e28abb60db069"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f37e7be23d2409a220505b450a3e00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#ae1f37e7be23d2409a220505b450a3e00">updateOptions</a> (SDL_Window *window, SDL_Surface *screen, SDL_Surface *surface, int n, int width, int height)</td></tr>
+<tr class="separator:ae1f37e7be23d2409a220505b450a3e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a261584f2d03c451a1a1c186fc2eeb522"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a261584f2d03c451a1a1c186fc2eeb522">printPlayerStats</a> (SDL_Window *window, SDL_Surface *screen, char *nom, int x, int y, int niveau, int vie)</td></tr>
+<tr class="separator:a261584f2d03c451a1a1c186fc2eeb522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09c202fbb220c5add8b31b1ca42e4bf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="combat_8c.html#a09c202fbb220c5add8b31b1ca42e4bf3">printPokemon</a> (SDL_Window *window, SDL_Surface *screen, char *nom_fichier, int x, int y)</td></tr>
+<tr class="separator:a09c202fbb220c5add8b31b1ca42e4bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier de gestion des attaques </p><dl class="section author"><dt>Auteur</dt><dd>Wandrille Ballereau </dd>
+<dd>
+Abdelhak Assahi </dd>
+<dd>
+Lilian Colla </dd>
+<dd>
+Mohamed Besbes </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2023 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 Alpha </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a3cdda094020b5028eb1f067adee36828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cdda094020b5028eb1f067adee36828">&#9670;&nbsp;</a></span>afficherLeCombat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int afficherLeCombat </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a>&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a>&#160;</td>
+          <td class="paramname"><em>sd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>isFirst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nb_attaque</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affichage de la scène de combat</p>
+
+</div>
+</div>
+<a id="a1cec927746c1653d16ef82cbd581fdae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cec927746c1653d16ef82cbd581fdae">&#9670;&nbsp;</a></span>afficherTableauMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int afficherTableauMenu </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affichage du tableau de menus</p>
+
+</div>
+</div>
+<a id="a42823ba7d62993ecbaa6e739d85ccfba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42823ba7d62993ecbaa6e739d85ccfba">&#9670;&nbsp;</a></span>attaque_graphique()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void attaque_graphique </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name_attaque</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type_sdl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>selected</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction qui affivhe chaque attaque</p>
+
+</div>
+</div>
+<a id="a19e5a7acc5f32845cefc92508759b5cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19e5a7acc5f32845cefc92508759b5cf">&#9670;&nbsp;</a></span>botton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void botton </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>titre</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>selected</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>fonction generique pour affichage des buttons sur l'écran</p>
+
+</div>
+</div>
+<a id="a3c4541359f884ab1b1bb3b058bf6eda9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c4541359f884ab1b1bb3b058bf6eda9">&#9670;&nbsp;</a></span>drawAllOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void drawAllOptions </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>selected</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a>&#160;</td>
+          <td class="paramname"><em>player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Afficher toutes les options</p>
+
+</div>
+</div>
+<a id="acedb2f3546aeed64f49890512cd50e61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acedb2f3546aeed64f49890512cd50e61">&#9670;&nbsp;</a></span>handle_events()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void handle_events </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a>&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a>&#160;</td>
+          <td class="paramname"><em>sd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>fonction qui gère l'attaque choisis applique les dégat et récupère le status du combat </p>
+<p>Fonction qui gère l'attaque choisis et applique les dégâts et récupère le status du combat</p>
+
+</div>
+</div>
+<a id="ac8a127834084ba0ff04e28abb60db069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8a127834084ba0ff04e28abb60db069">&#9670;&nbsp;</a></span>handle_option_events()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void handle_option_events </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a>&#160;</td>
+          <td class="paramname"><em>sd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction qui gere les eventement lors de l'affichage du combat</p>
+
+</div>
+</div>
+<a id="ad7f09375c6f31e7b00c6118f9e9c3d18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7f09375c6f31e7b00c6118f9e9c3d18">&#9670;&nbsp;</a></span>handle_sdlons_events()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void handle_sdlons_events </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a>&#160;</td>
+          <td class="paramname"><em>sd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction qui change le sdlon utilisé</p>
+
+</div>
+</div>
+<a id="a37af3dfaf5ac995e4ed2a9f65900466a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37af3dfaf5ac995e4ed2a9f65900466a">&#9670;&nbsp;</a></span>onAttack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onAttack </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a>&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a>&#160;</td>
+          <td class="paramname"><em>sd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction appelle dès que l'on clique sur l'option attaque</p>
+
+</div>
+</div>
+<a id="aaae4266dac6cc90455e6bc017b3a9cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaae4266dac6cc90455e6bc017b3a9cbe">&#9670;&nbsp;</a></span>printControlles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printControlles </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a>&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a>&#160;</td>
+          <td class="paramname"><em>sd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affichage des options</p>
+
+</div>
+</div>
+<a id="a261584f2d03c451a1a1c186fc2eeb522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a261584f2d03c451a1a1c186fc2eeb522">&#9670;&nbsp;</a></span>printPlayerStats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printPlayerStats </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>niveau</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vie</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affichage des statistiques des joueurs</p>
+
+</div>
+</div>
+<a id="a09c202fbb220c5add8b31b1ca42e4bf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09c202fbb220c5add8b31b1ca42e4bf3">&#9670;&nbsp;</a></span>printPokemon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printPokemon </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nom_fichier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affichage de sdlon</p>
+
+</div>
+</div>
+<a id="a49f5d4cc8d5eeb018b4981ebbb6c1e11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49f5d4cc8d5eeb018b4981ebbb6c1e11">&#9670;&nbsp;</a></span>printSdlonBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printSdlonBar </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>gendre</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vie</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>selected</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affichage carte de chaque sdlon</p>
+
+</div>
+</div>
+<a id="aaddf57bb376fd0c3c225a202f2dde318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaddf57bb376fd0c3c225a202f2dde318">&#9670;&nbsp;</a></span>showAllSDlons()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int showAllSDlons </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a>&#160;</td>
+          <td class="paramname"><em>player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affichage de tous les sdlons</p>
+
+</div>
+</div>
+<a id="a6843f126f55bde4a74f013f13a9be3a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6843f126f55bde4a74f013f13a9be3a1">&#9670;&nbsp;</a></span>showDescription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void showDescription </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>desc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affichage de la description de chaque item</p>
+
+</div>
+</div>
+<a id="adce5cb040ca1f89d4af5d5c7e56d67a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce5cb040ca1f89d4af5d5c7e56d67a6">&#9670;&nbsp;</a></span>showItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void showItem </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>qnt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a>&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction permettant d'afficher les items dans le sac</p>
+
+</div>
+</div>
+<a id="a2546e3d610435a765cc87bebd665ad78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2546e3d610435a765cc87bebd665ad78">&#9670;&nbsp;</a></span>showSac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int showSac </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>noms</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>descs</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstruct__sdlon.html">sdlon</a>&#160;</td>
+          <td class="paramname"><em>sd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affiche le sac</p>
+
+</div>
+</div>
+<a id="a60f8779af86903953fc142e4a440d6ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60f8779af86903953fc142e4a440d6ab">&#9670;&nbsp;</a></span>updateMenus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateMenus </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Mise à jour des menus sur le jeu</p>
+
+</div>
+</div>
+<a id="ae1f37e7be23d2409a220505b450a3e00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1f37e7be23d2409a220505b450a3e00">&#9670;&nbsp;</a></span>updateOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateOptions </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Mise à jour des options dans l'écran</p>
+
+</div>
+</div>
+<a id="a044a3e0cd08f6a511fd2b47eb6240532"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a044a3e0cd08f6a511fd2b47eb6240532">&#9670;&nbsp;</a></span>updateSdlons()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateSdlons </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplayer__s.html">player_t</a>&#160;</td>
+          <td class="paramname"><em>player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Mise à jour des cartes des sdlons</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

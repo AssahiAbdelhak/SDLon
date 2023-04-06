@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDLon:  Fichier source de prog/include/sdlon_init.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SDLon
+   &#160;<span id="projectnumber">1.0 Alpha</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_dfe6bed94bcf04987b38a6f8493ab81c.html">prog</a></li><li class="navelem"><a class="el" href="dir_cb0c0de03e6071efc1c0e17eea8d8ce8.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">sdlon_init.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef NB_SDLON</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//macros</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define NB_SDLON 30</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define NB_ATTAQUE 22</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define EAU 0</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define TERRE 1</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define AIR 2</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define FEU 3</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define HEAL 0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define ATT 1</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structstruct__attaque.html">   16</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structstruct__attaque.html">struct_attaque</a> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">char</span> nom_attaque[50];</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">int</span> type_attaque; <span class="comment">//eau : 0, terre : 1, air : 2, feu : 3 </span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">int</span> mode_attaque; <span class="comment">// Heal : 0 , Degat : 1</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">int</span> degat;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;} <a class="code" href="structstruct__attaque.html">attaque</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structstruct__sdlon.html">   23</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structstruct__sdlon.html">struct_sdlon</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordtype">int</span> type;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordtype">char</span> nom[50];</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">int</span> vie_max;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">int</span> vie;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="structstruct__attaque.html">attaque</a> attaque_1;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="structstruct__attaque.html">attaque</a> attaque_2;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="structstruct__attaque.html">attaque</a> attaque_3;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="structstruct__attaque.html">attaque</a> attaque_4;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordtype">int</span> evolution; <span class="comment">//indice de l&#39;evolution dans le tableau, 0 si pas d&#39;evolution</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">int</span> level;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">int</span> evol_sys; <span class="comment">//nombre avec premier chiffre, evolution courrante et 2e chiffre evolution total  </span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">int</span> xp;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">char</span> front_face[200];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">char</span> back_face[200];</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;} <a class="code" href="structstruct__sdlon.html">sdlon</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="sdlon__init_8c.html#a62c5b506d082bbbdcf96c27dc743b3cc">sdlon_init</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="sdlon__init_8c.html#a60466762ed67795f55b6e49ff8aa3dd1">get_sdlon_index</a>(<span class="keywordtype">char</span> * name);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="sdlon__init_8c.html#a54edb05e9ef301c1146479142f1bb55f">sdloncmp</a>(<a class="code" href="structstruct__sdlon.html">sdlon</a> sd_src, <a class="code" href="structstruct__sdlon.html">sdlon</a> sd_origin);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="sdlon__init_8c.html#a5b705064274a0f8f302e46aaf344af3a">afficheSDLon</a>(<a class="code" href="structstruct__sdlon.html">sdlon</a> s);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">extern</span> <a class="code" href="structstruct__sdlon.html">sdlon</a> <a class="code" href="sdlon__init_8c.html#acc7632090118f5b7ab5b3b8377128014">sdlon_s</a>[NB_SDLON];</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="asdlon__init_8c_html_a54edb05e9ef301c1146479142f1bb55f"><div class="ttname"><a href="sdlon__init_8c.html#a54edb05e9ef301c1146479142f1bb55f">sdloncmp</a></div><div class="ttdeci">int sdloncmp(sdlon sd_src, sdlon sd_origin)</div><div class="ttdoc">compare les sdlons retourne 1 si ils sont differents</div><div class="ttdef"><b>Definition:</b> sdlon_init.c:116</div></div>
+<div class="ttc" id="asdlon__init_8c_html_a5b705064274a0f8f302e46aaf344af3a"><div class="ttname"><a href="sdlon__init_8c.html#a5b705064274a0f8f302e46aaf344af3a">afficheSDLon</a></div><div class="ttdeci">void afficheSDLon(sdlon s)</div><div class="ttdoc">afficher un sdlon s</div><div class="ttdef"><b>Definition:</b> sdlon_init.c:147</div></div>
+<div class="ttc" id="asdlon__init_8c_html_a60466762ed67795f55b6e49ff8aa3dd1"><div class="ttname"><a href="sdlon__init_8c.html#a60466762ed67795f55b6e49ff8aa3dd1">get_sdlon_index</a></div><div class="ttdeci">int get_sdlon_index(char *name)</div><div class="ttdoc">recupere l'indice d'un sdlon depuis le tableau</div><div class="ttdef"><b>Definition:</b> sdlon_init.c:106</div></div>
+<div class="ttc" id="asdlon__init_8c_html_a62c5b506d082bbbdcf96c27dc743b3cc"><div class="ttname"><a href="sdlon__init_8c.html#a62c5b506d082bbbdcf96c27dc743b3cc">sdlon_init</a></div><div class="ttdeci">int sdlon_init()</div><div class="ttdoc">Fonction d'initialisation du tableau de sdlons.</div><div class="ttdef"><b>Definition:</b> sdlon_init.c:59</div></div>
+<div class="ttc" id="asdlon__init_8c_html_acc7632090118f5b7ab5b3b8377128014"><div class="ttname"><a href="sdlon__init_8c.html#acc7632090118f5b7ab5b3b8377128014">sdlon_s</a></div><div class="ttdeci">sdlon sdlon_s[NB_SDLON]</div><div class="ttdoc">Déclaration des tableaux de sdlons &amp; attaques.</div><div class="ttdef"><b>Definition:</b> sdlon_init.c:20</div></div>
+<div class="ttc" id="astructstruct__attaque_html"><div class="ttname"><a href="structstruct__attaque.html">struct_attaque</a></div><div class="ttdef"><b>Definition:</b> sdlon_init.h:16</div></div>
+<div class="ttc" id="astructstruct__sdlon_html"><div class="ttname"><a href="structstruct__sdlon.html">struct_sdlon</a></div><div class="ttdef"><b>Definition:</b> sdlon_init.h:23</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,203 @@
+\hypertarget{combat_8c}{}\doxysection{Référence du fichier prog/combat.c}
+\label{combat_8c}\index{prog/combat.c@{prog/combat.c}}
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}map.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}include/sdlon\+\_\+generate.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}include/combat.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{combat_8c_aed89bd71aee8be823e8a20ec4e093c1e}\label{combat_8c_aed89bd71aee8be823e8a20ec4e093c1e}} 
+\#define {\bfseries HEIGHT}~840
+\item 
+\mbox{\Hypertarget{combat_8c_a241aeeb764887ae5e3de58b98f04b16d}\label{combat_8c_a241aeeb764887ae5e3de58b98f04b16d}} 
+\#define {\bfseries WIDTH}~1280
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{combat_8c_aaae4266dac6cc90455e6bc017b3a9cbe}{print\+Controlles}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd)
+\item 
+void \mbox{\hyperlink{combat_8c_a37af3dfaf5ac995e4ed2a9f65900466a}{on\+Attack}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, SDL\+\_\+\+Surface $\ast$surface, int width, int height, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd)
+\item 
+void \mbox{\hyperlink{combat_8c_a19e5a7acc5f32845cefc92508759b5cf}{botton}} (SDL\+\_\+\+Surface $\ast$surface, char $\ast$titre, int width, int height, int x, int y, int selected)
+\item 
+int \mbox{\hyperlink{combat_8c_a3cdda094020b5028eb1f067adee36828}{afficher\+Le\+Combat}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd, int is\+First, int nb\+\_\+attaque)
+\item 
+void \mbox{\hyperlink{combat_8c_a60f8779af86903953fc142e4a440d6ab}{update\+Menus}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, SDL\+\_\+\+Surface $\ast$surface, int width, int height, int n)
+\item 
+int \mbox{\hyperlink{combat_8c_a1cec927746c1653d16ef82cbd581fdae}{afficher\+Tableau\+Menu}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, int width, int height)
+\item 
+void \mbox{\hyperlink{combat_8c_a42823ba7d62993ecbaa6e739d85ccfba}{attaque\+\_\+graphique}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, int width, int height, SDL\+\_\+\+Surface $\ast$surface, int x, int y, char $\ast$name\+\_\+attaque, int type\+\_\+sdl, int selected)
+\item 
+void \mbox{\hyperlink{combat_8c_acedb2f3546aeed64f49890512cd50e61}{handle\+\_\+events}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, int nb, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd)
+\item 
+void \mbox{\hyperlink{combat_8c_ad7f09375c6f31e7b00c6118f9e9c3d18}{handle\+\_\+sdlons\+\_\+events}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, int nb, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd)
+\item 
+void \mbox{\hyperlink{combat_8c_a49f5d4cc8d5eeb018b4981ebbb6c1e11}{print\+Sdlon\+Bar}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, int width, int height, int x, int y, char $\ast$nom, char $\ast$gendre, int vie, int lev, int selected, char $\ast$path, int type)
+\item 
+void \mbox{\hyperlink{combat_8c_a044a3e0cd08f6a511fd2b47eb6240532}{update\+Sdlons}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, int n, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player)
+\item 
+int \mbox{\hyperlink{combat_8c_aaddf57bb376fd0c3c225a202f2dde318}{show\+All\+SDlons}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, int n, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player)
+\item 
+void \mbox{\hyperlink{combat_8c_a3c4541359f884ab1b1bb3b058bf6eda9}{draw\+All\+Options}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, SDL\+\_\+\+Surface $\ast$surface, int width, int height, int selected, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player)
+\item 
+void \mbox{\hyperlink{combat_8c_a6843f126f55bde4a74f013f13a9be3a1}{show\+Description}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, char $\ast$desc)
+\item 
+void \mbox{\hyperlink{combat_8c_adce5cb040ca1f89d4af5d5c7e56d67a6}{show\+Item}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$surface, char $\ast$nom, int qnt, int y, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} player, int index)
+\item 
+int \mbox{\hyperlink{combat_8c_a2546e3d610435a765cc87bebd665ad78}{show\+Sac}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, char $\ast$noms\mbox{[}$\,$\mbox{]}, char $\ast$descs\mbox{[}$\,$\mbox{]}, int n, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd)
+\item 
+void \mbox{\hyperlink{combat_8c_ac8a127834084ba0ff04e28abb60db069}{handle\+\_\+option\+\_\+events}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, SDL\+\_\+\+Surface $\ast$surface, int width, int height, int n, \mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$player, \mbox{\hyperlink{structstruct__sdlon}{sdlon}} sd)
+\item 
+void \mbox{\hyperlink{combat_8c_ae1f37e7be23d2409a220505b450a3e00}{update\+Options}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, SDL\+\_\+\+Surface $\ast$surface, int n, int width, int height)
+\item 
+void \mbox{\hyperlink{combat_8c_a261584f2d03c451a1a1c186fc2eeb522}{print\+Player\+Stats}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, char $\ast$nom, int x, int y, int niveau, int vie)
+\item 
+void \mbox{\hyperlink{combat_8c_a09c202fbb220c5add8b31b1ca42e4bf3}{print\+Pokemon}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Surface $\ast$screen, char $\ast$nom\+\_\+fichier, int x, int y)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier de gestion des attaques \begin{DoxyAuthor}{Auteur}
+Wandrille Ballereau 
+
+Abdelhak Assahi 
+
+Lilian Colla 
+
+Mohamed Besbes 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 Alpha 
+\end{DoxyVersion}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{combat_8c_a3cdda094020b5028eb1f067adee36828}\label{combat_8c_a3cdda094020b5028eb1f067adee36828}} 
+\index{combat.c@{combat.c}!afficherLeCombat@{afficherLeCombat}}
+\index{afficherLeCombat@{afficherLeCombat}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{afficherLeCombat()}{afficherLeCombat()}}
+{\footnotesize\ttfamily int afficher\+Le\+Combat (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}}}]{player,  }\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}}}]{sd,  }\item[{int}]{is\+First,  }\item[{int}]{nb\+\_\+attaque }\end{DoxyParamCaption})}
+
+Affichage de la scène de combat\mbox{\Hypertarget{combat_8c_a1cec927746c1653d16ef82cbd581fdae}\label{combat_8c_a1cec927746c1653d16ef82cbd581fdae}} 
+\index{combat.c@{combat.c}!afficherTableauMenu@{afficherTableauMenu}}
+\index{afficherTableauMenu@{afficherTableauMenu}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{afficherTableauMenu()}{afficherTableauMenu()}}
+{\footnotesize\ttfamily int afficher\+Tableau\+Menu (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+Affichage du tableau de menus\mbox{\Hypertarget{combat_8c_a42823ba7d62993ecbaa6e739d85ccfba}\label{combat_8c_a42823ba7d62993ecbaa6e739d85ccfba}} 
+\index{combat.c@{combat.c}!attaque\_graphique@{attaque\_graphique}}
+\index{attaque\_graphique@{attaque\_graphique}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{attaque\_graphique()}{attaque\_graphique()}}
+{\footnotesize\ttfamily void attaque\+\_\+graphique (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{SDL\+\_\+\+Surface $\ast$}]{surface,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{char $\ast$}]{name\+\_\+attaque,  }\item[{int}]{type\+\_\+sdl,  }\item[{int}]{selected }\end{DoxyParamCaption})}
+
+Fonction qui affivhe chaque attaque\mbox{\Hypertarget{combat_8c_a19e5a7acc5f32845cefc92508759b5cf}\label{combat_8c_a19e5a7acc5f32845cefc92508759b5cf}} 
+\index{combat.c@{combat.c}!botton@{botton}}
+\index{botton@{botton}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{botton()}{botton()}}
+{\footnotesize\ttfamily void botton (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Surface $\ast$}]{surface,  }\item[{char $\ast$}]{titre,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{selected }\end{DoxyParamCaption})}
+
+fonction generique pour affichage des buttons sur l\textquotesingle{}écran\mbox{\Hypertarget{combat_8c_a3c4541359f884ab1b1bb3b058bf6eda9}\label{combat_8c_a3c4541359f884ab1b1bb3b058bf6eda9}} 
+\index{combat.c@{combat.c}!drawAllOptions@{drawAllOptions}}
+\index{drawAllOptions@{drawAllOptions}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{drawAllOptions()}{drawAllOptions()}}
+{\footnotesize\ttfamily void draw\+All\+Options (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{SDL\+\_\+\+Surface $\ast$}]{surface,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{int}]{selected,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}}}]{player }\end{DoxyParamCaption})}
+
+Afficher toutes les options\mbox{\Hypertarget{combat_8c_acedb2f3546aeed64f49890512cd50e61}\label{combat_8c_acedb2f3546aeed64f49890512cd50e61}} 
+\index{combat.c@{combat.c}!handle\_events@{handle\_events}}
+\index{handle\_events@{handle\_events}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{handle\_events()}{handle\_events()}}
+{\footnotesize\ttfamily void handle\+\_\+events (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{int}]{nb,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}}}]{player,  }\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}}}]{sd }\end{DoxyParamCaption})}
+
+fonction qui gère l\textquotesingle{}attaque choisis applique les dégat et récupère le status du combat Fonction qui gère l\textquotesingle{}attaque choisis et applique les dégâts et récupère le status du combat\mbox{\Hypertarget{combat_8c_ac8a127834084ba0ff04e28abb60db069}\label{combat_8c_ac8a127834084ba0ff04e28abb60db069}} 
+\index{combat.c@{combat.c}!handle\_option\_events@{handle\_option\_events}}
+\index{handle\_option\_events@{handle\_option\_events}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{handle\_option\_events()}{handle\_option\_events()}}
+{\footnotesize\ttfamily void handle\+\_\+option\+\_\+events (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{SDL\+\_\+\+Surface $\ast$}]{surface,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{int}]{n,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$}]{player,  }\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}}}]{sd }\end{DoxyParamCaption})}
+
+Fonction qui gere les eventement lors de l\textquotesingle{}affichage du combat\mbox{\Hypertarget{combat_8c_ad7f09375c6f31e7b00c6118f9e9c3d18}\label{combat_8c_ad7f09375c6f31e7b00c6118f9e9c3d18}} 
+\index{combat.c@{combat.c}!handle\_sdlons\_events@{handle\_sdlons\_events}}
+\index{handle\_sdlons\_events@{handle\_sdlons\_events}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{handle\_sdlons\_events()}{handle\_sdlons\_events()}}
+{\footnotesize\ttfamily void handle\+\_\+sdlons\+\_\+events (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{int}]{nb,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$}]{player,  }\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}}}]{sd }\end{DoxyParamCaption})}
+
+Fonction qui change le sdlon utilisé\mbox{\Hypertarget{combat_8c_a37af3dfaf5ac995e4ed2a9f65900466a}\label{combat_8c_a37af3dfaf5ac995e4ed2a9f65900466a}} 
+\index{combat.c@{combat.c}!onAttack@{onAttack}}
+\index{onAttack@{onAttack}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{onAttack()}{onAttack()}}
+{\footnotesize\ttfamily void on\+Attack (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{SDL\+\_\+\+Surface $\ast$}]{surface,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}}}]{player,  }\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}}}]{sd }\end{DoxyParamCaption})}
+
+Fonction appelle dès que l\textquotesingle{}on clique sur l\textquotesingle{}option attaque\mbox{\Hypertarget{combat_8c_aaae4266dac6cc90455e6bc017b3a9cbe}\label{combat_8c_aaae4266dac6cc90455e6bc017b3a9cbe}} 
+\index{combat.c@{combat.c}!printControlles@{printControlles}}
+\index{printControlles@{printControlles}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{printControlles()}{printControlles()}}
+{\footnotesize\ttfamily void print\+Controlles (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}}}]{player,  }\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}}}]{sd }\end{DoxyParamCaption})}
+
+Affichage des options\mbox{\Hypertarget{combat_8c_a261584f2d03c451a1a1c186fc2eeb522}\label{combat_8c_a261584f2d03c451a1a1c186fc2eeb522}} 
+\index{combat.c@{combat.c}!printPlayerStats@{printPlayerStats}}
+\index{printPlayerStats@{printPlayerStats}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{printPlayerStats()}{printPlayerStats()}}
+{\footnotesize\ttfamily void print\+Player\+Stats (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{char $\ast$}]{nom,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{niveau,  }\item[{int}]{vie }\end{DoxyParamCaption})}
+
+Affichage des statistiques des joueurs\mbox{\Hypertarget{combat_8c_a09c202fbb220c5add8b31b1ca42e4bf3}\label{combat_8c_a09c202fbb220c5add8b31b1ca42e4bf3}} 
+\index{combat.c@{combat.c}!printPokemon@{printPokemon}}
+\index{printPokemon@{printPokemon}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{printPokemon()}{printPokemon()}}
+{\footnotesize\ttfamily void print\+Pokemon (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{char $\ast$}]{nom\+\_\+fichier,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Affichage de sdlon\mbox{\Hypertarget{combat_8c_a49f5d4cc8d5eeb018b4981ebbb6c1e11}\label{combat_8c_a49f5d4cc8d5eeb018b4981ebbb6c1e11}} 
+\index{combat.c@{combat.c}!printSdlonBar@{printSdlonBar}}
+\index{printSdlonBar@{printSdlonBar}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{printSdlonBar()}{printSdlonBar()}}
+{\footnotesize\ttfamily void print\+Sdlon\+Bar (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{char $\ast$}]{nom,  }\item[{char $\ast$}]{gendre,  }\item[{int}]{vie,  }\item[{int}]{lev,  }\item[{int}]{selected,  }\item[{char $\ast$}]{path,  }\item[{int}]{type }\end{DoxyParamCaption})}
+
+Affichage carte de chaque sdlon\mbox{\Hypertarget{combat_8c_aaddf57bb376fd0c3c225a202f2dde318}\label{combat_8c_aaddf57bb376fd0c3c225a202f2dde318}} 
+\index{combat.c@{combat.c}!showAllSDlons@{showAllSDlons}}
+\index{showAllSDlons@{showAllSDlons}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{showAllSDlons()}{showAllSDlons()}}
+{\footnotesize\ttfamily int show\+All\+SDlons (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{int}]{n,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}}}]{player }\end{DoxyParamCaption})}
+
+Affichage de tous les sdlons\mbox{\Hypertarget{combat_8c_a6843f126f55bde4a74f013f13a9be3a1}\label{combat_8c_a6843f126f55bde4a74f013f13a9be3a1}} 
+\index{combat.c@{combat.c}!showDescription@{showDescription}}
+\index{showDescription@{showDescription}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{showDescription()}{showDescription()}}
+{\footnotesize\ttfamily void show\+Description (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{char $\ast$}]{desc }\end{DoxyParamCaption})}
+
+Affichage de la description de chaque item\mbox{\Hypertarget{combat_8c_adce5cb040ca1f89d4af5d5c7e56d67a6}\label{combat_8c_adce5cb040ca1f89d4af5d5c7e56d67a6}} 
+\index{combat.c@{combat.c}!showItem@{showItem}}
+\index{showItem@{showItem}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{showItem()}{showItem()}}
+{\footnotesize\ttfamily void show\+Item (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{surface,  }\item[{char $\ast$}]{nom,  }\item[{int}]{qnt,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}}}]{player,  }\item[{int}]{index }\end{DoxyParamCaption})}
+
+Fonction permettant d\textquotesingle{}afficher les items dans le sac\mbox{\Hypertarget{combat_8c_a2546e3d610435a765cc87bebd665ad78}\label{combat_8c_a2546e3d610435a765cc87bebd665ad78}} 
+\index{combat.c@{combat.c}!showSac@{showSac}}
+\index{showSac@{showSac}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{showSac()}{showSac()}}
+{\footnotesize\ttfamily int show\+Sac (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{char $\ast$}]{noms\mbox{[}$\,$\mbox{]},  }\item[{char $\ast$}]{descs\mbox{[}$\,$\mbox{]},  }\item[{int}]{n,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}} $\ast$}]{player,  }\item[{\mbox{\hyperlink{structstruct__sdlon}{sdlon}}}]{sd }\end{DoxyParamCaption})}
+
+Affiche le sac\mbox{\Hypertarget{combat_8c_a60f8779af86903953fc142e4a440d6ab}\label{combat_8c_a60f8779af86903953fc142e4a440d6ab}} 
+\index{combat.c@{combat.c}!updateMenus@{updateMenus}}
+\index{updateMenus@{updateMenus}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{updateMenus()}{updateMenus()}}
+{\footnotesize\ttfamily void update\+Menus (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{SDL\+\_\+\+Surface $\ast$}]{surface,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+Mise à jour des menus sur le jeu\mbox{\Hypertarget{combat_8c_ae1f37e7be23d2409a220505b450a3e00}\label{combat_8c_ae1f37e7be23d2409a220505b450a3e00}} 
+\index{combat.c@{combat.c}!updateOptions@{updateOptions}}
+\index{updateOptions@{updateOptions}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{updateOptions()}{updateOptions()}}
+{\footnotesize\ttfamily void update\+Options (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{SDL\+\_\+\+Surface $\ast$}]{surface,  }\item[{int}]{n,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+Mise à jour des options dans l\textquotesingle{}écran\mbox{\Hypertarget{combat_8c_a044a3e0cd08f6a511fd2b47eb6240532}\label{combat_8c_a044a3e0cd08f6a511fd2b47eb6240532}} 
+\index{combat.c@{combat.c}!updateSdlons@{updateSdlons}}
+\index{updateSdlons@{updateSdlons}!combat.c@{combat.c}}
+\doxysubsubsection{\texorpdfstring{updateSdlons()}{updateSdlons()}}
+{\footnotesize\ttfamily void update\+Sdlons (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Surface $\ast$}]{screen,  }\item[{int}]{n,  }\item[{\mbox{\hyperlink{structplayer__s}{player\+\_\+t}}}]{player }\end{DoxyParamCaption})}
+
+Mise à jour des cartes des sdlons
