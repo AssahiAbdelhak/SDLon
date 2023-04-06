@@ -269,6 +269,7 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
     sdlon_init();
     enum directions dir = DOWN;
     enum actions act = DEF1;
+    SDL_Surface * carte;
 // prq 32 et pas 16 pcq on veut recuperer les 4 part du personnage
     SDL_Rect src_rect = {dir*16,act*16,32,32};
     SDL_Surface* copy = SDL_CreateRGBSurface(0, 32, 32, screen->format->BitsPerPixel, 0, 0, 0, 0);
@@ -294,7 +295,44 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                     case SDLK_s:
                         sspi(player);
                      break;
-
+                    case SDLK_m:
+                        
+                        if(player.current_town==0)
+                                    carte = IMG_Load("images/carte.png");
+                                    else if(player.current_town==1)
+                                    carte = IMG_Load("images/carte1.png");
+                                    else if(player.current_town==2)
+                                    carte = IMG_Load("images/carte2.png");
+                                    else if(player.current_town==3)
+                                    carte = IMG_Load("images/carte3.png");
+                        SDL_BlitSurface(carte,NULL,screen,NULL);
+                        SDL_UpdateWindowSurface(window);
+                        int run = 1;
+                        while (run) {
+                            SDL_Event e;
+                            while (SDL_PollEvent( & e)) {
+                                move = 0;
+                            switch (e.type) {
+                                case SDL_QUIT:
+                                    destroy(window,screen);
+                                    run = 0;
+                                    break;
+                                case SDL_KEYDOWN:
+                                    
+                                    switch (e.key.keysym.sym){
+                                        case SDLK_ESCAPE:
+                                            if(player.current_town==0)
+                                    printMap(window,screen,player,collision,buissons);
+                                    else if(player.current_town==1)
+                                    printMap(window,screen,player,collision_map_2,buissons_map2);
+                                    else if(player.current_town==2)
+                                    printMap(window,screen,player,collision_map_3,buissons_map_3);
+                                    else if(player.current_town==3)
+                                    printMap(window,screen,player,collision_map_3,buissons_map_4);
+                                        break;
+                                    }
+                                }}}
+                     break;
                     case SDLK_i:
                         retour = afficherTableauMenu(window,screen,500,700);
                         switch (retour){
@@ -459,7 +497,25 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                     player.x = WIDTH - 80;
                     player.y = 400;
                     SDL_FillRect(screen,NULL,0x000000);
-                    printMap(window,screen,player,collision_map_4,buissons_map_4);
+                    int running = 1;
+                    while (running) {
+                        SDL_Event e;
+                        while (SDL_PollEvent( & e)) {
+                        switch (e.type) {
+                            case SDL_QUIT:
+                                running = 0;
+                                break;  
+                            case SDL_KEYDOWN:
+                
+                                switch (e.key.keysym.sym){
+                                    case SDLK_f:
+                                    printMap(window,screen,player,collision_map_4,buissons_map_4);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 if(player.current_town==1&&dansLesBuissons==VILLESUIVANTE){
                     if(player.x<100){
@@ -580,7 +636,7 @@ int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_S
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur L pour passer au labo",white);
         }
         else if(tab[(y/16)*80+(x/16)]==map4){
-            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour passer a la map 4",white);
+            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour prendre le bateau",white);
             printf("got here\n");
         }
 

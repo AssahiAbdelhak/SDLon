@@ -506,6 +506,15 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                 printMap(window,screen,player,collision,buissons);
                                 else if(player.current_town==1)
                                 printMap(window,screen,player,collision_map_2,buissons_map2);
+                                else if(player.current_town==2){
+                                    player.x = 430;
+                                    player.y = 330;
+                                    printMap(window,screen,player,collision_map_3,buissons_map_3);
+                                    }
+                                    else if(player.current_town==3){
+                                    
+                                    printMap(window,screen,player,collision_map_4,buissons_map_4);
+                                    }
                             }
                         if(detecter==PORTE_LABO){
                                 printf("il faut cliquer sur q\n");
@@ -516,6 +525,10 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                     printMap(window,screen,player,collision,buissons);
                                     else if(player.current_town==1)
                                     printMap(window,screen,player,collision_map_2,buissons_map2);
+                                    else if(player.current_town==2)
+                                    printMap(window,screen,player,collision_map_3,buissons_map_3);
+                                    else if(player.current_town==3)
+                                    printMap(window,screen,player,collision_map_4,buissons_map_4);
                                 }
                         break;
                         case SDLK_a:
@@ -650,8 +663,7 @@ int printSpiritInMarket(SDL_Window *window,SDL_Surface * screen,char *nom_fichie
                                                         player.story_position++;
                                                         if(player.current_town==0)
                                                             printMap(window,screen,player,collision,buissons);
-                                                            else if(player.current_town==1)
-                                                            printMap(window,screen,player,collision_map_2,buissons_map2);
+                                                            
                                                         break;
                                                     default:
                                                         printf("sdlon selectionné %d\n",selected);
