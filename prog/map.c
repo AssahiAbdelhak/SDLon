@@ -21,6 +21,7 @@
 #define PORTE 2
 #define VILLESUIVANTE 3
 #define LABO 4
+#define MAP4 5
 
 enum directions{DOWN,LEFT,RIGHT,UP};
 enum actions{DEF1,WALK1,DEF2,WALK2};
@@ -116,7 +117,7 @@ int localisationValide(int x,int y,int tab[4160]){
         SDL_Log("Localistion n'est pas valide\n");
         return 0;
     }
-    if(tab[(y/16)*80+(x/16)]&&tab[(y/16)*80+(x/16)]!=porte&&tab[(y/16)*80+(x/16)]!=ville_suivante&&tab[(y/16)*80+(x/16)]!=labo){
+    if(tab[(y/16)*80+(x/16)]&&tab[(y/16)*80+(x/16)]!=porte&&tab[(y/16)*80+(x/16)]!=ville_suivante&&tab[(y/16)*80+(x/16)]!=labo&&tab[(y/16)*80+(x/16)]!=map4){
         SDL_Log("Localistion n'est pas valide\n");
         return 0;
     }
@@ -453,6 +454,13 @@ void printSpirit(SDL_Window *window,SDL_Surface * screen,char *nom_fichier,int x
                     player.y = 400;
                     printMap(window,screen,player,collision_map_2,buissons_map2);
                 }
+                if(player.current_town==2&&dansLesBuissons==MAP4){
+                    player.current_town=3;
+                    player.x = WIDTH - 80;
+                    player.y = 400;
+                    SDL_FillRect(screen,NULL,0x000000);
+                    printMap(window,screen,player,collision_map_4,buissons_map_4);
+                }
                 if(player.current_town==1&&dansLesBuissons==VILLESUIVANTE){
                     if(player.x<100){
                         player.current_town=0;
@@ -533,12 +541,12 @@ int printMap(SDL_Window *window,SDL_Surface * screen,player_t player,int col[416
     hintBox.y=HEIGHT - 100 - hint->h;
     hintBox.x=(WIDTH - hint->w)/2;
     hintBox.h=hint->h;
-    hintBox.w=hint->w; 
+    hintBox.w=500; 
     hintContainer.x=0;
     hintContainer.y=0;
     hintContainer.h=hint->h;
-    hintContainer.w=hint->w;
-    SDL_Surface *hintSliceFromMap = SDL_CreateRGBSurface(0, hint->w, hint->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
+    hintContainer.w=500;
+    SDL_Surface *hintSliceFromMap = SDL_CreateRGBSurface(0, 500, hint->h, screen->format->BitsPerPixel, 0, 0, 0, 0);
     SDL_BlitSurface(screen,&hintBox,hintSliceFromMap,&hintContainer);
     ///***
     printf("print this\n");
@@ -558,17 +566,21 @@ int printMap(SDL_Window *window,SDL_Surface * screen,player_t player,int col[416
                 break;  
         }
       }
-}}
+    }
+}
 /*fonction qui renvoie vrai si on est dans les buissons faux sinon*/
 int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_Surface *hintSliceFromMap,SDL_Surface *hint,TTF_Font *font,SDL_Color white,int move,int tab[4160],int buches[4160]){
     printf("move == %d\n",move);
     if(move){
         if(tab[(y/16)*80+(x/16)]==porte)
-            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour Entrer a la maison",white);
+            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour Entrer au centre SDLon",white);
         /*else if(collision[(y/16)*80+(x/16)]==ville_suivante)
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur F pour passer a la ville",white);*/
         else if(tab[(y/16)*80+(x/16)]==labo){
             hint = TTF_RenderUTF8_Blended(font,"Cliquez sur L pour passer au labo",white);
+        }
+        else if(tab[(y/16)*80+(x/16)]==map4){
+            hint = TTF_RenderUTF8_Blended(font,"Cliquez sur E pour passer a la map 4",white);
             printf("got here\n");
         }
 
@@ -579,24 +591,23 @@ int detecterBuissons(SDL_Window * window, SDL_Surface * screen,int x,int y,SDL_S
         hint = TTF_RenderUTF8_Blended(font,"Vous n'avez pas trouve de sdlon",white);
     }
     SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
-    if(buches[(y/16)*80+(x/16)]||tab[(y/16)*80+(x/16)]==porte||tab[(y/16)*80+(x/16)]==ville_suivante||tab[(y/16)*80+(x/16)]==labo){
+    if(buches[(y/16)*80+(x/16)]||tab[(y/16)*80+(x/16)]==porte||tab[(y/16)*80+(x/16)]==ville_suivante||tab[(y/16)*80+(x/16)]==labo||tab[(y/16)*80+(x/16)]==map4){
         SDL_BlitSurface(hint,NULL,screen,&hintBox);
         SDL_UpdateWindowSurface(window);
         if(tab[(y/16)*80+(x/16)]==porte)
             return PORTE;
+        else if(tab[(y/16)*80+(x/16)]==map4)
+            return MAP4;
         else if(tab[(y/16)*80+(x/16)]==ville_suivante){
-            SDL_Log("got here 1");
             SDL_FillRect(screen,NULL,0x000000);
             return VILLESUIVANTE;
         }
         else if(tab[(y/16)*80+(x/16)]==labo){
-            printf("Passer au labo\n");
             return LABO;
         }
         else
             return BUISSONS;
     }else{        
-        
         SDL_BlitSurface(hintSliceFromMap,&hintContainer,screen,&hintBox);
         SDL_UpdateWindowSurface(window);
         return 0;

@@ -32,3 +32,7 @@ extern int collision_map_2[4160];
 extern int buissons_map2[4160];
 extern int collision_map_3[4160];
 extern int buissons_map_3[4160];
+extern int arene;
+extern int map4;
+int buissons_map_4[4160];
+int collision_map_4[4160];
